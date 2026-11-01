@@ -1,8 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "t:sections.footer.group",
   "sections": {
-    "footer": { "type": "footer", "settings": {} }
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu": { "type": "menu", "settings": { "title": "Shop", "menu": "main-menu" } },
+        "trade": { "type": "trade", "settings": { "link": "shopify://pages/trade-account" } },
+        "text": { "type": "text", "settings": { "title": "Contact", "text": "<p>Mon–Fri, 8:00–17:00. Orders placed before 14:00 ship the same day.</p>" } }
+      },
+      "block_order": ["menu", "trade", "text"],
+      "settings": {}
+    }
   },
   "order": ["footer"]
 }

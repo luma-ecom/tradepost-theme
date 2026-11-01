@@ -82,6 +82,13 @@
   </div>
 </header>
 
+{% stylesheet %}
+  @media (max-width: 989px) {
+    .header__search { grid-row: 2; }
+    .header__actions { grid-column: 3; grid-row: 1; }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:sections.header.name",

@@ -7,7 +7,7 @@
       <button type="submit" class="btn btn--primary">{{ 'general.search.submit' | t }}</button>
     </form>
     {%- if search.performed -%}
-      <p class="search-page__count">{{ 'general.search.results_count' | t: count: search.results_count, terms: search.terms | escape }}</p>
+      <p class="search-page__count">{{ 'general.search.results_count' | t: count: search.results_count, terms: search.terms }}</p>
       {%- paginate search.results by 48 -%}
         <div class="product-list">
           {%- for item in search.results -%}
