@@ -104,7 +104,9 @@
     .filters__toggle { display: inline-flex; }
     .collection__tools { width: 100%; }
     .collection__count { flex-basis: 100%; }
-    .collection__tools .sort { margin-left: auto; }
+    .collection__tools { gap: 10px; }
+    .collection__tools .sort { margin-left: auto; min-width: 0; }
+    .collection__tools .sort select { max-width: 150px; }
     .filters:not(.is-open) .filters__form { display: none; }
   }
 {% endstylesheet %}
