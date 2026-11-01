@@ -88,8 +88,8 @@
         {% render 'buy-buttons', product: product, variant: v, section_id: section.id %}
       </div>
 
-      {%- if customer.b2b? and customer.current_location.order_settings.payment_terms -%}
-        <p class="product__terms">{{ 'products.b2b.terms_note' | t: terms: customer.current_location.order_settings.payment_terms.name }}</p>
+      {%- if customer.b2b? and customer.current_location.metafields.depot.payment_terms.value != blank -%}
+        <p class="product__terms">{{ 'products.b2b.terms_note' | t: terms: customer.current_location.metafields.depot.payment_terms.value }}</p>
       {%- endif -%}
 
       {%- for block in section.blocks -%}
