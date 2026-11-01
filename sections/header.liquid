@@ -55,8 +55,8 @@
         <span class="header__action-label">{% if customer.b2b? %}{{ customer.current_company.name | truncate: 18 }}{% elsif customer %}{{ 'customer.account.title' | t }}{% else %}{{ 'customer.login.title' | t }}{% endif %}</span>
       </a>
       <a class="header__action header__cart" href="{{ routes.cart_url }}" data-cart-open aria-label="{{ 'cart.title' | t }}">
-        {% render 'icon', name: 'cart' %}
-        <span class="header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+        {% render 'icon', name: 'cart' %}<span class="visually-hidden">{{ 'cart.lines_label' | t }}</span>
+        <span class="header__cart-count{% if cart.items.size == 0 %} is-empty{% endif %}" data-cart-count>{{ cart.items.size }}</span>
       </a>
     </div>
   </div>

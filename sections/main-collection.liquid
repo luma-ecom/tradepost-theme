@@ -21,6 +21,9 @@
           <a class="view-toggle__btn{% if view == 'grid' %} is-active{% endif %}" href="{{ collection.url }}{% if collection.sort_by != blank %}?sort_by={{ collection.sort_by }}{% endif %}" aria-label="{{ 'collections.view_grid' | t }}">{% render 'icon', name: 'grid' %}</a>
           <a class="view-toggle__btn{% if view == 'list' %} is-active{% endif %}" href="{{ collection.url }}?view=list{% if collection.sort_by != blank %}&sort_by={{ collection.sort_by }}{% endif %}" aria-label="{{ 'collections.view_list' | t }}">{% render 'icon', name: 'list' %}</a>
         </div>
+        {%- if section.settings.show_filters and collection.filters.size > 0 -%}
+          <button type="button" class="filters__toggle btn btn--ghost btn--small" data-filters-toggle aria-controls="Filters-{{ section.id }}" aria-expanded="false">{% render 'icon', name: 'filter' %}{{ 'collections.filter' | t }}</button>
+        {%- endif -%}
         <form class="sort" method="get">
           {%- if template.suffix == 'list' -%}<input type="hidden" name="view" value="list">{%- endif -%}
           <label class="visually-hidden" for="SortBy">{{ 'collections.sort' | t }}</label>
@@ -35,8 +38,7 @@
 
     <div class="collection__layout">
       {%- if section.settings.show_filters and collection.filters.size > 0 -%}
-        <aside class="filters" data-filters-panel>
-          <button type="button" class="filters__toggle btn btn--ghost btn--small" data-filters-toggle aria-expanded="false">{{ 'collections.filter' | t }}</button>
+        <aside class="filters" id="Filters-{{ section.id }}" data-filters-panel>
           <form class="filters__form" method="get" data-filters>
             {%- if template.suffix == 'list' -%}<input type="hidden" name="view" value="list">{%- endif -%}
             {%- if collection.sort_by != blank -%}<input type="hidden" name="sort_by" value="{{ collection.sort_by }}">{%- endif -%}
@@ -97,9 +99,12 @@
 </section>
 
 {% stylesheet %}
-  .filters__toggle { display: none; }
+  .filters__toggle { display: none; gap: 6px; align-items: center; }
   @media (max-width: 989px) {
     .filters__toggle { display: inline-flex; }
+    .collection__tools { width: 100%; }
+    .collection__count { flex-basis: 100%; }
+    .collection__tools .sort { margin-left: auto; }
     .filters:not(.is-open) .filters__form { display: none; }
   }
 {% endstylesheet %}
@@ -108,7 +113,9 @@
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-filters-toggle]');
     if (!btn) return;
-    const open = btn.closest('[data-filters-panel]').classList.toggle('is-open');
+    const panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    const open = panel.classList.toggle('is-open');
     btn.setAttribute('aria-expanded', String(open));
   });
 {% endjavascript %}

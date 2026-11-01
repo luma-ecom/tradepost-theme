@@ -2,7 +2,7 @@
 <div data-cart-drawer-body>
   {% render 'cart-contents', compact: true %}
 </div>
-<span data-cart-count hidden>{{ cart.item_count }}</span>
+<span data-cart-count hidden>{{ cart.items.size }}</span>
 {% schema %}
 { "name": "Cart contents", "settings": [] }
 {% endschema %}

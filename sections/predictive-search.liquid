@@ -3,14 +3,30 @@
   {%- if predictive_search.performed -%}
     {%- if predictive_search.resources.products.size > 0 -%}
       <ul class="predictive__list" role="listbox">
+        {%- assign term = predictive_search.terms | downcase | strip -%}
         {%- for product in predictive_search.resources.products -%}
-          {%- assign v = product.selected_or_first_available_variant -%}
+          {%- liquid
+            assign v = product.selected_or_first_available_variant
+            assign matched = false
+            for variant in product.variants
+              assign sku = variant.sku | downcase
+              if sku != blank and sku contains term
+                assign v = variant
+                assign matched = true
+                break
+              endif
+            endfor
+            assign link = product.url
+            if matched and product.has_only_default_variant == false
+              assign link = v.url
+            endif
+          -%}
           <li class="predictive__item" role="option">
-            <a href="{{ product.url }}">
+            <a href="{{ link }}">
               {%- if product.featured_image -%}{{ product.featured_image | image_url: width: 80 | image_tag: loading: 'lazy', class: 'predictive__img' }}{%- endif -%}
               <span class="predictive__text">
                 <span class="predictive__title">{{ product.title | escape }}</span>
-                {%- if settings.show_sku and v.sku != blank -%}<span class="predictive__sku">{{ v.sku }}</span>{%- endif -%}
+                {%- if settings.show_sku and v.sku != blank -%}<span class="predictive__sku">{{ v.sku }}{% if matched and product.has_only_default_variant == false %} · {{ v.title | escape }}{% endif %}</span>{%- endif -%}
               </span>
             </a>
           </li>
