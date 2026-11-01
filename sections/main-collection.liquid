@@ -1,7 +1,8 @@
 {%- liquid
+  # Grid/list = alternate templates: collection.json (grid) and collection.list.json (?view=list)
   assign view = section.settings.default_view
-  if request.params.view == 'list' or request.params.view == 'grid'
-    assign view = request.params.view
+  if template.suffix == 'list'
+    assign view = 'list'
   endif
 -%}
 <section class="collection section" data-section="{{ section.id }}">
@@ -17,11 +18,11 @@
       <div class="collection__tools">
         <span class="collection__count">{{ 'collections.product_count' | t: count: collection.products_count }}</span>
         <div class="view-toggle" role="group" aria-label="{{ 'collections.view' | t }}">
-          <a class="view-toggle__btn{% if view == 'grid' %} is-active{% endif %}" href="?view=grid" aria-label="{{ 'collections.view_grid' | t }}">{% render 'icon', name: 'grid' %}</a>
-          <a class="view-toggle__btn{% if view == 'list' %} is-active{% endif %}" href="?view=list" aria-label="{{ 'collections.view_list' | t }}">{% render 'icon', name: 'list' %}</a>
+          <a class="view-toggle__btn{% if view == 'grid' %} is-active{% endif %}" href="{{ collection.url }}{% if collection.sort_by != blank %}?sort_by={{ collection.sort_by }}{% endif %}" aria-label="{{ 'collections.view_grid' | t }}">{% render 'icon', name: 'grid' %}</a>
+          <a class="view-toggle__btn{% if view == 'list' %} is-active{% endif %}" href="{{ collection.url }}?view=list{% if collection.sort_by != blank %}&sort_by={{ collection.sort_by }}{% endif %}" aria-label="{{ 'collections.view_list' | t }}">{% render 'icon', name: 'list' %}</a>
         </div>
         <form class="sort" method="get">
-          <input type="hidden" name="view" value="{{ view }}">
+          {%- if template.suffix == 'list' -%}<input type="hidden" name="view" value="list">{%- endif -%}
           <label class="visually-hidden" for="SortBy">{{ 'collections.sort' | t }}</label>
           <select id="SortBy" name="sort_by" onchange="this.form.submit()">
             {%- for option in collection.sort_options -%}
@@ -34,9 +35,10 @@
 
     <div class="collection__layout">
       {%- if section.settings.show_filters and collection.filters.size > 0 -%}
-        <aside class="filters">
+        <aside class="filters" data-filters-panel>
+          <button type="button" class="filters__toggle btn btn--ghost btn--small" data-filters-toggle aria-expanded="false">{{ 'collections.filter' | t }}</button>
           <form class="filters__form" method="get" data-filters>
-            <input type="hidden" name="view" value="{{ view }}">
+            {%- if template.suffix == 'list' -%}<input type="hidden" name="view" value="list">{%- endif -%}
             {%- if collection.sort_by != blank -%}<input type="hidden" name="sort_by" value="{{ collection.sort_by }}">{%- endif -%}
             {%- for filter in collection.filters -%}
               <details class="filters__group" open>
@@ -64,7 +66,7 @@
             {%- endfor -%}
             <div class="filters__actions">
               <button type="submit" class="btn btn--primary btn--small">{{ 'collections.filters.apply' | t }}</button>
-              <a class="btn btn--ghost btn--small" href="{{ collection.url }}?view={{ view }}">{{ 'collections.filters.clear' | t }}</a>
+              <a class="btn btn--ghost btn--small" href="{{ collection.url }}{% if template.suffix == 'list' %}?view=list{% endif %}">{{ 'collections.filters.clear' | t }}</a>
             </div>
           </form>
         </aside>
@@ -93,6 +95,23 @@
     </div>
   </div>
 </section>
+
+{% stylesheet %}
+  .filters__toggle { display: none; }
+  @media (max-width: 989px) {
+    .filters__toggle { display: inline-flex; }
+    .filters:not(.is-open) .filters__form { display: none; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-filters-toggle]');
+    if (!btn) return;
+    const open = btn.closest('[data-filters-panel]').classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+{% endjavascript %}
 
 {% schema %}
 {
