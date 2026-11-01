@@ -1,0 +1,16 @@
+<section class="cart-page section" data-section="{{ section.id }}">
+  <div class="page-width">
+    <h1 class="cart-page__title">{{ 'cart.title' | t }}</h1>
+    <div data-cart-page-body>
+      {% render 'cart-contents', compact: false %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main_cart.name",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

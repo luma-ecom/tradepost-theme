@@ -1,0 +1,98 @@
+<header class="header{% if section.settings.sticky %} header--sticky{% endif %}" data-section="{{ section.id }}">
+  {%- if customer.b2b? or section.settings.announcement != blank -%}
+    <div class="header__bar">
+      <div class="page-width header__bar-inner">
+        <span class="header__announcement">{{ section.settings.announcement }}</span>
+        {% render 'location-switcher' %}
+      </div>
+    </div>
+  {%- endif -%}
+  <div class="page-width header__inner">
+    <button type="button" class="header__menu-btn" data-menu-open aria-label="{{ 'general.menu' | t }}" aria-controls="MobileMenu" aria-expanded="false">{% render 'icon', name: 'menu' %}</button>
+
+    <a class="header__logo" href="{{ routes.root_url }}">
+      {%- if section.settings.logo -%}
+        {{ section.settings.logo | image_url: width: 400 | image_tag: widths: '200,400', class: 'header__logo-img', alt: shop.name, style: 'max-width:' | append: section.settings.logo_width | append: 'px' }}
+      {%- else -%}
+        <span class="header__logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="header__nav" aria-label="{{ 'general.menu' | t }}">
+      <ul class="nav" role="list">
+        {%- for link in section.settings.menu.links -%}
+          <li class="nav__item{% if link.links.size > 0 %} has-children{% endif %}">
+            <a class="nav__link{% if link.active %} is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+            {%- if link.links.size > 0 -%}
+              <ul class="nav__sub" role="list">
+                {%- for child in link.links -%}
+                  <li><a class="nav__sub-link" href="{{ child.url }}">{{ child.title }}</a>
+                    {%- if child.links.size > 0 -%}
+                      <ul class="nav__sub2" role="list">
+                        {%- for g in child.links -%}<li><a href="{{ g.url }}">{{ g.title }}</a></li>{%- endfor -%}
+                      </ul>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <form class="header__search" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="HeaderSearch">{{ 'general.search.label' | t }}</label>
+      <input id="HeaderSearch" type="search" name="q" placeholder="{{ 'general.search.placeholder_sku' | t }}" autocomplete="off" data-predictive-input>
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" aria-label="{{ 'general.search.submit' | t }}">{% render 'icon', name: 'search' %}</button>
+      <div class="predictive" data-predictive-results hidden></div>
+    </form>
+
+    <div class="header__actions">
+      <a class="header__action" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="{{ 'customer.account.title' | t }}">
+        {% render 'icon', name: 'account' %}
+        <span class="header__action-label">{% if customer.b2b? %}{{ customer.current_company.name | truncate: 18 }}{% elsif customer %}{{ 'customer.account.title' | t }}{% else %}{{ 'customer.login.title' | t }}{% endif %}</span>
+      </a>
+      <a class="header__action header__cart" href="{{ routes.cart_url }}" data-cart-open aria-label="{{ 'cart.title' | t }}">
+        {% render 'icon', name: 'cart' %}
+        <span class="header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="MobileMenu" class="mobile-menu" data-mobile-menu hidden>
+    <div class="mobile-menu__head">
+      <span>{{ 'general.menu' | t }}</span>
+      <button type="button" data-menu-close aria-label="{{ 'general.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <ul class="mobile-menu__list" role="list">
+      {%- for link in section.settings.menu.links -%}
+        <li>
+          {%- if link.links.size > 0 -%}
+            <details><summary>{{ link.title }}</summary>
+              <ul role="list">{%- for child in link.links -%}<li><a href="{{ child.url }}">{{ child.title }}</a></li>{%- endfor -%}</ul>
+            </details>
+          {%- else -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "tag": "header",
+  "class": "section-header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "t:sections.header.logo" },
+    { "type": "range", "id": "logo_width", "label": "t:sections.header.logo_width", "min": 80, "max": 300, "step": 10, "unit": "px", "default": 140 },
+    { "type": "link_list", "id": "menu", "label": "t:sections.header.menu", "default": "main-menu" },
+    { "type": "text", "id": "announcement", "label": "t:sections.header.announcement" },
+    { "type": "checkbox", "id": "sticky", "label": "t:sections.header.sticky", "default": true }
+  ]
+}
+{% endschema %}

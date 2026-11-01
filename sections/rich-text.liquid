@@ -1,0 +1,48 @@
+{%- liquid
+  assign show = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.audience == 'd2c' and customer.b2b?
+    assign show = false
+  endif
+-%}
+{%- if show -%}
+<section class="rich section" data-section="{{ section.id }}">
+  <div class="page-width rich__inner rich__inner--{{ section.settings.width }}">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'heading' -%}<h2 class="rich__heading" {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+      {%- when 'text' -%}<div class="rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+      {%- when 'button' -%}<a class="btn btn--{{ block.settings.style }}" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.rich_text.name",
+  "tag": "section",
+  "settings": [
+    { "type": "select", "id": "audience", "label": "t:sections.common.audience", "options": [
+      { "value": "everyone", "label": "t:sections.common.audience_everyone" },
+      { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+      { "value": "d2c", "label": "t:sections.common.audience_d2c" }
+    ], "default": "everyone", "info": "t:sections.common.audience_info" },
+    { "type": "select", "id": "width", "label": "t:sections.rich_text.width", "options": [
+      { "value": "narrow", "label": "t:sections.rich_text.narrow" }, { "value": "full", "label": "t:sections.rich_text.full" }
+    ], "default": "narrow" }
+  ],
+  "blocks": [
+    { "type": "heading", "name": "t:sections.rich_text.blocks.heading", "settings": [ { "type": "text", "id": "text", "label": "t:sections.common.title", "default": "Talk about your business" } ] },
+    { "type": "text", "name": "t:sections.rich_text.blocks.text", "settings": [ { "type": "richtext", "id": "text", "label": "t:sections.common.text", "default": "<p>Use this section to explain who you supply, how ordering works, and what makes you reliable.</p>" } ] },
+    { "type": "button", "name": "t:sections.rich_text.blocks.button", "settings": [
+      { "type": "text", "id": "label", "label": "t:sections.common.link_label", "default": "Learn more" },
+      { "type": "url", "id": "link", "label": "t:sections.common.link" },
+      { "type": "select", "id": "style", "label": "t:sections.rich_text.button_style", "options": [ { "value": "primary", "label": "Primary" }, { "value": "secondary", "label": "Secondary" } ], "default": "secondary" }
+    ]}
+  ],
+  "presets": [ { "name": "t:sections.rich_text.name", "blocks": [ { "type": "heading" }, { "type": "text" } ] } ]
+}
+{% endschema %}

@@ -1,0 +1,21 @@
+<section class="blog section" data-section="{{ section.id }}">
+  <div class="page-width">
+    <h1 class="blog__title">{{ blog.title | escape }}</h1>
+    {%- paginate blog.articles by 12 -%}
+      <div class="blog__grid">
+        {%- for article in blog.articles -%}
+          <article class="post-card">
+            {%- if article.image -%}<a href="{{ article.url }}">{{ article.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'post-card__img' }}</a>{%- endif -%}
+            <time class="post-card__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'date' }}</time>
+            <h2 class="post-card__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
+            <p class="post-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
+          </article>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}<nav class="pagination">{{ paginate | default_pagination }}</nav>{%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "t:sections.main_blog.name", "tag": "section", "settings": [] }
+{% endschema %}

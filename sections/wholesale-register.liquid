@@ -1,0 +1,68 @@
+{%- comment -%}
+  Hosts the trade-account application. Use the Shopify Forms app block for a full "company account request" flow,
+  or the built-in fallback contact form. Shows a pending state to logged-in retail customers tagged "trade-pending".
+{%- endcomment -%}
+<section class="register section" data-section="{{ section.id }}">
+  <div class="page-width register__inner">
+    <div class="register__copy">
+      <h1 class="register__title">{{ section.settings.title }}</h1>
+      <div class="rte">{{ section.settings.text }}</div>
+      {%- if section.settings.requirements != blank -%}
+        <div class="register__requirements rte">{{ section.settings.requirements }}</div>
+      {%- endif -%}
+    </div>
+    <div class="register__form">
+      {%- if customer.b2b? -%}
+        <div class="notice notice--success">{{ 'customer.register.already_b2b' | t }} <a href="{{ routes.account_url }}">{{ 'customer.account.title' | t }}</a></div>
+      {%- elsif customer and customer.tags contains section.settings.pending_tag -%}
+        <div class="notice notice--info">{{ 'customer.register.pending' | t }}</div>
+      {%- else -%}
+        {%- assign has_app_block = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}
+            {%- assign has_app_block = true -%}
+            {% render block %}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- unless has_app_block -%}
+          {%- form 'contact', class: 'form', id: 'TradeApplication' -%}
+            {%- if form.posted_successfully? -%}
+              <div class="notice notice--success">{{ 'customer.register.submitted' | t }}</div>
+            {%- endif -%}
+            {{ form.errors | default_errors }}
+            <input type="hidden" name="contact[subject]" value="Trade account application">
+            <label class="field"><span class="field__label">{{ 'customer.register.company' | t }}</span><input class="field__input" type="text" name="contact[company]" required></label>
+            <label class="field"><span class="field__label">{{ 'customer.register.tax_id' | t }}</span><input class="field__input" type="text" name="contact[tax_id]"></label>
+            <label class="field"><span class="field__label">{{ 'customer.register.contact_name' | t }}</span><input class="field__input" type="text" name="contact[name]" required></label>
+            <label class="field"><span class="field__label">{{ 'customer.register.email' | t }}</span><input class="field__input" type="email" name="contact[email]" required autocomplete="email"></label>
+            <label class="field"><span class="field__label">{{ 'customer.register.phone' | t }}</span><input class="field__input" type="tel" name="contact[phone]"></label>
+            <label class="field"><span class="field__label">{{ 'customer.register.business_type' | t }}</span>
+              <select class="field__input" name="contact[business_type]">
+                {%- assign types = section.settings.business_types | split: ',' -%}
+                {%- for t in types -%}<option>{{ t | strip }}</option>{%- endfor -%}
+              </select>
+            </label>
+            <label class="field"><span class="field__label">{{ 'customer.register.message' | t }}</span><textarea class="field__input" name="contact[body]" rows="3"></textarea></label>
+            <button type="submit" class="btn btn--primary btn--block">{{ 'customer.register.submit' | t }}</button>
+          {%- endform -%}
+        {%- endunless -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.wholesale_register.name",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Apply for a trade account" },
+    { "type": "richtext", "id": "text", "label": "t:sections.common.text", "default": "<p>Tell us about your business. Approved accounts see wholesale pricing, payment terms and quick ordering.</p>" },
+    { "type": "richtext", "id": "requirements", "label": "t:sections.wholesale_register.requirements", "default": "<p>You will need a registered business and a tax ID. Approval usually takes one business day.</p>" },
+    { "type": "text", "id": "business_types", "label": "t:sections.wholesale_register.business_types", "default": "Retailer, Distributor, Clinic / practice, Restaurant / hospitality, Contractor, Other" },
+    { "type": "text", "id": "pending_tag", "label": "t:sections.wholesale_register.pending_tag", "default": "trade-pending" }
+  ],
+  "blocks": [ { "type": "@app" } ],
+  "presets": [ { "name": "t:sections.wholesale_register.name" } ]
+}
+{% endschema %}

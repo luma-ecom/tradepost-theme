@@ -1,0 +1,181 @@
+{%- liquid
+  assign v = product.selected_or_first_available_variant
+-%}
+<section class="product section" data-section="{{ section.id }}" data-product-id="{{ product.id }}">
+  <div class="page-width product__grid">
+    <div class="product__media">
+      {%- if product.media.size > 0 -%}
+        <depot-gallery class="gallery" data-gallery>
+          <div class="gallery__main">
+            {%- for media in product.media -%}
+              <figure class="gallery__item{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}">
+                {%- case media.media_type -%}
+                {%- when 'image' -%}
+                  {%- if forloop.first -%}
+                    {{ media | image_url: width: 1200 | image_tag: loading: 'eager', widths: '400,600,900,1200', sizes: '(min-width: 990px) 50vw, 100vw', class: 'gallery__img' }}
+                  {%- else -%}
+                    {{ media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,900,1200', sizes: '(min-width: 990px) 50vw, 100vw', class: 'gallery__img' }}
+                  {%- endif -%}
+                {%- when 'video', 'external_video' -%}
+                  {{ media | media_tag: controls: true, class: 'gallery__video' }}
+                {%- when 'model' -%}
+                  {{ media | media_tag: class: 'gallery__model' }}
+                {%- endcase -%}
+              </figure>
+            {%- endfor -%}
+          </div>
+          {%- if product.media.size > 1 -%}
+            <div class="gallery__thumbs" role="list">
+              {%- for media in product.media -%}
+                <button type="button" class="gallery__thumb{% if forloop.first %} is-active{% endif %}" data-thumb data-media-id="{{ media.id }}" aria-label="{{ 'products.media.thumb' | t: index: forloop.index }}">
+                  {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', class: 'gallery__thumb-img' }}
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </depot-gallery>
+      {%- else -%}
+        <div class="gallery gallery--empty"><span>{{ 'products.no_image' | t }}</span></div>
+      {%- endif -%}
+    </div>
+
+    <div class="product__info">
+      {%- if product.vendor != blank and section.settings.show_vendor -%}
+        <p class="product__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+      <h1 class="product__title">{{ product.title | escape }}</h1>
+      {%- if settings.show_sku -%}
+        <p class="product__sku" data-sku>{% if v.sku != blank %}{{ 'products.sku' | t }} {{ v.sku }}{% endif %}</p>
+      {%- endif -%}
+
+      <div data-price-wrapper>
+        {% render 'price', variant: v, product: product, context: 'product' %}
+      </div>
+
+      {%- if product.has_only_default_variant == false -%}
+        <depot-variant-picker class="variants" data-url="{{ product.url }}" data-section-id="{{ section.id }}">
+          {%- for option in product.options_with_values -%}
+            <div class="variants__option">
+              <label class="variants__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+              <select class="variants__select" id="Option-{{ section.id }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]" data-option-index="{{ forloop.index0 }}">
+                {%- for value in option.values -%}
+                  <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- endfor -%}
+          <script type="application/json" data-variants>{{ product.variants | json }}</script>
+        </depot-variant-picker>
+      {%- endif -%}
+
+      <div class="product__stock" data-stock>
+        {%- if v.available -%}
+          {%- if v.inventory_management == 'shopify' and v.inventory_quantity > 0 and v.inventory_quantity <= settings.low_stock_threshold -%}
+            <span class="stock stock--low">{{ 'products.availability.low_stock' | t: count: v.inventory_quantity }}</span>
+          {%- else -%}
+            <span class="stock stock--in">{{ 'products.availability.in_stock' | t }}</span>
+          {%- endif -%}
+        {%- else -%}
+          <span class="stock stock--out">{{ 'products.availability.sold_out' | t }}</span>
+        {%- endif -%}
+      </div>
+
+      <div data-volume-wrapper>
+        {% render 'volume-tiers', variant: v, section_id: section.id %}
+      </div>
+
+      <div data-buy-wrapper>
+        {% render 'buy-buttons', product: product, variant: v, section_id: section.id %}
+      </div>
+
+      {%- if customer.b2b? and customer.current_location.order_settings.payment_terms -%}
+        <p class="product__terms">{{ 'products.b2b.terms_note' | t: terms: customer.current_location.order_settings.payment_terms.name }}</p>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+        {%- when 'description' -%}
+          {%- if product.description != blank -%}
+            <details class="accordion" {{ block.shopify_attributes }}{% if block.settings.open %} open{% endif %}>
+              <summary class="accordion__title">{{ block.settings.title | default: 'products.description' | t }}</summary>
+              <div class="accordion__body rte">{{ product.description }}</div>
+            </details>
+          {%- endif -%}
+        {%- when 'specs' -%}
+          {%- assign specs = product.metafields[block.settings.namespace][block.settings.key] -%}
+          {%- if specs != blank -%}
+            <details class="accordion" {{ block.shopify_attributes }}{% if block.settings.open %} open{% endif %}>
+              <summary class="accordion__title">{{ block.settings.title }}</summary>
+              <div class="accordion__body rte">{{ specs | metafield_tag }}</div>
+            </details>
+          {%- endif -%}
+        {%- when 'documents' -%}
+          {%- assign docs = product.metafields[block.settings.namespace][block.settings.key].value -%}
+          {%- if docs != blank -%}
+            <div class="documents" {{ block.shopify_attributes }}>
+              <h3 class="documents__title">{{ block.settings.title }}</h3>
+              <ul class="documents__list" role="list">
+                {%- for doc in docs -%}
+                  <li><a href="{{ doc.url }}" target="_blank" rel="noopener">{{ doc.alt | default: doc.url | split: '/' | last }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        {%- when 'text' -%}
+          <div class="rte product__text" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+        {%- when '@app' -%}
+          {% render block %}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.name",
+  "tag": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_vendor", "label": "t:sections.main_product.show_vendor", "default": false }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "description",
+      "name": "t:sections.main_product.blocks.description",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Description" },
+        { "type": "checkbox", "id": "open", "label": "t:sections.common.open_by_default", "default": true }
+      ]
+    },
+    {
+      "type": "specs",
+      "name": "t:sections.main_product.blocks.specs",
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Specifications" },
+        { "type": "text", "id": "namespace", "label": "t:sections.main_product.metafield_namespace", "default": "custom" },
+        { "type": "text", "id": "key", "label": "t:sections.main_product.metafield_key", "default": "specifications" },
+        { "type": "checkbox", "id": "open", "label": "t:sections.common.open_by_default", "default": false }
+      ]
+    },
+    {
+      "type": "documents",
+      "name": "t:sections.main_product.blocks.documents",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Datasheets & documents" },
+        { "type": "text", "id": "namespace", "label": "t:sections.main_product.metafield_namespace", "default": "custom" },
+        { "type": "text", "id": "key", "label": "t:sections.main_product.metafield_key", "default": "documents" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.main_product.blocks.text",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "t:sections.common.text" }
+      ]
+    }
+  ]
+}
+{% endschema %}

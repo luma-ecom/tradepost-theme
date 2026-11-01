@@ -1,0 +1,55 @@
+<section class="account section" data-section="{{ section.id }}">
+  <div class="page-width">
+    <header class="account__head">
+      <div>
+        <h1>{{ 'customer.account.title' | t }}</h1>
+        {%- if customer.b2b? -%}
+          <p class="account__company">{{ customer.current_company.name }}{% if customer.current_location %} · {{ customer.current_location.name }}{% endif %}</p>
+          {%- if customer.current_location.order_settings.payment_terms -%}
+            <p class="account__terms">{{ 'customer.account.terms' | t: terms: customer.current_location.order_settings.payment_terms.name }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+      <a class="btn btn--ghost btn--small" href="{{ routes.account_logout_url }}">{{ 'customer.account.logout' | t }}</a>
+    </header>
+    {% render 'location-switcher' %}
+    <div class="account__grid">
+      <div class="account__orders">
+        <h2>{{ 'customer.orders.title' | t }}</h2>
+        {%- paginate customer.orders by 20 -%}
+          {%- if customer.orders.size > 0 -%}
+            <table class="orders">
+              <thead><tr><th>{{ 'customer.orders.order' | t }}</th><th>{{ 'customer.orders.date' | t }}</th><th>{{ 'customer.orders.po' | t }}</th><th>{{ 'customer.orders.payment' | t }}</th><th>{{ 'customer.orders.fulfillment' | t }}</th><th>{{ 'customer.orders.total' | t }}</th><th></th></tr></thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr>
+                    <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                    <td>{{ order.created_at | date: format: 'date' }}</td>
+                    <td>{{ order.attributes['PO number'] | default: order.po_number }}</td>
+                    <td>{{ order.financial_status_label }}</td>
+                    <td>{{ order.fulfillment_status_label }}</td>
+                    <td>{{ order.total_price | money }}</td>
+                    <td><form action="{{ routes.cart_add_url }}" method="post" data-reorder data-order-id="{{ order.id }}">
+                      {%- for line in order.line_items -%}{%- if line.variant -%}<input type="hidden" name="items[{{ forloop.index0 }}][id]" value="{{ line.variant.id }}"><input type="hidden" name="items[{{ forloop.index0 }}][quantity]" value="{{ line.quantity }}">{%- endif -%}{%- endfor -%}
+                      <button type="submit" class="btn btn--secondary btn--small">{{ 'customer.orders.reorder' | t }}</button></form></td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+            {%- if paginate.pages > 1 -%}<nav class="pagination">{{ paginate | default_pagination }}</nav>{%- endif -%}
+          {%- else -%}
+            <p>{{ 'customer.orders.none' | t }}</p>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+      <aside class="account__side">
+        <h2>{{ 'customer.addresses.title' | t }}</h2>
+        {%- if customer.default_address -%}<address class="account__address">{{ customer.default_address | format_address }}</address>{%- endif -%}
+        <a href="{{ routes.account_addresses_url }}">{{ 'customer.addresses.manage' | t }}</a>
+      </aside>
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "t:sections.main_account.name", "tag": "section", "settings": [] }
+{% endschema %}

@@ -1,0 +1,9 @@
+<section class="page section" data-section="{{ section.id }}">
+  <div class="page-width page__inner">
+    <h1 class="page__title">{{ page.title | escape }}</h1>
+    <div class="rte">{{ page.content }}</div>
+  </div>
+</section>
+{% schema %}
+{ "name": "t:sections.main_page.name", "tag": "section", "settings": [] }
+{% endschema %}

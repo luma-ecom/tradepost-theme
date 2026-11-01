@@ -1,0 +1,73 @@
+{%- comment -%} Trade / wholesale hero. Audience setting lets you show different content to B2B and retail visitors on any plan. {%- endcomment -%}
+{%- liquid
+  assign show = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.audience == 'd2c' and customer.b2b?
+    assign show = false
+  endif
+-%}
+{%- if show -%}
+<section class="trade section" data-section="{{ section.id }}" style="--trade-bg: {{ section.settings.bg }}">
+  <div class="page-width trade__inner">
+    <div class="trade__copy">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="trade__title">{{ section.settings.title }}</h2>
+      <div class="trade__text rte">{{ section.settings.text }}</div>
+      <div class="trade__actions">
+        {%- if section.settings.primary_link != blank -%}
+          <a class="btn btn--primary" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.secondary_link != blank -%}
+          <a class="btn btn--ghost" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- if section.blocks.size > 0 -%}
+      <dl class="trade__facts">
+        {%- for block in section.blocks -%}
+          <div class="trade__fact" {{ block.shopify_attributes }}>
+            <dt>{{ block.settings.label }}</dt>
+            <dd>{{ block.settings.value }}</dd>
+          </div>
+        {%- endfor -%}
+      </dl>
+    {%- endif -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.trade_cta.name",
+  "tag": "section",
+  "settings": [
+    { "type": "select", "id": "audience", "label": "t:sections.common.audience", "options": [
+      { "value": "everyone", "label": "t:sections.common.audience_everyone" },
+      { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+      { "value": "d2c", "label": "t:sections.common.audience_d2c" }
+    ], "default": "d2c", "info": "t:sections.common.audience_info" },
+    { "type": "text", "id": "eyebrow", "label": "t:sections.trade_cta.eyebrow", "default": "Trade & wholesale" },
+    { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Order the way your business buys" },
+    { "type": "richtext", "id": "text", "label": "t:sections.common.text", "default": "<p>Your prices, your payment terms, quick reordering by SKU. Apply once, order from any location.</p>" },
+    { "type": "url", "id": "primary_link", "label": "t:sections.trade_cta.primary_link" },
+    { "type": "text", "id": "primary_label", "label": "t:sections.trade_cta.primary_label", "default": "Apply for a trade account" },
+    { "type": "url", "id": "secondary_link", "label": "t:sections.trade_cta.secondary_link" },
+    { "type": "text", "id": "secondary_label", "label": "t:sections.trade_cta.secondary_label", "default": "Already a customer? Log in" },
+    { "type": "color", "id": "bg", "label": "t:sections.common.background", "default": "#f6f6f4" }
+  ],
+  "blocks": [
+    { "type": "fact", "name": "t:sections.trade_cta.blocks.fact", "limit": 4, "settings": [
+      { "type": "text", "id": "label", "label": "t:sections.trade_cta.fact_label", "default": "Minimum order" },
+      { "type": "text", "id": "value", "label": "t:sections.trade_cta.fact_value", "default": "$250" }
+    ]}
+  ],
+  "presets": [
+    { "name": "t:sections.trade_cta.name", "blocks": [
+      { "type": "fact", "settings": { "label": "Minimum order", "value": "$250" } },
+      { "type": "fact", "settings": { "label": "Payment terms", "value": "Net 30 on approval" } },
+      { "type": "fact", "settings": { "label": "Lead time", "value": "2–3 business days" } }
+    ]}
+  ]
+}
+{% endschema %}

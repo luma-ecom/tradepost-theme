@@ -1,0 +1,27 @@
+{%- comment -%} Rendered via Section Rendering API from the header search. Shows SKU when matched. {%- endcomment -%}
+<div id="PredictiveSearchResults">
+  {%- if predictive_search.performed -%}
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <ul class="predictive__list" role="listbox">
+        {%- for product in predictive_search.resources.products -%}
+          {%- assign v = product.selected_or_first_available_variant -%}
+          <li class="predictive__item" role="option">
+            <a href="{{ product.url }}">
+              {%- if product.featured_image -%}{{ product.featured_image | image_url: width: 80 | image_tag: loading: 'lazy', class: 'predictive__img' }}{%- endif -%}
+              <span class="predictive__text">
+                <span class="predictive__title">{{ product.title | escape }}</span>
+                {%- if settings.show_sku and v.sku != blank -%}<span class="predictive__sku">{{ v.sku }}</span>{%- endif -%}
+              </span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <a class="predictive__all" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&options[prefix]=last">{{ 'general.search.submit' | t }} “{{ predictive_search.terms | escape }}”</a>
+    {%- else -%}
+      <p class="predictive__empty">{{ 'collections.empty' | t }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+{% schema %}
+{ "name": "Predictive search", "settings": [] }
+{% endschema %}

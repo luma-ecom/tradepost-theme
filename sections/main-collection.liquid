@@ -1,0 +1,111 @@
+{%- liquid
+  assign view = section.settings.default_view
+  if request.params.view == 'list' or request.params.view == 'grid'
+    assign view = request.params.view
+  endif
+-%}
+<section class="collection section" data-section="{{ section.id }}">
+  <div class="page-width">
+    <header class="collection__head">
+      <div>
+        {%- if section.settings.show_breadcrumbs -%}{% render 'breadcrumbs' %}{%- endif -%}
+        <h1 class="collection__title">{{ collection.title | escape }}</h1>
+        {%- if collection.description != blank and section.settings.show_description -%}
+          <div class="collection__desc rte">{{ collection.description }}</div>
+        {%- endif -%}
+      </div>
+      <div class="collection__tools">
+        <span class="collection__count">{{ 'collections.product_count' | t: count: collection.products_count }}</span>
+        <div class="view-toggle" role="group" aria-label="{{ 'collections.view' | t }}">
+          <a class="view-toggle__btn{% if view == 'grid' %} is-active{% endif %}" href="?view=grid" aria-label="{{ 'collections.view_grid' | t }}">{% render 'icon', name: 'grid' %}</a>
+          <a class="view-toggle__btn{% if view == 'list' %} is-active{% endif %}" href="?view=list" aria-label="{{ 'collections.view_list' | t }}">{% render 'icon', name: 'list' %}</a>
+        </div>
+        <form class="sort" method="get">
+          <input type="hidden" name="view" value="{{ view }}">
+          <label class="visually-hidden" for="SortBy">{{ 'collections.sort' | t }}</label>
+          <select id="SortBy" name="sort_by" onchange="this.form.submit()">
+            {%- for option in collection.sort_options -%}
+              <option value="{{ option.value }}"{% if option.value == collection.sort_by %} selected{% endif %}>{{ option.name }}</option>
+            {%- endfor -%}
+          </select>
+        </form>
+      </div>
+    </header>
+
+    <div class="collection__layout">
+      {%- if section.settings.show_filters and collection.filters.size > 0 -%}
+        <aside class="filters">
+          <form class="filters__form" method="get" data-filters>
+            <input type="hidden" name="view" value="{{ view }}">
+            {%- if collection.sort_by != blank -%}<input type="hidden" name="sort_by" value="{{ collection.sort_by }}">{%- endif -%}
+            {%- for filter in collection.filters -%}
+              <details class="filters__group" open>
+                <summary class="filters__title">{{ filter.label }}</summary>
+                {%- case filter.type -%}
+                {%- when 'list', 'boolean' -%}
+                  <ul class="filters__list" role="list">
+                    {%- for value in filter.values -%}
+                      <li>
+                        <label class="filters__item{% if value.count == 0 and value.active == false %} is-disabled{% endif %}">
+                          <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}"{% if value.active %} checked{% endif %}{% if value.count == 0 and value.active == false %} disabled{% endif %}>
+                          <span>{{ value.label }}</span> <span class="filters__count">({{ value.count }})</span>
+                        </label>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- when 'price_range' -%}
+                  <div class="filters__price">
+                    <input type="number" name="{{ filter.min_value.param_name }}" placeholder="{{ 'collections.filters.from' | t }}" value="{% if filter.min_value.value %}{{ filter.min_value.value | money_without_currency | replace: ',', '' }}{% endif %}" min="0">
+                    <span>–</span>
+                    <input type="number" name="{{ filter.max_value.param_name }}" placeholder="{{ 'collections.filters.to' | t }}" value="{% if filter.max_value.value %}{{ filter.max_value.value | money_without_currency | replace: ',', '' }}{% endif %}" min="0">
+                  </div>
+                {%- endcase -%}
+              </details>
+            {%- endfor -%}
+            <div class="filters__actions">
+              <button type="submit" class="btn btn--primary btn--small">{{ 'collections.filters.apply' | t }}</button>
+              <a class="btn btn--ghost btn--small" href="{{ collection.url }}?view={{ view }}">{{ 'collections.filters.clear' | t }}</a>
+            </div>
+          </form>
+        </aside>
+      {%- endif -%}
+
+      <div class="collection__products">
+        {%- paginate collection.products by section.settings.per_page -%}
+          {%- if collection.products.size == 0 -%}
+            <p class="collection__empty">{{ 'collections.empty' | t }}</p>
+          {%- else -%}
+            <div class="product-{{ view }}" data-products>
+              {%- for product in collection.products -%}
+                {% render 'product-card', product: product, view: view, section_id: section.id %}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination" aria-label="{{ 'general.pagination.label' | t }}">
+              {%- assign next_label = 'general.pagination.next' | t -%}
+              {%- assign prev_label = 'general.pagination.previous' | t -%}
+              {{ paginate | default_pagination: next: next_label, previous: prev_label }}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main_collection.name",
+  "tag": "section",
+  "settings": [
+    { "type": "range", "id": "per_page", "label": "t:sections.main_collection.per_page", "min": 12, "max": 96, "step": 12, "default": 48 },
+    { "type": "select", "id": "default_view", "label": "t:sections.main_collection.default_view", "options": [
+      { "value": "grid", "label": "t:collections.view_grid" }, { "value": "list", "label": "t:collections.view_list" }
+    ], "default": "grid" },
+    { "type": "checkbox", "id": "show_filters", "label": "t:sections.main_collection.show_filters", "default": true },
+    { "type": "checkbox", "id": "show_breadcrumbs", "label": "t:sections.main_collection.show_breadcrumbs", "default": true },
+    { "type": "checkbox", "id": "show_description", "label": "t:sections.main_collection.show_description", "default": true }
+  ]
+}
+{% endschema %}

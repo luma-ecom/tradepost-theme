@@ -1,0 +1,28 @@
+<section class="account section" data-section="{{ section.id }}">
+  <div class="page-width">
+    <a href="{{ routes.account_url }}">&larr; {{ 'customer.account.title' | t }}</a>
+    <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
+    <p class="account__meta">{{ order.created_at | date: format: 'date' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}{% if order.attributes['PO number'] %} · {{ 'customer.orders.po' | t }} {{ order.attributes['PO number'] }}{% endif %}</p>
+    <table class="orders">
+      <thead><tr><th>{{ 'customer.order.product' | t }}</th><th>{{ 'customer.order.sku' | t }}</th><th>{{ 'customer.order.price' | t }}</th><th>{{ 'customer.order.quantity' | t }}</th><th>{{ 'customer.order.total' | t }}</th></tr></thead>
+      <tbody>
+        {%- for line in order.line_items -%}
+          <tr><td>{{ line.title }}</td><td>{{ line.sku }}</td><td>{{ line.final_price | money }}</td><td>{{ line.quantity }}</td><td>{{ line.final_line_price | money }}</td></tr>
+        {%- endfor -%}
+      </tbody>
+      <tfoot>
+        <tr><td colspan="4">{{ 'cart.subtotal' | t }}</td><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+        {%- for s in order.shipping_methods -%}<tr><td colspan="4">{{ 'customer.order.shipping' | t }} ({{ s.title }})</td><td>{{ s.price | money }}</td></tr>{%- endfor -%}
+        {%- for t in order.tax_lines -%}<tr><td colspan="4">{{ t.title }} {{ t.rate | times: 100 }}%</td><td>{{ t.price | money }}</td></tr>{%- endfor -%}
+        <tr><td colspan="4"><strong>{{ 'customer.order.total' | t }}</strong></td><td><strong>{{ order.total_price | money }}</strong></td></tr>
+      </tfoot>
+    </table>
+    <form action="{{ routes.cart_add_url }}" method="post" data-reorder>
+      {%- for line in order.line_items -%}{%- if line.variant -%}<input type="hidden" name="items[{{ forloop.index0 }}][id]" value="{{ line.variant.id }}"><input type="hidden" name="items[{{ forloop.index0 }}][quantity]" value="{{ line.quantity }}">{%- endif -%}{%- endfor -%}
+      <button type="submit" class="btn btn--primary">{{ 'customer.orders.reorder' | t }}</button>
+    </form>
+  </div>
+</section>
+{% schema %}
+{ "name": "t:sections.main_order.name", "tag": "section", "settings": [] }
+{% endschema %}

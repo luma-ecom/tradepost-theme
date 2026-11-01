@@ -1,0 +1,8 @@
+{
+  "type": "header",
+  "name": "t:sections.header.group",
+  "sections": {
+    "header": { "type": "header", "settings": {} }
+  },
+  "order": ["header"]
+}

@@ -1,0 +1,19 @@
+<section class="collections-list section" data-section="{{ section.id }}">
+  <div class="page-width">
+    <h1 class="collections-list__title">{{ 'collections.all' | t }}</h1>
+    <div class="collections-grid">
+      {%- for c in collections -%}
+        {%- unless c.handle == 'frontpage' -%}
+        <a class="collection-card" href="{{ c.url }}">
+          {%- if c.featured_image -%}{{ c.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'collection-card__img' }}{%- endif -%}
+          <span class="collection-card__title">{{ c.title }}</span>
+          <span class="collection-card__count">{{ 'collections.product_count' | t: count: c.all_products_count }}</span>
+        </a>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "t:sections.main_list_collections.name", "tag": "section", "settings": [] }
+{% endschema %}

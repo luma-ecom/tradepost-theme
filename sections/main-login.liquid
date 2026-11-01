@@ -1,0 +1,27 @@
+<section class="account section" data-section="{{ section.id }}">
+  <div class="page-width account__narrow">
+    <h1>{{ 'customer.login.title' | t }}</h1>
+    {%- form 'customer_login', class: 'form' -%}
+      {{ form.errors | default_errors }}
+      <label class="field"><span class="field__label">{{ 'customer.login.email' | t }}</span><input class="field__input" type="email" name="customer[email]" autocomplete="email" required></label>
+      <label class="field"><span class="field__label">{{ 'customer.login.password' | t }}</span><input class="field__input" type="password" name="customer[password]" autocomplete="current-password" required></label>
+      <button type="submit" class="btn btn--primary btn--block">{{ 'customer.login.submit' | t }}</button>
+      <p class="account__links"><a href="#recover">{{ 'customer.login.forgot' | t }}</a> · <a href="{{ routes.account_register_url }}">{{ 'customer.login.create' | t }}</a></p>
+    {%- endform -%}
+    {%- if settings.trade_account_url != blank -%}
+      <div class="notice notice--info">{{ 'customer.login.trade_prompt' | t }} <a href="{{ settings.trade_account_url }}">{{ 'products.price.apply_trade' | t }}</a></div>
+    {%- endif -%}
+    <div id="recover" class="account__recover">
+      <h2>{{ 'customer.recover.title' | t }}</h2>
+      {%- form 'recover_customer_password', class: 'form' -%}
+        {%- if form.posted_successfully? -%}<div class="notice notice--success">{{ 'customer.recover.sent' | t }}</div>{%- endif -%}
+        {{ form.errors | default_errors }}
+        <label class="field"><span class="field__label">{{ 'customer.login.email' | t }}</span><input class="field__input" type="email" name="email" autocomplete="email" required></label>
+        <button type="submit" class="btn btn--secondary">{{ 'customer.recover.submit' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "t:sections.main_login.name", "tag": "section", "settings": [] }
+{% endschema %}

@@ -1,0 +1,14 @@
+<section class="notfound section" data-section="{{ section.id }}">
+  <div class="page-width notfound__inner">
+    <h1>{{ 'general.404.title' | t }}</h1>
+    <p>{{ 'general.404.text' | t }}</p>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="notfound__search">
+      <input type="search" name="q" placeholder="{{ 'general.search.placeholder_sku' | t }}" aria-label="{{ 'general.search.label' | t }}">
+      <button type="submit" class="btn btn--primary">{{ 'general.search.submit' | t }}</button>
+    </form>
+    <a class="btn btn--secondary" href="{{ routes.root_url }}">{{ 'general.404.home' | t }}</a>
+  </div>
+</section>
+{% schema %}
+{ "name": "t:sections.main_404.name", "tag": "section", "settings": [] }
+{% endschema %}
