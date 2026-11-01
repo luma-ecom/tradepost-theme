@@ -78,6 +78,24 @@ class DepotQuantity extends HTMLElement {
 }
 customElements.define('depot-quantity', DepotQuantity);
 
+/* Highlight the volume tier that applies to the chosen quantity (PDP). */
+const markTier = (scope, qty) => {
+  const rows = [...scope.querySelectorAll('[data-volume-tiers] tr[data-tier-min]')];
+  let hit = null;
+  rows.forEach(r => { if (qty >= parseInt(r.dataset.tierMin, 10)) hit = r; });
+  rows.forEach(r => r.classList.toggle('is-active', r === hit));
+};
+document.addEventListener('depot:quantity', (e) => {
+  if (e.detail.lineKey) return;
+  const scope = e.target.closest('[data-section]') || document;
+  markTier(scope, e.detail.value);
+});
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('depot-product-form depot-quantity').forEach(q => {
+    markTier(q.closest('[data-section]') || document, parseInt(q.input.value, 10) || 1);
+  });
+});
+
 /* ---------- Variant picker: swaps price, tiers, buy buttons, sku, stock via Section Rendering ---------- */
 class DepotVariantPicker extends HTMLElement {
   connectedCallback() {
@@ -103,6 +121,8 @@ class DepotVariantPicker extends HTMLElement {
         const next = doc.querySelector(sel); const cur = this.section.querySelector(sel);
         if (next && cur) cur.replaceWith(next);
       });
+      const qi = this.section.querySelector('depot-product-form [data-qty-input]');
+      markTier(this.section, qi ? parseInt(qi.value, 10) || 1 : 1);
       const media = this.section.querySelector(`[data-media-id="${v.featured_media && v.featured_media.id}"]`);
       if (media) this.section.querySelector('depot-gallery')?.show(v.featured_media.id);
     } finally { this.section.classList.remove('is-loading'); }
@@ -168,7 +188,7 @@ class DepotCart {
   async changeLine(key, quantity) {
     let error = null;
     try {
-      const res = await fetch(Depot.routes.cartChange, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ id: key, quantity }) });
+      const res = await fetch(`${Depot.routes.cartChange}.js`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ id: key, quantity }) });
       if (!res.ok) {
         // 422: quantity rule, stock or price-list limit. Keep the message at the line instead of failing silently.
         const data = await res.json().catch(() => ({}));
