@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Depot",
-    "theme_version": "0.1.4",
+    "theme_version": "0.1.5",
     "theme_author": "LUMA-E",
     "theme_documentation_url": "https://github.com/luma-ecom/depot-theme#readme",
     "theme_support_url": "https://github.com/luma-ecom/depot-theme/issues"
@@ -75,6 +75,13 @@
         "type": "checkbox",
         "id": "show_unit_label",
         "label": "t:settings.b2b.show_unit_label.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "b2b_hide_compare_at",
+        "label": "t:settings.b2b.b2b_hide_compare_at.label",
+        "info": "t:settings.b2b.b2b_hide_compare_at.info",
         "default": true
       }
     ]

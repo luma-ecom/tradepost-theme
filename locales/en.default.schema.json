@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "settings": {
     "b2b": {
@@ -23,7 +32,8 @@
         "info": "Display label only. Set actual tax inclusion in Settings > Taxes and in your B2B catalogs."
       },
       "show_sku": { "label": "Show SKU on cards, product pages and cart" },
-      "show_unit_label": { "label": "Show \"/ea\" after unit prices" }
+      "show_unit_label": { "label": "Show \"/ea\" after unit prices" },
+      "b2b_hide_compare_at": { "label": "Hide compare-at price for B2B buyers", "info": "B2B price lists are discounts off your retail price, so Shopify shows retail as compare-at. Hide it to keep trade pricing clean." }
     },
     "colors": {
       "name": "Colors", "text": "Text", "muted": "Muted text", "background": "Background", "surface": "Surface",

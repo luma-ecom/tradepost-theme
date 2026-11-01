@@ -40,6 +40,9 @@
     if compare != blank and compare > price
       assign has_compare = true
     endif
+    if customer.b2b? and settings.b2b_hide_compare_at
+      assign has_compare = false
+    endif
     assign has_tiers = false
     if variant.quantity_price_breaks.size > 0
       assign has_tiers = true
