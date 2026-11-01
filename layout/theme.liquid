@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" dir="{% if settings.rtl %}rtl{% else %}ltr{% endif %}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_accent }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64 }}">
+  {%- endif -%}
+  <title>
+    {{- page_title -}}
+    {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
+    {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  {% render 'meta-tags' %}
+  {% render 'css-variables' %}
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  {{ content_for_header }}
+</head>
+<body class="template-{{ request.page_type | handle }}{% if customer.b2b? %} is-b2b{% endif %}{% if customer %} is-logged-in{% endif %}">
+  <a class="skip-link" href="#main">{{ 'accessibility.skip_to_content' | t }}</a>
+
+  {% sections 'header-group' %}
+
+  <main id="main" class="main" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  {% render 'cart-drawer' %}
+
+  <script>
+    window.depot = {
+      routes: {
+        cart: '{{ routes.cart_url }}',
+        cartAdd: '{{ routes.cart_add_url }}',
+        cartChange: '{{ routes.cart_change_url }}',
+        cartUpdate: '{{ routes.cart_update_url }}',
+        predictiveSearch: '{{ routes.predictive_search_url }}'
+      },
+      moneyFormat: {{ shop.money_format | json }},
+      b2b: {{ customer.b2b? | default: false | json }},
+      strings: {
+        qtyMin: {{ 'products.quantity.min_of' | t: min: '[min]' | json }},
+        qtyMax: {{ 'products.quantity.max_of' | t: max: '[max]' | json }},
+        qtyStep: {{ 'products.quantity.multiples_of' | t: step: '[step]' | json }},
+        stockLeft: {{ 'products.quantity.stock_left' | t: count: '[count]' | json }},
+        outOfStock: {{ 'products.availability.sold_out' | t | json }},
+        addedToCart: {{ 'cart.added' | t | json }}
+      }
+    };
+  </script>
+</body>
+</html>
