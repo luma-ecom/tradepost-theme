@@ -41,7 +41,7 @@
       assign has_compare = true
     endif
     assign has_tiers = false
-    if variant.quantity_price_breaks_configured?
+    if variant.quantity_price_breaks.size > 0
       assign has_tiers = true
       assign lowest = price
       assign lowest_qty = 1

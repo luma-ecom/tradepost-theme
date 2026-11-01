@@ -5,8 +5,8 @@
         <h1>{{ 'customer.account.title' | t }}</h1>
         {%- if customer.b2b? -%}
           <p class="account__company">{{ customer.current_company.name }}{% if customer.current_location %} · {{ customer.current_location.name }}{% endif %}</p>
-          {%- if customer.current_location.order_settings.payment_terms -%}
-            <p class="account__terms">{{ 'customer.account.terms' | t: terms: customer.current_location.order_settings.payment_terms.name }}</p>
+          {%- if customer.current_location.metafields.depot.payment_terms.value != blank -%}
+            <p class="account__terms">{{ 'customer.account.terms' | t: terms: customer.current_location.metafields.depot.payment_terms.value }}</p>
           {%- endif -%}
         {%- endif -%}
       </div>
