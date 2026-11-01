@@ -1,9 +1,38 @@
 # Changelog
 
-## 0.1.2 — 2026-11-02
-- Fix: `font_face` output was outside `<style>` → raw @font-face text printed at top of every page (first render on depot-demo). Now inside the style block in `snippets/css-variables.liquid`.
-- Repo URLs → `luma-ecom/depot-theme`. Theme now deploys from GitHub (`main` → draft theme on depot-demo).
-- Finding: on non-Plus plans catalogs can't be assigned to company locations; pricing goes through B2B markets (max 3 active B2B catalogs). Demo store set up that way. No theme code depends on direct assignment.
+## 0.2.0 — 2026-11-02
+WP2: P2 fixes from the WP1 pass, design v1.1 locked.
+- Cart: PO number and notes show to B2B buyers only by default (new setting Cart › "Show PO number and notes to B2B buyers only").
+- Cart line shows the next volume tier ("Add 12 more for $4.10/ea") when the line has price breaks.
+- Cart line shows Shopify's error at the line when a quantity change is refused (422) instead of failing silently.
+- Cart count badge counts lines, not units (a B2B cart of 3 SKUs × 120 reads 3). Drawer title "Cart (3)". Badge hidden when empty.
+- Predictive search: when the query matches a variant SKU, the result shows that SKU and variant and links to it.
+- Product card without image: quiet image icon instead of underlined "No image" text.
+- List view: "Choose options" is a text link, not a heavy button.
+- Mobile collection: Filter button sits on the same row as Sort.
+- Trade application form: no grey card; hairline top rule like the rest of the theme.
+- Docs: `docs/b2b-setup.md` (B2B markets on non-Plus, 2 company-location metafields `depot.payment_terms` / `depot.review_orders`, settings). README and demo-companies updated.
+- Removed temporary `sections/zz-debug.liquid`.
+
+## 0.1.5 — 2026-11-02
+- New setting B2B › "Hide compare-at price for B2B buyers" (`b2b_hide_compare_at`, on by default). B2B price lists make Shopify show the retail price as compare-at on every trade price.
+- Kept `customers/*` templates for stores on classic customer accounts (decision 02/11).
+
+## 0.1.4 — 2026-11-02
+- WP1 B2B pass (buyer logged in on depot-demo).
+- Volume pricing table and card tier hint now render: check `variant.quantity_price_breaks.size` (`quantity_price_breaks_configured?` returns nil in this context). Quantity rule line (min / multiples) shows even without tiers.
+- Location switcher no longer shows "Translation missing" for the location name.
+- Payment terms and submit-for-review messages read company-location metafields `depot.payment_terms` (text) and `depot.review_orders` (boolean). Liquid does not expose a location's payment terms or checkout-to-draft setting.
+- Cart line under the B2B minimum (added before login) is corrected in the cart once, so the shown quantity matches the subtotal (waits for the cart controller; theme.js is deferred).
+
+## 0.1.3 — 2026-11-02
+- WP1 fixes from first run on depot-demo: PDP accordion title no longer shows "Translation missing"; search count no longer double-escapes quotes, singular/plural; product count singular/plural.
+- Collection grid/list now uses an alternate template (`collection.list.json`, `?view=list`); the old query-param check never worked.
+- Footer ships with default blocks (menu, trade, contact) instead of rendering empty.
+- Mobile: header icons back on the first row; filters collapse behind a Filter button (section-level `{% stylesheet %}` / `{% javascript %}`).
+
+## 0.1.2 — 2026-11-01
+- Font-face declarations moved inside the `<style>` tag (synced from the store copy).
 
 ## 0.1.1 — 2026-11-01
 - Repo: CLAUDE.md (rules for Claude Code), docs/DEPOT-STATE.md, docs/demo-companies.md, docs/make-demo-catalog.py + demo-catalog.csv (79 products · 314 SKU dental-supply demo). No theme code changes.

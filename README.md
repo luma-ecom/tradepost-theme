@@ -6,7 +6,7 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 
 ## Status
 
-`0.1.0` — foundation. Group A (pricing) and Group C (company accounts) in progress. Not yet for production.
+`0.2.0` — first pass on a live B2B dev store done (3 companies, 3 B2B price lists, volume pricing, quantity rules). Not yet for production; public beta planned as `1.0.0-beta`.
 
 ## What is in the core (free)
 
@@ -27,7 +27,7 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 1. Download the latest release zip.
 2. Shopify admin → Online Store → Themes → Add theme → Upload zip file.
 3. Create a page with template `page.trade-account` and link it in Theme settings → B2B & wholesale → Trade application page.
-4. Set up companies, catalogs, quantity rules and payment terms in Shopify admin → Customers → Companies.
+4. Set up companies, price lists, quantity rules and payment terms in Shopify admin. On non-Plus plans B2B pricing goes through B2B markets (max 3 active B2B catalogs). Add the two company-location metafields `depot.payment_terms` and `depot.review_orders`. Step by step: [`docs/b2b-setup.md`](docs/b2b-setup.md).
 
 ## Need help connecting pricing and orders to QuickBooks, Xero, Odoo or your ERP?
 
