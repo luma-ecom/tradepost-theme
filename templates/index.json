@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "trade": { "type": "trade-cta", "settings": { "audience": "d2c" } },
+    "featured": { "type": "featured-collection", "settings": { "title": "Popular with trade customers", "limit": 8, "columns": 4 } },
+    "rich": { "type": "rich-text", "blocks": {
+      "h": { "type": "heading", "settings": { "text": "Built for distributors, not just shops" } },
+      "t": { "type": "text", "settings": { "text": "<p>Customer-specific pricing, quantity rules, net terms and quick reordering, using Shopify’s native B2B on every plan.</p>" } }
+    }, "block_order": ["h", "t"] }
+  },
+  "order": ["trade", "featured", "rich"]
+}

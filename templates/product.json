@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "main": { "type": "main-product", "blocks": {
+      "desc": { "type": "description", "settings": { "title": "Description", "open": true } },
+      "specs": { "type": "specs", "settings": { "title": "Specifications", "namespace": "custom", "key": "specifications", "open": false } },
+      "docs": { "type": "documents", "settings": { "title": "Datasheets & documents", "namespace": "custom", "key": "documents" } }
+    }, "block_order": ["desc", "specs", "docs"] }
+  },
+  "order": ["main"]
+}
