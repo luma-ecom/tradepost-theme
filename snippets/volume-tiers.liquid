@@ -22,8 +22,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr data-tier-min="1">
-          <td>1{% if variant.quantity_price_breaks.first %}–{{ variant.quantity_price_breaks.first.minimum_quantity | minus: 1 }}{% else %}+{% endif %}</td>
+        {%- assign start_qty = variant.quantity_rule.min | default: 1 -%}
+        <tr data-tier-min="{{ start_qty }}">
+          <td>{{ start_qty }}{% if variant.quantity_price_breaks.first %}–{{ variant.quantity_price_breaks.first.minimum_quantity | minus: 1 }}{% else %}+{% endif %}</td>
           <td>{{ variant.price | money }}</td>
           <td>—</td>
         </tr>
