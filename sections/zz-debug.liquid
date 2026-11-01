@@ -1,2 +1,0 @@
-{%- assign v = product.selected_or_first_available_variant -%}<pre id="dbg">b2b={{ customer.b2b? }} loc={{ customer.current_location.name }} sku={{ v.sku }} price={{ v.price }} cfg={{ v.quantity_price_breaks_configured? }} n={{ v.quantity_price_breaks.size }} first={{ v.quantity_price_breaks.first.minimum_quantity }} rule={{ v.quantity_rule.min }}/{{ v.quantity_rule.increment }} vis={{ settings.price_visibility }}</pre>
-{% schema %}{ "name": "Debug" }{% endschema %}
