@@ -2,7 +2,9 @@
 
 Store giả lập nhà phân phối vật tư nha khoa (preset "Clinic"). Dùng `docs/demo-catalog.csv` (79 sản phẩm · 314 SKU · 8 collection) rồi dựng B2B như sau trong Shopify admin → Customers → Companies.
 
-## Catalogs (Products → Catalogs)
+## Bảng giá (non-Plus: qua B2B markets)
+Trên Grow (non-Plus) không gán catalog thẳng vào company location. Mỗi tier = 1 B2B market (điều kiện = company locations) → 1 catalog → 1 price list. Tối đa 3 catalog B2B active. Retail là giá gốc.
+
 | Catalog | Giá | Dùng cho |
 |---|---|---|
 | Retail (default) | giá niêm yết trong CSV | khách lẻ |
@@ -17,7 +19,7 @@ Store giả lập nhà phân phối vật tư nha khoa (preset "Clinic"). Dùng 
 | Nha khoa Sài Gòn Smile | Quận 3 | Trade Tier 2 | Net 15 | Pay now | 1 location |
 | Bright Clinic Group | Hà Nội | Trade Tier 1 | Due on fulfillment | Pay now | tax exempt để test nhãn VAT |
 
-Mỗi company một buyer (email demo), đặt mật khẩu, lưu vào password manager. Buyer của Hải Đăng cần có quyền cả 2 location.
+Mỗi company một buyer, login OTP về email Leo: `leo+haidang@` (Key Account, 2 location) · `leo+sgsmile@` (Tier 2) · `leo+bright@` (Tier 1). Mỗi location có metafield `depot.payment_terms` + `depot.review_orders` (xem `docs/b2b-setup.md`).
 
 ## Retail test
 - Khách chưa login: với `price_visibility = logged_in` phải thấy "Log in to see prices" và link trade account.
