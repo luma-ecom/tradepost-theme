@@ -19,10 +19,10 @@
 - 0.1.0: nền theme code gốc, 72 file, theme check 0 lỗi (xem CHANGELOG).
 - 0.1.1: CLAUDE.md, docs/, scripts tạo demo catalog + hướng dẫn company.
 - Spec v1.1, Design Direction v1.0, Plan v1.0 (Excel), aicrm product #5 + OKR #10.
-- Toàn bộ file dự án đã chép về Mac: `Documents/Claude/Projects/Solo + AI Company/Depot/`.
+- File dự án trên Mac: `LUMA-E AI First Company/06-Products/Depot/`. Handoff mới nhất: `claude/DEPOT-HANDOFF-v1.1.md` trong Project.
 
-## Chưa chạy trên store thật
-Toàn bộ 0.1.x chưa render trên dev store. Mọi "Xong" trong Backlog là code có, chưa nghiệm thu.
+## Nghiệm thu
+0.1.2 render trên depot-demo (home OK). Các màn khác chưa soi → mọi "Xong" trong Backlog vẫn là code có, chưa nghiệm thu, cho tới hết WP1.
 
 ## Lưu ý kỹ thuật phát hiện khi setup
 - Store dùng **new customer accounts** → các template `customers/*` của theme (login/register/account/order/addresses) **không được dùng**; trang tài khoản do Shopify host. Cần quyết định ở WP1: giữ template cho store classic hay bỏ, và chuyển "reorder / PO column / location switcher" sang nơi theme còn kiểm soát (header, cart, PDP).
@@ -31,12 +31,11 @@ Toàn bộ 0.1.x chưa render trên dev store. Mọi "Xong" trong Backlog là co
 ## Lỗi mở
 - [đã sửa 0.1.2] @font-face in ra text đầu trang — `font_face` nằm ngoài `<style>`.
 - Featured collection trên home chưa chọn collection (placeholder "Product") — set trong editor hoặc preset.
-- Buyer demo chưa có mật khẩu/đăng nhập: new customer accounts dùng mã OTP qua email → email `*@depot-demo.test` không nhận được. Cần đổi email buyer sang email thật của Leo (alias +haidang, +sgsmile, +bright) để test login.
+- [đã sửa] Buyer demo đổi email sang `leo+haidang@`, `leo+sgsmile@`, `leo+bright@luma-e.com` → login bằng OTP gửi về hộp thư Leo.
 
 ## Việc kế tiếp
-1. Đổi email 3 buyer sang alias email thật (Leo) để login được bằng OTP.
-2. WP1: soi 5 màn desktop+mobile trong editor/preview (header+B2B bar, PDP, collection, cart, account), ghi lỗi vào đây, sửa → 0.2.0.
-3. Sửa spec/README/landing: pricing non-Plus qua B2B markets (3 catalog).
+1. WP1: soi 5 màn desktop+mobile trong editor/preview (header+B2B bar, PDP, collection, cart, account), ghi lỗi vào đây, sửa → 0.2.0.
+2. Sửa spec/README/landing: pricing non-Plus qua B2B markets (3 catalog).
 
 ## Quyết định cần Leo
 - Tên theme (tạm Depot).
