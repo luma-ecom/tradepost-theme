@@ -166,8 +166,20 @@ class DepotCart {
   open() { if (!this.drawer) return; this.drawer.hidden = false; document.body.classList.add('drawer-open'); }
   close() { if (!this.drawer) return; this.drawer.hidden = true; document.body.classList.remove('drawer-open'); }
   async changeLine(key, quantity) {
-    await fetch(Depot.routes.cartChange, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: key, quantity }) });
-    this.refresh(false);
+    let error = null;
+    try {
+      const res = await fetch(Depot.routes.cartChange, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ id: key, quantity }) });
+      if (!res.ok) {
+        // 422: quantity rule, stock or price-list limit. Keep the message at the line instead of failing silently.
+        const data = await res.json().catch(() => ({}));
+        error = data.description || data.message || t('updateError');
+      }
+    } catch (ex) { error = t('updateError'); }
+    await this.refresh(false);
+    if (error) this.lineError(key, error);
+  }
+  lineError(key, message) {
+    document.querySelectorAll(`[data-line-key="${CSS.escape(key)}"] [data-line-error]`).forEach(el => { el.textContent = message; el.hidden = false; });
   }
   async update(payload) {
     await fetch(Depot.routes.cartUpdate, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
@@ -191,7 +203,10 @@ class DepotCart {
     const pageBody = document.querySelector('[data-cart-page-body]');
     if (fresh && pageBody) pageBody.innerHTML = fresh.innerHTML;
     const count = doc.querySelector('[data-cart-count]');
-    if (count) document.querySelectorAll('[data-cart-count]').forEach(el => { el.textContent = count.textContent; });
+    if (count) document.querySelectorAll('[data-cart-count]').forEach(el => {
+      el.textContent = count.textContent;
+      el.classList.toggle('is-empty', count.textContent.trim() === '0' && el.classList.contains('header__cart-count'));
+    });
     if (open) this.open();
   }
 }
