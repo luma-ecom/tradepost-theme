@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Depot",
-    "theme_version": "0.1.5",
+    "theme_version": "0.2.0",
     "theme_author": "LUMA-E",
     "theme_documentation_url": "https://github.com/luma-ecom/depot-theme#readme",
     "theme_support_url": "https://github.com/luma-ecom/depot-theme/issues"
@@ -127,6 +127,7 @@
       ], "default": "drawer" },
       { "type": "checkbox", "id": "cart_show_po_field", "label": "t:settings.cart.po_field", "default": true },
       { "type": "checkbox", "id": "cart_show_notes", "label": "t:settings.cart.notes", "default": true },
+      { "type": "checkbox", "id": "cart_b2b_fields_only", "label": "t:settings.cart.b2b_fields_only", "info": "t:settings.cart.b2b_fields_only_info", "default": true },
       { "type": "text", "id": "cart_minimum_message", "label": "t:settings.cart.minimum_message", "info": "t:settings.cart.minimum_message_info" }
     ]
   }
