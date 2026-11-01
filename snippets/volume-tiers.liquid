@@ -11,7 +11,7 @@
   endif
 -%}
 <div id="VolumeTiers-{{ section_id }}" class="volume-tiers" data-volume-tiers>
-  {%- if can_show and variant.quantity_price_breaks_configured? -%}
+  {%- if can_show and variant.quantity_price_breaks.size > 0 -%}
     <h3 class="volume-tiers__title">{{ 'products.volume.title' | t }}</h3>
     <table class="volume-tiers__table">
       <thead>
@@ -40,12 +40,12 @@
         {%- endfor -%}
       </tbody>
     </table>
-    {%- if variant.quantity_rule.min > 1 or variant.quantity_rule.increment > 1 or variant.quantity_rule.max -%}
-      <p class="volume-tiers__rules">
-        {%- if variant.quantity_rule.min > 1 %}{{ 'products.quantity.min_of' | t: min: variant.quantity_rule.min }}{% endif -%}
-        {%- if variant.quantity_rule.increment > 1 %} · {{ 'products.quantity.multiples_of' | t: step: variant.quantity_rule.increment }}{% endif -%}
-        {%- if variant.quantity_rule.max %} · {{ 'products.quantity.max_of' | t: max: variant.quantity_rule.max }}{% endif -%}
-      </p>
-    {%- endif -%}
+  {%- endif -%}
+  {%- if can_show and variant.quantity_rule.min > 1 or variant.quantity_rule.increment > 1 or variant.quantity_rule.max -%}
+    <p class="volume-tiers__rules">
+      {%- if variant.quantity_rule.min > 1 %}{{ 'products.quantity.min_of' | t: min: variant.quantity_rule.min }}{% endif -%}
+      {%- if variant.quantity_rule.increment > 1 %} · {{ 'products.quantity.multiples_of' | t: step: variant.quantity_rule.increment }}{% endif -%}
+      {%- if variant.quantity_rule.max %} · {{ 'products.quantity.max_of' | t: max: variant.quantity_rule.max }}{% endif -%}
+    </p>
   {%- endif -%}
 </div>

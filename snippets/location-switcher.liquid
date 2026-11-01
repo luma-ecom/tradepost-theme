@@ -9,7 +9,7 @@
     {%- if locations.size > 1 -%}
       <details class="location-switcher__menu">
         <summary class="location-switcher__current">
-          {{ customer.current_location.name | default: 'customer.location.select' | t }}
+          {%- if customer.current_location -%}{{ customer.current_location.name }}{%- else -%}{{ 'customer.location.select' | t }}{%- endif -%}
           {% render 'icon', name: 'chevron' %}
         </summary>
         <ul class="location-switcher__list" role="list">

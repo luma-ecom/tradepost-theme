@@ -32,7 +32,7 @@
       </div>
       <p class="buy-buttons__error" data-form-error role="alert" hidden></p>
     {%- endform -%}
-    {%- if customer.b2b? and customer.current_location.order_settings.checkout_to_draft -%}
+    {%- if customer.b2b? and customer.current_location.metafields.depot.review_orders.value -%}
       <p class="buy-buttons__note">{{ 'products.b2b.checkout_to_draft_note' | t }}</p>
     {%- endif -%}
   </depot-product-form>

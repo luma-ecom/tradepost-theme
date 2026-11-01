@@ -40,16 +40,16 @@
         <span data-cart-subtotal>{{ cart.total_price | money }}</span>
       </div>
       <p class="cart-summary__note">
-        {%- if customer.b2b? and customer.current_location.order_settings.checkout_to_draft -%}
+        {%- if customer.b2b? and customer.current_location.metafields.depot.review_orders.value -%}
           {{ 'cart.b2b.submit_for_review' | t }}
-        {%- elsif customer.b2b? and customer.current_location.order_settings.payment_terms -%}
-          {{ 'cart.b2b.terms' | t: terms: customer.current_location.order_settings.payment_terms.name }}
+        {%- elsif customer.b2b? and customer.current_location.metafields.depot.payment_terms.value != blank -%}
+          {{ 'cart.b2b.terms' | t: terms: customer.current_location.metafields.depot.payment_terms.value }}
         {%- else -%}
           {{ 'cart.taxes_shipping_note' | t }}
         {%- endif -%}
       </p>
       <button type="submit" name="checkout" class="btn btn--primary btn--block" data-checkout>
-        {%- if customer.b2b? and customer.current_location.order_settings.checkout_to_draft -%}
+        {%- if customer.b2b? and customer.current_location.metafields.depot.review_orders.value -%}
           {{ 'cart.submit_order' | t }}
         {%- else -%}
           {{ 'cart.checkout' | t }}
