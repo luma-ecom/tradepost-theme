@@ -12,6 +12,8 @@ WP2: P2 fixes from the WP1 pass, design v1.1 locked.
 - Mobile collection: Filter button sits on the same row as Sort.
 - Trade application form: no grey card; hairline top rule like the rest of the theme.
 - Docs: `docs/b2b-setup.md` (B2B markets on non-Plus, 2 company-location metafields `depot.payment_terms` / `depot.review_orders`, settings). README and demo-companies updated.
+- PDP: the volume tier that applies to the chosen quantity is highlighted (updates on quantity and variant change); the table starts at the quantity-rule minimum (12–23, not 1–23); empty gallery shows the same quiet image icon.
+- Design v1.1 locked: tabular numerals for prices, tier tables, quantities and totals; SKUs in a mono stack (`--font-mono`), as set in Design Direction v1.0. Mobile list view and cart line media sized to their column.
 - Removed temporary `sections/zz-debug.liquid`.
 
 ## 0.1.5 — 2026-11-02
