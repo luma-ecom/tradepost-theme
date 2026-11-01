@@ -1,13 +1,19 @@
 # DEPOT-STATE — cập nhật cuối mỗi phiên
 
-**Cập nhật:** 01/11/2026 · **Version hiện tại:** 0.1.1 · **WP đang làm:** WP0 Setup → WP1
+**Cập nhật:** 02/11/2026 · **Version hiện tại:** 0.1.2 · **WP đang làm:** WP0 Setup → WP1
+
+## Repo
+- GitHub `luma-ecom/depot-theme` (private) tạo 02/11, đủ 65 file theme + docs, 10 commit (upload qua web nên lịch sử khác bản zip; GitHub là nguồn chuẩn, bỏ zip).
+- Folder Mac đúng: `LUMA-E AI First Company/06-Products/Depot/` (không dùng `Solo + AI Company`).
+- 0.1.2: URL repo đã đổi sang `luma-ecom`.
 
 ## Dev store
 - `depot-demo.myshopify.com` — org LUMA-E.COM, plan test **Grow** (non-Plus → đúng giới hạn 3 catalog), currency đổi sang **USD** trước khi import.
 - Đã import `docs/demo-catalog.csv`: 79 sản phẩm · 314 SKU · tồn kho theo CSV. Chưa gán collection thủ công (CSV có cột Collection → kiểm tra lại trong admin).
 - Customer accounts: bản mới (shopify.com/…/account) đang bật — bắt buộc cho B2B companies.
-- Theme Depot **chưa upload**: dialog upload nằm trong iframe app nên không đẩy file từ phiên này được. File sạch để kéo thả: `Depot/depot-theme-0.1.1-upload.zip` (chỉ assets/config/layout/locales/sections/snippets/templates).
-- Companies / catalogs / payment terms: **chưa tạo** (làm nhanh nhất qua Shopify connector + GraphQL sau khi Leo cấp lại quyền; làm tay trong admin ~60 thao tác).
+- Theme: GitHub `main` đã nối vào store → draft theme **depot-theme/main** (id 191852413001). Push `main` = tự cập nhật. Render lần đầu OK (xem Lỗi mở).
+- B2B data (02/11, qua GraphQL): 3 company / 4 location (Hải Đăng ×2 Net 30 + draft review; Sài Gòn Smile Net 15; Bright Clinic due-on-fulfillment, tax exempt). 3 B2B market (Key Account / Tier 2 / Tier 1) → 3 catalog → 3 price list −28/−20/−12%. Volume pricing trên 21 SKU gloves+masks: KA 24+ −5%, 96+ −12%; T2 48+ −5%, 120+ −10%. Quantity rule KA: min 12, bước 12.
+- **Phát hiện plan**: trên non-Plus KHÔNG gán catalog thẳng vào company location (`Catalogs assigned to company locations can't be set to active with your plan`); phải đi qua **B2B markets** (điều kiện = company locations), tối đa 3 catalog B2B active. Trang Products → Catalogs không có trên store này. Theme không phụ thuộc cách gán, nhưng docs/spec/landing phải nói đúng: "3 bảng giá B2B qua markets" chứ không phải "catalog theo company".
 
 ## Xong
 - 0.1.0: nền theme code gốc, 72 file, theme check 0 lỗi (xem CHANGELOG).
@@ -23,12 +29,14 @@ Toàn bộ 0.1.x chưa render trên dev store. Mọi "Xong" trong Backlog là co
 - Form đăng ký trade account (`wholesale-register`) vẫn hợp lệ vì nằm trên page của theme.
 
 ## Lỗi mở
-(chưa có — điền sau WP1)
+- [đã sửa 0.1.2] @font-face in ra text đầu trang — `font_face` nằm ngoài `<style>`.
+- Featured collection trên home chưa chọn collection (placeholder "Product") — set trong editor hoặc preset.
+- Buyer demo chưa có mật khẩu/đăng nhập: new customer accounts dùng mã OTP qua email → email `*@depot-demo.test` không nhận được. Cần đổi email buyer sang email thật của Leo (alias +haidang, +sgsmile, +bright) để test login.
 
 ## Việc kế tiếp
-1. Leo: kéo `depot-theme-0.1.1-upload.zip` vào Themes → Import; hoặc Claude Code trên Mac + `shopify theme push`.
-2. Leo: cấp lại quyền Shopify connector cho `depot-demo` → chị tạo 4 catalog, 3 company, volume pricing, quantity rules, payment terms theo `docs/demo-companies.md` bằng GraphQL.
-3. WP1: soi 5 màn desktop+mobile, ghi lỗi vào đây, sửa → 0.2.0.
+1. Đổi email 3 buyer sang alias email thật (Leo) để login được bằng OTP.
+2. WP1: soi 5 màn desktop+mobile trong editor/preview (header+B2B bar, PDP, collection, cart, account), ghi lỗi vào đây, sửa → 0.2.0.
+3. Sửa spec/README/landing: pricing non-Plus qua B2B markets (3 catalog).
 
 ## Quyết định cần Leo
 - Tên theme (tạm Depot).
