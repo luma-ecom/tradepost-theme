@@ -2,10 +2,10 @@
   {
     "name": "theme_info",
     "theme_name": "Depot",
-    "theme_version": "0.1.1",
+    "theme_version": "0.1.2",
     "theme_author": "LUMA-E",
-    "theme_documentation_url": "https://github.com/luma-e/depot-theme#readme",
-    "theme_support_url": "https://github.com/luma-e/depot-theme/issues"
+    "theme_documentation_url": "https://github.com/luma-ecom/depot-theme#readme",
+    "theme_support_url": "https://github.com/luma-ecom/depot-theme/issues"
   },
   {
     "name": "t:settings.b2b.name",
