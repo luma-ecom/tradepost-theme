@@ -1,0 +1,155 @@
+{
+  "general": {
+    "meta": { "tags": "Tagged \"{{ tags }}\"", "page": "Page {{ page }}" },
+    "menu": "Menu",
+    "close": "Close",
+    "home": "Home",
+    "breadcrumbs": "Breadcrumbs",
+    "pagination": { "label": "Pagination", "next": "Next", "previous": "Previous" },
+    "search": {
+      "label": "Search",
+      "placeholder_sku": "Search products or SKU",
+      "submit": "Search",
+      "title": "Search",
+      "results_count": "{{ count }} results for \"{{ terms }}\""
+    },
+    "404": { "title": "Page not found", "text": "The page you requested does not exist.", "home": "Back to home" }
+  },
+  "accessibility": { "skip_to_content": "Skip to content" },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "choose_options": "Choose options",
+    "description": "Description",
+    "sku": "SKU",
+    "no_image": "No image",
+    "media": { "thumb": "Load image {{ index }}" },
+    "availability": {
+      "in_stock": "In stock",
+      "low_stock": "Only {{ count }} left",
+      "sold_out": "Out of stock"
+    },
+    "price": {
+      "per_unit": "/ea",
+      "regular_price": "Regular price",
+      "from_tier": "From {{ price }} at {{ qty }}+",
+      "login_to_see": "Log in to see prices",
+      "login_to_order": "Log in to order",
+      "apply_trade": "Apply for a trade account",
+      "b2b_only": "Trade pricing — available to approved accounts",
+      "ex_tax": "ex. tax",
+      "inc_tax": "inc. tax"
+    },
+    "quantity": {
+      "label": "Quantity",
+      "increase": "Increase quantity",
+      "decrease": "Decrease quantity",
+      "min_of": "Minimum {{ min }}",
+      "max_of": "Maximum {{ max }}",
+      "multiples_of": "Sold in multiples of {{ step }}",
+      "stock_left": "{{ count }} available"
+    },
+    "volume": {
+      "title": "Volume pricing",
+      "quantity": "Quantity",
+      "unit_price": "Unit price",
+      "saving": "Saving"
+    },
+    "b2b": {
+      "checkout_to_draft_note": "Orders from your account are submitted for review before payment.",
+      "terms_note": "Your payment terms: {{ terms }}"
+    }
+  },
+  "collections": {
+    "all": "Collections",
+    "view_all": "View all",
+    "product_count": "{{ count }} products",
+    "view": "View",
+    "view_grid": "Grid",
+    "view_list": "List",
+    "sort": "Sort by",
+    "empty": "No products match these filters.",
+    "placeholder": "Product",
+    "filters": { "from": "From", "to": "To", "apply": "Apply", "clear": "Clear" }
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "continue": "Continue shopping",
+    "remove": "Remove",
+    "po_number": "PO number",
+    "note": "Order notes",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "submit_order": "Submit order for review",
+    "taxes_shipping_note": "Taxes and shipping calculated at checkout.",
+    "added": "Added to cart",
+    "b2b": {
+      "submit_for_review": "Your order will be sent to us for review. Payment is arranged on your account terms.",
+      "terms": "Payment terms on this account: {{ terms }}."
+    }
+  },
+  "customer": {
+    "account": { "title": "Account", "logout": "Log out", "terms": "Payment terms: {{ terms }}" },
+    "location": { "select": "Select location" },
+    "login": {
+      "title": "Log in",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log in",
+      "forgot": "Forgot password?",
+      "create": "Create account",
+      "trade_prompt": "Buying for a business?"
+    },
+    "recover": { "title": "Reset your password", "submit": "Send reset link", "sent": "We sent you an email with a link to reset your password." },
+    "register": {
+      "title": "Create account",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "company": "Company",
+      "tax_id": "Tax / VAT ID",
+      "contact_name": "Contact name",
+      "email": "Work email",
+      "phone": "Phone",
+      "business_type": "Business type",
+      "message": "Tell us what you buy and roughly how often",
+      "submit": "Submit application",
+      "submit_account": "Create account",
+      "submitted": "Thanks. We review applications within one business day and will email you.",
+      "pending": "Your trade application is being reviewed. We will email you when it is approved.",
+      "already_b2b": "Your trade account is active.",
+      "trade_prompt": "Buying for a business?"
+    },
+    "orders": {
+      "title": "Orders",
+      "order": "Order",
+      "date": "Date",
+      "po": "PO",
+      "payment": "Payment",
+      "fulfillment": "Fulfillment",
+      "total": "Total",
+      "reorder": "Reorder",
+      "none": "No orders yet."
+    },
+    "order": { "title": "Order {{ name }}", "product": "Product", "sku": "SKU", "price": "Price", "quantity": "Qty", "total": "Total", "shipping": "Shipping" },
+    "addresses": {
+      "title": "Addresses",
+      "manage": "Manage addresses",
+      "default": "Default",
+      "edit": "Edit",
+      "save": "Save",
+      "delete": "Delete",
+      "add": "Add address",
+      "confirm_delete": "Delete this address?",
+      "address1": "Address",
+      "address2": "Apartment, suite, etc.",
+      "city": "City",
+      "zip": "Postal code",
+      "country": "Country",
+      "province": "Province / state",
+      "set_default": "Set as default address"
+    },
+    "activate": { "title": "Activate account", "confirm": "Confirm password", "submit": "Activate", "decline": "Decline" },
+    "reset": { "title": "Reset password", "submit": "Reset password" }
+  },
+  "gift_cards": { "title": "Gift card", "expired": "Expired", "shop": "Start shopping" }
+}
