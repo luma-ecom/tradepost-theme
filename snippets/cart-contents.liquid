@@ -16,6 +16,13 @@
       <p class="cart-minimum" data-cart-minimum>{{ settings.cart_minimum_message }}</p>
     {%- endif -%}
 
+    {%- liquid
+      assign show_extras = true
+      if settings.cart_b2b_fields_only and customer.b2b? != true
+        assign show_extras = false
+      endif
+    -%}
+    {%- if show_extras -%}
     <div class="cart-extras">
       {%- if settings.cart_show_po_field -%}
         <label class="field">
@@ -30,6 +37,7 @@
         </label>
       {%- endif -%}
     </div>
+    {%- endif -%}
 
     <div class="cart-summary">
       {%- for d in cart.cart_level_discount_applications -%}

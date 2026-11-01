@@ -11,7 +11,7 @@
     {%- if product.featured_image -%}
       {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '200,300,400,600', sizes: '(min-width: 990px) 25vw, 50vw', class: 'card__img' }}
     {%- else -%}
-      <span class="card__placeholder">{{ 'products.no_image' | t }}</span>
+      <span class="card__placeholder">{% render 'icon', name: 'image' %}<span class="visually-hidden">{{ 'products.no_image' | t }}</span></span>
     {%- endif -%}
     {%- unless product.available -%}
       <span class="badge badge--muted">{{ 'products.availability.sold_out' | t }}</span>
@@ -31,7 +31,7 @@
         {% render 'buy-buttons', product: product, variant: v, section_id: section_id %}
       </div>
     {%- elsif view == 'list' -%}
-      <a class="btn btn--secondary btn--small" href="{{ product.url }}">{{ 'products.choose_options' | t }}</a>
+      <a class="card__options" href="{{ product.url }}">{{ 'products.choose_options' | t }} <span aria-hidden="true">→</span></a>
     {%- endif -%}
   </div>
 </article>

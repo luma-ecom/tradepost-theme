@@ -21,6 +21,22 @@
       {{ item.final_price | money }}{% if settings.show_unit_label %}<span class="price__unit">{{ 'products.price.per_unit' | t }}</span>{% endif %}
       {%- if item.original_price > item.final_price -%}<s>{{ item.original_price | money }}</s>{%- endif -%}
     </div>
+    {%- liquid
+      assign next_break = nil
+      for break in item.variant.quantity_price_breaks
+        if break.minimum_quantity > item.quantity
+          if next_break == nil or break.minimum_quantity < next_break.minimum_quantity
+            assign next_break = break
+          endif
+        endif
+      endfor
+    -%}
+    {%- if next_break and next_break.price < item.final_price -%}
+      {%- assign more = next_break.minimum_quantity | minus: item.quantity -%}
+      {%- assign next_money = next_break.price | money -%}
+      <span class="cart-line__tier">{{ 'cart.next_tier' | t: count: more, price: next_money }}</span>
+    {%- endif -%}
+    <span class="cart-line__error" data-line-error role="alert" hidden></span>
   </div>
   <div class="cart-line__qty">
     {%- assign qty_id = 'CartQty-' | append: index -%}
