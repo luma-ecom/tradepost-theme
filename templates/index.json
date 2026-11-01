@@ -1,11 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "trade": { "type": "trade-cta", "settings": { "audience": "d2c" } },
-    "featured": { "type": "featured-collection", "settings": { "title": "Popular with trade customers", "limit": 8, "columns": 4 } },
-    "rich": { "type": "rich-text", "blocks": {
-      "h": { "type": "heading", "settings": { "text": "Built for distributors, not just shops" } },
-      "t": { "type": "text", "settings": { "text": "<p>Customer-specific pricing, quantity rules, net terms and quick reordering, using Shopify’s native B2B on every plan.</p>" } }
-    }, "block_order": ["h", "t"] }
+    "featured": {
+      "type": "featured-collection",
+      "settings": { "title": "Popular with trade customers", "collection": "consumables", "limit": 8, "columns": 4 }
+    },
+    "rich": {
+      "type": "rich-text",
+      "blocks": {
+        "h": { "type": "heading", "settings": { "text": "Built for distributors, not just shops" } },
+        "t": { "type": "text", "settings": { "text": "<p>Customer-specific pricing, quantity rules, net terms and quick reordering, using Shopify’s native B2B on every plan.</p>" } }
+      },
+      "block_order": ["h", "t"],
+      "settings": {}
+    }
   },
   "order": ["trade", "featured", "rich"]
 }
