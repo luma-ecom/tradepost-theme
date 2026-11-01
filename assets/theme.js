@@ -37,7 +37,10 @@ class DepotQuantity extends HTMLElement {
     this.querySelector('[data-qty-plus]').addEventListener('click', () => this.change(this.step));
     this.input.addEventListener('change', () => this.validate(true));
     this.input.addEventListener('input', debounce(() => this.validate(false), 400));
+    const before = this.input.value;
     this.validate(false);
+    // Cart line below the B2B rule (e.g. added before login): push the corrected quantity to the cart once.
+    if (this.dataset.lineKey && this.input.value !== before) this.validate(true);
   }
   get ceiling() {
     const caps = [];
