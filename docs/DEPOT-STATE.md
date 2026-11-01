@@ -43,7 +43,7 @@
 ## Quyết định đã chốt
 - 02/11: ẩn compare-at với B2B (mặc định bật); giữ `customers/*`.
 - 02/11 (WP2): PO + notes chỉ hiện với B2B (setting, mặc định bật); badge giỏ đếm số dòng.
+- 02/11: Order form toàn catalog + dán SKU/CSV (B14, B15) là **FREE** — nằm trong lõi GitHub, làm cửa vào.
 
 ## Quyết định cần Leo
 - Tên theme (tạm Depot).
-- Order form toàn catalog + CSV: FREE hay PREMIUM (đề nghị FREE). **Cần trước WP4 (10/11).**
