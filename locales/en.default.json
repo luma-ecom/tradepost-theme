@@ -93,6 +93,9 @@
     "submit_order": "Submit order for review",
     "taxes_shipping_note": "Taxes and shipping calculated at checkout.",
     "added": "Added to cart",
+    "next_tier": "Add {{ count }} more for {{ price }}/ea",
+    "lines_label": "Items in cart:",
+    "update_error": "Could not update this line.",
     "b2b": {
       "submit_for_review": "Your order will be sent to us for review. Payment is arranged on your account terms.",
       "terms": "Payment terms on this account: {{ terms }}."

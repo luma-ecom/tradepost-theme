@@ -44,6 +44,7 @@
     "cart": {
       "name": "Cart", "type": "Cart type", "drawer": "Drawer", "page": "Page",
       "po_field": "Show PO number field", "notes": "Show order notes",
+      "b2b_fields_only": "Show PO number and notes to B2B buyers only", "b2b_fields_only_info": "Retail customers see a simpler cart. Turn off to show both fields to everyone.",
       "minimum_message": "Minimum order message", "minimum_message_info": "Shown above the cart summary, e.g. \"Minimum order $250 for trade accounts\". Enforcement happens at checkout via your B2B settings."
     }
   },
