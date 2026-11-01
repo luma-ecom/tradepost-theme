@@ -35,7 +35,7 @@
           {%- endif -%}
         </depot-gallery>
       {%- else -%}
-        <div class="gallery gallery--empty"><span>{{ 'products.no_image' | t }}</span></div>
+        <div class="gallery gallery--empty"><span class="gallery__placeholder">{% render 'icon', name: 'image' %}<span class="visually-hidden">{{ 'products.no_image' | t }}</span></span></div>
       {%- endif -%}
     </div>
 
