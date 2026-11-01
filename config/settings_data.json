@@ -1,0 +1,35 @@
+{
+  "current": {
+    "price_visibility": "everyone",
+    "hide_buy_buttons_when_price_hidden": true,
+    "show_volume_tiers_on_cards": true,
+    "show_stock_in_order_list": true,
+    "low_stock_threshold": 20,
+    "tax_display": "store",
+    "show_sku": true,
+    "show_unit_label": true,
+    "color_text": "#1a1a1a",
+    "color_muted": "#6b6b6b",
+    "color_background": "#ffffff",
+    "color_surface": "#f6f6f4",
+    "color_border": "#e4e4e0",
+    "color_accent": "#0f766e",
+    "color_accent_text": "#ffffff",
+    "color_success": "#15803d",
+    "color_warning": "#b45309",
+    "color_error": "#b91c1c",
+    "font_heading": "inter_n6",
+    "font_body": "inter_n4",
+    "font_size_base": 15,
+    "page_width": 1320,
+    "radius": 4,
+    "rtl": false,
+    "cart_type": "drawer",
+    "cart_show_po_field": true,
+    "cart_show_notes": true,
+    "sections": {
+      "header": { "type": "header", "settings": {} },
+      "footer": { "type": "footer", "settings": {} }
+    }
+  }
+}
