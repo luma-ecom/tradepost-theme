@@ -1,0 +1,315 @@
+Handle,Title,Body (HTML),Vendor,Product Category,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Grams,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Compare At Price,Variant Requires Shipping,Variant Taxable,Status,Collection
+glv-medicom-1,"Nitrile Exam Gloves, Powder-Free — Medicom (100/box)","<p>Nitrile Exam Gloves, Powder-Free by Medicom. Pack: 100/box. Professional use only.</p><table><tr><td>Pack</td><td>100/box</td></tr><tr><td>Brand</td><td>Medicom</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>",Medicom,,Consumables,"Consumables, Medicom, B2B",TRUE,Size,XS,GLV-MED-XS-001,50,shopify,1383,deny,manual,6.39,,TRUE,TRUE,active,Consumables
+glv-medicom-1,,,,,,,,,S,GLV-MED-S-001,50,shopify,168,deny,manual,7.01,,TRUE,TRUE,,
+glv-medicom-1,,,,,,,,,M,GLV-MED-M-001,50,shopify,193,deny,manual,6.53,,TRUE,TRUE,,
+glv-medicom-1,,,,,,,,,L,GLV-MED-L-001,900,shopify,303,deny,manual,7.04,,TRUE,TRUE,,
+glv-medicom-1,,,,,,,,,XL,GLV-MED-XL-001,120,shopify,1231,deny,manual,6.78,7.8,TRUE,TRUE,,
+glv-kimberly-clark-2,"Nitrile Exam Gloves, Powder-Free — Kimberly-Clark (100/box)","<p>Nitrile Exam Gloves, Powder-Free by Kimberly-Clark. Pack: 100/box. Professional use only.</p><table><tr><td>Pack</td><td>100/box</td></tr><tr><td>Brand</td><td>Kimberly-Clark</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>",Kimberly-Clark,,Consumables,"Consumables, Kimberly-Clark, B2B",TRUE,Size,XS,GLV-KIM-XS-002,900,shopify,643,deny,manual,6.09,,TRUE,TRUE,active,Consumables
+glv-kimberly-clark-2,,,,,,,,,S,GLV-KIM-S-002,900,shopify,1721,deny,manual,6.26,7.2,TRUE,TRUE,,
+glv-kimberly-clark-2,,,,,,,,,M,GLV-KIM-M-002,900,shopify,812,deny,manual,5.87,,TRUE,TRUE,,
+glv-kimberly-clark-2,,,,,,,,,L,GLV-KIM-L-002,250,shopify,6,deny,manual,6.14,,TRUE,TRUE,,
+glv-kimberly-clark-2,,,,,,,,,XL,GLV-KIM-XL-002,120,shopify,1941,deny,manual,6.11,,TRUE,TRUE,,
+glv-sempermed-3,"Nitrile Exam Gloves, Powder-Free — Sempermed (100/box)","<p>Nitrile Exam Gloves, Powder-Free by Sempermed. Pack: 100/box. Professional use only.</p><table><tr><td>Pack</td><td>100/box</td></tr><tr><td>Brand</td><td>Sempermed</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>",Sempermed,,Consumables,"Consumables, Sempermed, B2B",TRUE,Size,XS,GLV-SEM-XS-003,250,shopify,1226,deny,manual,7.32,,TRUE,TRUE,active,Consumables
+glv-sempermed-3,,,,,,,,,S,GLV-SEM-S-003,900,shopify,639,deny,manual,7.57,8.71,TRUE,TRUE,,
+glv-sempermed-3,,,,,,,,,M,GLV-SEM-M-003,500,shopify,1600,deny,manual,7.36,,TRUE,TRUE,,
+glv-sempermed-3,,,,,,,,,L,GLV-SEM-L-003,900,shopify,0,deny,manual,7.62,,TRUE,TRUE,,
+glv-sempermed-3,,,,,,,,,XL,GLV-SEM-XL-003,900,shopify,1725,deny,manual,7.33,,TRUE,TRUE,,
+msk-medicom-4,3-Ply Surgical Mask Type IIR — Medicom (50/box),<p>3-Ply Surgical Mask Type IIR by Medicom. Pack: 50/box. Professional use only.</p><table><tr><td>Pack</td><td>50/box</td></tr><tr><td>Brand</td><td>Medicom</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Medicom,,Consumables,"Consumables, Medicom, B2B",TRUE,Color,Blue,MSK-MED-BLUE-004,500,shopify,190,deny,manual,3.77,,TRUE,TRUE,active,Consumables
+msk-medicom-4,,,,,,,,,White,MSK-MED-WHITE-004,900,shopify,183,deny,manual,3.47,,TRUE,TRUE,,
+msk-medicom-4,,,,,,,,,Black,MSK-MED-BLACK-004,250,shopify,1733,deny,manual,3.62,,TRUE,TRUE,,
+msk-halyard-5,3-Ply Surgical Mask Type IIR — Halyard (50/box),<p>3-Ply Surgical Mask Type IIR by Halyard. Pack: 50/box. Professional use only.</p><table><tr><td>Pack</td><td>50/box</td></tr><tr><td>Brand</td><td>Halyard</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Halyard,,Consumables,"Consumables, Halyard, B2B",TRUE,Color,Blue,MSK-HAL-BLUE-005,120,shopify,394,deny,manual,3.04,,TRUE,TRUE,active,Consumables
+msk-halyard-5,,,,,,,,,White,MSK-HAL-WHITE-005,500,shopify,314,deny,manual,3.08,,TRUE,TRUE,,
+msk-halyard-5,,,,,,,,,Black,MSK-HAL-BLACK-005,120,shopify,10,deny,manual,2.97,,TRUE,TRUE,,
+bib-crosstex-6,Patient Bibs 2-Ply — Crosstex (500/case),<p>Patient Bibs 2-Ply by Crosstex. Pack: 500/case. Professional use only.</p><table><tr><td>Pack</td><td>500/case</td></tr><tr><td>Brand</td><td>Crosstex</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Crosstex,,Consumables,"Consumables, Crosstex, B2B",TRUE,Color,Blue,BIB-CRO-BLUE-006,500,shopify,620,deny,manual,21.92,,TRUE,TRUE,active,Consumables
+bib-crosstex-6,,,,,,,,,Green,BIB-CRO-GREEN-006,120,shopify,359,deny,manual,20.48,23.55,TRUE,TRUE,,
+bib-crosstex-6,,,,,,,,,Lavender,BIB-CRO-LAVEND-006,250,shopify,0,deny,manual,22.20,25.53,TRUE,TRUE,,
+bib-medicom-7,Patient Bibs 2-Ply — Medicom (500/case),<p>Patient Bibs 2-Ply by Medicom. Pack: 500/case. Professional use only.</p><table><tr><td>Pack</td><td>500/case</td></tr><tr><td>Brand</td><td>Medicom</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Medicom,,Consumables,"Consumables, Medicom, B2B",TRUE,Color,Blue,BIB-MED-BLUE-007,120,shopify,806,deny,manual,16.61,,TRUE,TRUE,active,Consumables
+bib-medicom-7,,,,,,,,,Green,BIB-MED-GREEN-007,50,shopify,1105,deny,manual,17.21,,TRUE,TRUE,,
+bib-medicom-7,,,,,,,,,Lavender,BIB-MED-LAVEND-007,900,shopify,1833,deny,manual,16.91,,TRUE,TRUE,,
+suc-crosstex-8,Saliva Ejector Tips — Crosstex (100/bag),<p>Saliva Ejector Tips by Crosstex. Pack: 100/bag. Professional use only.</p><table><tr><td>Pack</td><td>100/bag</td></tr><tr><td>Brand</td><td>Crosstex</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Crosstex,,Consumables,"Consumables, Crosstex, B2B",TRUE,Color,Clear,SUC-CRO-CLEAR-008,120,shopify,262,deny,manual,4.29,,TRUE,TRUE,active,Consumables
+suc-crosstex-8,,,,,,,,,Blue,SUC-CRO-BLUE-008,900,shopify,6,deny,manual,4.27,4.91,TRUE,TRUE,,
+suc-crosstex-8,,,,,,,,,White,SUC-CRO-WHITE-008,250,shopify,3,deny,manual,4.33,,TRUE,TRUE,,
+suc-plasdent-9,Saliva Ejector Tips — Plasdent (100/bag),<p>Saliva Ejector Tips by Plasdent. Pack: 100/bag. Professional use only.</p><table><tr><td>Pack</td><td>100/bag</td></tr><tr><td>Brand</td><td>Plasdent</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Plasdent,,Consumables,"Consumables, Plasdent, B2B",TRUE,Color,Clear,SUC-PLA-CLEAR-009,250,shopify,6,deny,manual,4.69,5.39,TRUE,TRUE,active,Consumables
+suc-plasdent-9,,,,,,,,,Blue,SUC-PLA-BLUE-009,500,shopify,1283,deny,manual,4.57,5.26,TRUE,TRUE,,
+suc-plasdent-9,,,,,,,,,White,SUC-PLA-WHITE-009,120,shopify,1004,deny,manual,4.62,,TRUE,TRUE,,
+ctr-richmond-10,Cotton Rolls #2 — Richmond (2000/box),<p>Cotton Rolls #2 by Richmond. Pack: 2000/box. Professional use only.</p><table><tr><td>Pack</td><td>2000/box</td></tr><tr><td>Brand</td><td>Richmond</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Richmond,,Consumables,"Consumables, Richmond, B2B",TRUE,Pack,2000/box,CTR-RIC-2000BO-010,900,shopify,592,deny,manual,10.08,,TRUE,TRUE,active,Consumables
+ctr-crosstex-11,Cotton Rolls #2 — Crosstex (2000/box),<p>Cotton Rolls #2 by Crosstex. Pack: 2000/box. Professional use only.</p><table><tr><td>Pack</td><td>2000/box</td></tr><tr><td>Brand</td><td>Crosstex</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Crosstex,,Consumables,"Consumables, Crosstex, B2B",TRUE,Pack,2000/box,CTR-CRO-2000BO-011,50,shopify,1131,deny,manual,9.67,,TRUE,TRUE,active,Consumables
+stp-crosstex-12,Sterilization Pouches Self-Seal — Crosstex (200/box),<p>Sterilization Pouches Self-Seal by Crosstex. Pack: 200/box. Professional use only.</p><table><tr><td>Pack</td><td>200/box</td></tr><tr><td>Brand</td><td>Crosstex</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Crosstex,,Consumables,"Consumables, Crosstex, B2B",TRUE,Size,2.25x4,STP-CRO-225X4-012,250,shopify,1366,deny,manual,17.40,,TRUE,TRUE,active,Consumables
+stp-crosstex-12,,,,,,,,,3.5x9,STP-CRO-35X9-012,900,shopify,1910,deny,manual,16.15,,TRUE,TRUE,,
+stp-crosstex-12,,,,,,,,,5.25x10,STP-CRO-525X10-012,120,shopify,1079,deny,manual,16.44,,TRUE,TRUE,,
+stp-crosstex-12,,,,,,,,,7.5x13,STP-CRO-75X13-012,120,shopify,1725,deny,manual,16.57,,TRUE,TRUE,,
+stp-medicom-13,Sterilization Pouches Self-Seal — Medicom (200/box),<p>Sterilization Pouches Self-Seal by Medicom. Pack: 200/box. Professional use only.</p><table><tr><td>Pack</td><td>200/box</td></tr><tr><td>Brand</td><td>Medicom</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Medicom,,Consumables,"Consumables, Medicom, B2B",TRUE,Size,2.25x4,STP-MED-225X4-013,500,shopify,109,deny,manual,14.77,,TRUE,TRUE,active,Consumables
+stp-medicom-13,,,,,,,,,3.5x9,STP-MED-35X9-013,250,shopify,1468,deny,manual,14.19,,TRUE,TRUE,,
+stp-medicom-13,,,,,,,,,5.25x10,STP-MED-525X10-013,500,shopify,796,deny,manual,13.40,15.41,TRUE,TRUE,,
+stp-medicom-13,,,,,,,,,7.5x13,STP-MED-75X13-013,900,shopify,468,deny,manual,14.01,,TRUE,TRUE,,
+pra-young-14,Prophy Angles Disposable — Young (100/box),<p>Prophy Angles Disposable by Young. Pack: 100/box. Professional use only.</p><table><tr><td>Pack</td><td>100/box</td></tr><tr><td>Brand</td><td>Young</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Young,,Consumables,"Consumables, Young, B2B",TRUE,Cup,Soft,PRA-YOU-SOFT-014,50,shopify,1387,deny,manual,40.08,,TRUE,TRUE,active,Consumables
+pra-young-14,,,,,,,,,Firm,PRA-YOU-FIRM-014,120,shopify,1652,deny,manual,41.69,47.94,TRUE,TRUE,,
+pra-preventech-15,Prophy Angles Disposable — Preventech (100/box),<p>Prophy Angles Disposable by Preventech. Pack: 100/box. Professional use only.</p><table><tr><td>Pack</td><td>100/box</td></tr><tr><td>Brand</td><td>Preventech</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Preventech,,Consumables,"Consumables, Preventech, B2B",TRUE,Cup,Soft,PRA-PRE-SOFT-015,500,shopify,227,deny,manual,36.05,,TRUE,TRUE,active,Consumables
+pra-preventech-15,,,,,,,,,Firm,PRA-PRE-FIRM-015,120,shopify,1572,deny,manual,36.60,,TRUE,TRUE,,
+prp-preventech-16,Prophy Paste Unit-Dose — Preventech (200/box),<p>Prophy Paste Unit-Dose by Preventech. Pack: 200/box. Professional use only.</p><table><tr><td>Pack</td><td>200/box</td></tr><tr><td>Brand</td><td>Preventech</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Preventech,,Consumables,"Consumables, Preventech, B2B",TRUE,Flavor,Mint,PRP-PRE-MINT-016,120,shopify,0,deny,manual,37.18,,TRUE,TRUE,active,Consumables
+prp-preventech-16,,,,,,,,,Cherry,PRP-PRE-CHERRY-016,250,shopify,1270,deny,manual,38.72,,TRUE,TRUE,,
+prp-preventech-16,,,,,,,,,Bubblegum,PRP-PRE-BUBBLE-016,50,shopify,1172,deny,manual,35.36,40.66,TRUE,TRUE,,
+prp-preventech-16,,,,,,,,,Orange,PRP-PRE-ORANGE-016,120,shopify,1962,deny,manual,35.39,,TRUE,TRUE,,
+prp-young-17,Prophy Paste Unit-Dose — Young (200/box),<p>Prophy Paste Unit-Dose by Young. Pack: 200/box. Professional use only.</p><table><tr><td>Pack</td><td>200/box</td></tr><tr><td>Brand</td><td>Young</td></tr><tr><td>Category</td><td>Consumables</td></tr></table>,Young,,Consumables,"Consumables, Young, B2B",TRUE,Flavor,Mint,PRP-YOU-MINT-017,900,shopify,565,deny,manual,33.69,,TRUE,TRUE,active,Consumables
+prp-young-17,,,,,,,,,Cherry,PRP-YOU-CHERRY-017,250,shopify,1164,deny,manual,34.46,39.63,TRUE,TRUE,,
+prp-young-17,,,,,,,,,Bubblegum,PRP-YOU-BUBBLE-017,500,shopify,1406,deny,manual,35.07,,TRUE,TRUE,,
+prp-young-17,,,,,,,,,Orange,PRP-YOU-ORANGE-017,900,shopify,1848,deny,manual,34.76,,TRUE,TRUE,,
+cmp-3m-18,Universal Composite Syringe 4g — 3M (1 syringe),<p>Universal Composite Syringe 4g by 3M. Pack: 1 syringe. Professional use only.</p><table><tr><td>Pack</td><td>1 syringe</td></tr><tr><td>Brand</td><td>3M</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,3M,,Restorative,"Restorative, 3M, B2B",TRUE,Shade,A1,CMP-3M-A1-018,120,shopify,1640,deny,manual,45.79,52.66,TRUE,TRUE,active,Restorative
+cmp-3m-18,,,,,,,,,A2,CMP-3M-A2-018,50,shopify,1019,deny,manual,48.01,55.21,TRUE,TRUE,,
+cmp-3m-18,,,,,,,,,A3,CMP-3M-A3-018,50,shopify,1111,deny,manual,47.56,,TRUE,TRUE,,
+cmp-3m-18,,,,,,,,,A3.5,CMP-3M-A35-018,50,shopify,166,deny,manual,46.13,,TRUE,TRUE,,
+cmp-3m-18,,,,,,,,,B1,CMP-3M-B1-018,50,shopify,1200,deny,manual,45.00,,TRUE,TRUE,,
+cmp-3m-18,,,,,,,,,B2,CMP-3M-B2-018,120,shopify,1304,deny,manual,49.81,,TRUE,TRUE,,
+cmp-3m-18,,,,,,,,,C2,CMP-3M-C2-018,900,shopify,976,deny,manual,47.45,,TRUE,TRUE,,
+cmp-3m-18,,,,,,,,,D3,CMP-3M-D3-018,250,shopify,1481,deny,manual,47.52,,TRUE,TRUE,,
+cmp-kerr-19,Universal Composite Syringe 4g — Kerr (1 syringe),<p>Universal Composite Syringe 4g by Kerr. Pack: 1 syringe. Professional use only.</p><table><tr><td>Pack</td><td>1 syringe</td></tr><tr><td>Brand</td><td>Kerr</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,Kerr,,Restorative,"Restorative, Kerr, B2B",TRUE,Shade,A1,CMP-KER-A1-019,50,shopify,464,deny,manual,59.65,68.6,TRUE,TRUE,active,Restorative
+cmp-kerr-19,,,,,,,,,A2,CMP-KER-A2-019,50,shopify,697,deny,manual,54.91,,TRUE,TRUE,,
+cmp-kerr-19,,,,,,,,,A3,CMP-KER-A3-019,120,shopify,670,deny,manual,59.31,,TRUE,TRUE,,
+cmp-kerr-19,,,,,,,,,A3.5,CMP-KER-A35-019,120,shopify,1367,deny,manual,58.54,67.32,TRUE,TRUE,,
+cmp-kerr-19,,,,,,,,,B1,CMP-KER-B1-019,500,shopify,499,deny,manual,59.08,67.94,TRUE,TRUE,,
+cmp-kerr-19,,,,,,,,,B2,CMP-KER-B2-019,500,shopify,1417,deny,manual,59.61,68.55,TRUE,TRUE,,
+cmp-kerr-19,,,,,,,,,C2,CMP-KER-C2-019,250,shopify,877,deny,manual,56.56,65.04,TRUE,TRUE,,
+cmp-kerr-19,,,,,,,,,D3,CMP-KER-D3-019,500,shopify,8,deny,manual,54.59,,TRUE,TRUE,,
+cmp-ivoclar-20,Universal Composite Syringe 4g — Ivoclar (1 syringe),<p>Universal Composite Syringe 4g by Ivoclar. Pack: 1 syringe. Professional use only.</p><table><tr><td>Pack</td><td>1 syringe</td></tr><tr><td>Brand</td><td>Ivoclar</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,Ivoclar,,Restorative,"Restorative, Ivoclar, B2B",TRUE,Shade,A1,CMP-IVO-A1-020,50,shopify,1109,deny,manual,52.85,,TRUE,TRUE,active,Restorative
+cmp-ivoclar-20,,,,,,,,,A2,CMP-IVO-A2-020,50,shopify,15,deny,manual,50.63,,TRUE,TRUE,,
+cmp-ivoclar-20,,,,,,,,,A3,CMP-IVO-A3-020,120,shopify,131,deny,manual,54.42,62.58,TRUE,TRUE,,
+cmp-ivoclar-20,,,,,,,,,A3.5,CMP-IVO-A35-020,250,shopify,1789,deny,manual,54.45,,TRUE,TRUE,,
+cmp-ivoclar-20,,,,,,,,,B1,CMP-IVO-B1-020,250,shopify,1148,deny,manual,54.50,,TRUE,TRUE,,
+cmp-ivoclar-20,,,,,,,,,B2,CMP-IVO-B2-020,50,shopify,3,deny,manual,53.83,61.9,TRUE,TRUE,,
+cmp-ivoclar-20,,,,,,,,,C2,CMP-IVO-C2-020,50,shopify,84,deny,manual,52.90,,TRUE,TRUE,,
+cmp-ivoclar-20,,,,,,,,,D3,CMP-IVO-D3-020,500,shopify,505,deny,manual,49.73,,TRUE,TRUE,,
+cmp-gc-21,Universal Composite Syringe 4g — GC (1 syringe),<p>Universal Composite Syringe 4g by GC. Pack: 1 syringe. Professional use only.</p><table><tr><td>Pack</td><td>1 syringe</td></tr><tr><td>Brand</td><td>GC</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,GC,,Restorative,"Restorative, GC, B2B",TRUE,Shade,A1,CMP-GC-A1-021,120,shopify,905,deny,manual,36.75,,TRUE,TRUE,active,Restorative
+cmp-gc-21,,,,,,,,,A2,CMP-GC-A2-021,120,shopify,0,deny,manual,35.93,,TRUE,TRUE,,
+cmp-gc-21,,,,,,,,,A3,CMP-GC-A3-021,250,shopify,420,deny,manual,34.01,,TRUE,TRUE,,
+cmp-gc-21,,,,,,,,,A3.5,CMP-GC-A35-021,120,shopify,471,deny,manual,34.34,,TRUE,TRUE,,
+cmp-gc-21,,,,,,,,,B1,CMP-GC-B1-021,50,shopify,1695,deny,manual,33.32,,TRUE,TRUE,,
+cmp-gc-21,,,,,,,,,B2,CMP-GC-B2-021,900,shopify,0,deny,manual,35.16,,TRUE,TRUE,,
+cmp-gc-21,,,,,,,,,C2,CMP-GC-C2-021,500,shopify,1964,deny,manual,34.94,,TRUE,TRUE,,
+cmp-gc-21,,,,,,,,,D3,CMP-GC-D3-021,900,shopify,1168,deny,manual,36.40,,TRUE,TRUE,,
+flw-3m-22,Flowable Composite 2g — 3M (2 syringes),<p>Flowable Composite 2g by 3M. Pack: 2 syringes. Professional use only.</p><table><tr><td>Pack</td><td>2 syringes</td></tr><tr><td>Brand</td><td>3M</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,3M,,Restorative,"Restorative, 3M, B2B",TRUE,Shade,A1,FLW-3M-A1-022,120,shopify,520,deny,manual,34.49,,TRUE,TRUE,active,Restorative
+flw-3m-22,,,,,,,,,A2,FLW-3M-A2-022,50,shopify,761,deny,manual,36.90,,TRUE,TRUE,,
+flw-3m-22,,,,,,,,,A3,FLW-3M-A3-022,50,shopify,14,deny,manual,36.52,,TRUE,TRUE,,
+flw-3m-22,,,,,,,,,B1,FLW-3M-B1-022,250,shopify,9,deny,manual,36.48,,TRUE,TRUE,,
+flw-kerr-23,Flowable Composite 2g — Kerr (2 syringes),<p>Flowable Composite 2g by Kerr. Pack: 2 syringes. Professional use only.</p><table><tr><td>Pack</td><td>2 syringes</td></tr><tr><td>Brand</td><td>Kerr</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,Kerr,,Restorative,"Restorative, Kerr, B2B",TRUE,Shade,A1,FLW-KER-A1-023,500,shopify,142,deny,manual,39.98,45.98,TRUE,TRUE,active,Restorative
+flw-kerr-23,,,,,,,,,A2,FLW-KER-A2-023,900,shopify,0,deny,manual,39.57,,TRUE,TRUE,,
+flw-kerr-23,,,,,,,,,A3,FLW-KER-A3-023,250,shopify,120,deny,manual,42.17,,TRUE,TRUE,,
+flw-kerr-23,,,,,,,,,B1,FLW-KER-B1-023,900,shopify,736,deny,manual,39.65,,TRUE,TRUE,,
+flw-ivoclar-24,Flowable Composite 2g — Ivoclar (2 syringes),<p>Flowable Composite 2g by Ivoclar. Pack: 2 syringes. Professional use only.</p><table><tr><td>Pack</td><td>2 syringes</td></tr><tr><td>Brand</td><td>Ivoclar</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,Ivoclar,,Restorative,"Restorative, Ivoclar, B2B",TRUE,Shade,A1,FLW-IVO-A1-024,50,shopify,1639,deny,manual,38.97,,TRUE,TRUE,active,Restorative
+flw-ivoclar-24,,,,,,,,,A2,FLW-IVO-A2-024,250,shopify,12,deny,manual,39.13,45.0,TRUE,TRUE,,
+flw-ivoclar-24,,,,,,,,,A3,FLW-IVO-A3-024,120,shopify,223,deny,manual,41.53,,TRUE,TRUE,,
+flw-ivoclar-24,,,,,,,,,B1,FLW-IVO-B1-024,250,shopify,1516,deny,manual,42.41,,TRUE,TRUE,,
+bnd-3m-25,Universal Bonding Agent — 3M (1 bottle),<p>Universal Bonding Agent by 3M. Pack: 1 bottle. Professional use only.</p><table><tr><td>Pack</td><td>1 bottle</td></tr><tr><td>Brand</td><td>3M</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,3M,,Restorative,"Restorative, 3M, B2B",TRUE,Size,5 mL,BND-3M-5ML-025,50,shopify,631,deny,manual,107.44,,TRUE,TRUE,active,Restorative
+bnd-3m-25,,,,,,,,,Unit-dose 50,BND-3M-UNIT-D-025,900,shopify,1514,deny,manual,109.33,,TRUE,TRUE,,
+bnd-kuraray-26,Universal Bonding Agent — Kuraray (1 bottle),<p>Universal Bonding Agent by Kuraray. Pack: 1 bottle. Professional use only.</p><table><tr><td>Pack</td><td>1 bottle</td></tr><tr><td>Brand</td><td>Kuraray</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,Kuraray,,Restorative,"Restorative, Kuraray, B2B",TRUE,Size,5 mL,BND-KUR-5ML-026,50,shopify,1082,deny,manual,72.07,,TRUE,TRUE,active,Restorative
+bnd-kuraray-26,,,,,,,,,Unit-dose 50,BND-KUR-UNIT-D-026,120,shopify,1246,deny,manual,73.83,,TRUE,TRUE,,
+bnd-ivoclar-27,Universal Bonding Agent — Ivoclar (1 bottle),<p>Universal Bonding Agent by Ivoclar. Pack: 1 bottle. Professional use only.</p><table><tr><td>Pack</td><td>1 bottle</td></tr><tr><td>Brand</td><td>Ivoclar</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,Ivoclar,,Restorative,"Restorative, Ivoclar, B2B",TRUE,Size,5 mL,BND-IVO-5ML-027,500,shopify,0,deny,manual,69.45,,TRUE,TRUE,active,Restorative
+bnd-ivoclar-27,,,,,,,,,Unit-dose 50,BND-IVO-UNIT-D-027,900,shopify,1193,deny,manual,65.14,74.91,TRUE,TRUE,,
+gic-gc-28,Glass Ionomer Cement — GC (15g/8mL),<p>Glass Ionomer Cement by GC. Pack: 15g/8mL. Professional use only.</p><table><tr><td>Pack</td><td>15g/8mL</td></tr><tr><td>Brand</td><td>GC</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,GC,,Restorative,"Restorative, GC, B2B",TRUE,Shade,A2,GIC-GC-A2-028,900,shopify,56,deny,manual,65.64,75.49,TRUE,TRUE,active,Restorative
+gic-gc-28,,,,,,,,,A3,GIC-GC-A3-028,500,shopify,238,deny,manual,67.08,77.14,TRUE,TRUE,,
+gic-gc-28,,,,,,,,,B2,GIC-GC-B2-028,120,shopify,202,deny,manual,68.40,,TRUE,TRUE,,
+gic-3m-29,Glass Ionomer Cement — 3M (15g/8mL),<p>Glass Ionomer Cement by 3M. Pack: 15g/8mL. Professional use only.</p><table><tr><td>Pack</td><td>15g/8mL</td></tr><tr><td>Brand</td><td>3M</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,3M,,Restorative,"Restorative, 3M, B2B",TRUE,Shade,A2,GIC-3M-A2-029,500,shopify,992,deny,manual,54.84,,TRUE,TRUE,active,Restorative
+gic-3m-29,,,,,,,,,A3,GIC-3M-A3-029,120,shopify,638,deny,manual,56.45,,TRUE,TRUE,,
+gic-3m-29,,,,,,,,,B2,GIC-3M-B2-029,250,shopify,5,deny,manual,53.89,,TRUE,TRUE,,
+etc-ultradent-30,Etching Gel 37% — Ultradent (1 kit),<p>Etching Gel 37% by Ultradent. Pack: 1 kit. Professional use only.</p><table><tr><td>Pack</td><td>1 kit</td></tr><tr><td>Brand</td><td>Ultradent</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,Ultradent,,Restorative,"Restorative, Ultradent, B2B",TRUE,Size,3 mL x 4,ETC-ULT-3MLX4-030,50,shopify,10,deny,manual,24.59,,TRUE,TRUE,active,Restorative
+etc-ultradent-30,,,,,,,,,12 mL,ETC-ULT-12ML-030,250,shopify,1433,deny,manual,25.78,,TRUE,TRUE,,
+etc-3m-31,Etching Gel 37% — 3M (1 kit),<p>Etching Gel 37% by 3M. Pack: 1 kit. Professional use only.</p><table><tr><td>Pack</td><td>1 kit</td></tr><tr><td>Brand</td><td>3M</td></tr><tr><td>Category</td><td>Restorative</td></tr></table>,3M,,Restorative,"Restorative, 3M, B2B",TRUE,Size,3 mL x 4,ETC-3M-3MLX4-031,250,shopify,292,deny,manual,24.13,,TRUE,TRUE,active,Restorative
+etc-3m-31,,,,,,,,,12 mL,ETC-3M-12ML-031,50,shopify,1967,deny,manual,22.85,,TRUE,TRUE,,
+rtf-dentsply-32,Rotary Files — Dentsply (6/pack),<p>Rotary Files by Dentsply. Pack: 6/pack. Professional use only.</p><table><tr><td>Pack</td><td>6/pack</td></tr><tr><td>Brand</td><td>Dentsply</td></tr><tr><td>Category</td><td>Endodontics</td></tr></table>,Dentsply,,Endodontics,"Endodontics, Dentsply, B2B",TRUE,Size,15/.04,RTF-DEN-1504-032,120,shopify,970,deny,manual,56.95,,TRUE,TRUE,active,Endodontics
+rtf-dentsply-32,,,,,,,,,20/.04,RTF-DEN-2004-032,250,shopify,4,deny,manual,52.00,,TRUE,TRUE,,
+rtf-dentsply-32,,,,,,,,,25/.04,RTF-DEN-2504-032,250,shopify,13,deny,manual,54.13,,TRUE,TRUE,,
+rtf-dentsply-32,,,,,,,,,25/.06,RTF-DEN-2506-032,120,shopify,1888,deny,manual,56.26,,TRUE,TRUE,,
+rtf-dentsply-32,,,,,,,,,30/.04,RTF-DEN-3004-032,250,shopify,0,deny,manual,54.03,,TRUE,TRUE,,
+rtf-dentsply-32,,,,,,,,,35/.04,RTF-DEN-3504-032,250,shopify,902,deny,manual,53.17,,TRUE,TRUE,,
+rtf-dentsply-32,,,,,,,,,40/.04,RTF-DEN-4004-032,50,shopify,0,deny,manual,55.53,,TRUE,TRUE,,
+rtf-vdw-33,Rotary Files — VDW (6/pack),<p>Rotary Files by VDW. Pack: 6/pack. Professional use only.</p><table><tr><td>Pack</td><td>6/pack</td></tr><tr><td>Brand</td><td>VDW</td></tr><tr><td>Category</td><td>Endodontics</td></tr></table>,VDW,,Endodontics,"Endodontics, VDW, B2B",TRUE,Size,15/.04,RTF-VDW-1504-033,250,shopify,74,deny,manual,58.72,,TRUE,TRUE,active,Endodontics
+rtf-vdw-33,,,,,,,,,20/.04,RTF-VDW-2004-033,250,shopify,9,deny,manual,59.31,,TRUE,TRUE,,
+rtf-vdw-33,,,,,,,,,25/.04,RTF-VDW-2504-033,50,shopify,1597,deny,manual,54.93,63.17,TRUE,TRUE,,
+rtf-vdw-33,,,,,,,,,25/.06,RTF-VDW-2506-033,120,shopify,13,deny,manual,55.00,,TRUE,TRUE,,
+rtf-vdw-33,,,,,,,,,30/.04,RTF-VDW-3004-033,250,shopify,943,deny,manual,56.36,64.81,TRUE,TRUE,,
+rtf-vdw-33,,,,,,,,,35/.04,RTF-VDW-3504-033,500,shopify,926,deny,manual,58.61,,TRUE,TRUE,,
+rtf-vdw-33,,,,,,,,,40/.04,RTF-VDW-4004-033,50,shopify,1976,deny,manual,56.62,,TRUE,TRUE,,
+rtf-coltene-34,Rotary Files — Coltene (6/pack),<p>Rotary Files by Coltene. Pack: 6/pack. Professional use only.</p><table><tr><td>Pack</td><td>6/pack</td></tr><tr><td>Brand</td><td>Coltene</td></tr><tr><td>Category</td><td>Endodontics</td></tr></table>,Coltene,,Endodontics,"Endodontics, Coltene, B2B",TRUE,Size,15/.04,RTF-COL-1504-034,250,shopify,973,deny,manual,40.35,46.4,TRUE,TRUE,active,Endodontics
+rtf-coltene-34,,,,,,,,,20/.04,RTF-COL-2004-034,500,shopify,1917,deny,manual,41.69,47.94,TRUE,TRUE,,
+rtf-coltene-34,,,,,,,,,25/.04,RTF-COL-2504-034,250,shopify,627,deny,manual,39.00,,TRUE,TRUE,,
+rtf-coltene-34,,,,,,,,,25/.06,RTF-COL-2506-034,500,shopify,538,deny,manual,39.01,,TRUE,TRUE,,
+rtf-coltene-34,,,,,,,,,30/.04,RTF-COL-3004-034,500,shopify,13,deny,manual,38.41,,TRUE,TRUE,,
+rtf-coltene-34,,,,,,,,,35/.04,RTF-COL-3504-034,500,shopify,977,deny,manual,41.60,,TRUE,TRUE,,
+rtf-coltene-34,,,,,,,,,40/.04,RTF-COL-4004-034,250,shopify,1171,deny,manual,38.55,44.33,TRUE,TRUE,,
+gpp-dentsply-35,Gutta Percha Points — Dentsply (120/box),<p>Gutta Percha Points by Dentsply. Pack: 120/box. Professional use only.</p><table><tr><td>Pack</td><td>120/box</td></tr><tr><td>Brand</td><td>Dentsply</td></tr><tr><td>Category</td><td>Endodontics</td></tr></table>,Dentsply,,Endodontics,"Endodontics, Dentsply, B2B",TRUE,Size,15,GPP-DEN-15-035,50,shopify,804,deny,manual,11.76,,TRUE,TRUE,active,Endodontics
+gpp-dentsply-35,,,,,,,,,20,GPP-DEN-20-035,120,shopify,895,deny,manual,11.92,,TRUE,TRUE,,
+gpp-dentsply-35,,,,,,,,,25,GPP-DEN-25-035,900,shopify,742,deny,manual,12.40,,TRUE,TRUE,,
+gpp-dentsply-35,,,,,,,,,30,GPP-DEN-30-035,120,shopify,307,deny,manual,12.32,,TRUE,TRUE,,
+gpp-dentsply-35,,,,,,,,,35,GPP-DEN-35-035,500,shopify,6,deny,manual,11.92,,TRUE,TRUE,,
+gpp-dentsply-35,,,,,,,,,40,GPP-DEN-40-035,120,shopify,1788,deny,manual,12.48,,TRUE,TRUE,,
+gpp-dentsply-35,,,,,,,,,Assorted,GPP-DEN-ASSORT-035,500,shopify,0,deny,manual,12.35,,TRUE,TRUE,,
+gpp-meta-36,Gutta Percha Points — Meta (120/box),<p>Gutta Percha Points by Meta. Pack: 120/box. Professional use only.</p><table><tr><td>Pack</td><td>120/box</td></tr><tr><td>Brand</td><td>Meta</td></tr><tr><td>Category</td><td>Endodontics</td></tr></table>,Meta,,Endodontics,"Endodontics, Meta, B2B",TRUE,Size,15,GPP-MET-15-036,900,shopify,199,deny,manual,14.02,,TRUE,TRUE,active,Endodontics
+gpp-meta-36,,,,,,,,,20,GPP-MET-20-036,120,shopify,969,deny,manual,13.80,15.87,TRUE,TRUE,,
+gpp-meta-36,,,,,,,,,25,GPP-MET-25-036,500,shopify,1446,deny,manual,13.59,,TRUE,TRUE,,
+gpp-meta-36,,,,,,,,,30,GPP-MET-30-036,120,shopify,15,deny,manual,13.49,,TRUE,TRUE,,
+gpp-meta-36,,,,,,,,,35,GPP-MET-35-036,120,shopify,126,deny,manual,14.41,,TRUE,TRUE,,
+gpp-meta-36,,,,,,,,,40,GPP-MET-40-036,50,shopify,1131,deny,manual,14.39,,TRUE,TRUE,,
+gpp-meta-36,,,,,,,,,Assorted,GPP-MET-ASSORT-036,500,shopify,7,deny,manual,14.22,,TRUE,TRUE,,
+ppp-dentsply-37,Paper Points — Dentsply (200/box),<p>Paper Points by Dentsply. Pack: 200/box. Professional use only.</p><table><tr><td>Pack</td><td>200/box</td></tr><tr><td>Brand</td><td>Dentsply</td></tr><tr><td>Category</td><td>Endodontics</td></tr></table>,Dentsply,,Endodontics,"Endodontics, Dentsply, B2B",TRUE,Size,15,PPP-DEN-15-037,500,shopify,52,deny,manual,7.81,,TRUE,TRUE,active,Endodontics
+ppp-dentsply-37,,,,,,,,,20,PPP-DEN-20-037,500,shopify,697,deny,manual,8.37,,TRUE,TRUE,,
+ppp-dentsply-37,,,,,,,,,25,PPP-DEN-25-037,250,shopify,1170,deny,manual,8.02,,TRUE,TRUE,,
+ppp-dentsply-37,,,,,,,,,30,PPP-DEN-30-037,500,shopify,6,deny,manual,8.24,,TRUE,TRUE,,
+ppp-dentsply-37,,,,,,,,,Assorted,PPP-DEN-ASSORT-037,120,shopify,6,deny,manual,8.39,,TRUE,TRUE,,
+ppp-meta-38,Paper Points — Meta (200/box),<p>Paper Points by Meta. Pack: 200/box. Professional use only.</p><table><tr><td>Pack</td><td>200/box</td></tr><tr><td>Brand</td><td>Meta</td></tr><tr><td>Category</td><td>Endodontics</td></tr></table>,Meta,,Endodontics,"Endodontics, Meta, B2B",TRUE,Size,15,PPP-MET-15-038,120,shopify,1521,deny,manual,9.12,,TRUE,TRUE,active,Endodontics
+ppp-meta-38,,,,,,,,,20,PPP-MET-20-038,50,shopify,0,deny,manual,8.99,,TRUE,TRUE,,
+ppp-meta-38,,,,,,,,,25,PPP-MET-25-038,120,shopify,460,deny,manual,9.01,,TRUE,TRUE,,
+ppp-meta-38,,,,,,,,,30,PPP-MET-30-038,900,shopify,592,deny,manual,9.45,,TRUE,TRUE,,
+ppp-meta-38,,,,,,,,,Assorted,PPP-MET-ASSORT-038,50,shopify,433,deny,manual,9.59,,TRUE,TRUE,,
+nao-cerkamed-39,Sodium Hypochlorite 3% — Cerkamed (1 bottle),<p>Sodium Hypochlorite 3% by Cerkamed. Pack: 1 bottle. Professional use only.</p><table><tr><td>Pack</td><td>1 bottle</td></tr><tr><td>Brand</td><td>Cerkamed</td></tr><tr><td>Category</td><td>Endodontics</td></tr></table>,Cerkamed,,Endodontics,"Endodontics, Cerkamed, B2B",TRUE,Size,250 mL,NAO-CER-250ML-039,900,shopify,9,deny,manual,20.77,23.89,TRUE,TRUE,active,Endodontics
+nao-cerkamed-39,,,,,,,,,1 L,NAO-CER-1L-039,500,shopify,3,deny,manual,22.30,25.64,TRUE,TRUE,,
+nao-vista-40,Sodium Hypochlorite 3% — Vista (1 bottle),<p>Sodium Hypochlorite 3% by Vista. Pack: 1 bottle. Professional use only.</p><table><tr><td>Pack</td><td>1 bottle</td></tr><tr><td>Brand</td><td>Vista</td></tr><tr><td>Category</td><td>Endodontics</td></tr></table>,Vista,,Endodontics,"Endodontics, Vista, B2B",TRUE,Size,250 mL,NAO-VIS-250ML-040,120,shopify,1550,deny,manual,20.21,23.24,TRUE,TRUE,active,Endodontics
+nao-vista-40,,,,,,,,,1 L,NAO-VIS-1L-040,500,shopify,429,deny,manual,21.43,,TRUE,TRUE,,
+frc-hu-friedy-41,Extraction Forceps — Hu-Friedy (1 pc),<p>Extraction Forceps by Hu-Friedy. Pack: 1 pc. Professional use only.</p><table><tr><td>Pack</td><td>1 pc</td></tr><tr><td>Brand</td><td>Hu-Friedy</td></tr><tr><td>Category</td><td>Instruments</td></tr></table>,Hu-Friedy,,Instruments,"Instruments, Hu-Friedy, B2B",TRUE,Pattern,#150,FRC-HU--#150-041,500,shopify,825,deny,manual,45.84,,TRUE,TRUE,active,Instruments
+frc-hu-friedy-41,,,,,,,,,#151,FRC-HU--#151-041,500,shopify,55,deny,manual,42.23,48.56,TRUE,TRUE,,
+frc-hu-friedy-41,,,,,,,,,#17,FRC-HU--#17-041,500,shopify,303,deny,manual,44.52,,TRUE,TRUE,,
+frc-hu-friedy-41,,,,,,,,,#18L,FRC-HU--#18L-041,50,shopify,1732,deny,manual,43.32,,TRUE,TRUE,,
+frc-hu-friedy-41,,,,,,,,,#18R,FRC-HU--#18R-041,500,shopify,0,deny,manual,44.10,,TRUE,TRUE,,
+frc-hu-friedy-41,,,,,,,,,#23,FRC-HU--#23-041,500,shopify,795,deny,manual,45.36,,TRUE,TRUE,,
+frc-hu-friedy-41,,,,,,,,,#65,FRC-HU--#65-041,50,shopify,1330,deny,manual,45.49,52.31,TRUE,TRUE,,
+frc-hu-friedy-41,,,,,,,,,#69,FRC-HU--#69-041,50,shopify,1695,deny,manual,46.22,,TRUE,TRUE,,
+frc-medesy-42,Extraction Forceps — Medesy (1 pc),<p>Extraction Forceps by Medesy. Pack: 1 pc. Professional use only.</p><table><tr><td>Pack</td><td>1 pc</td></tr><tr><td>Brand</td><td>Medesy</td></tr><tr><td>Category</td><td>Instruments</td></tr></table>,Medesy,,Instruments,"Instruments, Medesy, B2B",TRUE,Pattern,#150,FRC-MED-#150-042,50,shopify,607,deny,manual,74.86,,TRUE,TRUE,active,Instruments
+frc-medesy-42,,,,,,,,,#151,FRC-MED-#151-042,250,shopify,1517,deny,manual,77.76,,TRUE,TRUE,,
+frc-medesy-42,,,,,,,,,#17,FRC-MED-#17-042,50,shopify,0,deny,manual,78.30,,TRUE,TRUE,,
+frc-medesy-42,,,,,,,,,#18L,FRC-MED-#18L-042,500,shopify,0,deny,manual,74.03,,TRUE,TRUE,,
+frc-medesy-42,,,,,,,,,#18R,FRC-MED-#18R-042,500,shopify,841,deny,manual,78.58,,TRUE,TRUE,,
+frc-medesy-42,,,,,,,,,#23,FRC-MED-#23-042,250,shopify,10,deny,manual,73.62,,TRUE,TRUE,,
+frc-medesy-42,,,,,,,,,#65,FRC-MED-#65-042,250,shopify,1632,deny,manual,73.36,,TRUE,TRUE,,
+frc-medesy-42,,,,,,,,,#69,FRC-MED-#69-042,120,shopify,1655,deny,manual,78.52,90.3,TRUE,TRUE,,
+frc-carl-martin-43,Extraction Forceps — Carl Martin (1 pc),<p>Extraction Forceps by Carl Martin. Pack: 1 pc. Professional use only.</p><table><tr><td>Pack</td><td>1 pc</td></tr><tr><td>Brand</td><td>Carl Martin</td></tr><tr><td>Category</td><td>Instruments</td></tr></table>,Carl Martin,,Instruments,"Instruments, Carl Martin, B2B",TRUE,Pattern,#150,FRC-CAR-#150-043,900,shopify,885,deny,manual,54.82,63.04,TRUE,TRUE,active,Instruments
+frc-carl-martin-43,,,,,,,,,#151,FRC-CAR-#151-043,50,shopify,379,deny,manual,60.47,,TRUE,TRUE,,
+frc-carl-martin-43,,,,,,,,,#17,FRC-CAR-#17-043,500,shopify,222,deny,manual,55.70,,TRUE,TRUE,,
+frc-carl-martin-43,,,,,,,,,#18L,FRC-CAR-#18L-043,120,shopify,322,deny,manual,56.99,,TRUE,TRUE,,
+frc-carl-martin-43,,,,,,,,,#18R,FRC-CAR-#18R-043,250,shopify,1784,deny,manual,59.19,,TRUE,TRUE,,
+frc-carl-martin-43,,,,,,,,,#23,FRC-CAR-#23-043,250,shopify,1210,deny,manual,56.07,,TRUE,TRUE,,
+frc-carl-martin-43,,,,,,,,,#65,FRC-CAR-#65-043,250,shopify,556,deny,manual,55.56,,TRUE,TRUE,,
+frc-carl-martin-43,,,,,,,,,#69,FRC-CAR-#69-043,250,shopify,1234,deny,manual,55.58,63.92,TRUE,TRUE,,
+mir-hu-friedy-44,Dental Mirror Handle + Head #5 — Hu-Friedy (12/box),<p>Dental Mirror Handle + Head #5 by Hu-Friedy. Pack: 12/box. Professional use only.</p><table><tr><td>Pack</td><td>12/box</td></tr><tr><td>Brand</td><td>Hu-Friedy</td></tr><tr><td>Category</td><td>Instruments</td></tr></table>,Hu-Friedy,,Instruments,"Instruments, Hu-Friedy, B2B",TRUE,Type,Plane,MIR-HU--PLANE-044,500,shopify,523,deny,manual,35.28,40.57,TRUE,TRUE,active,Instruments
+mir-hu-friedy-44,,,,,,,,,Front-surface,MIR-HU--FRONT--044,120,shopify,259,deny,manual,32.88,,TRUE,TRUE,,
+mir-hu-friedy-44,,,,,,,,,Magnifying,MIR-HU--MAGNIF-044,120,shopify,1922,deny,manual,34.26,,TRUE,TRUE,,
+mir-medesy-45,Dental Mirror Handle + Head #5 — Medesy (12/box),<p>Dental Mirror Handle + Head #5 by Medesy. Pack: 12/box. Professional use only.</p><table><tr><td>Pack</td><td>12/box</td></tr><tr><td>Brand</td><td>Medesy</td></tr><tr><td>Category</td><td>Instruments</td></tr></table>,Medesy,,Instruments,"Instruments, Medesy, B2B",TRUE,Type,Plane,MIR-MED-PLANE-045,250,shopify,1745,deny,manual,20.59,,TRUE,TRUE,active,Instruments
+mir-medesy-45,,,,,,,,,Front-surface,MIR-MED-FRONT--045,50,shopify,414,deny,manual,20.30,,TRUE,TRUE,,
+mir-medesy-45,,,,,,,,,Magnifying,MIR-MED-MAGNIF-045,50,shopify,12,deny,manual,20.87,,TRUE,TRUE,,
+scl-hu-friedy-46,Scaler / Curette — Hu-Friedy (1 pc),<p>Scaler / Curette by Hu-Friedy. Pack: 1 pc. Professional use only.</p><table><tr><td>Pack</td><td>1 pc</td></tr><tr><td>Brand</td><td>Hu-Friedy</td></tr><tr><td>Category</td><td>Instruments</td></tr></table>,Hu-Friedy,,Instruments,"Instruments, Hu-Friedy, B2B",TRUE,Type,Gracey 1/2,SCL-HU--GRACEY-046,120,shopify,6,deny,manual,34.68,39.88,TRUE,TRUE,active,Instruments
+scl-hu-friedy-46,,,,,,,,,Gracey 11/12,SCL-HU--GRACEY-046,120,shopify,1726,deny,manual,32.30,,TRUE,TRUE,,
+scl-hu-friedy-46,,,,,,,,,Gracey 13/14,SCL-HU--GRACEY-046,900,shopify,209,deny,manual,31.87,,TRUE,TRUE,,
+scl-hu-friedy-46,,,,,,,,,Universal,SCL-HU--UNIVER-046,900,shopify,885,deny,manual,31.50,,TRUE,TRUE,,
+scl-hu-friedy-46,,,,,,,,,Sickle H6/H7,SCL-HU--SICKLE-046,250,shopify,1143,deny,manual,31.47,36.19,TRUE,TRUE,,
+scl-lm-47,Scaler / Curette — LM (1 pc),<p>Scaler / Curette by LM. Pack: 1 pc. Professional use only.</p><table><tr><td>Pack</td><td>1 pc</td></tr><tr><td>Brand</td><td>LM</td></tr><tr><td>Category</td><td>Instruments</td></tr></table>,LM,,Instruments,"Instruments, LM, B2B",TRUE,Type,Gracey 1/2,SCL-LM-GRACEY-047,900,shopify,679,deny,manual,33.55,38.58,TRUE,TRUE,active,Instruments
+scl-lm-47,,,,,,,,,Gracey 11/12,SCL-LM-GRACEY-047,250,shopify,898,deny,manual,33.54,,TRUE,TRUE,,
+scl-lm-47,,,,,,,,,Gracey 13/14,SCL-LM-GRACEY-047,50,shopify,850,deny,manual,34.67,,TRUE,TRUE,,
+scl-lm-47,,,,,,,,,Universal,SCL-LM-UNIVER-047,500,shopify,370,deny,manual,33.57,,TRUE,TRUE,,
+scl-lm-47,,,,,,,,,Sickle H6/H7,SCL-LM-SICKLE-047,50,shopify,796,deny,manual,33.70,38.76,TRUE,TRUE,,
+cin-hu-friedy-48,Composite Instrument — Hu-Friedy (1 pc),<p>Composite Instrument by Hu-Friedy. Pack: 1 pc. Professional use only.</p><table><tr><td>Pack</td><td>1 pc</td></tr><tr><td>Brand</td><td>Hu-Friedy</td></tr><tr><td>Category</td><td>Instruments</td></tr></table>,Hu-Friedy,,Instruments,"Instruments, Hu-Friedy, B2B",TRUE,Type,PFI,CIN-HU--PFI-048,900,shopify,15,deny,manual,24.48,28.15,TRUE,TRUE,active,Instruments
+cin-hu-friedy-48,,,,,,,,,IPC,CIN-HU--IPC-048,250,shopify,1559,deny,manual,23.46,26.98,TRUE,TRUE,,
+cin-hu-friedy-48,,,,,,,,,Ball burnisher,CIN-HU--BALLBU-048,500,shopify,401,deny,manual,24.52,28.2,TRUE,TRUE,,
+cin-hu-friedy-48,,,,,,,,,Goldstein,CIN-HU--GOLDST-048,120,shopify,1672,deny,manual,24.63,28.32,TRUE,TRUE,,
+cin-lm-49,Composite Instrument — LM (1 pc),<p>Composite Instrument by LM. Pack: 1 pc. Professional use only.</p><table><tr><td>Pack</td><td>1 pc</td></tr><tr><td>Brand</td><td>LM</td></tr><tr><td>Category</td><td>Instruments</td></tr></table>,LM,,Instruments,"Instruments, LM, B2B",TRUE,Type,PFI,CIN-LM-PFI-049,900,shopify,0,deny,manual,38.78,,TRUE,TRUE,active,Instruments
+cin-lm-49,,,,,,,,,IPC,CIN-LM-IPC-049,120,shopify,844,deny,manual,35.49,,TRUE,TRUE,,
+cin-lm-49,,,,,,,,,Ball burnisher,CIN-LM-BALLBU-049,120,shopify,1804,deny,manual,36.03,,TRUE,TRUE,,
+cin-lm-49,,,,,,,,,Goldstein,CIN-LM-GOLDST-049,900,shopify,424,deny,manual,37.40,43.01,TRUE,TRUE,,
+dbr-komet-50,Diamond Bur FG — Komet (5/pack),<p>Diamond Bur FG by Komet. Pack: 5/pack. Professional use only.</p><table><tr><td>Pack</td><td>5/pack</td></tr><tr><td>Brand</td><td>Komet</td></tr><tr><td>Category</td><td>Rotary</td></tr></table>,Komet,,Rotary,"Rotary, Komet, B2B",TRUE,Shape,Round,DBR-KOM-ROUND-050,120,shopify,356,deny,manual,10.07,,TRUE,TRUE,active,Rotary
+dbr-komet-50,,,,,,,,,Flat-end cylinder,DBR-KOM-FLAT-E-050,50,shopify,0,deny,manual,10.42,,TRUE,TRUE,,
+dbr-komet-50,,,,,,,,,Taper,DBR-KOM-TAPER-050,900,shopify,713,deny,manual,9.93,,TRUE,TRUE,,
+dbr-komet-50,,,,,,,,,Pear,DBR-KOM-PEAR-050,900,shopify,1643,deny,manual,10.14,,TRUE,TRUE,,
+dbr-komet-50,,,,,,,,,Flame,DBR-KOM-FLAME-050,500,shopify,847,deny,manual,10.53,,TRUE,TRUE,,
+dbr-komet-50,,,,,,,,,Football,DBR-KOM-FOOTBA-050,120,shopify,57,deny,manual,10.48,,TRUE,TRUE,,
+dbr-mani-51,Diamond Bur FG — MANI (5/pack),<p>Diamond Bur FG by MANI. Pack: 5/pack. Professional use only.</p><table><tr><td>Pack</td><td>5/pack</td></tr><tr><td>Brand</td><td>MANI</td></tr><tr><td>Category</td><td>Rotary</td></tr></table>,MANI,,Rotary,"Rotary, MANI, B2B",TRUE,Shape,Round,DBR-MAN-ROUND-051,500,shopify,1727,deny,manual,12.38,14.24,TRUE,TRUE,active,Rotary
+dbr-mani-51,,,,,,,,,Flat-end cylinder,DBR-MAN-FLAT-E-051,50,shopify,187,deny,manual,11.94,,TRUE,TRUE,,
+dbr-mani-51,,,,,,,,,Taper,DBR-MAN-TAPER-051,120,shopify,1082,deny,manual,12.45,14.32,TRUE,TRUE,,
+dbr-mani-51,,,,,,,,,Pear,DBR-MAN-PEAR-051,50,shopify,14,deny,manual,12.18,,TRUE,TRUE,,
+dbr-mani-51,,,,,,,,,Flame,DBR-MAN-FLAME-051,120,shopify,11,deny,manual,12.96,,TRUE,TRUE,,
+dbr-mani-51,,,,,,,,,Football,DBR-MAN-FOOTBA-051,50,shopify,0,deny,manual,11.85,,TRUE,TRUE,,
+dbr-jota-52,Diamond Bur FG — Jota (5/pack),<p>Diamond Bur FG by Jota. Pack: 5/pack. Professional use only.</p><table><tr><td>Pack</td><td>5/pack</td></tr><tr><td>Brand</td><td>Jota</td></tr><tr><td>Category</td><td>Rotary</td></tr></table>,Jota,,Rotary,"Rotary, Jota, B2B",TRUE,Shape,Round,DBR-JOT-ROUND-052,120,shopify,1057,deny,manual,10.38,,TRUE,TRUE,active,Rotary
+dbr-jota-52,,,,,,,,,Flat-end cylinder,DBR-JOT-FLAT-E-052,250,shopify,1526,deny,manual,11.11,12.78,TRUE,TRUE,,
+dbr-jota-52,,,,,,,,,Taper,DBR-JOT-TAPER-052,250,shopify,566,deny,manual,10.23,,TRUE,TRUE,,
+dbr-jota-52,,,,,,,,,Pear,DBR-JOT-PEAR-052,500,shopify,984,deny,manual,10.21,,TRUE,TRUE,,
+dbr-jota-52,,,,,,,,,Flame,DBR-JOT-FLAME-052,250,shopify,588,deny,manual,10.75,,TRUE,TRUE,,
+dbr-jota-52,,,,,,,,,Football,DBR-JOT-FOOTBA-052,250,shopify,0,deny,manual,10.26,11.8,TRUE,TRUE,,
+cbr-ss-white-53,Carbide Bur FG — SS White (10/pack),<p>Carbide Bur FG by SS White. Pack: 10/pack. Professional use only.</p><table><tr><td>Pack</td><td>10/pack</td></tr><tr><td>Brand</td><td>SS White</td></tr><tr><td>Category</td><td>Rotary</td></tr></table>,SS White,,Rotary,"Rotary, SS White, B2B",TRUE,Shape,#330,CBR-SS -#330-053,900,shopify,395,deny,manual,21.31,,TRUE,TRUE,active,Rotary
+cbr-ss-white-53,,,,,,,,,#245,CBR-SS -#245-053,500,shopify,0,deny,manual,21.46,,TRUE,TRUE,,
+cbr-ss-white-53,,,,,,,,,#557,CBR-SS -#557-053,250,shopify,1237,deny,manual,21.08,,TRUE,TRUE,,
+cbr-ss-white-53,,,,,,,,,#2,CBR-SS -#2-053,250,shopify,1339,deny,manual,21.45,,TRUE,TRUE,,
+cbr-ss-white-53,,,,,,,,,#4,CBR-SS -#4-053,50,shopify,805,deny,manual,20.84,,TRUE,TRUE,,
+cbr-ss-white-53,,,,,,,,,#6,CBR-SS -#6-053,250,shopify,411,deny,manual,20.92,,TRUE,TRUE,,
+cbr-komet-54,Carbide Bur FG — Komet (10/pack),<p>Carbide Bur FG by Komet. Pack: 10/pack. Professional use only.</p><table><tr><td>Pack</td><td>10/pack</td></tr><tr><td>Brand</td><td>Komet</td></tr><tr><td>Category</td><td>Rotary</td></tr></table>,Komet,,Rotary,"Rotary, Komet, B2B",TRUE,Shape,#330,CBR-KOM-#330-054,250,shopify,1359,deny,manual,23.51,,TRUE,TRUE,active,Rotary
+cbr-komet-54,,,,,,,,,#245,CBR-KOM-#245-054,900,shopify,1580,deny,manual,21.27,24.46,TRUE,TRUE,,
+cbr-komet-54,,,,,,,,,#557,CBR-KOM-#557-054,120,shopify,905,deny,manual,22.42,,TRUE,TRUE,,
+cbr-komet-54,,,,,,,,,#2,CBR-KOM-#2-054,50,shopify,1304,deny,manual,22.75,26.16,TRUE,TRUE,,
+cbr-komet-54,,,,,,,,,#4,CBR-KOM-#4-054,120,shopify,672,deny,manual,21.44,,TRUE,TRUE,,
+cbr-komet-54,,,,,,,,,#6,CBR-KOM-#6-054,900,shopify,666,deny,manual,22.60,,TRUE,TRUE,,
+cbr-mani-55,Carbide Bur FG — MANI (10/pack),<p>Carbide Bur FG by MANI. Pack: 10/pack. Professional use only.</p><table><tr><td>Pack</td><td>10/pack</td></tr><tr><td>Brand</td><td>MANI</td></tr><tr><td>Category</td><td>Rotary</td></tr></table>,MANI,,Rotary,"Rotary, MANI, B2B",TRUE,Shape,#330,CBR-MAN-#330-055,120,shopify,78,deny,manual,23.54,,TRUE,TRUE,active,Rotary
+cbr-mani-55,,,,,,,,,#245,CBR-MAN-#245-055,250,shopify,180,deny,manual,22.82,,TRUE,TRUE,,
+cbr-mani-55,,,,,,,,,#557,CBR-MAN-#557-055,900,shopify,591,deny,manual,23.62,27.16,TRUE,TRUE,,
+cbr-mani-55,,,,,,,,,#2,CBR-MAN-#2-055,900,shopify,1267,deny,manual,22.84,,TRUE,TRUE,,
+cbr-mani-55,,,,,,,,,#4,CBR-MAN-#4-055,50,shopify,558,deny,manual,21.68,24.93,TRUE,TRUE,,
+cbr-mani-55,,,,,,,,,#6,CBR-MAN-#6-055,50,shopify,881,deny,manual,21.73,24.99,TRUE,TRUE,,
+pdc-3m-56,Polishing Discs — 3M (50/box),<p>Polishing Discs by 3M. Pack: 50/box. Professional use only.</p><table><tr><td>Pack</td><td>50/box</td></tr><tr><td>Brand</td><td>3M</td></tr><tr><td>Category</td><td>Rotary</td></tr></table>,3M,,Rotary,"Rotary, 3M, B2B",TRUE,Grit,Coarse,PDC-3M-COARSE-056,900,shopify,1977,deny,manual,26.00,,TRUE,TRUE,active,Rotary
+pdc-3m-56,,,,,,,,,Medium,PDC-3M-MEDIUM-056,900,shopify,1088,deny,manual,27.30,,TRUE,TRUE,,
+pdc-3m-56,,,,,,,,,Fine,PDC-3M-FINE-056,500,shopify,683,deny,manual,25.62,,TRUE,TRUE,,
+pdc-3m-56,,,,,,,,,Superfine,PDC-3M-SUPERF-056,500,shopify,63,deny,manual,26.52,,TRUE,TRUE,,
+pdc-3m-56,,,,,,,,,Assorted,PDC-3M-ASSORT-056,50,shopify,13,deny,manual,26.74,,TRUE,TRUE,,
+pdc-shofu-57,Polishing Discs — Shofu (50/box),<p>Polishing Discs by Shofu. Pack: 50/box. Professional use only.</p><table><tr><td>Pack</td><td>50/box</td></tr><tr><td>Brand</td><td>Shofu</td></tr><tr><td>Category</td><td>Rotary</td></tr></table>,Shofu,,Rotary,"Rotary, Shofu, B2B",TRUE,Grit,Coarse,PDC-SHO-COARSE-057,250,shopify,302,deny,manual,30.92,,TRUE,TRUE,active,Rotary
+pdc-shofu-57,,,,,,,,,Medium,PDC-SHO-MEDIUM-057,900,shopify,594,deny,manual,31.94,,TRUE,TRUE,,
+pdc-shofu-57,,,,,,,,,Fine,PDC-SHO-FINE-057,120,shopify,655,deny,manual,31.96,,TRUE,TRUE,,
+pdc-shofu-57,,,,,,,,,Superfine,PDC-SHO-SUPERF-057,120,shopify,11,deny,manual,29.84,,TRUE,TRUE,,
+pdc-shofu-57,,,,,,,,,Assorted,PDC-SHO-ASSORT-057,250,shopify,465,deny,manual,32.98,,TRUE,TRUE,,
+cur-woodpecker-58,LED Curing Light — Woodpecker (1 unit),<p>LED Curing Light by Woodpecker. Pack: 1 unit. Professional use only.</p><table><tr><td>Pack</td><td>1 unit</td></tr><tr><td>Brand</td><td>Woodpecker</td></tr><tr><td>Category</td><td>Equipment</td></tr></table>,Woodpecker,,Equipment,"Equipment, Woodpecker, B2B",TRUE,Model,Standard,CUR-WOO-STANDA-058,900,shopify,1281,deny,manual,232.48,,TRUE,TRUE,active,Equipment
+cur-woodpecker-58,,,,,,,,,Pro,CUR-WOO-PRO-058,50,shopify,1769,deny,manual,239.96,275.95,TRUE,TRUE,,
+cur-ivoclar-59,LED Curing Light — Ivoclar (1 unit),<p>LED Curing Light by Ivoclar. Pack: 1 unit. Professional use only.</p><table><tr><td>Pack</td><td>1 unit</td></tr><tr><td>Brand</td><td>Ivoclar</td></tr><tr><td>Category</td><td>Equipment</td></tr></table>,Ivoclar,,Equipment,"Equipment, Ivoclar, B2B",TRUE,Model,Standard,CUR-IVO-STANDA-059,500,shopify,1218,deny,manual,309.52,,TRUE,TRUE,active,Equipment
+cur-ivoclar-59,,,,,,,,,Pro,CUR-IVO-PRO-059,50,shopify,209,deny,manual,299.33,344.23,TRUE,TRUE,,
+cur-3m-60,LED Curing Light — 3M (1 unit),<p>LED Curing Light by 3M. Pack: 1 unit. Professional use only.</p><table><tr><td>Pack</td><td>1 unit</td></tr><tr><td>Brand</td><td>3M</td></tr><tr><td>Category</td><td>Equipment</td></tr></table>,3M,,Equipment,"Equipment, 3M, B2B",TRUE,Model,Standard,CUR-3M-STANDA-060,50,shopify,5,deny,manual,196.76,226.27,TRUE,TRUE,active,Equipment
+cur-3m-60,,,,,,,,,Pro,CUR-3M-PRO-060,50,shopify,0,deny,manual,192.33,,TRUE,TRUE,,
+usc-woodpecker-61,Ultrasonic Scaler Unit — Woodpecker (1 unit),<p>Ultrasonic Scaler Unit by Woodpecker. Pack: 1 unit. Professional use only.</p><table><tr><td>Pack</td><td>1 unit</td></tr><tr><td>Brand</td><td>Woodpecker</td></tr><tr><td>Category</td><td>Equipment</td></tr></table>,Woodpecker,,Equipment,"Equipment, Woodpecker, B2B",TRUE,Model,Built-in,USC-WOO-BUILT--061,120,shopify,184,deny,manual,589.20,,TRUE,TRUE,active,Equipment
+usc-woodpecker-61,,,,,,,,,Portable,USC-WOO-PORTAB-061,500,shopify,1728,deny,manual,569.56,,TRUE,TRUE,,
+usc-ems-62,Ultrasonic Scaler Unit — EMS (1 unit),<p>Ultrasonic Scaler Unit by EMS. Pack: 1 unit. Professional use only.</p><table><tr><td>Pack</td><td>1 unit</td></tr><tr><td>Brand</td><td>EMS</td></tr><tr><td>Category</td><td>Equipment</td></tr></table>,EMS,,Equipment,"Equipment, EMS, B2B",TRUE,Model,Built-in,USC-EMS-BUILT--062,50,shopify,279,deny,manual,280.63,,TRUE,TRUE,active,Equipment
+usc-ems-62,,,,,,,,,Portable,USC-EMS-PORTAB-062,120,shopify,1343,deny,manual,299.60,,TRUE,TRUE,,
+apx-woodpecker-63,Apex Locator — Woodpecker (1 unit),<p>Apex Locator by Woodpecker. Pack: 1 unit. Professional use only.</p><table><tr><td>Pack</td><td>1 unit</td></tr><tr><td>Brand</td><td>Woodpecker</td></tr><tr><td>Category</td><td>Equipment</td></tr></table>,Woodpecker,,Equipment,"Equipment, Woodpecker, B2B",TRUE,Model,Standard,APX-WOO-STANDA-063,250,shopify,469,deny,manual,286.12,,TRUE,TRUE,active,Equipment
+apx-morita-64,Apex Locator — Morita (1 unit),<p>Apex Locator by Morita. Pack: 1 unit. Professional use only.</p><table><tr><td>Pack</td><td>1 unit</td></tr><tr><td>Brand</td><td>Morita</td></tr><tr><td>Category</td><td>Equipment</td></tr></table>,Morita,,Equipment,"Equipment, Morita, B2B",TRUE,Model,Standard,APX-MOR-STANDA-064,250,shopify,628,deny,manual,258.89,,TRUE,TRUE,active,Equipment
+aut-woson-65,Autoclave Class B — Woson (1 unit),<p>Autoclave Class B by Woson. Pack: 1 unit. Professional use only.</p><table><tr><td>Pack</td><td>1 unit</td></tr><tr><td>Brand</td><td>Woson</td></tr><tr><td>Category</td><td>Equipment</td></tr></table>,Woson,,Equipment,"Equipment, Woson, B2B",TRUE,Capacity,18 L,AUT-WOS-18L-065,50,shopify,1025,deny,manual,3706.43,,TRUE,TRUE,active,Equipment
+aut-woson-65,,,,,,,,,23 L,AUT-WOS-23L-065,250,shopify,113,deny,manual,3547.39,,TRUE,TRUE,,
+aut-melag-66,Autoclave Class B — Melag (1 unit),<p>Autoclave Class B by Melag. Pack: 1 unit. Professional use only.</p><table><tr><td>Pack</td><td>1 unit</td></tr><tr><td>Brand</td><td>Melag</td></tr><tr><td>Category</td><td>Equipment</td></tr></table>,Melag,,Equipment,"Equipment, Melag, B2B",TRUE,Capacity,18 L,AUT-MEL-18L-066,50,shopify,0,deny,manual,3039.11,,TRUE,TRUE,active,Equipment
+aut-melag-66,,,,,,,,,23 L,AUT-MEL-23L-066,120,shopify,638,deny,manual,2910.95,3347.59,TRUE,TRUE,,
+wip-metrex-67,Surface Disinfectant Wipes — Metrex (1 tub),<p>Surface Disinfectant Wipes by Metrex. Pack: 1 tub. Professional use only.</p><table><tr><td>Pack</td><td>1 tub</td></tr><tr><td>Brand</td><td>Metrex</td></tr><tr><td>Category</td><td>Infection Control</td></tr></table>,Metrex,,Infection Control,"Infection Control, Metrex, B2B",TRUE,Pack,160/tub,WIP-MET-160TUB-067,500,shopify,160,deny,manual,10.13,,TRUE,TRUE,active,Infection Control
+wip-metrex-67,,,,,,,,,Refill 160,WIP-MET-REFILL-067,250,shopify,1740,deny,manual,10.34,,TRUE,TRUE,,
+wip-schülke-68,Surface Disinfectant Wipes — Schülke (1 tub),<p>Surface Disinfectant Wipes by Schülke. Pack: 1 tub. Professional use only.</p><table><tr><td>Pack</td><td>1 tub</td></tr><tr><td>Brand</td><td>Schülke</td></tr><tr><td>Category</td><td>Infection Control</td></tr></table>,Schülke,,Infection Control,"Infection Control, Schülke, B2B",TRUE,Pack,160/tub,WIP-SCH-160TUB-068,120,shopify,1233,deny,manual,14.81,,TRUE,TRUE,active,Infection Control
+wip-schülke-68,,,,,,,,,Refill 160,WIP-SCH-REFILL-068,50,shopify,524,deny,manual,14.13,16.25,TRUE,TRUE,,
+enz-metrex-69,Instrument Enzymatic Cleaner — Metrex (1 bottle),<p>Instrument Enzymatic Cleaner by Metrex. Pack: 1 bottle. Professional use only.</p><table><tr><td>Pack</td><td>1 bottle</td></tr><tr><td>Brand</td><td>Metrex</td></tr><tr><td>Category</td><td>Infection Control</td></tr></table>,Metrex,,Infection Control,"Infection Control, Metrex, B2B",TRUE,Size,1 L,ENZ-MET-1L-069,250,shopify,1199,deny,manual,42.84,,TRUE,TRUE,active,Infection Control
+enz-metrex-69,,,,,,,,,5 L,ENZ-MET-5L-069,500,shopify,9,deny,manual,43.31,,TRUE,TRUE,,
+enz-schülke-70,Instrument Enzymatic Cleaner — Schülke (1 bottle),<p>Instrument Enzymatic Cleaner by Schülke. Pack: 1 bottle. Professional use only.</p><table><tr><td>Pack</td><td>1 bottle</td></tr><tr><td>Brand</td><td>Schülke</td></tr><tr><td>Category</td><td>Infection Control</td></tr></table>,Schülke,,Infection Control,"Infection Control, Schülke, B2B",TRUE,Size,1 L,ENZ-SCH-1L-070,900,shopify,0,deny,manual,58.44,,TRUE,TRUE,active,Infection Control
+enz-schülke-70,,,,,,,,,5 L,ENZ-SCH-5L-070,500,shopify,826,deny,manual,63.47,,TRUE,TRUE,,
+brf-plasdent-71,Barrier Film — Plasdent (1200 sheets),<p>Barrier Film by Plasdent. Pack: 1200 sheets. Professional use only.</p><table><tr><td>Pack</td><td>1200 sheets</td></tr><tr><td>Brand</td><td>Plasdent</td></tr><tr><td>Category</td><td>Infection Control</td></tr></table>,Plasdent,,Infection Control,"Infection Control, Plasdent, B2B",TRUE,Color,Clear,BRF-PLA-CLEAR-071,250,shopify,1461,deny,manual,12.24,,TRUE,TRUE,active,Infection Control
+brf-plasdent-71,,,,,,,,,Blue,BRF-PLA-BLUE-071,900,shopify,1118,deny,manual,11.48,,TRUE,TRUE,,
+brf-crosstex-72,Barrier Film — Crosstex (1200 sheets),<p>Barrier Film by Crosstex. Pack: 1200 sheets. Professional use only.</p><table><tr><td>Pack</td><td>1200 sheets</td></tr><tr><td>Brand</td><td>Crosstex</td></tr><tr><td>Category</td><td>Infection Control</td></tr></table>,Crosstex,,Infection Control,"Infection Control, Crosstex, B2B",TRUE,Color,Clear,BRF-CRO-CLEAR-072,120,shopify,948,deny,manual,15.38,,TRUE,TRUE,active,Infection Control
+brf-crosstex-72,,,,,,,,,Blue,BRF-CRO-BLUE-072,900,shopify,10,deny,manual,15.31,,TRUE,TRUE,,
+alg-zhermack-73,Alginate Fast-Set — Zhermack (1 bag),<p>Alginate Fast-Set by Zhermack. Pack: 1 bag. Professional use only.</p><table><tr><td>Pack</td><td>1 bag</td></tr><tr><td>Brand</td><td>Zhermack</td></tr><tr><td>Category</td><td>Impression</td></tr></table>,Zhermack,,Impression,"Impression, Zhermack, B2B",TRUE,Size,453 g,ALG-ZHE-453G-073,120,shopify,1490,deny,manual,15.57,,TRUE,TRUE,active,Impression
+alg-zhermack-73,,,,,,,,,1 kg,ALG-ZHE-1KG-073,120,shopify,1531,deny,manual,14.77,,TRUE,TRUE,,
+alg-dentsply-74,Alginate Fast-Set — Dentsply (1 bag),<p>Alginate Fast-Set by Dentsply. Pack: 1 bag. Professional use only.</p><table><tr><td>Pack</td><td>1 bag</td></tr><tr><td>Brand</td><td>Dentsply</td></tr><tr><td>Category</td><td>Impression</td></tr></table>,Dentsply,,Impression,"Impression, Dentsply, B2B",TRUE,Size,453 g,ALG-DEN-453G-074,50,shopify,579,deny,manual,16.49,,TRUE,TRUE,active,Impression
+alg-dentsply-74,,,,,,,,,1 kg,ALG-DEN-1KG-074,120,shopify,1397,deny,manual,15.02,,TRUE,TRUE,,
+pvs-3m-75,PVS Impression Material — 3M (2 x 50 mL),<p>PVS Impression Material by 3M. Pack: 2 x 50 mL. Professional use only.</p><table><tr><td>Pack</td><td>2 x 50 mL</td></tr><tr><td>Brand</td><td>3M</td></tr><tr><td>Category</td><td>Impression</td></tr></table>,3M,,Impression,"Impression, 3M, B2B",TRUE,Viscosity,Light body,PVS-3M-LIGHTB-075,50,shopify,940,deny,manual,53.50,61.52,TRUE,TRUE,active,Impression
+pvs-3m-75,,,,,,,,,Medium body,PVS-3M-MEDIUM-075,500,shopify,1862,deny,manual,54.17,62.3,TRUE,TRUE,,
+pvs-3m-75,,,,,,,,,Heavy body,PVS-3M-HEAVYB-075,250,shopify,944,deny,manual,55.97,,TRUE,TRUE,,
+pvs-3m-75,,,,,,,,,Putty,PVS-3M-PUTTY-075,50,shopify,340,deny,manual,53.40,,TRUE,TRUE,,
+pvs-zhermack-76,PVS Impression Material — Zhermack (2 x 50 mL),<p>PVS Impression Material by Zhermack. Pack: 2 x 50 mL. Professional use only.</p><table><tr><td>Pack</td><td>2 x 50 mL</td></tr><tr><td>Brand</td><td>Zhermack</td></tr><tr><td>Category</td><td>Impression</td></tr></table>,Zhermack,,Impression,"Impression, Zhermack, B2B",TRUE,Viscosity,Light body,PVS-ZHE-LIGHTB-076,500,shopify,930,deny,manual,54.76,,TRUE,TRUE,active,Impression
+pvs-zhermack-76,,,,,,,,,Medium body,PVS-ZHE-MEDIUM-076,900,shopify,1417,deny,manual,54.89,,TRUE,TRUE,,
+pvs-zhermack-76,,,,,,,,,Heavy body,PVS-ZHE-HEAVYB-076,500,shopify,1441,deny,manual,51.78,59.55,TRUE,TRUE,,
+pvs-zhermack-76,,,,,,,,,Putty,PVS-ZHE-PUTTY-076,120,shopify,1336,deny,manual,54.76,,TRUE,TRUE,,
+pvs-kettenbach-77,PVS Impression Material — Kettenbach (2 x 50 mL),<p>PVS Impression Material by Kettenbach. Pack: 2 x 50 mL. Professional use only.</p><table><tr><td>Pack</td><td>2 x 50 mL</td></tr><tr><td>Brand</td><td>Kettenbach</td></tr><tr><td>Category</td><td>Impression</td></tr></table>,Kettenbach,,Impression,"Impression, Kettenbach, B2B",TRUE,Viscosity,Light body,PVS-KET-LIGHTB-077,500,shopify,1339,deny,manual,52.53,,TRUE,TRUE,active,Impression
+pvs-kettenbach-77,,,,,,,,,Medium body,PVS-KET-MEDIUM-077,120,shopify,1322,deny,manual,56.64,,TRUE,TRUE,,
+pvs-kettenbach-77,,,,,,,,,Heavy body,PVS-KET-HEAVYB-077,500,shopify,721,deny,manual,56.17,,TRUE,TRUE,,
+pvs-kettenbach-77,,,,,,,,,Putty,PVS-KET-PUTTY-077,120,shopify,267,deny,manual,51.84,,TRUE,TRUE,,
+try-plasdent-78,Impression Trays Disposable — Plasdent (12/bag),<p>Impression Trays Disposable by Plasdent. Pack: 12/bag. Professional use only.</p><table><tr><td>Pack</td><td>12/bag</td></tr><tr><td>Brand</td><td>Plasdent</td></tr><tr><td>Category</td><td>Impression</td></tr></table>,Plasdent,,Impression,"Impression, Plasdent, B2B",TRUE,Size,S upper,TRY-PLA-SUPPER-078,900,shopify,459,deny,manual,9.10,10.46,TRUE,TRUE,active,Impression
+try-plasdent-78,,,,,,,,,M upper,TRY-PLA-MUPPER-078,250,shopify,469,deny,manual,9.29,,TRUE,TRUE,,
+try-plasdent-78,,,,,,,,,L upper,TRY-PLA-LUPPER-078,120,shopify,890,deny,manual,9.32,,TRUE,TRUE,,
+try-plasdent-78,,,,,,,,,S lower,TRY-PLA-SLOWER-078,900,shopify,1612,deny,manual,9.50,,TRUE,TRUE,,
+try-plasdent-78,,,,,,,,,M lower,TRY-PLA-MLOWER-078,50,shopify,165,deny,manual,8.84,,TRUE,TRUE,,
+try-plasdent-78,,,,,,,,,L lower,TRY-PLA-LLOWER-078,250,shopify,0,deny,manual,9.00,,TRUE,TRUE,,
+try-premium-plus-79,Impression Trays Disposable — Premium Plus (12/bag),<p>Impression Trays Disposable by Premium Plus. Pack: 12/bag. Professional use only.</p><table><tr><td>Pack</td><td>12/bag</td></tr><tr><td>Brand</td><td>Premium Plus</td></tr><tr><td>Category</td><td>Impression</td></tr></table>,Premium Plus,,Impression,"Impression, Premium Plus, B2B",TRUE,Size,S upper,TRY-PRE-SUPPER-079,900,shopify,7,deny,manual,8.75,,TRUE,TRUE,active,Impression
+try-premium-plus-79,,,,,,,,,M upper,TRY-PRE-MUPPER-079,120,shopify,1691,deny,manual,8.95,,TRUE,TRUE,,
+try-premium-plus-79,,,,,,,,,L upper,TRY-PRE-LUPPER-079,120,shopify,15,deny,manual,8.13,,TRUE,TRUE,,
+try-premium-plus-79,,,,,,,,,S lower,TRY-PRE-SLOWER-079,120,shopify,1201,deny,manual,8.73,,TRUE,TRUE,,
+try-premium-plus-79,,,,,,,,,M lower,TRY-PRE-MLOWER-079,500,shopify,1358,deny,manual,8.83,,TRUE,TRUE,,
+try-premium-plus-79,,,,,,,,,L lower,TRY-PRE-LLOWER-079,500,shopify,652,deny,manual,8.77,,TRUE,TRUE,,
