@@ -54,7 +54,8 @@
         qtyStep: {{ 'products.quantity.multiples_of' | t: step: '[step]' | json }},
         stockLeft: {{ 'products.quantity.stock_left' | t: count: '[count]' | json }},
         outOfStock: {{ 'products.availability.sold_out' | t | json }},
-        addedToCart: {{ 'cart.added' | t | json }}
+        addedToCart: {{ 'cart.added' | t | json }},
+        updateError: {{ 'cart.update_error' | t | json }}
       }
     };
   </script>
