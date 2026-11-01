@@ -97,7 +97,7 @@
         {%- when 'description' -%}
           {%- if product.description != blank -%}
             <details class="accordion" {{ block.shopify_attributes }}{% if block.settings.open %} open{% endif %}>
-              <summary class="accordion__title">{{ block.settings.title | default: 'products.description' | t }}</summary>
+              <summary class="accordion__title">{%- if block.settings.title != blank -%}{{ block.settings.title | escape }}{%- else -%}{{ 'products.description' | t }}{%- endif -%}</summary>
               <div class="accordion__body rte">{{ product.description }}</div>
             </details>
           {%- endif -%}
