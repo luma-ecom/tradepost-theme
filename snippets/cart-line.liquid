@@ -1,0 +1,31 @@
+{%- comment -%} One cart line. Params: item (line_item), index {%- endcomment -%}
+<div class="cart-line" data-line-key="{{ item.key }}" data-line-index="{{ index }}">
+  <a class="cart-line__media" href="{{ item.url }}">
+    {%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', class: 'cart-line__img' }}{%- endif -%}
+  </a>
+  <div class="cart-line__info">
+    <a class="cart-line__title" href="{{ item.url }}">{{ item.product.title | escape }}</a>
+    {%- if item.product.has_only_default_variant == false -%}
+      <span class="cart-line__variant">{{ item.variant.title }}</span>
+    {%- endif -%}
+    {%- if settings.show_sku and item.sku != blank -%}<span class="cart-line__sku">{{ item.sku }}</span>{%- endif -%}
+    {%- for p in item.properties -%}
+      {%- unless p.last == blank or p.first contains '_' -%}
+        <span class="cart-line__prop">{{ p.first }}: {{ p.last }}</span>
+      {%- endunless -%}
+    {%- endfor -%}
+    {%- for d in item.line_level_discount_allocations -%}
+      <span class="cart-line__discount">{{ d.discount_application.title }} (−{{ d.amount | money }})</span>
+    {%- endfor -%}
+    <div class="cart-line__unit">
+      {{ item.final_price | money }}{% if settings.show_unit_label %}<span class="price__unit">{{ 'products.price.per_unit' | t }}</span>{% endif %}
+      {%- if item.original_price > item.final_price -%}<s>{{ item.original_price | money }}</s>{%- endif -%}
+    </div>
+  </div>
+  <div class="cart-line__qty">
+    {%- assign qty_id = 'CartQty-' | append: index -%}
+    {% render 'quantity-input', variant: item.variant, id: qty_id, name: 'updates[]', value: item.quantity, line_key: item.key %}
+    <button type="button" class="cart-line__remove" data-line-remove aria-label="{{ 'cart.remove' | t }}">{{ 'cart.remove' | t }}</button>
+  </div>
+  <div class="cart-line__total" data-line-total>{{ item.final_line_price | money }}</div>
+</div>

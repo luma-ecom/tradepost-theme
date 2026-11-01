@@ -1,0 +1,48 @@
+{%- comment -%}
+  Add-to-cart form. Hidden when price is gated and settings.hide_buy_buttons_when_price_hidden.
+  Params: product (required), variant (required), section_id (required)
+{%- endcomment -%}
+{%- liquid
+  assign can_buy = true
+  if settings.hide_buy_buttons_when_price_hidden
+    if settings.price_visibility == 'logged_in' and customer == blank
+      assign can_buy = false
+    elsif settings.price_visibility == 'b2b_only' and customer.b2b? != true
+      assign can_buy = false
+    endif
+  endif
+-%}
+{%- if can_buy -%}
+  {%- liquid
+    assign form_id = 'ProductForm-' | append: section_id
+    assign qty_id = 'Quantity-' | append: section_id
+  -%}
+  <depot-product-form class="buy-buttons" data-section-id="{{ section_id }}">
+    {%- form 'product', product, id: form_id, class: 'buy-buttons__form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+      <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id>
+      <div class="buy-buttons__row">
+        {% render 'quantity-input', variant: variant, id: qty_id %}
+        <button type="submit" class="btn btn--primary buy-buttons__submit" data-add-to-cart
+          {% unless variant.available %}disabled{% endunless %}>
+          <span data-add-label>
+            {%- if variant.available -%}{{ 'products.add_to_cart' | t }}{%- else -%}{{ 'products.availability.sold_out' | t }}{%- endif -%}
+          </span>
+          <span class="btn__spinner" hidden aria-hidden="true"></span>
+        </button>
+      </div>
+      <p class="buy-buttons__error" data-form-error role="alert" hidden></p>
+    {%- endform -%}
+    {%- if customer.b2b? and customer.current_location.order_settings.checkout_to_draft -%}
+      <p class="buy-buttons__note">{{ 'products.b2b.checkout_to_draft_note' | t }}</p>
+    {%- endif -%}
+  </depot-product-form>
+{%- else -%}
+  <div class="buy-buttons buy-buttons--gated">
+    {%- if customer == blank -%}
+      <a class="btn btn--secondary" href="{{ routes.account_login_url }}">{{ 'products.price.login_to_order' | t }}</a>
+    {%- endif -%}
+    {%- if settings.trade_account_url != blank -%}
+      <a class="btn btn--ghost" href="{{ settings.trade_account_url }}">{{ 'products.price.apply_trade' | t }}</a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

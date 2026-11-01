@@ -1,0 +1,37 @@
+{%- comment -%}
+  Product card for collection grids and lists.
+  Params: product (required), view ('grid' | 'list', default 'grid'), section_id
+{%- endcomment -%}
+{%- liquid
+  assign v = product.selected_or_first_available_variant
+  assign view = view | default: 'grid'
+-%}
+<article class="card card--{{ view }}" data-product-card>
+  <a class="card__media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '200,300,400,600', sizes: '(min-width: 990px) 25vw, 50vw', class: 'card__img' }}
+    {%- else -%}
+      <span class="card__placeholder">{{ 'products.no_image' | t }}</span>
+    {%- endif -%}
+    {%- unless product.available -%}
+      <span class="badge badge--muted">{{ 'products.availability.sold_out' | t }}</span>
+    {%- endunless -%}
+  </a>
+  <div class="card__body">
+    {%- if settings.show_sku and v.sku != blank -%}
+      <span class="card__sku">{{ v.sku }}</span>
+    {%- endif -%}
+    <h3 class="card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+    {%- if view == 'list' and product.metafields.custom.short_spec != blank -%}
+      <p class="card__spec">{{ product.metafields.custom.short_spec }}</p>
+    {%- endif -%}
+    {% render 'price', variant: v, product: product, context: 'card', show_tiers: true %}
+    {%- if view == 'list' and product.variants.size == 1 -%}
+      <div class="card__quick">
+        {% render 'buy-buttons', product: product, variant: v, section_id: section_id %}
+      </div>
+    {%- elsif view == 'list' -%}
+      <a class="btn btn--secondary btn--small" href="{{ product.url }}">{{ 'products.choose_options' | t }}</a>
+    {%- endif -%}
+  </div>
+</article>

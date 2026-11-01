@@ -1,0 +1,24 @@
+{{ settings.font_heading | font_face: font_display: 'swap' }}
+{{ settings.font_body | font_face: font_display: 'swap' }}
+<style>
+  :root {
+    --color-text: {{ settings.color_text }};
+    --color-muted: {{ settings.color_muted }};
+    --color-bg: {{ settings.color_background }};
+    --color-surface: {{ settings.color_surface }};
+    --color-border: {{ settings.color_border }};
+    --color-accent: {{ settings.color_accent }};
+    --color-accent-text: {{ settings.color_accent_text }};
+    --color-success: {{ settings.color_success }};
+    --color-warning: {{ settings.color_warning }};
+    --color-error: {{ settings.color_error }};
+    --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+    --font-heading-weight: {{ settings.font_heading.weight }};
+    --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+    --font-body-weight: {{ settings.font_body.weight }};
+    --font-size-base: {{ settings.font_size_base }}px;
+    --page-width: {{ settings.page_width }}px;
+    --radius: {{ settings.radius }}px;
+    --gutter: 20px;
+  }
+</style>

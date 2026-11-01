@@ -1,0 +1,14 @@
+{%- if settings.cart_type == 'drawer' -%}
+<depot-cart-drawer class="drawer" data-cart-drawer hidden>
+  <div class="drawer__backdrop" data-cart-close></div>
+  <aside class="drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'cart.title' | t }}">
+    <header class="drawer__head">
+      <h2 class="drawer__title">{{ 'cart.title' | t }} <span data-cart-count>({{ cart.item_count }})</span></h2>
+      <button type="button" class="drawer__close" data-cart-close aria-label="{{ 'general.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </header>
+    <div class="drawer__body" data-cart-drawer-body>
+      {% render 'cart-contents', compact: true %}
+    </div>
+  </aside>
+</depot-cart-drawer>
+{%- endif -%}

@@ -1,0 +1,51 @@
+{%- comment -%}
+  Volume pricing table for one variant. Re-rendered via Section Rendering API on variant change.
+  Params: variant (required), section_id (required)
+{%- endcomment -%}
+{%- liquid
+  assign can_show = true
+  if settings.price_visibility == 'logged_in' and customer == blank
+    assign can_show = false
+  elsif settings.price_visibility == 'b2b_only' and customer.b2b? != true
+    assign can_show = false
+  endif
+-%}
+<div id="VolumeTiers-{{ section_id }}" class="volume-tiers" data-volume-tiers>
+  {%- if can_show and variant.quantity_price_breaks_configured? -%}
+    <h3 class="volume-tiers__title">{{ 'products.volume.title' | t }}</h3>
+    <table class="volume-tiers__table">
+      <thead>
+        <tr>
+          <th scope="col">{{ 'products.volume.quantity' | t }}</th>
+          <th scope="col">{{ 'products.volume.unit_price' | t }}</th>
+          <th scope="col">{{ 'products.volume.saving' | t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-tier-min="1">
+          <td>1{% if variant.quantity_price_breaks.first %}–{{ variant.quantity_price_breaks.first.minimum_quantity | minus: 1 }}{% else %}+{% endif %}</td>
+          <td>{{ variant.price | money }}</td>
+          <td>—</td>
+        </tr>
+        {%- for break in variant.quantity_price_breaks -%}
+          {%- liquid
+            assign next = variant.quantity_price_breaks[forloop.index]
+            assign saving = variant.price | minus: break.price | times: 100.0 | divided_by: variant.price | round
+          -%}
+          <tr data-tier-min="{{ break.minimum_quantity }}">
+            <td>{{ break.minimum_quantity }}{% if next %}–{{ next.minimum_quantity | minus: 1 }}{% else %}+{% endif %}</td>
+            <td>{{ break.price | money }}</td>
+            <td>{% if saving > 0 %}−{{ saving }}%{% else %}—{% endif %}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    {%- if variant.quantity_rule.min > 1 or variant.quantity_rule.increment > 1 or variant.quantity_rule.max -%}
+      <p class="volume-tiers__rules">
+        {%- if variant.quantity_rule.min > 1 %}{{ 'products.quantity.min_of' | t: min: variant.quantity_rule.min }}{% endif -%}
+        {%- if variant.quantity_rule.increment > 1 %} · {{ 'products.quantity.multiples_of' | t: step: variant.quantity_rule.increment }}{% endif -%}
+        {%- if variant.quantity_rule.max %} · {{ 'products.quantity.max_of' | t: max: variant.quantity_rule.max }}{% endif -%}
+      </p>
+    {%- endif -%}
+  {%- endif -%}
+</div>

@@ -1,0 +1,81 @@
+{%- comment -%}
+  Renders a price block that respects B2B rules.
+  Params:
+    variant   (required) variant object
+    product   (optional) product object, used for "from" pricing on cards
+    context   'card' | 'product' | 'line'   (default 'product')
+    show_tiers  boolean, show lowest volume tier hint (cards)
+  Behaviour:
+    - Hides price (and renders a login prompt) when settings.price_visibility requires it.
+    - Shows compare-at ONLY when it is greater than the selling price (never 0.00).
+    - Shows unit label "/ea" when settings.show_unit_label.
+    - When the variant has volume pricing, shows the lowest tier as "From X (Y+)".
+{%- endcomment -%}
+{%- liquid
+  assign ctx = context | default: 'product'
+  assign can_show = true
+  if settings.price_visibility == 'logged_in' and customer == blank
+    assign can_show = false
+  elsif settings.price_visibility == 'b2b_only' and customer.b2b? != true
+    assign can_show = false
+  endif
+-%}
+{%- if can_show == false -%}
+  <div class="price price--gated" data-price-gated>
+    {%- if customer == blank -%}
+      <a class="price__gate-link" href="{{ routes.account_login_url }}">{{ 'products.price.login_to_see' | t }}</a>
+      {%- if settings.trade_account_url != blank -%}
+        <span class="price__gate-sep">·</span>
+        <a class="price__gate-link" href="{{ settings.trade_account_url }}">{{ 'products.price.apply_trade' | t }}</a>
+      {%- endif -%}
+    {%- else -%}
+      <span class="price__gate-text">{{ 'products.price.b2b_only' | t }}</span>
+    {%- endif -%}
+  </div>
+{%- else -%}
+  {%- liquid
+    assign price = variant.price
+    assign compare = variant.compare_at_price
+    assign has_compare = false
+    if compare != blank and compare > price
+      assign has_compare = true
+    endif
+    assign has_tiers = false
+    if variant.quantity_price_breaks_configured?
+      assign has_tiers = true
+      assign lowest = price
+      assign lowest_qty = 1
+      for break in variant.quantity_price_breaks
+        if break.price < lowest
+          assign lowest = break.price
+          assign lowest_qty = break.minimum_quantity
+        endif
+      endfor
+    endif
+  -%}
+  <div class="price price--{{ ctx }}{% if has_compare %} price--on-sale{% endif %}" data-price>
+    <span class="price__current">
+      <span class="price__amount" data-price-amount>{{ price | money }}</span>
+      {%- if settings.show_unit_label -%}
+        <span class="price__unit">{{ 'products.price.per_unit' | t }}</span>
+      {%- endif -%}
+    </span>
+    {%- if has_compare -%}
+      <s class="price__compare" data-price-compare>
+        <span class="visually-hidden">{{ 'products.price.regular_price' | t }}</span>
+        {{ compare | money }}
+      </s>
+    {%- endif -%}
+    {%- if has_tiers and show_tiers and ctx == 'card' and settings.show_volume_tiers_on_cards -%}
+      {%- assign lowest_money = lowest | money -%}
+      <span class="price__tier-hint">
+        {{ 'products.price.from_tier' | t: price: lowest_money, qty: lowest_qty }}
+      </span>
+    {%- endif -%}
+    {%- if settings.tax_display != 'store' -%}
+      <span class="price__tax">
+        {%- if settings.tax_display == 'ex' -%}{{ 'products.price.ex_tax' | t }}{%- else -%}{{ 'products.price.inc_tax' | t }}{%- endif -%}
+      </span>
+    {%- endif -%}
+  </div>
+{%- endif -%}

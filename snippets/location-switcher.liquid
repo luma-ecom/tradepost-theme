@@ -1,0 +1,31 @@
+{%- comment -%}
+  Company / location switcher for B2B buyers with more than one location.
+  Uses company_location.url_to_set_as_current (native). Renders nothing for non-B2B.
+{%- endcomment -%}
+{%- if customer.b2b? -%}
+  {%- assign locations = customer.company_available_locations -%}
+  <div class="location-switcher" data-location-switcher>
+    <span class="location-switcher__company">{{ customer.current_company.name }}</span>
+    {%- if locations.size > 1 -%}
+      <details class="location-switcher__menu">
+        <summary class="location-switcher__current">
+          {{ customer.current_location.name | default: 'customer.location.select' | t }}
+          {% render 'icon', name: 'chevron' %}
+        </summary>
+        <ul class="location-switcher__list" role="list">
+          {%- for location in locations -%}
+            <li>
+              {%- if location.id == customer.current_location.id -%}
+                <span class="location-switcher__item is-current" aria-current="true">{{ location.name }}</span>
+              {%- else -%}
+                <a class="location-switcher__item" href="{{ location.url_to_set_as_current }}">{{ location.name }}</a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </details>
+    {%- elsif customer.current_location -%}
+      <span class="location-switcher__current">{{ customer.current_location.name }}</span>
+    {%- endif -%}
+  </div>
+{%- endif -%}
