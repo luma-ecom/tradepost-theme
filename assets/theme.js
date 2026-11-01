@@ -40,7 +40,11 @@ class DepotQuantity extends HTMLElement {
     const before = this.input.value;
     this.validate(false);
     // Cart line below the B2B rule (e.g. added before login): push the corrected quantity to the cart once.
-    if (this.dataset.lineKey && this.input.value !== before) this.validate(true);
+    if (this.dataset.lineKey && this.input.value !== before) {
+      const sync = () => this.validate(true);
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(sync, 0));
+      else sync();
+    }
   }
   get ceiling() {
     const caps = [];
