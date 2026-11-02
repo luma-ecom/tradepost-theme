@@ -1,0 +1,281 @@
+{%- comment -%}
+  Quick order list: every variant of one product in a table, with live stock, the buyer's
+  price (volume tier applied), quantity rules and one "Add to cart" for all lines.
+  Stock is re-read from the server right before adding; quantities already in the cart count
+  against stock, quantity rules and volume tiers. Nothing above available stock reaches the cart.
+  JS: <depot-quick-order> in assets/theme.js. Price visibility comes from snippets/price.liquid.
+{%- endcomment -%}
+{%- liquid
+  assign show = true
+  if product == blank
+    assign show = false
+  elsif section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.hide_single and product.has_only_default_variant
+    assign show = false
+  endif
+-%}
+{%- if show -%}
+  {%- capture price_probe -%}{% render 'price', variant: product.selected_or_first_available_variant, context: 'line' %}{%- endcapture -%}
+  {%- liquid
+    assign show_images = false
+    if section.settings.show_images and product.images.size > 0
+      assign show_images = true
+    endif
+    assign track_stock = settings.show_stock_in_order_list
+  -%}
+  <div class="page-width quick-order" id="QuickOrder-{{ section.id }}">
+    <div class="quick-order__head">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="quick-order__title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="quick-order__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if price_probe contains 'data-price-gated' -%}
+      {{ price_probe }}
+    {%- else -%}
+      <depot-quick-order
+        class="quick-order__list"
+        data-url="{{ product.url }}"
+        data-section-id="{{ section.id }}"
+        data-line-one="{{ 'products.quick_order.line_one' | t | escape }}"
+        data-line-other="{{ 'products.quick_order.line_other' | t | escape }}"
+        data-tier-label="{{ 'products.quick_order.tier' | t | escape }}"
+        data-msg-added="{{ 'products.quick_order.added' | t | escape }}"
+        data-msg-stock="{{ 'products.quick_order.stock_changed' | t | escape }}"
+        data-msg-review="{{ 'products.quick_order.review' | t | escape }}"
+        data-msg-error="{{ 'products.quick_order.error' | t | escape }}">
+        <form class="quick-order__form" data-qo-form novalidate>
+          <table class="quick-order__table">
+            <caption class="visually-hidden">{{ product.title | escape }}</caption>
+            <thead>
+              <tr>
+                {%- if show_images -%}
+                  <th scope="col" class="quick-order__c-media"><span class="visually-hidden">{{ 'products.quick_order.image' | t }}</span></th>
+                {%- endif -%}
+                <th scope="col">{{ 'products.quick_order.variant' | t }}</th>
+                {%- if settings.show_sku -%}
+                  <th scope="col">{{ 'products.quick_order.sku' | t }}</th>
+                {%- endif -%}
+                {%- if track_stock -%}
+                  <th scope="col">{{ 'products.quick_order.stock' | t }}</th>
+                {%- endif -%}
+                <th scope="col" class="is-num">{{ 'products.quick_order.unit_price' | t }}</th>
+                <th scope="col" class="is-qty">{{ 'products.quick_order.quantity' | t }}</th>
+                <th scope="col" class="is-num">{{ 'products.quick_order.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody data-qo-body>
+              {%- for variant in product.variants -%}
+                {%- liquid
+                  assign in_cart = 0
+                  for item in cart.items
+                    if item.variant_id == variant.id
+                      assign in_cart = in_cart | plus: item.quantity
+                    endif
+                  endfor
+
+                  assign rule = variant.quantity_rule
+                  assign rmin = rule.min | default: 1
+                  assign rstep = rule.increment | default: 1
+                  assign add_min = rmin
+                  assign add_max = rule.max
+                  if in_cart > 0
+                    assign add_min = rmin | minus: in_cart
+                    if add_min < rstep
+                      assign add_min = rstep
+                    endif
+                    if rule.max
+                      assign add_max = rule.max | minus: in_cart
+                    endif
+                  endif
+
+                  assign avail = nil
+                  if variant.inventory_management == 'shopify' and variant.inventory_policy == 'deny'
+                    assign avail = variant.inventory_quantity | minus: in_cart
+                    if avail < 0
+                      assign avail = 0
+                    endif
+                  endif
+
+                  assign can_add = variant.available
+                  if avail != nil and avail < add_min
+                    assign can_add = false
+                  endif
+                  if add_max != nil and add_max < add_min
+                    assign can_add = false
+                  endif
+                -%}
+                {%- capture breaks -%}[{%- for b in variant.quantity_price_breaks -%}[{{ b.minimum_quantity }},{{ b.price }}]{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]{%- endcapture -%}
+                <tr class="quick-order__row{% unless can_add %} is-disabled{% endunless %}"
+                  data-qo-row
+                  data-variant-id="{{ variant.id }}"
+                  data-price="{{ variant.price }}"
+                  data-breaks="{{ breaks | strip }}"
+                  data-in-cart="{{ in_cart }}">
+                  {%- if show_images -%}
+                    <td class="quick-order__c-media">
+                      {%- if variant.image -%}
+                        {{ variant.image | image_url: width: 96 | image_tag: loading: 'lazy', class: 'quick-order__img', alt: variant.title }}
+                      {%- endif -%}
+                    </td>
+                  {%- endif -%}
+                  <td class="quick-order__c-variant">
+                    <span class="quick-order__variant">{% if product.has_only_default_variant %}{{ product.title | escape }}{% else %}{{ variant.title | escape }}{% endif %}</span>
+                    <span class="quick-order__incart" data-qo-incart>{% if in_cart > 0 %}{{ 'products.quick_order.in_cart' | t: count: in_cart }}{% endif %}</span>
+                    <p class="quick-order__error" data-qo-error role="alert" hidden></p>
+                  </td>
+                  {%- if settings.show_sku -%}
+                    <td class="quick-order__c-sku"><span class="quick-order__sku">{{ variant.sku | default: '—' }}</span></td>
+                  {%- endif -%}
+                  {%- if track_stock -%}
+                    <td class="quick-order__c-stock" data-qo-stock>
+                      {%- if variant.inventory_management == 'shopify' -%}
+                        {%- if variant.inventory_quantity <= 0 -%}
+                          {%- if variant.inventory_policy == 'continue' -%}
+                            <span class="stock stock--low">{{ 'products.quick_order.backorder' | t }}</span>
+                          {%- else -%}
+                            <span class="stock stock--out">{{ 'products.availability.sold_out' | t }}</span>
+                          {%- endif -%}
+                        {%- elsif variant.inventory_quantity <= settings.low_stock_threshold -%}
+                          <span class="stock stock--low">{{ 'products.availability.low_stock' | t: count: variant.inventory_quantity }}</span>
+                        {%- else -%}
+                          <span class="stock stock--in">{{ 'products.quick_order.in_stock_count' | t: count: variant.inventory_quantity }}</span>
+                        {%- endif -%}
+                      {%- elsif variant.available -%}
+                        <span class="stock stock--in">{{ 'products.availability.in_stock' | t }}</span>
+                      {%- else -%}
+                        <span class="stock stock--out">{{ 'products.availability.sold_out' | t }}</span>
+                      {%- endif -%}
+                    </td>
+                  {%- endif -%}
+                  <td class="quick-order__c-unit is-num">
+                    <span data-qo-unit>{{ variant.price | money }}</span>
+                    {%- if settings.show_unit_label -%}<span class="price__unit">{{ 'products.price.per_unit' | t }}</span>{%- endif -%}
+                    <span class="quick-order__tier" data-qo-tier></span>
+                  </td>
+                  <td class="quick-order__c-qty is-qty" data-qo-qty>
+                    {%- if can_add -%}
+                      {%- assign qo_id = 'QuickOrder-' | append: section.id | append: '-' | append: variant.id -%}
+                      {% render 'quantity-input', variant: variant, id: qo_id, name: qo_id, allow_zero: true, min_qty: add_min, max_qty: add_max, available: avail %}
+                    {%- elsif variant.available and in_cart > 0 -%}
+                      <span class="quick-order__none">{{ 'products.quick_order.none_left' | t }}</span>
+                    {%- else -%}
+                      <span class="quick-order__none">{{ 'products.quick_order.unavailable' | t }}</span>
+                    {%- endif -%}
+                  </td>
+                  <td class="quick-order__c-total is-num" data-qo-total>—</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+
+          <div class="quick-order__foot">
+            <p class="quick-order__summary">
+              <span data-qo-count>{{ 'products.quick_order.line_other' | t | replace: '[count]', '0' }}</span>
+              <span class="quick-order__sep" aria-hidden="true">·</span>
+              <span>{{ 'products.quick_order.subtotal' | t }}</span>
+              <strong data-qo-subtotal>{{ 0 | money }}</strong>
+            </p>
+            <button type="button" class="btn btn--ghost btn--small" data-qo-clear>{{ 'products.quick_order.clear' | t }}</button>
+            <button type="submit" class="btn btn--primary quick-order__submit" data-qo-submit disabled>{{ 'products.quick_order.add' | t }}</button>
+            <p class="quick-order__status" data-qo-status role="status" aria-live="polite"></p>
+          </div>
+        </form>
+        {%- if customer.b2b? and customer.current_location.metafields.depot.review_orders.value -%}
+          <p class="quick-order__note">{{ 'products.b2b.checkout_to_draft_note' | t }}</p>
+        {%- endif -%}
+      </depot-quick-order>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when '@app' -%}
+          {% render block %}
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .quick-order{padding-top:8px;padding-bottom:48px}
+  .quick-order__head{display:flex;justify-content:space-between;align-items:baseline;gap:8px 24px;flex-wrap:wrap;margin-bottom:12px}
+  .quick-order__title{font-size:1.25rem;margin:0}
+  .quick-order__text{color:var(--color-muted);font-size:.92rem;max-width:60ch}
+  .quick-order__table{font-size:.92rem;font-variant-numeric:tabular-nums}
+  .quick-order__table th{font-weight:500;color:var(--color-muted);font-size:.8rem;text-align:left;padding:8px 14px 8px 0;border-bottom:1px solid var(--color-border);white-space:nowrap}
+  .quick-order__table td{padding:10px 14px 10px 0;border-bottom:1px solid var(--color-border);vertical-align:middle}
+  .quick-order__table .is-num{text-align:right;white-space:nowrap}
+  .quick-order__table th:last-child,.quick-order__table td:last-child{padding-right:0}
+  .quick-order__c-media{width:56px}
+  .quick-order__img{width:48px;height:48px;object-fit:contain;border:1px solid var(--color-border);border-radius:3px}
+  .quick-order__variant{font-weight:500}
+  .quick-order__incart{display:block;font-size:.78rem;color:var(--color-muted)}
+  .quick-order__incart:empty{display:none}
+  .quick-order__error{margin:4px 0 0;font-size:.8rem;color:var(--color-error)}
+  .quick-order__sku{font-family:var(--font-mono);font-size:.85rem;color:var(--color-muted)}
+  .quick-order__tier{display:block;font-size:.75rem;color:var(--color-accent);font-weight:500}
+  .quick-order__tier:empty{display:none}
+  .quick-order__row.is-disabled .quick-order__variant,.quick-order__row.is-disabled [data-qo-unit]{color:var(--color-muted)}
+  .quick-order__row.is-active .quick-order__c-total{font-weight:600}
+  .quick-order__row.has-error .qty{border-color:var(--color-error)}
+  .quick-order__none{font-size:.82rem;color:var(--color-muted)}
+  .quick-order .qty{grid-template-columns:36px 56px 36px}
+  .quick-order__foot{display:flex;align-items:center;justify-content:flex-end;gap:12px 14px;flex-wrap:wrap;padding-top:16px}
+  .quick-order__summary{margin:0 auto 0 0;font-variant-numeric:tabular-nums}
+  .quick-order__summary strong{font-size:1.1rem;margin-left:4px}
+  .quick-order__sep{color:var(--color-muted);margin:0 6px}
+  .quick-order__submit{min-width:180px}
+  .quick-order__status{flex-basis:100%;margin:0;text-align:right;font-size:.88rem;color:var(--color-success)}
+  .quick-order__status:empty{display:none}
+  .quick-order__status.is-error{color:var(--color-error)}
+  .quick-order__note{font-size:.85rem;color:var(--color-muted);text-align:right;margin:8px 0 0}
+  @media (max-width: 749px){
+    .quick-order__table thead{display:none}
+    .quick-order__table,.quick-order__table tbody{display:block}
+    .quick-order__row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"v u" "s u" "k k" "q t";gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--color-border)}
+    .quick-order__row td{display:block;border:0;padding:0}
+    .quick-order__row .quick-order__c-media{display:none}
+    .quick-order__c-variant{grid-area:v}
+    .quick-order__c-sku{grid-area:s}
+    .quick-order__c-stock{grid-area:k;font-size:.85rem}
+    .quick-order__c-unit{grid-area:u}
+    .quick-order__c-qty{grid-area:q;padding-top:8px!important}
+    .quick-order__c-total{grid-area:t;align-self:end;padding-bottom:12px!important}
+    .quick-order__summary{flex-basis:100%;margin:0}
+    .quick-order__submit{flex:1}
+    .quick-order__status,.quick-order__note{text-align:left}
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.quick_order_list.name",
+  "tag": "section",
+  "class": "quick-order-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "t:sections.common.title", "default": "Order by variant" },
+    { "type": "richtext", "id": "text", "label": "t:sections.common.text" },
+    {
+      "type": "select",
+      "id": "audience",
+      "label": "t:sections.common.audience",
+      "options": [
+        { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+        { "value": "everyone", "label": "t:sections.common.audience_everyone" }
+      ],
+      "default": "b2b",
+      "info": "t:sections.common.audience_info"
+    },
+    { "type": "checkbox", "id": "hide_single", "label": "t:sections.quick_order_list.hide_single", "default": true },
+    { "type": "checkbox", "id": "show_images", "label": "t:sections.quick_order_list.show_images", "default": true },
+    { "type": "paragraph", "content": "t:sections.quick_order_list.info" }
+  ],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "t:sections.quick_order_list.name" }]
+}
+{% endschema %}
