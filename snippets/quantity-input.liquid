@@ -6,6 +6,10 @@
     name        input name (default 'quantity')
     value       initial value (default = rule min or 1)
     line_key    cart line key when used in cart (optional)
+    allow_zero  start at 0 and let the buyer clear the line (quick order rows)
+    min_qty     override the rule minimum (e.g. quantity already in the cart)
+    max_qty     override the rule maximum
+    available   override the stock cap (stock minus quantity already in the cart)
   JS (theme.js, <depot-quantity>) validates min / max / increment / stock on input and blur.
 {%- endcomment -%}
 {%- liquid
@@ -17,18 +21,31 @@
   if variant.inventory_management == 'shopify' and variant.inventory_policy == 'deny'
     assign stock = variant.inventory_quantity
   endif
+  if min_qty != blank
+    assign qmin = min_qty
+  endif
+  if max_qty != blank
+    assign qmax = max_qty
+  endif
+  if available != nil
+    assign stock = available
+  endif
   assign start = value | default: qmin
+  if allow_zero
+    assign start = value | default: 0
+  endif
 -%}
 <depot-quantity class="qty"
   data-min="{{ qmin }}"
   data-step="{{ qstep }}"
   {% if qmax %}data-max="{{ qmax }}"{% endif %}
   {% if stock != nil %}data-stock="{{ stock }}"{% endif %}
-  {% if line_key %}data-line-key="{{ line_key }}"{% endif %}>
+  {% if line_key %}data-line-key="{{ line_key }}"{% endif %}
+  {% if allow_zero %}data-allow-zero{% endif %}>
   <button type="button" class="qty__btn" data-qty-minus aria-label="{{ 'products.quantity.decrease' | t }}">−</button>
   <input class="qty__input" type="number" inputmode="numeric"
     id="{{ id }}" name="{{ name | default: 'quantity' }}"
-    value="{{ start }}" min="{{ qmin }}" step="{{ qstep }}" {% if qmax %}max="{{ qmax }}"{% endif %}
+    value="{{ start }}" min="{% if allow_zero %}0{% else %}{{ qmin }}{% endif %}" step="{{ qstep }}" {% if qmax %}max="{{ qmax }}"{% endif %}
     aria-label="{{ 'products.quantity.label' | t }}" data-qty-input>
   <button type="button" class="qty__btn" data-qty-plus aria-label="{{ 'products.quantity.increase' | t }}">+</button>
   <span class="qty__hint" data-qty-hint aria-live="polite"></span>
