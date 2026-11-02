@@ -66,6 +66,30 @@
     "b2b": {
       "checkout_to_draft_note": "Orders from your account are submitted for review before payment.",
       "terms_note": "Your payment terms: {{ terms }}"
+    },
+    "quick_order": {
+      "variant": "Variant",
+      "sku": "SKU",
+      "stock": "Stock",
+      "unit_price": "Unit price",
+      "quantity": "Qty",
+      "total": "Total",
+      "image": "Image",
+      "in_stock_count": "{{ count }} in stock",
+      "backorder": "On backorder",
+      "in_cart": "{{ count }} in your cart",
+      "none_left": "All available stock is in your cart",
+      "unavailable": "Unavailable",
+      "line_one": "1 line",
+      "line_other": "[count] lines",
+      "subtotal": "Subtotal",
+      "clear": "Clear",
+      "add": "Add to cart",
+      "added": "Added [count] lines to your cart.",
+      "stock_changed": "Stock changed: [count] can be added now. Quantity adjusted.",
+      "review": "Check the highlighted lines, then add again.",
+      "tier": "Tier [qty]+",
+      "error": "Could not add to cart. Try again."
     }
   },
   "collections": {

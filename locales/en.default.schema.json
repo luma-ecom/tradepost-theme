@@ -82,6 +82,12 @@
     },
     "wholesale_register": { "name": "Trade account application", "requirements": "Requirements", "business_types": "Business types (comma separated)", "pending_tag": "Customer tag meaning \"pending approval\"" },
     "rich_text": { "name": "Rich text", "width": "Width", "narrow": "Narrow", "full": "Full", "button_style": "Button style", "blocks": { "heading": "Heading", "text": "Text", "button": "Button" } },
+    "quick_order_list": {
+      "name": "Quick order list",
+      "hide_single": "Hide on products with a single variant",
+      "show_images": "Show variant images",
+      "info": "Lists every variant with stock, the buyer's price and volume tier, and adds all lines to the cart at once. Stock and the quantity already in the cart are checked again right before adding."
+    },
     "featured_collection": { "name": "Featured collection", "collection": "Collection", "limit": "Products to show", "columns": "Columns" }
   },
   "collections": { "view_grid": "Grid", "view_list": "List" }
