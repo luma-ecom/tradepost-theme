@@ -1,5 +1,5 @@
 /* Depot theme — original code. No build step, no dependencies.
-   Components: depot-quantity, depot-variant-picker, depot-product-form, depot-cart-drawer, depot-gallery,
+   Components: depot-quantity, depot-variant-picker, depot-product-form, depot-cart-drawer, depot-gallery, depot-quick-order,
    plus header menu / predictive search / reorder helpers. */
 
 const Depot = window.depot || {};
@@ -33,6 +33,7 @@ class DepotQuantity extends HTMLElement {
     this.step = parseInt(this.dataset.step || '1', 10);
     this.max = this.dataset.max ? parseInt(this.dataset.max, 10) : null;
     this.stock = this.dataset.stock !== undefined ? parseInt(this.dataset.stock, 10) : null;
+    this.allowZero = this.hasAttribute('data-allow-zero');
     this.querySelector('[data-qty-minus]').addEventListener('click', () => this.change(-this.step));
     this.querySelector('[data-qty-plus]').addEventListener('click', () => this.change(this.step));
     this.input.addEventListener('change', () => this.validate(true));
@@ -54,11 +55,29 @@ class DepotQuantity extends HTMLElement {
     return caps.length ? Math.min(...caps) : null;
   }
   change(delta) {
-    const v = (parseInt(this.input.value, 10) || this.min) + delta;
+    const cur = parseInt(this.input.value, 10) || 0;
+    let v = (cur || this.min) + delta;
+    // Quick order rows start empty: + goes 0 → min, − goes min → 0.
+    if (this.allowZero && cur <= 0 && delta > 0) v = this.min;
+    else if (this.allowZero && cur <= this.min && delta < 0) v = 0;
     this.input.value = v;
     this.validate(true);
   }
+  /* allow_zero inputs (quick order): empty means 0; no room in stock forces 0. Returns true when handled. */
+  zeroed(emit) {
+    const raw = parseInt(this.input.value, 10);
+    const cap = this.ceiling;
+    const noRoom = cap !== null && cap < this.min;
+    if (!isNaN(raw) && raw > 0 && !noRoom) return false;
+    const msg = noRoom && raw > 0 ? (cap <= 0 ? t('outOfStock') : t('stockLeft', { count: cap })) : '';
+    this.input.value = 0;
+    if (this.hint) this.hint.textContent = msg;
+    this.classList.toggle('qty--warn', !!msg);
+    if (emit) this.dispatchEvent(new CustomEvent('depot:quantity', { bubbles: true, detail: { value: 0, lineKey: this.dataset.lineKey || null } }));
+    return true;
+  }
   validate(emit) {
+    if (this.allowZero && this.zeroed(emit)) return;
     let v = parseInt(this.input.value, 10);
     let msg = '';
     if (isNaN(v) || v < this.min) { v = this.min; msg = t('qtyMin', { min: this.min }); }
@@ -281,3 +300,175 @@ document.addEventListener('DOMContentLoaded', () => {
     country.addEventListener('change', fill); fill();
   });
 });
+
+/* ---------- Quick order list: all variants of one product, live stock, one add ---------- */
+class DepotQuickOrder extends HTMLElement {
+  connectedCallback() {
+    this.form = this.querySelector('[data-qo-form]');
+    if (!this.form) return;
+    this.form.addEventListener('submit', (e) => { e.preventDefault(); this.submit(); });
+    this.querySelector('[data-qo-clear]')?.addEventListener('click', () => this.clear());
+    this.addEventListener('depot:quantity', () => this.recalc());
+    this.recalc();
+  }
+  rows() { return [...this.querySelectorAll('[data-qo-row]')]; }
+  qtyOf(row) { const q = row.querySelector('depot-quantity'); return q ? (parseInt(q.input.value, 10) || 0) : 0; }
+  /* Volume tiers count what is already in the cart for this variant. */
+  unitFor(row, qty) {
+    const total = qty + (parseInt(row.dataset.inCart, 10) || 0);
+    let unit = parseInt(row.dataset.price, 10);
+    let tier = 0;
+    JSON.parse(row.dataset.breaks || '[]').forEach(([min, cents]) => { if (total >= min) { unit = cents; tier = min; } });
+    return { unit, tier };
+  }
+  recalc() {
+    let lines = 0; let subtotal = 0;
+    this.rows().forEach(row => {
+      const qty = this.qtyOf(row);
+      const { unit, tier } = this.unitFor(row, qty);
+      const unitEl = row.querySelector('[data-qo-unit]');
+      if (unitEl) unitEl.textContent = money(unit);
+      const tierEl = row.querySelector('[data-qo-tier]');
+      if (tierEl) tierEl.textContent = tier ? this.dataset.tierLabel.replace('[qty]', tier) : '';
+      const totalEl = row.querySelector('[data-qo-total]');
+      if (totalEl) totalEl.textContent = qty ? money(unit * qty) : '—';
+      row.classList.toggle('is-active', qty > 0);
+      if (qty) { lines += 1; subtotal += unit * qty; }
+    });
+    const count = this.querySelector('[data-qo-count]');
+    if (count) count.textContent = lines === 1 ? this.dataset.lineOne : this.dataset.lineOther.replace('[count]', lines);
+    const sub = this.querySelector('[data-qo-subtotal]');
+    if (sub) sub.textContent = money(subtotal);
+    const btn = this.querySelector('[data-qo-submit]');
+    if (btn) btn.disabled = lines === 0;
+  }
+  rowError(row, message) {
+    const el = row.querySelector('[data-qo-error]');
+    if (el) { el.textContent = message; el.hidden = !message; }
+    row.classList.toggle('has-error', !!message);
+  }
+  status(message, isError) {
+    const el = this.querySelector('[data-qo-status]');
+    if (!el) return;
+    el.textContent = message || '';
+    el.classList.toggle('is-error', !!isError);
+  }
+  clear() {
+    this.rows().forEach(row => {
+      const q = row.querySelector('depot-quantity');
+      if (q) { q.input.value = 0; q.validate(false); }
+      this.rowError(row, '');
+    });
+    this.status('');
+    this.recalc();
+  }
+  /* Re-render this section from the server: fresh stock and cart quantities. */
+  async fetchFresh() {
+    const html = await (await fetch(`${this.dataset.url}?section_id=${encodeURIComponent(this.dataset.sectionId)}`)).text();
+    return new DOMParser().parseFromString(html, 'text/html').querySelector('depot-quick-order');
+  }
+  /* Apply fresh stock / rules to the rows without losing typed quantities. */
+  applyFresh(fresh) {
+    this.rows().forEach(row => {
+      const next = fresh.querySelector(`[data-qo-row][data-variant-id="${row.dataset.variantId}"]`);
+      if (!next) return;
+      row.dataset.inCart = next.dataset.inCart;
+      row.className = next.className;
+      ['[data-qo-stock]', '[data-qo-incart]'].forEach(sel => {
+        const a = row.querySelector(sel); const b = next.querySelector(sel);
+        if (a && b) a.innerHTML = b.innerHTML;
+      });
+      const q = row.querySelector('depot-quantity');
+      const nq = next.querySelector('depot-quantity');
+      if (q && nq) {
+        q.min = parseInt(nq.dataset.min || '1', 10);
+        q.step = parseInt(nq.dataset.step || '1', 10);
+        q.max = nq.dataset.max ? parseInt(nq.dataset.max, 10) : null;
+        q.stock = nq.dataset.stock !== undefined ? parseInt(nq.dataset.stock, 10) : null;
+      } else if (q && !nq) {
+        // Sold out since the page loaded: swap the control for the server's text.
+        const cell = row.querySelector('[data-qo-qty]'); const ncell = next.querySelector('[data-qo-qty]');
+        if (cell && ncell) cell.innerHTML = ncell.innerHTML;
+      }
+    });
+  }
+  async submit() {
+    const btn = this.querySelector('[data-qo-submit]');
+    const wanted = new Map(this.rows().map(row => [row, this.qtyOf(row)]).filter(([, q]) => q > 0));
+    if (!wanted.size) return;
+    btn.disabled = true; btn.classList.add('is-loading');
+    this.status('');
+    this.rows().forEach(row => this.rowError(row, ''));
+    try {
+      // 1. Live stock check: stock may have moved since the page loaded.
+      const fresh = await this.fetchFresh();
+      if (fresh) this.applyFresh(fresh);
+      let changed = false;
+      const items = [];
+      wanted.forEach((qty, row) => {
+        const q = row.querySelector('depot-quantity');
+        if (!q) { changed = true; this.rowError(row, t('outOfStock')); return; }
+        q.validate(false);
+        const now = parseInt(q.input.value, 10) || 0;
+        if (now !== qty) {
+          changed = true;
+          this.rowError(row, this.dataset.msgStock.replace('[count]', now));
+        }
+        if (now > 0) items.push({ id: parseInt(row.dataset.variantId, 10), quantity: now, row, inCart: parseInt(row.dataset.inCart, 10) || 0 });
+      });
+      this.recalc();
+      if (changed) { this.status(this.dataset.msgReview, true); return; }
+
+      // 2. One request for all lines.
+      const res = await fetch(`${Depot.routes.cartAdd}.js`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: items.map(({ id, quantity }) => ({ id, quantity })) })
+      });
+      let added = items.length;
+      let failed = 0;
+      if (!res.ok) {
+        // 3. Refused (422): find the lines that did not go in and say why at the line.
+        added = 0;
+        const cart = await (await fetch(`${Depot.routes.cart}.js`, { headers: { 'Accept': 'application/json' } })).json();
+        const have = {};
+        cart.items.forEach(i => { have[i.variant_id] = (have[i.variant_id] || 0) + i.quantity; });
+        for (const it of items) {
+          if ((have[it.id] || 0) >= it.inCart + it.quantity) { added += 1; it.ok = true; continue; }
+          const r = await fetch(`${Depot.routes.cartAdd}.js`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ items: [{ id: it.id, quantity: it.quantity }] })
+          });
+          if (r.ok) { added += 1; it.ok = true; } else {
+            failed += 1;
+            const d = await r.json().catch(() => ({}));
+            this.rowError(it.row, d.description || d.message || this.dataset.msgError);
+          }
+        }
+      }
+      if (added) document.dispatchEvent(new CustomEvent('depot:cart-updated', { detail: { open: !failed } }));
+      if (!failed) {
+        // Everything in: re-render rows (quantities back to 0, stock and "in your cart" updated).
+        const after = await this.fetchFresh();
+        const body = this.querySelector('[data-qo-body]');
+        const nextBody = after && after.querySelector('[data-qo-body]');
+        if (body && nextBody) body.innerHTML = nextBody.innerHTML;
+        this.recalc();
+        this.status(this.dataset.msgAdded.replace('[count]', added));
+      } else {
+        items.forEach(it => { if (it.ok) { const q = it.row.querySelector('depot-quantity'); q.input.value = 0; q.validate(false); } });
+        const after = await this.fetchFresh();
+        if (after) this.applyFresh(after);
+        this.recalc();
+        this.status(added ? this.dataset.msgAdded.replace('[count]', added) + ' ' + this.dataset.msgReview : this.dataset.msgReview, true);
+      }
+    } catch (ex) {
+      this.status(this.dataset.msgError, true);
+    } finally {
+      btn.classList.remove('is-loading');
+      this.recalc();
+    }
+  }
+}
+customElements.define('depot-quick-order', DepotQuickOrder);
