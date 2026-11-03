@@ -5,7 +5,7 @@
       "specs": { "type": "specs", "settings": { "title": "Specifications", "namespace": "custom", "key": "specifications", "open": false } },
       "docs": { "type": "documents", "settings": { "title": "Datasheets & documents", "namespace": "custom", "key": "documents" } }
     }, "block_order": ["desc", "specs", "docs"] },
-    "quick_order": { "type": "quick-order-list", "settings": { "heading": "Order by variant", "audience": "everyone", "hide_single": true, "show_images": true } }
+    "quick_order": { "type": "quick-order-list", "settings": { "heading": "Order by variant", "audience": "b2b", "hide_single": true, "show_images": true } }
   },
   "order": ["main", "quick_order"]
 }
