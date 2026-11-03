@@ -4,7 +4,7 @@
       "type": "order-form",
       "settings": {
         "heading": "Quick order",
-        "audience": "everyone",
+        "audience": "b2b",
         "show_paste": true,
         "show_csv": true,
         "open_bulk": true
