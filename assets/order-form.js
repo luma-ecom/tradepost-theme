@@ -44,7 +44,11 @@
   /* One line of text → cells. CSV quotes respected; comma, semicolon or tab separate. */
   const splitCells = (line) => {
     const delim = line.includes('\t') ? '\t' : (line.includes(';') && !line.includes(',') ? ';' : ',');
-    if (!line.includes(delim)) return line.trim().split(/\s+/);
+    if (!line.includes(delim)) {
+      // "SKU 12": the last number is the quantity, the rest is the SKU (SKUs may contain spaces).
+      const m = line.trim().match(/^(.*\S)\s+(\d+)$/);
+      return m ? [m[1], m[2]] : [line.trim()];
+    }
     const cells = []; let cur = ''; let quoted = false;
     for (let i = 0; i < line.length; i += 1) {
       const ch = line[i];
@@ -91,6 +95,9 @@
         count: this.$('[data-of-count]'), subtotal: this.$('[data-of-subtotal]'), submit: this.$('[data-of-submit]'),
         clear: this.$('[data-of-clear]'), status: this.$('[data-of-status]')
       };
+      // Phones: keep the list near the top; the paste / CSV panel opens on demand.
+      const bulk = this.querySelector('.order-form__bulk');
+      if (bulk && window.matchMedia('(max-width: 749px)').matches) bulk.open = false;
       this.bind();
       this.render();
       this.ready = this.load();
@@ -252,7 +259,9 @@
       row.querySelector('[data-of-tier]').textContent = tier ? fill(this.s.tier, { qty: tier }) : '';
       row.querySelector('[data-of-total]').textContent = line.qty ? money(unit * line.qty) : '—';
       const msg = row.querySelector('[data-of-msg]');
-      msg.textContent = line.note || '';
+      // The stock column already says "Out of stock": don't repeat it under the name.
+      const repeat = this.showStock && line.blocked && line.note === qs(this.s, 'outOfStock');
+      msg.textContent = repeat ? '' : (line.note || '');
       msg.classList.toggle('is-error', !!line.error);
       row.classList.toggle('is-active', line.qty > 0);
       row.classList.toggle('is-blocked', !!line.blocked);
@@ -443,7 +452,7 @@
         if (!line) return;
         line.qty = Math.max(toInt(e.target.value) || 0, 0);
         line.note = ''; line.error = false;
-        this.paintRow(line); this.totals();
+        this.paintRow(line); this.totals(); this.status('');
       });
       body.addEventListener('change', (e) => {
         if (!e.target.matches('[data-of-qty]')) return;
@@ -482,6 +491,28 @@
       const d = await res.json().catch(() => ({}));
       return { ok: false, message: d.description || d.message || this.s.error };
     }
+    /* Add a group; if Shopify refuses it (422), keep what went in and split the rest in halves
+       until the refused lines are isolated, so each one shows Shopify's reason at the line. */
+    async addItems(items, before) {
+      const r = await this.post(items);
+      if (r.ok) { items.forEach(it => { it.ok = true; }); return; }
+      const have = await this.fetchCart();
+      const left = items.filter(it => {
+        if ((have[it.id] || 0) >= (before[it.id] || 0) + it.quantity) { it.ok = true; return false; }
+        return true;
+      });
+      if (!left.length) return;
+      if (left.length === 1) {
+        const one = items.length === 1 ? r : await this.post(left);
+        if (one.ok) { left[0].ok = true; return; }
+        left[0].line.error = true;
+        left[0].line.note = `${this.s.notAdded} ${one.message}`.trim();
+        return;
+      }
+      const mid = Math.ceil(left.length / 2);
+      await this.addItems(left.slice(0, mid), before);
+      await this.addItems(left.slice(mid), before);
+    }
     async submit() {
       if (this.busy) return;
       await this.ready;
@@ -506,22 +537,9 @@
         // 2. Add in chunks; 3. a refused chunk is retried line by line, Shopify's reason shown at the line.
         const before = { ...this.inCart };
         const items = wanted.map(l => ({ id: l.rec.id, quantity: l.qty, line: l }));
-        let added = 0; let failed = 0;
-        for (let i = 0; i < items.length; i += CHUNK) {
-          const chunk = items.slice(i, i + CHUNK);
-          const r = await this.post(chunk);
-          if (r.ok) { chunk.forEach(it => { it.ok = true; }); added += chunk.length; continue; }
-          const have = await this.fetchCart();
-          for (const it of chunk) {
-            if ((have[it.id] || 0) >= (before[it.id] || 0) + it.quantity) { it.ok = true; added += 1; continue; }
-            const one = await this.post([it]);
-            if (one.ok) { it.ok = true; added += 1; } else {
-              failed += 1;
-              it.line.error = true;
-              it.line.note = `${this.s.notAdded} ${one.message}`.trim();
-            }
-          }
-        }
+        for (let i = 0; i < items.length; i += CHUNK) await this.addItems(items.slice(i, i + CHUNK), before);
+        const added = items.filter(it => it.ok).length;
+        const failed = items.length - added;
         const done = new Set(items.filter(it => it.ok).map(it => it.id));
         this.lines = this.lines.filter(l => !done.has(l.rec.id));
         await this.fetchCart();
