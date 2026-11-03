@@ -2,7 +2,14 @@
   "type": "header",
   "name": "t:sections.header.group",
   "sections": {
-    "header": { "type": "header", "settings": {} }
+    "header": {
+      "type": "header",
+      "settings": {
+        "quick_order_link": "/pages/quick-order?view=order-form"
+      }
+    }
   },
-  "order": ["header"]
+  "order": [
+    "header"
+  ]
 }
