@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "order-form",
+      "settings": {
+        "heading": "Quick order",
+        "audience": "b2b",
+        "show_paste": true,
+        "show_csv": true,
+        "open_bulk": true
+      }
+    }
+  },
+  "order": ["main"]
+}
