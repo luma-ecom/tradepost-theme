@@ -1,70 +1,81 @@
 # DEPOT-STATE — cập nhật cuối mỗi phiên
 
-**Cập nhật:** 03/11/2026 (khuya) · **Version hiện tại:** 0.3.0 · **WP:** WP3 xong (soi khách lẻ) → còn soi B2B; kế tiếp WP4
+**Cập nhật:** 03/11/2026 (phiên WP4) · **Version hiện tại:** 0.4.0 · **WP:** WP4 xong (soi khách lẻ) → còn soi B2B cho WP3 + WP4; kế tiếp WP6 chuẩn bị public beta
 
 ## Repo
-- GitHub `luma-ecom/depot-theme` (private, `main`) là nguồn chuẩn. Store `depot-theme/main` (id 191852413001) tự sync từ main (đã kiểm 03/11: section mới lên store trong ~10 giây).
+- GitHub `luma-ecom/depot-theme` (private, `main`) là nguồn chuẩn. Store `depot-theme/main` (id 191852413001) tự sync từ main (~10–20 giây; asset JS có lúc trễ hơn, reload lại là có).
 - Shopify commit ngược về GitHub mỗi lần sửa trên store; JSON Shopify ghi lại có header comment "auto-generated" — bình thường.
-- Cách đẩy code từ Cowork (chạy ổn, WP2 12 lần + WP3 9 lần): **Chrome "Browser 1"** (Leo chỉ định; GitHub đang đăng nhập `luma-ecom`). Trang `github.com/luma-ecom/depot-theme/upload/main/<folder>` + JS: fetch raw hiện tại → áp patch theo chuỗi (đếm đúng 1 lần) → giữ bản mới trong `localStorage` (không dùng sessionStorage: mất khi extension rớt) → inject File bằng DataTransfer → đợi file hiện trong danh sách → bấm Commit. Không xoá được file qua upload: dùng `github.com/.../delete/main/<path>`.
-- Lưu ý: get_page_text gộp nhiều dấu cách thành một → khi so chuỗi patch phải lấy từ raw thật (JSON.stringify từng dòng), không lấy từ text đã đọc.
-- Theme check: chạy được trong cloud bằng `@shopify/theme-check-node` (`themeCheckRun`) trên bản mini (file mới + locale + snippet liên quan). gh CLI trong cloud không có token → không clone repo được.
-- Bản local trên Mac: `02-releases/depot-theme-0.1.1-local-snapshot/` (nội dung = 0.2.0, chưa có 0.3.0).
+- Cách đẩy code từ Cowork (WP2 12 lần, WP3 9 lần, WP4 13 lần): **Chrome "Browser 1"** (GitHub đăng nhập `luma-ecom`). Trang `github.com/luma-ecom/depot-theme/upload/main/<folder>` + JS inject File bằng DataTransfer → kiểm tên file hiện trong trang → click "Commit changes" bằng JS.
+  - File mới lớn: trong cloud nén gzip+base64 một bundle JSON {path: nội dung} → dán vào JS → `DecompressionStream('gzip')` → so SHA-256 với bản cloud → upload. Sửa file đã có: tạo patch [old,new] bằng difflib trong cloud, áp trên raw hiện tại (đếm đúng 1 lần), so SHA-256.
+  - JSON locale / header-group: fetch raw → bỏ header comment → JSON.parse → sửa → stringify 2 space.
+  - Output của javascript_tool bị cắt ~1.000 ký tự và chặn chuỗi giống query string → đọc file dài bằng cách ghi vào `<pre>` rồi `get_page_text`.
+- Theme check: `@shopify/theme-check-node` (`themeCheckRun`) trên bản mini trong cloud (file mới + locale tối thiểu + stub snippet). Test JS bằng jsdom với fetch giả (catalog 520 SKU).
+- Bản local trên Mac: `02-releases/depot-theme-0.1.1-local-snapshot/` (nội dung = 0.2.0).
 
 ## Dev store
-- `depot-demo.myshopify.com` — plan test Grow (non-Plus), USD, new customer accounts, 79 sản phẩm / 314 SKU, chưa có ảnh. Storefront có mật khẩu.
-- 3 company / 4 location; 3 B2B market → 3 catalog → price list −28/−20/−12%; volume pricing 21 SKU gloves+masks; quantity rule KA min 12 / bước 12; metafield `depot.payment_terms` + `depot.review_orders` trên 4 location.
-- Buyer demo (OTP về email Leo): `leo+haidang@` (KA, 2 location) · `leo+sgsmile@` (T2) · `leo+bright@` (T1). Chị không đăng nhập thay (nhập mã OTP = việc Leo tự làm).
-- Giỏ khách lẻ trên Browser 1: XS×12 + M×12 găng Medicom (có từ trước, đã trả về đúng sau khi test).
+- `depot-demo.myshopify.com` — plan test Grow (non-Plus), USD, new customer accounts, 79 sản phẩm / 314 SKU (310 SKU khác nhau: 4 SKU trùng trong data demo), chưa có ảnh. Storefront có mật khẩu → soi bằng Preview từ admin (Themes → ⋯ → Preview), chị không nhập mật khẩu storefront.
+- Theme live vẫn là Horizon; Depot là draft. Hệ quả: trang admin chỉ cho chọn template của theme live → page **Quick order** (`/pages/quick-order`, đã tạo, visible) đang dùng template mặc định; xem form bằng `/pages/quick-order?view=order-form`. Khi publish Depot: gán template `page.order-form` cho page này.
+- 3 company / 4 location; 3 B2B market → 3 catalog → price list −28/−20/−12%; volume pricing 21 SKU gloves+masks; quantity rule KA min 12 / bước 12; metafield `depot.payment_terms` + `depot.review_orders`.
+- Buyer demo (OTP về email Leo): `leo+haidang@` (KA, 2 location) · `leo+sgsmile@` (T2) · `leo+bright@` (T1).
+- Giỏ khách lẻ trong phiên preview: đã dọn sạch sau test WP4.
+- Shopify connector của Cowork đang cần đăng nhập lại (lỗi auth 03/11) — phiên này làm qua admin trên Chrome.
 
 ## Xong
-- 0.1.0–0.1.5: nền theme, WP1 soi + 10 P1 (xem CHANGELOG).
-- 0.2.0 (WP2, 02/11): xem CHANGELOG.
-- **0.3.0 (WP3, 03/11)** — Quick order list (B10):
-  - Section mới `quick-order-list` trên template product, dưới main. Bảng mọi biến thể: biến thể · SKU · tồn kho · đơn giá · số lượng · thành tiền; 1 nút "Add to cart" cho tất cả, đếm dòng + subtotal.
-  - Tồn kho: "N in stock" / "Only N left" / "Out of stock" / "On backorder". Ô số lượng chặn ở (tồn − đã có trong giỏ); hết chỗ thì hiện "All available stock is in your cart".
-  - Kiểm tồn lại trên server ngay trước khi thêm; tồn đổi → chỉnh số + báo tại dòng, không thêm gì cho tới khi buyer bấm lại. Shopify vẫn từ chối (422) → tìm dòng nào chưa vào, thử từng dòng, báo câu của Shopify tại dòng.
-  - Quantity rule + bậc giá tính cả số đã có trong giỏ (min hàng giảm khi giỏ đã đủ min; đơn giá hiện bậc sẽ áp "Tier 120+").
-  - Setting: heading, text, hiện cho B2B (mặc định) / mọi người, ẩn với sản phẩm 1 biến thể (mặc định bật), ảnh biến thể. Ẩn giá theo `price.liquid`. Nhận app block.
-  - `quantity-input` có thêm tham số tuỳ chọn `allow_zero`, `min_qty`, `max_qty`, `available` (chỗ dùng cũ không đổi).
-  - Mobile <750px: mỗi biến thể 3 dòng (biến thể · giá / SKU · tồn / số lượng · tổng).
+- 0.1.0–0.3.0: xem CHANGELOG (nền theme, WP1–WP2 sửa lỗi + khoá design v1.1, WP3 quick order list).
+- **0.4.0 (WP4, 03/11)** — Quick order form toàn catalog (B14 + B15, FREE):
+  - Section mới `order-form` + template `page.order-form`; endpoint `order-form-data` (Section Rendering, 100 sản phẩm/trang) trả giá theo account, bậc giá, quantity rule, tồn kho. JS riêng `assets/order-form.js`, chỉ tải trên trang này.
+  - Tìm theo SKU (đúng → bắt đầu bằng → chứa) rồi theo tên; phím ↑↓ Enter chọn, Enter ở ô số lượng quay lại ô tìm.
+  - Dán "SKU, qty": dấu phẩy / chấm phẩy / tab Excel / dấu cách; header tuỳ chọn (cột sku/qty/quantity ở vị trí nào cũng được); CSV có ngoặc kép; SKU có dấu cách; SKU trùng cộng dồn; thiếu số lượng = min. SKU không có liệt kê tên. Có link tải CSV mẫu.
+  - Mỗi dòng ép vào min / bước / max / tồn, tính cả số đã có trong giỏ (cùng luật quick order list). Dòng hết hàng giữ trong danh sách, xám, không bao giờ gửi vào giỏ.
+  - Trước khi thêm: đọc lại tồn + giỏ cho các trang catalog liên quan; có thay đổi → chỉnh + báo tại dòng, không thêm gì. Thêm theo nhóm 100; 422 → giữ phần đã vào, chia đôi phần còn lại tới khi cô lập dòng lỗi, báo câu của Shopify tại dòng.
+  - Danh sách lưu trong localStorage (reload không mất).
+  - Header: setting mới "Quick order page" → B2B buyer thấy link "Quick order" trên thanh trên. Demo đã đặt `/pages/quick-order?view=order-form`.
+  - Setting section: heading, text, B2B (mặc định) / mọi người, collection nguồn (mặc định tất cả), ô dán, CSV, mở panel sẵn. Ẩn giá theo `price.liquid`. Nhận app block.
+  - Mobile <750px: mỗi dòng 3 hàng (tên · xoá / SKU · tồn / giá · số lượng · tổng); panel dán/CSV đóng sẵn.
+  - README + CHANGELOG + version 0.4.0.
 
-## Nghiệm thu WP3 (DoD: không thêm được vượt tồn; báo tại dòng; app embed không vỡ)
-- Soi 03/11 bằng khách lẻ trên găng Medicom (5 size), tạm bật section cho mọi khách rồi trả về B2B:
-  - Gõ 200 ở size S (tồn 168) → tự về 168, gợi ý "168 available" tại ô. OK.
-  - Giả lập tồn đổi (client tưởng 500, gõ 300) → bấm Add: chỉnh về 168, dòng đỏ "Stock changed: 168 can be added now", không thêm gì vào giỏ. OK.
-  - Thêm 3 dòng (XS 1, S 5, XL 10) → 1 request, drawer mở "Cart (4)", bảng reset về 0, "13 in your cart"/tồn khả dụng cập nhật. OK.
-  - Desktop + mobile (giả lập 390px trong trang, vì cửa sổ Chrome không đổi cỡ được) — không đè, chữ đủ. OK.
-  - Theme check 0 lỗi (bản mini). JS parse OK.
-- **Chưa soi:** B2B thật (giá sỉ, bậc giá "Tier 120+", min 12/bước 12, min giảm khi giỏ đã có) — cần Leo đăng nhập buyer Hải Đăng trên Browser 1. Nhánh 422 thử-từng-dòng chưa kích được trên store (code đã review). App embed (F34) vẫn chưa test với app thật — section có nhận `@app` block.
+## Nghiệm thu WP4 (DoD: 500 SKU không lag; dòng hết hàng không vào cart; tổng tiền theo giá account)
+- Soi 03/11 bằng khách lẻ (tạm bật "mọi người" rồi trả về B2B):
+  - Tải catalog 314 SKU: 1 request, ~0,25 giây. Dán 310 dòng: render 18 ms; 20 lần gõ số lượng trên bảng 310 dòng: 3 ms. jsdom 520 SKU / 500 dòng: OK. → 500 SKU không lag.
+  - Dán 6 dòng (header, tab, phẩy, chấm phẩy, SKU lạ, thiếu số lượng): 5 vào, "1 not found: NOT-A-SKU"; MSK-HAL-BLACK (tồn 10) gõ 50 → 10 "10 available"; Autoclave hết hàng → xám.
+  - Giả lập tồn đổi (500 > tồn thật 394) → "Stock changed: 394…", không thêm gì. Bấm lại → drawer "Cart (5)", dòng hết hàng ở lại, không vào giỏ.
+  - Sau khi thêm, MSK-HAL-BLACK (10 trong giỏ = hết tồn) → "All available stock is in your cart".
+  - CSV header "Item SKU","Quantity" có ngoặc kép + cột thừa: OK. SKU có dấu cách "CBR-SS -#245-053 4": OK.
+  - Desktop + mobile (giả lập 390px bằng cách áp rule media trong trang) — không tràn ngang, không đè chữ.
+  - Theme check 0 lỗi (bản mini). Regression nhanh: PDP, collection, cart drawer bình thường.
+- **Chưa soi:** B2B thật (giá sỉ, Tier 120+, min 12/bước 12, link Quick order trên thanh B2B) — cần Leo đăng nhập buyer Hải Đăng trên Browser 1. Logic tier/min đã test bằng jsdom.
 
 ## Lỗi mở / chưa soi
-- WP3 soi B2B (như trên).
+- Soi B2B cho WP3 + WP4 (như trên) — 1 lần đăng nhập Hải Đăng là soi được cả hai.
 - Company Tier 1 / Tier 2 chưa login thử.
 - Account (QA009–010): Shopify host, chỉ soi được trên store classic accounts.
-- Demo chưa có ảnh sản phẩm → cần trước WP6 public beta (cột ảnh của quick order tự ẩn khi sản phẩm không có ảnh).
-- Edge: nếu rule min > bậc giá đầu thì dòng đầu bảng tier PDP có thể ra "30–23" — hiếm, sửa khi gặp.
+- Demo chưa có ảnh sản phẩm → cần trước WP6.
+- Data demo có 4 SKU trùng → order form lấy biến thể đầu tiên; nên sửa data trước WP6.
+- Edge: rule min > bậc giá đầu → dòng đầu bảng tier PDP có thể ra "30–23" — hiếm.
 - App embed BSS/SparkLayer (F34) và Markets đa tiền tệ (F35) chưa test.
-- Chrome thứ hai ("Browser 2", profile oroca-leo): trong lúc extension rớt, chị đã chuyển tài khoản GitHub ở đó sang `luma-ecom` (account switcher) — Leo đổi lại `oroca-leo` nếu cần.
+- Catalog >25.000 sản phẩm: pagination Shopify có giới hạn; order form chưa test ở cỡ đó (mục tiêu đang là 5.000 SKU).
+- Chrome "Browser 2" (profile oroca-leo): GitHub đang ở `luma-ecom` — Leo đổi lại `oroca-leo` nếu cần.
 
 ## GTM1 (02/11)
-- G01 Keyword Planner (US): mọi cụm "shopify b2b/wholesale theme", "quick order form", "b2b portal shopify" = 10–100/tháng; "shopify b2b" 1K–10K; "shopify b2b app" / "wholesale app" 100–1K; CPC $6–18. Merchant tìm app, không tìm theme. Traffic chính phải từ Community/Reddit/LinkedIn/Upwork.
-- Landing `luma-e.com/depot` (A free / B $89 reserve, nút ERP chung): **PR luma-e-v2 #50**, branch `feat/depot-landing`. Deploy tay (`npm run deploy`, Cloudflare).
+- G01 Keyword Planner (US): "shopify b2b/wholesale theme", "quick order form", "b2b portal shopify" = 10–100/tháng; "shopify b2b" 1K–10K; CPC $6–18. Merchant tìm app, không tìm theme → traffic từ Community/Reddit/LinkedIn/Upwork.
+- Landing `luma-e.com/depot` (A free / B $89 reserve, nút ERP): **PR luma-e-v2 #50**, branch `feat/depot-landing`. Deploy tay (`npm run deploy`, Cloudflare).
 - Kit: `01-docs/Depot-GTM1-Kit-v1.0.html`. Preview landing: `01-docs/Depot-Landing-Preview-v1.0.html`.
-- **Leo chốt 03/11: GIỮ kit phân phối + ads** tới khi sản phẩm chỉnh chu. Ngày đọc A/B = ngày bắt đầu phân phối + 14.
+- **Leo chốt 03/11: GIỮ kit phân phối + ads** tới khi sản phẩm chỉnh chu.
 
 ## Việc kế tiếp
-1. Soi WP3 với B2B (Leo đăng nhập Hải Đăng trên Browser 1 → chị soi găng/khẩu trang có volume pricing: Tier hiện đúng, min 12/bước 12, min giảm khi giỏ đã có 12).
-2. WP4: order form toàn catalog + dán "SKU, qty" + CSV (0.4.0) — FREE. Tái dùng `depot-quantity allow_zero` và cách kiểm tồn của WP3 (fetch section mới → cap → 1 request → 422 thì thử từng dòng).
+1. Soi B2B WP3 + WP4: Leo đăng nhập Hải Đăng trên Browser 1 → chị soi găng/khẩu trang (Tier, min 12/bước 12, min giảm khi giỏ đã có), order form (giá −28%, tier khi dán 120+, link Quick order trên thanh B2B).
+2. WP6 chuẩn bị public beta: ảnh demo, sửa 4 SKU trùng, README/docs/LICENSE, test 1 app embed, Lighthouse.
 3. Deploy PR luma-e-v2 #50 → kiểm /depot?v=a, ?v=b. KHÔNG đẩy kit/ads tới mốc "chỉnh chu".
-4. Trước WP6: ảnh demo, soi khách lẻ, test 1 app embed.
-5. Sửa spec v1.1 → v1.2 theo phát hiện non-Plus.
+4. Sửa spec v1.1 → v1.2 theo phát hiện non-Plus.
 
 ## Quyết định đã chốt
 - 02/11: ẩn compare-at với B2B (mặc định bật); giữ `customers/*`.
-- 02/11 (WP2): PO + notes chỉ hiện với B2B (setting, mặc định bật); badge giỏ đếm số dòng.
+- 02/11 (WP2): PO + notes chỉ hiện với B2B; badge giỏ đếm số dòng.
 - 02/11: Order form toàn catalog + dán SKU/CSV (B14, B15) là **FREE**.
 - 03/11: Giữ phân phối (kit Khuê, ads) tới khi sản phẩm chỉnh chu.
-- 03/11 (WP3): Quick order list mặc định chỉ hiện cho B2B buyer, ẩn với sản phẩm 1 biến thể; cột tồn kho dùng setting có sẵn "Show stock levels in order lists". Dùng Chrome "Browser 1" cho GitHub/Shopify.
+- 03/11 (WP3): Quick order list mặc định chỉ hiện cho B2B, ẩn với sản phẩm 1 biến thể. Dùng Chrome "Browser 1".
+- 03/11 (WP4): Order form mặc định chỉ cho B2B (giống quick order list); ô số lượng của form là input thường dựng bằng JS (bảng 500 dòng dựng phía client) nhưng áp đúng luật của `depot-quantity`; JS tách file riêng, không nhồi vào theme.js.
 
 ## Quyết định cần Leo
 - Tên theme (tạm Depot).
+- Khi nào publish Depot trên depot-demo (cần để gán template page.order-form và để demo không cần `?view=`).
