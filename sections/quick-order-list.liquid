@@ -236,12 +236,12 @@
   @media (max-width: 749px){
     .quick-order__table thead{display:none}
     .quick-order__table,.quick-order__table tbody{display:block}
-    .quick-order__row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"v u" "s u" "k k" "q t";gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--color-border)}
+    .quick-order__row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"v u" "s k" "q t";gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--color-border)}
     .quick-order__row td{display:block;border:0;padding:0}
     .quick-order__row .quick-order__c-media{display:none}
     .quick-order__c-variant{grid-area:v}
     .quick-order__c-sku{grid-area:s}
-    .quick-order__c-stock{grid-area:k;font-size:.85rem}
+    .quick-order__c-stock{grid-area:k;font-size:.82rem;text-align:right}
     .quick-order__c-unit{grid-area:u}
     .quick-order__c-qty{grid-area:q;padding-top:8px!important}
     .quick-order__c-total{grid-area:t;align-self:end;padding-bottom:12px!important}
