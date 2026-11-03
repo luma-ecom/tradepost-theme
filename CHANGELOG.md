@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.4.0 — 2026-11-03
+WP4: quick order form for the whole catalog (backlog B14, B15). Free core.
+- New section **Quick order form** (`sections/order-form.liquid`) and template `page.order-form`. Buyers find items by SKU or name, paste "SKU, qty" lines, or upload a CSV, then add every line to the cart with one button. Line count and subtotal at the bottom.
+- Catalog loads in pages of 100 products from a Section Rendering endpoint (`sections/order-form-data.liquid`) with the buyer's own price (B2B catalog applied), volume tiers, quantity rules and stock. 310 SKUs load in about 0.25 s; a 500-line list renders and recalculates without lag (no per-keystroke re-render).
+- Search: SKU first (exact, starts with, contains), then product and variant name; arrow keys + Enter pick a SKU, Enter in the quantity jumps back to search.
+- Paste / CSV: comma, semicolon, tab (Excel) or space separated; header row optional (columns named sku / qty / quantity are found in any order); quoted CSV cells; SKUs with spaces; duplicate SKUs merged; no quantity means the minimum. Unknown SKUs are listed by name. "Download a CSV template".
+- Every line is brought inside min / increment / max / stock, counting what is already in the cart (same rules as the quick order list). Out-of-stock lines stay in the list, greyed, and are never sent to the cart; a variant whose stock is all in the cart says so.
+- Unit price shows the volume tier that will apply ("Tier 120+") counting the cart; subtotal is the buyer's account price.
+- Right before adding, stock and the cart are read again for the affected catalog pages. If anything moved, lines are adjusted with the reason at the line and nothing is added until the buyer confirms. Lines are added in groups of 100; if Shopify refuses a group (422), the theme keeps what went in and splits the rest until each refused line shows Shopify's message.
+- The list is kept in the browser (localStorage) so a page reload does not lose it.
+- Settings: heading, text, show to B2B buyers only (default) or everyone, products from a collection (default: all the buyer can see), paste box, CSV upload, panel open by default. Price visibility follows `snippets/price.liquid`. Accepts app blocks. JS lives in `assets/order-form.js`, loaded only on this page.
+- Header: new setting **Quick order page** — B2B buyers get a "Quick order" link in the top bar.
+- Mobile (<750px): each line is a 3-row card (name · remove / SKU · stock / price · qty · total); the paste / CSV panel starts closed.
+
 ## 0.3.0 — 2026-11-03
 WP3: quick order list with live stock (backlog B10).
 - New section **Quick order list** (`sections/quick-order-list.liquid`), on the product template under the main product. One table for every variant: variant, SKU, stock, unit price, quantity, line total; one "Add to cart" for all lines, line count and subtotal at the bottom.
