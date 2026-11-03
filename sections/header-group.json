@@ -5,7 +5,7 @@
     "header": {
       "type": "header",
       "settings": {
-        "quick_order_link": "/pages/quick-order?view=order-form"
+        "quick_order_link": "/pages/quick-order"
       }
     }
   },
