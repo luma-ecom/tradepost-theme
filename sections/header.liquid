@@ -3,7 +3,10 @@
     <div class="header__bar">
       <div class="page-width header__bar-inner">
         <span class="header__announcement">{{ section.settings.announcement }}</span>
-        {% render 'location-switcher' %}
+        {%- if customer.b2b? and section.settings.quick_order_link != blank -%}
+        <a class="header__bar-link" href="{{ section.settings.quick_order_link }}">{{ 'general.quick_order' | t }}</a>
+      {%- endif -%}
+      {% render 'location-switcher' %}
       </div>
     </div>
   {%- endif -%}
@@ -83,6 +86,8 @@
 </header>
 
 {% stylesheet %}
+.header__bar-link{margin-left:auto;margin-right:20px;color:inherit;font-weight:500;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.header__bar-link + *{margin-left:0}
   @media (max-width: 989px) {
     .header__search { grid-row: 2; }
     .header__actions { grid-column: 3; grid-row: 1; }
@@ -99,7 +104,8 @@
     { "type": "range", "id": "logo_width", "label": "t:sections.header.logo_width", "min": 80, "max": 300, "step": 10, "unit": "px", "default": 140 },
     { "type": "link_list", "id": "menu", "label": "t:sections.header.menu", "default": "main-menu" },
     { "type": "text", "id": "announcement", "label": "t:sections.header.announcement" },
-    { "type": "checkbox", "id": "sticky", "label": "t:sections.header.sticky", "default": true }
+    { "type": "checkbox", "id": "sticky", "label": "t:sections.header.sticky", "default": true },
+    { "type": "url", "id": "quick_order_link", "label": "t:sections.header.quick_order_link", "info": "t:sections.header.quick_order_link_info" }
   ]
 }
 {% endschema %}

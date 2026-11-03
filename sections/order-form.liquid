@@ -1,0 +1,282 @@
+{%- comment -%}
+  Quick order form for the whole catalog: find by SKU or name, paste "SKU, qty" lines, upload a CSV,
+  then add every line to the cart at once. The catalog (buyer's prices, volume tiers, quantity rules, stock)
+  loads in pages from sections/order-form-data.liquid; quantities already in the cart count against
+  stock, rules and tiers. Lines with no stock never reach the cart.
+  JS: <depot-order-form> in assets/order-form.js (loaded only here). Price visibility: snippets/price.liquid.
+{%- endcomment -%}
+{%- liquid
+  assign source = section.settings.collection
+  if source == blank
+    assign source = collections.all
+  endif
+  assign source_url = source.url | default: routes.all_products_collection_url
+
+  assign allowed = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign allowed = false
+  endif
+
+  assign probe_variant = source.products.first.selected_or_first_available_variant
+-%}
+{%- capture price_probe -%}{% render 'price', variant: probe_variant, context: 'line' %}{%- endcapture -%}
+
+<div class="page-width order-form" id="OrderForm-{{ section.id }}">
+  <div class="order-form__head">
+    {%- if section.settings.heading != blank -%}
+      <h1 class="order-form__title">{{ section.settings.heading | escape }}</h1>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="order-form__text rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- if allowed == false -%}
+    <div class="order-form__gate">
+      {%- if customer == blank -%}
+        <a class="price__gate-link" href="{{ routes.account_login_url }}">{{ 'products.price.login_to_order' | t }}</a>
+        {%- if settings.trade_account_url != blank -%}
+          <span class="price__gate-sep">·</span>
+          <a class="price__gate-link" href="{{ settings.trade_account_url }}">{{ 'products.price.apply_trade' | t }}</a>
+        {%- endif -%}
+      {%- else -%}
+        <span class="price__gate-text">{{ 'products.price.b2b_only' | t }}</span>
+      {%- endif -%}
+    </div>
+  {%- elsif price_probe contains 'data-price-gated' -%}
+    <div class="order-form__gate">{{ price_probe }}</div>
+  {%- else -%}
+    <depot-order-form
+      class="order-form__app"
+      data-source="{{ source_url }}"
+      data-show-stock="{{ settings.show_stock_in_order_list }}"
+      data-show-sku="{{ settings.show_sku }}"
+      data-low-stock="{{ settings.low_stock_threshold }}">
+      <script type="application/json" data-of-strings>
+        {
+          "loading": {{ 'order_form.loading' | t | json }},
+          "loaded": {{ 'order_form.loaded' | t | json }},
+          "loadError": {{ 'order_form.load_error' | t | json }},
+          "noResults": {{ 'order_form.no_results' | t | json }},
+          "importedOne": {{ 'order_form.imported_one' | t | json }},
+          "importedOther": {{ 'order_form.imported_other' | t | json }},
+          "notFound": {{ 'order_form.not_found' | t | json }},
+          "nothingFound": {{ 'order_form.nothing_found' | t | json }},
+          "fileError": {{ 'order_form.file_error' | t | json }},
+          "remove": {{ 'order_form.remove' | t | json }},
+          "qtyFor": {{ 'order_form.quantity_for' | t | json }},
+          "belowMin": {{ 'order_form.below_min' | t | json }},
+          "maxReached": {{ 'order_form.max_reached' | t | json }},
+          "notAdded": {{ 'order_form.not_added' | t | json }},
+          "lineOne": {{ 'products.quick_order.line_one' | t | json }},
+          "lineOther": {{ 'products.quick_order.line_other' | t | json }},
+          "added": {{ 'products.quick_order.added' | t | json }},
+          "stockChanged": {{ 'products.quick_order.stock_changed' | t | json }},
+          "review": {{ 'products.quick_order.review' | t | json }},
+          "error": {{ 'products.quick_order.error' | t | json }},
+          "tier": {{ 'products.quick_order.tier' | t | json }},
+          "inCart": {{ 'products.quick_order.in_cart' | t: count: '[count]' | json }},
+          "noneLeft": {{ 'products.quick_order.none_left' | t | json }},
+          "backorder": {{ 'products.quick_order.backorder' | t | json }},
+          "inStockCount": {{ 'products.quick_order.in_stock_count' | t: count: '[count]' | json }},
+          "lowStock": {{ 'products.availability.low_stock' | t: count: '[count]' | json }},
+          "inStock": {{ 'products.availability.in_stock' | t | json }},
+          "outOfStock": {{ 'products.availability.sold_out' | t | json }},
+          "perUnit": {% if settings.show_unit_label %}{{ 'products.price.per_unit' | t | json }}{% else %}""{% endif %}
+        }
+      </script>
+
+      <div class="order-form__tools">
+        <div class="order-form__find">
+          <label class="field__label" for="OrderFormSearch-{{ section.id }}">{{ 'order_form.search_label' | t }}</label>
+          <div class="order-form__search">
+            <input class="field__input" id="OrderFormSearch-{{ section.id }}" type="search" autocomplete="off" spellcheck="false"
+              placeholder="{{ 'order_form.loading' | t }}" data-placeholder="{{ 'order_form.search_placeholder' | t }}"
+              role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="OrderFormResults-{{ section.id }}"
+              disabled data-of-search>
+            <ul class="order-form__results" id="OrderFormResults-{{ section.id }}" role="listbox" hidden data-of-results></ul>
+          </div>
+          <p class="order-form__meta" data-of-meta aria-live="polite">{{ 'order_form.loading' | t }}</p>
+        </div>
+
+        {%- if section.settings.show_paste or section.settings.show_csv -%}
+          <details class="order-form__bulk"{% if section.settings.open_bulk %} open{% endif %}>
+            <summary>{{ 'order_form.bulk_title' | t }}</summary>
+            <div class="order-form__bulk-body">
+              {%- if section.settings.show_paste -%}
+                <div class="order-form__paste">
+                  <label class="field__label" for="OrderFormPaste-{{ section.id }}">{{ 'order_form.paste_label' | t }}</label>
+                  <textarea class="field__input order-form__textarea" id="OrderFormPaste-{{ section.id }}" rows="5" spellcheck="false"
+                    placeholder="{{ 'order_form.paste_placeholder' | t }}" data-of-paste></textarea>
+                  <p class="order-form__help">{{ 'order_form.paste_help' | t }}</p>
+                  <button type="button" class="btn btn--secondary btn--small" data-of-paste-add disabled>{{ 'order_form.paste_button' | t }}</button>
+                </div>
+              {%- endif -%}
+              {%- if section.settings.show_csv -%}
+                <div class="order-form__csv">
+                  <label class="field__label" for="OrderFormCsv-{{ section.id }}">{{ 'order_form.csv_label' | t }}</label>
+                  <input class="order-form__file" id="OrderFormCsv-{{ section.id }}" type="file" accept=".csv,.txt,text/csv,text/plain" disabled data-of-file>
+                  <p class="order-form__help">{{ 'order_form.csv_help' | t }}</p>
+                  <button type="button" class="order-form__link" data-of-template>{{ 'order_form.csv_template' | t }}</button>
+                </div>
+              {%- endif -%}
+            </div>
+            <p class="order-form__import" data-of-import role="status" aria-live="polite" hidden></p>
+          </details>
+        {%- endif -%}
+      </div>
+
+      <form class="order-form__form" data-of-form novalidate>
+        <table class="order-form__table">
+          <caption class="visually-hidden">{{ 'order_form.title' | t }}</caption>
+          <thead>
+            <tr>
+              {%- if settings.show_sku -%}<th scope="col">{{ 'products.quick_order.sku' | t }}</th>{%- endif -%}
+              <th scope="col">{{ 'order_form.item' | t }}</th>
+              {%- if settings.show_stock_in_order_list -%}<th scope="col">{{ 'products.quick_order.stock' | t }}</th>{%- endif -%}
+              <th scope="col" class="is-num">{{ 'products.quick_order.unit_price' | t }}</th>
+              <th scope="col" class="is-qty">{{ 'products.quick_order.quantity' | t }}</th>
+              <th scope="col" class="is-num">{{ 'products.quick_order.total' | t }}</th>
+              <th scope="col"><span class="visually-hidden">{{ 'order_form.remove_column' | t }}</span></th>
+            </tr>
+          </thead>
+          <tbody data-of-body></tbody>
+        </table>
+        <p class="order-form__empty" data-of-empty>{{ 'order_form.empty' | t }}</p>
+
+        <div class="order-form__foot">
+          <p class="order-form__summary">
+            <span data-of-count>{{ 'products.quick_order.line_other' | t | replace: '[count]', '0' }}</span>
+            <span class="order-form__sep" aria-hidden="true">·</span>
+            <span>{{ 'products.quick_order.subtotal' | t }}</span>
+            <strong data-of-subtotal>{{ 0 | money }}</strong>
+          </p>
+          <button type="button" class="btn btn--ghost btn--small" data-of-clear>{{ 'order_form.clear' | t }}</button>
+          <button type="submit" class="btn btn--primary order-form__submit" data-of-submit disabled>{{ 'products.quick_order.add' | t }}</button>
+          <p class="order-form__status" data-of-status role="status" aria-live="polite"></p>
+        </div>
+      </form>
+      {%- if customer.b2b? and customer.current_location.metafields.depot.review_orders.value -%}
+        <p class="order-form__note">{{ 'products.b2b.checkout_to_draft_note' | t }}</p>
+      {%- endif -%}
+    </depot-order-form>
+    <script src="{{ 'order-form.js' | asset_url }}" defer></script>
+  {%- endif -%}
+
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when '@app' -%}
+        {% render block %}
+    {%- endcase -%}
+  {%- endfor -%}
+</div>
+
+{% stylesheet %}
+.order-form{padding-top:24px;padding-bottom:56px}
+.order-form__head{margin-bottom:20px}
+.order-form__title{font-size:1.6rem;margin:0 0 6px}
+.order-form__text{color:var(--color-muted);font-size:.95rem;max-width:64ch}
+.order-form__gate{padding:24px 0;border-top:1px solid var(--color-border)}
+.order-form__tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 40px;align-items:start;padding-bottom:20px;border-bottom:1px solid var(--color-border)}
+.order-form__search{position:relative}
+.order-form__meta{margin:6px 0 0;font-size:.82rem;color:var(--color-muted)}
+.order-form__meta.is-error{color:var(--color-error)}
+.order-form__results{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 4px);margin:0;padding:4px 0;list-style:none;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius);box-shadow:0 6px 24px rgba(0,0,0,.08);max-height:360px;overflow:auto}
+.order-form__result{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 12px;padding:8px 12px;cursor:pointer;font-size:.9rem;font-variant-numeric:tabular-nums}
+.order-form__result[aria-selected="true"],.order-form__result:hover{background:var(--color-surface)}
+.order-form__result.is-out{color:var(--color-muted)}
+.order-form__result-sku{font-family:var(--font-mono);font-size:.85rem}
+.order-form__result-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.order-form__result-note{font-size:.85rem;color:var(--color-muted)}
+.order-form__bulk summary{cursor:pointer;font-size:.85rem;color:var(--color-muted);padding:2px 0 8px}
+.order-form__bulk-body{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:16px 24px}
+.order-form__textarea{font-family:var(--font-mono);font-size:.85rem;resize:vertical;min-height:110px}
+.order-form__help{margin:4px 0 8px;font-size:.8rem;color:var(--color-muted)}
+.order-form__file{font-size:.85rem;max-width:100%}
+.order-form__link{background:none;border:0;padding:0;color:var(--color-accent);font-size:.85rem;text-decoration:underline;cursor:pointer}
+.order-form__import{margin:12px 0 0;font-size:.88rem;color:var(--color-success)}
+.order-form__import.is-error{color:var(--color-error)}
+.order-form__table{font-size:.92rem;font-variant-numeric:tabular-nums;margin-top:8px}
+.order-form__table th{font-weight:500;color:var(--color-muted);font-size:.8rem;text-align:left;padding:8px 14px 8px 0;border-bottom:1px solid var(--color-border);white-space:nowrap}
+.order-form__table td{padding:10px 14px 10px 0;border-bottom:1px solid var(--color-border);vertical-align:middle}
+.order-form__table .is-num{text-align:right;white-space:nowrap}
+.order-form__table th:last-child,.order-form__table td:last-child{padding-right:0;width:32px}
+.order-form__sku{font-family:var(--font-mono);font-size:.85rem;white-space:nowrap}
+.order-form__name{font-weight:500}
+.order-form__name a{color:inherit;text-decoration:none}
+.order-form__name a:hover{text-decoration:underline}
+.order-form__variant{display:block;font-size:.85rem;color:var(--color-muted)}
+.order-form__incart{display:block;font-size:.78rem;color:var(--color-muted)}
+.order-form__msg{margin:4px 0 0;font-size:.8rem;color:var(--color-warning)}
+.order-form__msg.is-error{color:var(--color-error)}
+.order-form__msg:empty{display:none}
+.order-form__tier{display:block;font-size:.75rem;color:var(--color-accent);font-weight:500}
+.order-form__tier:empty{display:none}
+.order-form__qty{width:84px;padding:7px 8px;border:1px solid var(--color-border);border-radius:var(--radius);text-align:right;background:var(--color-bg);font:inherit}
+.order-form__qty:focus{outline:2px solid var(--color-accent);outline-offset:1px;border-color:var(--color-accent)}
+.order-form__row.is-active .order-form__c-total{font-weight:600}
+.order-form__row.is-blocked .order-form__name,.order-form__row.is-blocked [data-of-unit]{color:var(--color-muted)}
+.order-form__row.is-flash{background:var(--color-surface)}
+.order-form__remove{background:none;border:0;padding:4px;color:var(--color-muted);cursor:pointer;font-size:1.1rem;line-height:1}
+.order-form__remove:hover{color:var(--color-text)}
+.order-form__empty{color:var(--color-muted);font-size:.92rem;padding:20px 0;margin:0;border-bottom:1px solid var(--color-border)}
+.order-form__foot{display:flex;align-items:center;justify-content:flex-end;gap:12px 14px;flex-wrap:wrap;padding-top:16px}
+.order-form__summary{margin:0 auto 0 0;font-variant-numeric:tabular-nums}
+.order-form__summary strong{font-size:1.1rem;margin-left:4px}
+.order-form__sep{color:var(--color-muted);margin:0 6px}
+.order-form__submit{min-width:180px}
+.order-form__status{flex-basis:100%;margin:0;text-align:right;font-size:.88rem;color:var(--color-success)}
+.order-form__status:empty{display:none}
+.order-form__status.is-error{color:var(--color-error)}
+.order-form__note{font-size:.85rem;color:var(--color-muted);text-align:right;margin:8px 0 0}
+@media (max-width: 989px){
+.order-form__tools{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width: 749px){
+.order-form__bulk-body{grid-template-columns:minmax(0,1fr)}
+.order-form__table thead{display:none}
+.order-form__table,.order-form__table tbody{display:block}
+.order-form__row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"n n x" "s k k" "u q t";gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--color-border);align-items:center}
+.order-form__row td{display:block;border:0;padding:0!important;width:auto!important}
+.order-form__c-name{grid-area:n}
+.order-form__c-sku{grid-area:s}
+.order-form__c-stock{grid-area:k;text-align:right;font-size:.82rem}
+.order-form__c-unit{grid-area:u;text-align:left!important}
+.order-form__c-qty{grid-area:q}
+.order-form__c-total{grid-area:t;min-width:72px}
+.order-form__c-remove{grid-area:x;align-self:start}
+.order-form__summary{flex-basis:100%;margin:0}
+.order-form__submit{flex:1}
+.order-form__status,.order-form__note{text-align:left}
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.order_form.name",
+  "tag": "section",
+  "class": "order-form-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "t:sections.common.title", "default": "Quick order" },
+    { "type": "richtext", "id": "text", "label": "t:sections.common.text", "default": "<p>Search by SKU, or paste a list from your spreadsheet. Your account prices, minimums and volume pricing apply.</p>" },
+    {
+      "type": "select",
+      "id": "audience",
+      "label": "t:sections.common.audience",
+      "options": [
+        { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+        { "value": "everyone", "label": "t:sections.common.audience_everyone" }
+      ],
+      "default": "b2b",
+      "info": "t:sections.common.audience_info"
+    },
+    { "type": "collection", "id": "collection", "label": "t:sections.order_form.collection", "info": "t:sections.order_form.collection_info" },
+    { "type": "checkbox", "id": "show_paste", "label": "t:sections.order_form.show_paste", "default": true },
+    { "type": "checkbox", "id": "show_csv", "label": "t:sections.order_form.show_csv", "default": true },
+    { "type": "checkbox", "id": "open_bulk", "label": "t:sections.order_form.open_bulk", "default": true },
+    { "type": "paragraph", "content": "t:sections.order_form.info" }
+  ],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "t:sections.order_form.name" }]
+}
+{% endschema %}
