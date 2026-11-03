@@ -9,29 +9,48 @@
  */
 {
   "general": {
-    "meta": { "tags": "Tagged \"{{ tags }}\"", "page": "Page {{ page }}" },
+    "404": {
+      "title": "Page not found",
+      "text": "The page you requested does not exist.",
+      "home": "Back to home"
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
     "menu": "Menu",
     "close": "Close",
     "home": "Home",
     "breadcrumbs": "Breadcrumbs",
-    "pagination": { "label": "Pagination", "next": "Next", "previous": "Previous" },
+    "pagination": {
+      "label": "Pagination",
+      "next": "Next",
+      "previous": "Previous"
+    },
     "search": {
       "label": "Search",
       "placeholder_sku": "Search products or SKU",
       "submit": "Search",
       "title": "Search",
-      "results_count": { "one": "{{ count }} result for “{{ terms }}”", "other": "{{ count }} results for “{{ terms }}”" }
+      "results_count": {
+        "one": "{{ count }} result for “{{ terms }}”",
+        "other": "{{ count }} results for “{{ terms }}”"
+      }
     },
-    "404": { "title": "Page not found", "text": "The page you requested does not exist.", "home": "Back to home" }
+    "quick_order": "Quick order"
   },
-  "accessibility": { "skip_to_content": "Skip to content" },
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
   "products": {
     "add_to_cart": "Add to cart",
     "choose_options": "Choose options",
     "description": "Description",
     "sku": "SKU",
     "no_image": "No image",
-    "media": { "thumb": "Load image {{ index }}" },
+    "media": {
+      "thumb": "Load image {{ index }}"
+    },
     "availability": {
       "in_stock": "In stock",
       "low_stock": "Only {{ count }} left",
@@ -92,10 +111,44 @@
       "error": "Could not add to cart. Try again."
     }
   },
+  "order_form": {
+    "title": "Quick order",
+    "search_label": "Find by SKU or product name",
+    "search_placeholder": "Type a SKU or product name",
+    "loading": "Loading catalog…",
+    "loaded": "[count] SKUs ready to order.",
+    "load_error": "Could not load the catalog. Refresh the page to try again.",
+    "no_results": "No SKU or product matches “[q]”.",
+    "bulk_title": "Paste a list or upload a CSV",
+    "paste_label": "Paste SKUs and quantities",
+    "paste_placeholder": "SKU, quantity (one per line)",
+    "paste_help": "One item per line: SKU, then quantity. Commas, tabs (copied from Excel) or spaces all work. No quantity means the minimum.",
+    "paste_button": "Add to list",
+    "csv_label": "Upload a CSV file",
+    "csv_help": "Columns sku and quantity. A header row is optional.",
+    "csv_template": "Download a CSV template",
+    "imported_one": "1 SKU added to the list.",
+    "imported_other": "[count] SKUs added to the list.",
+    "not_found": "[count] not found: [skus]",
+    "nothing_found": "Nothing to add. Put one SKU and quantity per line.",
+    "file_error": "Could not read this file. Save it as CSV and try again.",
+    "item": "Product",
+    "quantity_for": "Quantity for [item]",
+    "remove": "Remove [item]",
+    "remove_column": "Remove",
+    "empty": "Your list is empty. Find a SKU above, or paste a list from your spreadsheet.",
+    "below_min": "Only [count] available, below the minimum of [min].",
+    "max_reached": "The maximum per order is already in your cart.",
+    "not_added": "Not added:",
+    "clear": "Clear list"
+  },
   "collections": {
     "all": "Collections",
     "view_all": "View all",
-    "product_count": { "one": "{{ count }} product", "other": "{{ count }} products" },
+    "product_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    },
     "filter": "Filter",
     "view": "View",
     "view_grid": "Grid",
@@ -103,7 +156,12 @@
     "sort": "Sort by",
     "empty": "No products match these filters.",
     "placeholder": "Product",
-    "filters": { "from": "From", "to": "To", "apply": "Apply", "clear": "Clear" }
+    "filters": {
+      "from": "From",
+      "to": "To",
+      "apply": "Apply",
+      "clear": "Clear"
+    }
   },
   "cart": {
     "title": "Cart",
@@ -126,8 +184,14 @@
     }
   },
   "customer": {
-    "account": { "title": "Account", "logout": "Log out", "terms": "Payment terms: {{ terms }}" },
-    "location": { "select": "Select location" },
+    "account": {
+      "title": "Account",
+      "logout": "Log out",
+      "terms": "Payment terms: {{ terms }}"
+    },
+    "location": {
+      "select": "Select location"
+    },
     "login": {
       "title": "Log in",
       "email": "Email",
@@ -137,7 +201,11 @@
       "create": "Create account",
       "trade_prompt": "Buying for a business?"
     },
-    "recover": { "title": "Reset your password", "submit": "Send reset link", "sent": "We sent you an email with a link to reset your password." },
+    "recover": {
+      "title": "Reset your password",
+      "submit": "Send reset link",
+      "sent": "We sent you an email with a link to reset your password."
+    },
     "register": {
       "title": "Create account",
       "first_name": "First name",
@@ -167,7 +235,15 @@
       "reorder": "Reorder",
       "none": "No orders yet."
     },
-    "order": { "title": "Order {{ name }}", "product": "Product", "sku": "SKU", "price": "Price", "quantity": "Qty", "total": "Total", "shipping": "Shipping" },
+    "order": {
+      "title": "Order {{ name }}",
+      "product": "Product",
+      "sku": "SKU",
+      "price": "Price",
+      "quantity": "Qty",
+      "total": "Total",
+      "shipping": "Shipping"
+    },
     "addresses": {
       "title": "Addresses",
       "manage": "Manage addresses",
@@ -185,8 +261,20 @@
       "province": "Province / state",
       "set_default": "Set as default address"
     },
-    "activate": { "title": "Activate account", "confirm": "Confirm password", "submit": "Activate", "decline": "Decline" },
-    "reset": { "title": "Reset password", "submit": "Reset password" }
+    "activate": {
+      "title": "Activate account",
+      "confirm": "Confirm password",
+      "submit": "Activate",
+      "decline": "Decline"
+    },
+    "reset": {
+      "title": "Reset password",
+      "submit": "Reset password"
+    }
   },
-  "gift_cards": { "title": "Gift card", "expired": "Expired", "shop": "Start shopping" }
+  "gift_cards": {
+    "title": "Gift card",
+    "expired": "Expired",
+    "shop": "Start shopping"
+  }
 }

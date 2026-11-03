@@ -19,11 +19,22 @@
         "b2b_only": "Approved B2B accounts only",
         "info": "Visitors who cannot see prices get a login link and, if set, a link to your trade application page."
       },
-      "hide_buy_buttons": { "label": "Also hide add-to-cart when prices are hidden" },
-      "trade_account_url": { "label": "Trade application page", "info": "Create a page with the template page.trade-account and link it here." },
-      "volume_tiers_on_cards": { "label": "Show lowest volume tier on product cards (\"From $X at 12+\")" },
-      "stock_in_order_list": { "label": "Show stock levels in order lists" },
-      "low_stock_threshold": { "label": "Low stock warning below" },
+      "hide_buy_buttons": {
+        "label": "Also hide add-to-cart when prices are hidden"
+      },
+      "trade_account_url": {
+        "label": "Trade application page",
+        "info": "Create a page with the template page.trade-account and link it here."
+      },
+      "volume_tiers_on_cards": {
+        "label": "Show lowest volume tier on product cards (\"From $X at 12+\")"
+      },
+      "stock_in_order_list": {
+        "label": "Show stock levels in order lists"
+      },
+      "low_stock_threshold": {
+        "label": "Low stock warning below"
+      },
       "tax_display": {
         "label": "Tax label next to prices",
         "store": "Follow store tax settings (no label)",
@@ -31,64 +42,209 @@
         "inc": "Label prices as inc. tax",
         "info": "Display label only. Set actual tax inclusion in Settings > Taxes and in your B2B catalogs."
       },
-      "show_sku": { "label": "Show SKU on cards, product pages and cart" },
-      "show_unit_label": { "label": "Show \"/ea\" after unit prices" },
-      "b2b_hide_compare_at": { "label": "Hide compare-at price for B2B buyers", "info": "B2B price lists are discounts off your retail price, so Shopify shows retail as compare-at. Hide it to keep trade pricing clean." }
+      "show_sku": {
+        "label": "Show SKU on cards, product pages and cart"
+      },
+      "show_unit_label": {
+        "label": "Show \"/ea\" after unit prices"
+      },
+      "b2b_hide_compare_at": {
+        "label": "Hide compare-at price for B2B buyers",
+        "info": "B2B price lists are discounts off your retail price, so Shopify shows retail as compare-at. Hide it to keep trade pricing clean."
+      }
     },
     "colors": {
-      "name": "Colors", "text": "Text", "muted": "Muted text", "background": "Background", "surface": "Surface",
-      "border": "Borders", "accent": "Accent", "accent_text": "Text on accent", "success": "Success", "warning": "Warning", "error": "Error"
+      "name": "Colors",
+      "text": "Text",
+      "muted": "Muted text",
+      "background": "Background",
+      "surface": "Surface",
+      "border": "Borders",
+      "accent": "Accent",
+      "accent_text": "Text on accent",
+      "success": "Success",
+      "warning": "Warning",
+      "error": "Error"
     },
-    "typography": { "name": "Typography", "heading": "Headings", "body": "Body", "base_size": "Base font size" },
-    "layout": { "name": "Layout", "page_width": "Page width", "radius": "Corner radius", "rtl": "Right-to-left layout", "favicon": "Favicon" },
+    "typography": {
+      "name": "Typography",
+      "heading": "Headings",
+      "body": "Body",
+      "base_size": "Base font size"
+    },
+    "layout": {
+      "name": "Layout",
+      "page_width": "Page width",
+      "radius": "Corner radius",
+      "rtl": "Right-to-left layout",
+      "favicon": "Favicon"
+    },
     "cart": {
-      "name": "Cart", "type": "Cart type", "drawer": "Drawer", "page": "Page",
-      "po_field": "Show PO number field", "notes": "Show order notes",
-      "b2b_fields_only": "Show PO number and notes to B2B buyers only", "b2b_fields_only_info": "Retail customers see a simpler cart. Turn off to show both fields to everyone.",
-      "minimum_message": "Minimum order message", "minimum_message_info": "Shown above the cart summary, e.g. \"Minimum order $250 for trade accounts\". Enforcement happens at checkout via your B2B settings."
+      "name": "Cart",
+      "type": "Cart type",
+      "drawer": "Drawer",
+      "page": "Page",
+      "po_field": "Show PO number field",
+      "notes": "Show order notes",
+      "b2b_fields_only": "Show PO number and notes to B2B buyers only",
+      "b2b_fields_only_info": "Retail customers see a simpler cart. Turn off to show both fields to everyone.",
+      "minimum_message": "Minimum order message",
+      "minimum_message_info": "Shown above the cart summary, e.g. \"Minimum order $250 for trade accounts\". Enforcement happens at checkout via your B2B settings."
     }
   },
   "sections": {
     "common": {
-      "title": "Heading", "text": "Text", "link": "Link", "link_label": "Link label", "background": "Background",
+      "title": "Heading",
+      "text": "Text",
+      "link": "Link",
+      "link_label": "Link label",
+      "background": "Background",
       "open_by_default": "Open by default",
-      "audience": "Show to", "audience_everyone": "Everyone", "audience_b2b": "B2B buyers only", "audience_d2c": "Retail visitors only",
+      "audience": "Show to",
+      "audience_everyone": "Everyone",
+      "audience_b2b": "B2B buyers only",
+      "audience_d2c": "Retail visitors only",
       "audience_info": "Works on all plans. B2B buyers are customers logged in to a company account."
     },
-    "header": { "name": "Header", "group": "Header", "logo": "Logo", "logo_width": "Logo width", "menu": "Menu", "announcement": "Announcement text", "sticky": "Sticky header" },
-    "footer": { "name": "Footer", "group": "Footer", "payment_icons": "Show payment icons", "blocks": { "menu": "Menu", "text": "Text", "trade": "Trade account prompt" } },
+    "header": {
+      "name": "Header",
+      "group": "Header",
+      "logo": "Logo",
+      "logo_width": "Logo width",
+      "menu": "Menu",
+      "announcement": "Announcement text",
+      "sticky": "Sticky header",
+      "quick_order_link": "Quick order page",
+      "quick_order_link_info": "Shown to B2B buyers in the top bar. Create a page with the template page.order-form and pick it here."
+    },
+    "footer": {
+      "name": "Footer",
+      "group": "Footer",
+      "payment_icons": "Show payment icons",
+      "blocks": {
+        "menu": "Menu",
+        "text": "Text",
+        "trade": "Trade account prompt"
+      }
+    },
     "main_product": {
-      "name": "Product", "show_vendor": "Show vendor", "metafield_namespace": "Metafield namespace", "metafield_key": "Metafield key",
-      "blocks": { "description": "Description", "specs": "Specifications (metafield)", "documents": "Documents (file list metafield)", "text": "Text" }
+      "name": "Product",
+      "show_vendor": "Show vendor",
+      "metafield_namespace": "Metafield namespace",
+      "metafield_key": "Metafield key",
+      "blocks": {
+        "description": "Description",
+        "specs": "Specifications (metafield)",
+        "documents": "Documents (file list metafield)",
+        "text": "Text"
+      }
     },
-    "main_collection": { "name": "Collection", "per_page": "Products per page", "default_view": "Default view", "show_filters": "Show filters", "show_breadcrumbs": "Show breadcrumbs", "show_description": "Show description" },
-    "main_cart": { "name": "Cart" },
-    "main_page": { "name": "Page" },
-    "main_404": { "name": "404" },
-    "main_search": { "name": "Search" },
-    "main_list_collections": { "name": "Collections list" },
-    "main_blog": { "name": "Blog" },
-    "main_article": { "name": "Article" },
-    "main_login": { "name": "Login" },
-    "main_register": { "name": "Register" },
-    "main_account": { "name": "Account" },
-    "main_order": { "name": "Order" },
-    "main_addresses": { "name": "Addresses" },
-    "main_activate": { "name": "Activate account" },
-    "main_reset": { "name": "Reset password" },
+    "main_collection": {
+      "name": "Collection",
+      "per_page": "Products per page",
+      "default_view": "Default view",
+      "show_filters": "Show filters",
+      "show_breadcrumbs": "Show breadcrumbs",
+      "show_description": "Show description"
+    },
+    "main_cart": {
+      "name": "Cart"
+    },
+    "main_page": {
+      "name": "Page"
+    },
+    "main_404": {
+      "name": "404"
+    },
+    "main_search": {
+      "name": "Search"
+    },
+    "main_list_collections": {
+      "name": "Collections list"
+    },
+    "main_blog": {
+      "name": "Blog"
+    },
+    "main_article": {
+      "name": "Article"
+    },
+    "main_login": {
+      "name": "Login"
+    },
+    "main_register": {
+      "name": "Register"
+    },
+    "main_account": {
+      "name": "Account"
+    },
+    "main_order": {
+      "name": "Order"
+    },
+    "main_addresses": {
+      "name": "Addresses"
+    },
+    "main_activate": {
+      "name": "Activate account"
+    },
+    "main_reset": {
+      "name": "Reset password"
+    },
     "trade_cta": {
-      "name": "Trade & wholesale banner", "eyebrow": "Eyebrow", "primary_link": "Primary link", "primary_label": "Primary label",
-      "secondary_link": "Secondary link", "secondary_label": "Secondary label", "blocks": { "fact": "Fact" }, "fact_label": "Label", "fact_value": "Value"
+      "name": "Trade & wholesale banner",
+      "eyebrow": "Eyebrow",
+      "primary_link": "Primary link",
+      "primary_label": "Primary label",
+      "secondary_link": "Secondary link",
+      "secondary_label": "Secondary label",
+      "blocks": {
+        "fact": "Fact"
+      },
+      "fact_label": "Label",
+      "fact_value": "Value"
     },
-    "wholesale_register": { "name": "Trade account application", "requirements": "Requirements", "business_types": "Business types (comma separated)", "pending_tag": "Customer tag meaning \"pending approval\"" },
-    "rich_text": { "name": "Rich text", "width": "Width", "narrow": "Narrow", "full": "Full", "button_style": "Button style", "blocks": { "heading": "Heading", "text": "Text", "button": "Button" } },
+    "wholesale_register": {
+      "name": "Trade account application",
+      "requirements": "Requirements",
+      "business_types": "Business types (comma separated)",
+      "pending_tag": "Customer tag meaning \"pending approval\""
+    },
+    "rich_text": {
+      "name": "Rich text",
+      "width": "Width",
+      "narrow": "Narrow",
+      "full": "Full",
+      "button_style": "Button style",
+      "blocks": {
+        "heading": "Heading",
+        "text": "Text",
+        "button": "Button"
+      }
+    },
     "quick_order_list": {
       "name": "Quick order list",
       "hide_single": "Hide on products with a single variant",
       "show_images": "Show variant images",
       "info": "Lists every variant with stock, the buyer's price and volume tier, and adds all lines to the cart at once. Stock and the quantity already in the cart are checked again right before adding."
     },
-    "featured_collection": { "name": "Featured collection", "collection": "Collection", "limit": "Products to show", "columns": "Columns" }
+    "order_form": {
+      "name": "Quick order form",
+      "data_name": "Quick order form data",
+      "collection": "Products from",
+      "collection_info": "Leave empty to use every product the buyer can see.",
+      "show_paste": "Show paste box",
+      "show_csv": "Show CSV upload",
+      "open_bulk": "Open the paste / CSV panel by default",
+      "info": "Whole-catalog order form. Buyers find items by SKU, paste lines or upload a CSV; their account prices, volume tiers, quantity rules and stock apply, and lines with no stock are never added. Create a page with the template page.order-form, then link it in Header › Quick order page."
+    },
+    "featured_collection": {
+      "name": "Featured collection",
+      "collection": "Collection",
+      "limit": "Products to show",
+      "columns": "Columns"
+    }
   },
-  "collections": { "view_grid": "Grid", "view_list": "List" }
+  "collections": {
+    "view_grid": "Grid",
+    "view_list": "List"
+  }
 }
