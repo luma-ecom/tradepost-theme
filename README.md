@@ -6,12 +6,13 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 
 ## Status
 
-`0.2.0` — first pass on a live B2B dev store done (3 companies, 3 B2B price lists, volume pricing, quantity rules). Not yet for production; public beta planned as `1.0.0-beta`.
+`0.3.0` — quick order list with live stock added. Tested on a live B2B dev store (3 companies, 3 B2B price lists, volume pricing, quantity rules). Not yet for production; public beta planned as `1.0.0-beta`.
 
 ## What is in the core (free)
 
 - Volume pricing table on product pages that re-renders on variant change
 - Quantity rules (min / max / increments) enforced in every quantity input, with live stock cap
+- Quick order list: every variant of a product in one table with stock, account price, volume tier and one add-to-cart; stock re-checked before adding, problems shown at the line
 - Unit prices with `/ea`, line totals, correct compare-at handling
 - `Who can see prices`: everyone / logged-in / approved B2B accounts, with login and trade-application prompts
 - Lowest volume tier on product cards ("From $X at 12+")

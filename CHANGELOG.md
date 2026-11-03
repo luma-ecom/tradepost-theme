@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 — 2026-11-03
+WP3: quick order list with live stock (backlog B10).
+- New section **Quick order list** (`sections/quick-order-list.liquid`), on the product template under the main product. One table for every variant: variant, SKU, stock, unit price, quantity, line total; one "Add to cart" for all lines, line count and subtotal at the bottom.
+- Stock: column shows "N in stock" / "Only N left" (low-stock threshold) / "Out of stock" / "On backorder". Quantity is capped at stock minus what is already in the cart; a variant with no room left shows "All available stock is in your cart" instead of an input.
+- Stock is checked again on the server right before adding. If it moved, the line is adjusted and the reason shows at the line; nothing is added until the buyer confirms.
+- If Shopify still refuses (422), the theme works out which lines went in, retries the rest one by one and shows Shopify's message at each refused line.
+- Quantity rules and volume pricing count what is already in the cart: the row minimum drops once the rule minimum is in the cart, and the unit price shows the tier that will apply ("Tier 120+").
+- Settings: heading, text, show to B2B buyers only (default) or everyone, hide on single-variant products (default on), variant images. Uses the existing theme setting B2B › "Show stock levels in order lists". Price visibility follows `snippets/price.liquid` (gated visitors see the login / trade prompt, no table). Accepts app blocks.
+- `depot-quantity` / `snippets/quantity-input.liquid`: new optional params `allow_zero`, `min_qty`, `max_qty`, `available` (existing uses unchanged).
+- Mobile (<750px): each variant is a 3-line row (variant · price / SKU · stock / quantity · total).
+
 ## 0.2.0 — 2026-11-02
 WP2: P2 fixes from the WP1 pass, design v1.1 locked.
 - Cart: PO number and notes show to B2B buyers only by default (new setting Cart › "Show PO number and notes to B2B buyers only").
