@@ -14,7 +14,7 @@
 
 ## Dev store
 - `depot-demo.myshopify.com` — plan test Grow (non-Plus), USD, new customer accounts, 79 sản phẩm / 314 SKU (310 SKU khác nhau: 4 SKU trùng trong data demo), chưa có ảnh. Storefront có mật khẩu → soi bằng Preview từ admin (Themes → ⋯ → Preview), chị không nhập mật khẩu storefront.
-- Theme live vẫn là Horizon; Depot là draft. Hệ quả: trang admin chỉ cho chọn template của theme live → page **Quick order** (`/pages/quick-order`, đã tạo, visible) đang dùng template mặc định; xem form bằng `/pages/quick-order?view=order-form`. Khi publish Depot: gán template `page.order-form` cho page này.
+- **Depot là theme live** trên depot-demo từ 03/11 (Horizon còn lại làm draft, bấm Publish là quay lại được). Page **Quick order** (`/pages/quick-order`) đã gán template `page.order-form`; link "Quick order" trên thanh B2B trỏ `/pages/quick-order`. Storefront vẫn có mật khẩu.
 - 3 company / 4 location; 3 B2B market → 3 catalog → price list −28/−20/−12%; volume pricing 21 SKU gloves+masks; quantity rule KA min 12 / bước 12; metafield `depot.payment_terms` + `depot.review_orders`.
 - Buyer demo (OTP về email Leo): `leo+haidang@` (KA, 2 location) · `leo+sgsmile@` (T2) · `leo+bright@` (T1).
 - Giỏ khách lẻ trong phiên preview: đã dọn sạch sau test WP4.
@@ -29,7 +29,7 @@
   - Mỗi dòng ép vào min / bước / max / tồn, tính cả số đã có trong giỏ (cùng luật quick order list). Dòng hết hàng giữ trong danh sách, xám, không bao giờ gửi vào giỏ.
   - Trước khi thêm: đọc lại tồn + giỏ cho các trang catalog liên quan; có thay đổi → chỉnh + báo tại dòng, không thêm gì. Thêm theo nhóm 100; 422 → giữ phần đã vào, chia đôi phần còn lại tới khi cô lập dòng lỗi, báo câu của Shopify tại dòng.
   - Danh sách lưu trong localStorage (reload không mất).
-  - Header: setting mới "Quick order page" → B2B buyer thấy link "Quick order" trên thanh trên. Demo đã đặt `/pages/quick-order?view=order-form`.
+  - Header: setting mới "Quick order page" → B2B buyer thấy link "Quick order" trên thanh trên. Demo trỏ `/pages/quick-order`.
   - Setting section: heading, text, B2B (mặc định) / mọi người, collection nguồn (mặc định tất cả), ô dán, CSV, mở panel sẵn. Ẩn giá theo `price.liquid`. Nhận app block.
   - Mobile <750px: mỗi dòng 3 hàng (tên · xoá / SKU · tồn / giá · số lượng · tổng); panel dán/CSV đóng sẵn.
   - README + CHANGELOG + version 0.4.0.
@@ -78,4 +78,3 @@
 
 ## Quyết định cần Leo
 - Tên theme (tạm Depot).
-- Khi nào publish Depot trên depot-demo (cần để gán template page.order-form và để demo không cần `?view=`).
