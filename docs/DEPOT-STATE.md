@@ -60,12 +60,14 @@
 - G01 Keyword Planner (US): "shopify b2b/wholesale theme", "quick order form", "b2b portal shopify" = 10–100/tháng; "shopify b2b" 1K–10K; CPC $6–18. Merchant tìm app, không tìm theme → traffic từ Community/Reddit/LinkedIn/Upwork.
 - Landing `luma-e.com/depot` (A free / B $89 reserve, nút ERP): **PR luma-e-v2 #50**, branch `feat/depot-landing`. Deploy tay (`npm run deploy`, Cloudflare).
 - Kit: `01-docs/Depot-GTM1-Kit-v1.0.html`. Preview landing: `01-docs/Depot-Landing-Preview-v1.0.html`.
-- **Leo chốt 03/11: GIỮ kit phân phối + ads** tới khi sản phẩm chỉnh chu.
+- **Leo chốt 03/11: GIỮ kit phân phối** tới khi sản phẩm chỉnh chu (WP6).
+- **Leo chốt 03/11 (sau): BỎ A/B và ads $150.** Landing còn 1 bản + nút ERP; traffic chỉ từ kênh free (Leo sẽ nghĩ cách làm). Lý do: CPC $6–18 → $150 chỉ ~10–25 click, không đủ đọc số. OKR #10 bỏ KR6 (người trả $89).
 
 ## Việc kế tiếp
 1. WP6 chuẩn bị public beta: ảnh demo, sửa 4 SKU trùng, README/docs/LICENSE, test 1 app embed, Lighthouse.
-2. Deploy PR luma-e-v2 #50 → kiểm /depot?v=a, ?v=b. KHÔNG đẩy kit/ads tới mốc "chỉnh chu".
-3. Sửa spec v1.1 → v1.2 theo phát hiện non-Plus.
+2. Landing PR luma-e-v2 #50: gộp về 1 bản (bỏ biến thể A/B), giữ nút ERP + đo click; deploy khi WP6 chỉnh chu. Kênh free: chờ Leo.
+3. WP5 (premium) làm sau WP6, không chờ số; ưu tiên preset y tế–nha khoa + RFQ.
+4. Sửa spec v1.1 → v1.2 theo phát hiện non-Plus.
 
 ## Quyết định đã chốt
 - 02/11: ẩn compare-at với B2B (mặc định bật); giữ `customers/*`.
@@ -73,6 +75,8 @@
 - 02/11: Order form toàn catalog + dán SKU/CSV (B14, B15) là **FREE**.
 - 03/11: Giữ phân phối (kit Khuê, ads) tới khi sản phẩm chỉnh chu.
 - 03/11 (WP3): Quick order list mặc định chỉ hiện cho B2B, ẩn với sản phẩm 1 biến thể. Dùng Chrome "Browser 1".
+- 03/11: Bỏ A/B + ads $150; landing 1 bản + nút ERP; chỉ kênh free. WP5 làm sau WP6, không gate bằng số A/B (thay quyết định 31/10 "premium chỉ khi A/B ≥10 pre-order").
+- 03/11: Publish Depot làm theme live trên depot-demo.
 - 03/11 (WP4): Order form mặc định chỉ cho B2B (giống quick order list); ô số lượng của form là input thường dựng bằng JS (bảng 500 dòng dựng phía client) nhưng áp đúng luật của `depot-quantity`; JS tách file riêng, không nhồi vào theme.js.
 
 ## Quyết định cần Leo
