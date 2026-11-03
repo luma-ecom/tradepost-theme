@@ -1,6 +1,6 @@
 # DEPOT-STATE — cập nhật cuối mỗi phiên
 
-**Cập nhật:** 03/11/2026 (phiên WP4) · **Version hiện tại:** 0.4.0 · **WP:** WP4 xong (soi khách lẻ) → còn soi B2B cho WP3 + WP4; kế tiếp WP6 chuẩn bị public beta
+**Cập nhật:** 03/11/2026 (phiên WP4) · **Version hiện tại:** 0.4.0 · **WP:** WP3 + WP4 xong, đã soi cả khách lẻ lẫn B2B; kế tiếp WP6 chuẩn bị public beta
 
 ## Repo
 - GitHub `luma-ecom/depot-theme` (private, `main`) là nguồn chuẩn. Store `depot-theme/main` (id 191852413001) tự sync từ main (~10–20 giây; asset JS có lúc trễ hơn, reload lại là có).
@@ -43,11 +43,11 @@
   - CSV header "Item SKU","Quantity" có ngoặc kép + cột thừa: OK. SKU có dấu cách "CBR-SS -#245-053 4": OK.
   - Desktop + mobile (giả lập 390px bằng cách áp rule media trong trang) — không tràn ngang, không đè chữ.
   - Theme check 0 lỗi (bản mini). Regression nhanh: PDP, collection, cart drawer bình thường.
-- **Chưa soi:** B2B thật (giá sỉ, Tier 120+, min 12/bước 12, link Quick order trên thanh B2B) — cần Leo đăng nhập buyer Hải Đăng trên Browser 1. Logic tier/min đã test bằng jsdom.
+- **Soi B2B 03/11 (Hải Đăng, location HCM Thủ Đức, Browser 2):** thanh B2B có link Quick order + tên company + location; giá −28% đúng (MSK 3,04 → 2,19); dán 5 dòng: 5 → 12 "Minimum 12", 30 → 36 "multiples of 12" + Tier 24+, MSK-BLACK tồn 10 < min 12 → chặn "Only 10 available, below the minimum of 12", găng XS đã có 12 trong giỏ + 12 → Tier 24+ $4.37. Thêm vào giỏ: đơn giá trong giỏ khớp 100% với form (211/219/437/1187). Ghi chú checkout-to-draft hiện đúng. WP3 quick order list trên PDP găng Medicom: giá sỉ, Tier 24+, min 12/bước 12, "N in your cart" đúng. Giỏ Hải Đăng đã trả về XS×12 + M×12.
 
 ## Lỗi mở / chưa soi
-- Soi B2B cho WP3 + WP4 (như trên) — 1 lần đăng nhập Hải Đăng là soi được cả hai.
 - Company Tier 1 / Tier 2 chưa login thử.
+- Browser: Hải Đăng đăng nhập trên **Browser 2** (Leo chọn 03/11) → soi B2B ở Browser 2; GitHub + admin vẫn làm trên Browser 1.
 - Account (QA009–010): Shopify host, chỉ soi được trên store classic accounts.
 - Demo chưa có ảnh sản phẩm → cần trước WP6.
 - Data demo có 4 SKU trùng → order form lấy biến thể đầu tiên; nên sửa data trước WP6.
@@ -63,10 +63,9 @@
 - **Leo chốt 03/11: GIỮ kit phân phối + ads** tới khi sản phẩm chỉnh chu.
 
 ## Việc kế tiếp
-1. Soi B2B WP3 + WP4: Leo đăng nhập Hải Đăng trên Browser 1 → chị soi găng/khẩu trang (Tier, min 12/bước 12, min giảm khi giỏ đã có), order form (giá −28%, tier khi dán 120+, link Quick order trên thanh B2B).
-2. WP6 chuẩn bị public beta: ảnh demo, sửa 4 SKU trùng, README/docs/LICENSE, test 1 app embed, Lighthouse.
-3. Deploy PR luma-e-v2 #50 → kiểm /depot?v=a, ?v=b. KHÔNG đẩy kit/ads tới mốc "chỉnh chu".
-4. Sửa spec v1.1 → v1.2 theo phát hiện non-Plus.
+1. WP6 chuẩn bị public beta: ảnh demo, sửa 4 SKU trùng, README/docs/LICENSE, test 1 app embed, Lighthouse.
+2. Deploy PR luma-e-v2 #50 → kiểm /depot?v=a, ?v=b. KHÔNG đẩy kit/ads tới mốc "chỉnh chu".
+3. Sửa spec v1.1 → v1.2 theo phát hiện non-Plus.
 
 ## Quyết định đã chốt
 - 02/11: ẩn compare-at với B2B (mặc định bật); giữ `customers/*`.
