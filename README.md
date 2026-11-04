@@ -30,6 +30,11 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 2. Shopify admin → Online Store → Themes → Add theme → Upload zip file.
 3. Create a page with template `page.trade-account` and link it in Theme settings → B2B & wholesale → Trade application page.
 4. Set up companies, price lists, quantity rules and payment terms in Shopify admin. On non-Plus plans B2B pricing goes through B2B markets (max 3 active B2B catalogs). Add the two company-location metafields `depot.payment_terms` and `depot.review_orders`. Step by step: [`docs/b2b-setup.md`](docs/b2b-setup.md).
+5. Optional: create a page with template `page.order-form` (quick order form for the whole catalog) and pick it in the Header section → Quick order page.
+
+## Updating and rolling back
+
+Upload each new release as an unpublished theme, preview it as a B2B buyer, then publish. Rollback is publishing the previous version from your theme library. Details: [`docs/updating-and-rollback.md`](docs/updating-and-rollback.md).
 
 ## Need help connecting pricing and orders to QuickBooks, Xero, Odoo or your ERP?
 
