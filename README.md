@@ -1,6 +1,6 @@
-# Depot — the B2B theme for Shopify on every plan
+# Tradepost — the B2B theme for Shopify on every plan
 
-Depot is built for distributors, importers and manufacturers who sell to trade customers: customer-specific pricing, quantity rules, volume pricing, net terms, PO numbers and quick reordering, using Shopify's **native B2B**, available on Basic, Grow, Advanced and Plus since April 2026.
+Tradepost is built for distributors, importers and manufacturers who sell to trade customers: customer-specific pricing, quantity rules, volume pricing, net terms, PO numbers and quick reordering, using Shopify's **native B2B**, available on Basic, Grow, Advanced and Plus since April 2026.
 
 It fixes the things merchants complain about in Shopify's free Trade theme: stock-aware quantity inputs, prices that can be hidden until login, a location switcher, B2B-vs-retail content on any plan, SKU-first search, and a release process that does not break your store.
 

@@ -1,6 +1,6 @@
-# Depot — instructions for Claude Code
+# Tradepost — instructions for Claude Code
 
-Depot is an original Shopify theme for B2B distributors. It is LUMA-E's new-customer door: the free core on GitHub leads to paid services (ERP/accounting sync, >3 price lists, migrations). Read `README.md`, `CHANGELOG.md` and `docs/DEPOT-STATE.md` before touching code.
+Tradepost is an original Shopify theme for B2B distributors. It is LUMA-E's new-customer door: the free core on GitHub leads to paid services (ERP/accounting sync, >3 price lists, migrations). Read `README.md` and `CHANGELOG.md` before touching code.
 
 ## Hard rules
 1. **Original code only.** Never open, copy, paraphrase or "take inspiration from" files of Shopify's Dawn, Horizon or Skeleton themes, or any Theme Store theme. Their licenses forbid redistribution of derived themes. Use only Shopify's Liquid/theme documentation.
@@ -28,11 +28,11 @@ Quiet catalog, clear numbers, no decoration. Hairlines not cards; one accent col
 ```
 shopify theme dev --store <dev-store>.myshopify.com     # hot reload
 shopify theme check
-shopify theme push --store <store> --password <theme-access-password> --unpublished --theme "Depot x.y.z"
+shopify theme push --store <store> --password <theme-access-password> --unpublished --theme "Tradepost x.y.z"
 ```
 
-## Work packages (see docs/DEPOT-STATE.md for current)
+## Work packages (current status is tracked outside the repo)
 WP1 demo store + visual QA → WP2 fixes, lock design → WP3 quick order list with stock → WP4 catalog order form + CSV → WP6 public beta → WP5 premium (presets, RFQ, VAT, saved lists) → WP7 1.0.
 
 ## Definition of done for a work package
-Theme check clean · 5 screens QA'd desktop+mobile · CHANGELOG + version bumped · `docs/DEPOT-STATE.md` updated (done / open bugs / next) · pushed to the dev store as an unpublished theme named with the version.
+Theme check clean · 5 screens QA'd desktop+mobile · CHANGELOG + version bumped · pushed to the dev store as an unpublished theme named with the version.
