@@ -9,20 +9,59 @@
  */
 {
   "sections": {
-    "trade": { "type": "trade-cta", "settings": { "audience": "d2c" } },
+    "trade": {
+      "type": "trade-cta",
+      "settings": {
+        "audience": "d2c"
+      }
+    },
     "featured": {
       "type": "featured-collection",
-      "settings": { "title": "Popular with trade customers", "collection": "consumables", "limit": 8, "columns": 4 }
+      "settings": {
+        "title": "Popular with trade customers",
+        "collection": "consumables",
+        "limit": 8,
+        "columns": 4
+      }
     },
     "rich": {
       "type": "rich-text",
       "blocks": {
-        "h": { "type": "heading", "settings": { "text": "Built for distributors, not just shops" } },
-        "t": { "type": "text", "settings": { "text": "<p>Customer-specific pricing, quantity rules, net terms and quick reordering, using Shopify’s native B2B on every plan.</p>" } }
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Built for distributors, not just shops"
+          }
+        },
+        "t": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Customer-specific pricing, quantity rules, net terms and quick reordering, using Shopify’s native B2B on every plan.</p>"
+          }
+        }
       },
-      "block_order": ["h", "t"],
+      "block_order": [
+        "h",
+        "t"
+      ],
       "settings": {}
+    },
+    "video": {
+      "type": "video-feature",
+      "settings": {
+        "eyebrow": "For trade buyers",
+        "heading": "See what a trade buyer sees",
+        "text": "<p>Account prices, volume tiers, quantity rules, quick order by SKU and payment terms at checkout. This 30-second tour is a real B2B login on this demo store.</p>",
+        "button_label": "Request a B2B demo login",
+        "button_link": "/pages/trade-account",
+        "audience": "d2c"
+      }
     }
   },
-  "order": ["trade", "featured", "rich"]
+  "order": [
+    "trade",
+    "video",
+    "featured",
+    "rich"
+  ]
 }
