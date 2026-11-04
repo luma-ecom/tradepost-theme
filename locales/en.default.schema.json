@@ -11,7 +11,7 @@
   "settings": {
     "b2b": {
       "name": "B2B & wholesale",
-      "intro": "Depot builds on Shopify's native B2B (company accounts, price lists, quantity rules, volume pricing, net terms), available on all paid plans. These settings control how the storefront shows them.",
+      "intro": "Tradepost builds on Shopify's native B2B (company accounts, price lists, quantity rules, volume pricing, net terms), available on all paid plans. These settings control how the storefront shows them.",
       "price_visibility": {
         "label": "Who can see prices",
         "everyone": "Everyone",
