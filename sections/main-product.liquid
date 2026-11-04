@@ -12,7 +12,7 @@
                 {%- case media.media_type -%}
                 {%- when 'image' -%}
                   {%- if forloop.first -%}
-                    {{ media | image_url: width: 1200 | image_tag: loading: 'eager', widths: '400,600,900,1200', sizes: '(min-width: 990px) 50vw, 100vw', class: 'gallery__img' }}
+                    {{ media | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '400,600,900,1200', sizes: '(min-width: 990px) 50vw, 100vw', class: 'gallery__img' }}
                   {%- else -%}
                     {{ media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,900,1200', sizes: '(min-width: 990px) 50vw, 100vw', class: 'gallery__img' }}
                   {%- endif -%}
