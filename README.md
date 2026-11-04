@@ -8,6 +8,12 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 
 `1.0.0-beta` — public beta. Quick order list and whole-catalog quick order form (search by SKU, paste, CSV), native B2B pricing, volume tiers, quantity rules and stock checks. Tested on a live B2B dev store (3 companies, 3 B2B price lists, volume pricing, quantity rules). Report issues on GitHub.
 
+
+## Live demo
+
+- Store: https://depot-demo.myshopify.com (password: `tradepost`). You see the retail view.
+- B2B view: watch the short tour on the home page, or click **Request a B2B demo login** and we will send you a demo buyer account.
+
 ## What is in the core (free)
 
 - Volume pricing table on product pages that re-renders on variant change
