@@ -276,5 +276,10 @@
     "title": "Gift card",
     "expired": "Expired",
     "shop": "Start shopping"
+  },
+  "sections": {
+    "video_feature": {
+      "placeholder": "Pick a video in the theme editor."
+    }
   }
 }

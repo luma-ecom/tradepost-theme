@@ -241,6 +241,10 @@
       "collection": "Collection",
       "limit": "Products to show",
       "columns": "Columns"
+    },
+    "video_feature": {
+      "name": "Video",
+      "video": "Video"
     }
   },
   "collections": {
