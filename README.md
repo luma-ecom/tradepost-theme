@@ -6,7 +6,7 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 
 ## Status
 
-`0.4.0` — quick order form for the whole catalog (search by SKU, paste, CSV) added. Tested on a live B2B dev store (3 companies, 3 B2B price lists, volume pricing, quantity rules). Not yet for production; public beta planned as `1.0.0-beta`.
+`1.0.0-beta` — public beta. Quick order list and whole-catalog quick order form (search by SKU, paste, CSV), native B2B pricing, volume tiers, quantity rules and stock checks. Tested on a live B2B dev store (3 companies, 3 B2B price lists, volume pricing, quantity rules). Report issues on GitHub.
 
 ## What is in the core (free)
 

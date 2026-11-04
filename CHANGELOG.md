@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0-beta — 2026-11-04
+WP6: public beta candidate. No breaking changes from 0.4.0; settings carry over.
+- Product page: the main product image loads with `fetchpriority="high"` (faster LCP on first visit).
+- Docs: new `docs/updating-and-rollback.md` (update as an unpublished theme, preview as a B2B buyer, publish; rollback = publish the previous version). `docs/b2b-setup.md` gains a section on the quick order form and quick order list. README: quick order page install step and an Updating section.
+- Checked before tagging: 5 screens on desktop and mobile (390px) as a retail visitor and as a B2B buyer (Key Account, 2 locations); quick order list and quick order form with account prices, volume tiers, quantity rules and stock; cart prices match the form. CLS 0 on home, collection and product pages. An app embed (BSS B2B Wholesale Pricing, free plan) turned on: product page, cart drawer and collection keep working, no console errors.
+- Demo store: product illustrations on all 79 demo products; duplicate demo SKUs fixed.
+
 ## 0.4.0 — 2026-11-03
 WP4: quick order form for the whole catalog (backlog B14, B15). Free core.
 - New section **Quick order form** (`sections/order-form.liquid`) and template `page.order-form`. Buyers find items by SKU or name, paste "SKU, qty" lines, or upload a CSV, then add every line to the cart with one button. Line count and subtotal at the bottom.
