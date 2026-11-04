@@ -26,13 +26,15 @@
         <a class="btn btn--primary" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
       {%- endif -%}
     </div>
-    <div class="video-feature__media">
-      {%- if section.settings.video != blank -%}
+    {%- if section.settings.video != blank -%}
+      <div class="video-feature__media">
         {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: true, playsinline: true, image_size: '1280x', class: 'video-feature__video' }}
-      {%- else -%}
+      </div>
+    {%- elsif request.design_mode -%}
+      <div class="video-feature__media">
         <div class="video-feature__placeholder">{{ 'sections.video_feature.placeholder' | t }}</div>
-      {%- endif -%}
-    </div>
+      </div>
+    {%- endif -%}
   </div>
 {%- endif -%}
 
