@@ -1,6 +1,6 @@
-# B2B setup for Depot
+# B2B setup for Tradepost
 
-Depot reads Shopify's native B2B data. Nothing here needs an app.
+Tradepost reads Shopify's native B2B data. Nothing here needs an app.
 
 ## 1. Pricing: markets on non-Plus, catalogs on Plus
 
@@ -13,7 +13,7 @@ Need more than 3 price lists on a non-Plus plan, or price lists pushed from your
 
 ## 2. Payment terms and order review: two metafields
 
-Liquid cannot read a company location's payment terms or its "submit orders for review" setting. Depot uses two **company location metafields** so the cart and product page can tell the buyer what happens next.
+Liquid cannot read a company location's payment terms or its "submit orders for review" setting. Tradepost uses two **company location metafields** so the cart and product page can tell the buyer what happens next.
 
 | Namespace and key | Type | Example | What the buyer sees |
 |---|---|---|---|
@@ -39,7 +39,7 @@ Theme settings → Cart:
 
 ## 4. Customer accounts
 
-B2B needs the new customer accounts. On those stores Shopify hosts the account pages, so Depot's `customers/*` templates are not used; the company name, location switcher, payment terms and PO field live in the header, product page and cart instead. The templates stay in the theme for stores on classic accounts.
+B2B needs the new customer accounts. On those stores Shopify hosts the account pages, so Tradepost's `customers/*` templates are not used; the company name, location switcher, payment terms and PO field live in the header, product page and cart instead. The templates stay in the theme for stores on classic accounts.
 
 ## 5. Quick order form and quick order list
 

@@ -1,6 +1,6 @@
-# Updating Depot and rolling back
+# Updating Tradepost and rolling back
 
-Depot ships as numbered releases (`0.4.0`, `1.0.0-beta`, …). Every release has a `CHANGELOG.md` entry and a matching `theme_version` in `config/settings_schema.json`. Settings are never renamed between releases, so your theme editor settings carry over.
+Tradepost ships as numbered releases (`0.4.0`, `1.0.0-beta`, …). Every release has a `CHANGELOG.md` entry and a matching `theme_version` in `config/settings_schema.json`. Settings are never renamed between releases, so your theme editor settings carry over.
 
 ## Update without risk
 
@@ -11,7 +11,7 @@ Depot ships as numbered releases (`0.4.0`, `1.0.0-beta`, …). Every release has
 
 ## Roll back
 
-Something looks wrong after an update: Online Store → Themes → the previous Depot version → **Publish**. That is the whole rollback. Shopify keeps up to 20 themes, so keep the previous release until the new one has run for a week.
+Something looks wrong after an update: Online Store → Themes → the previous Tradepost version → **Publish**. That is the whole rollback. Shopify keeps up to 20 themes, so keep the previous release until the new one has run for a week.
 
 ## Using GitHub
 
