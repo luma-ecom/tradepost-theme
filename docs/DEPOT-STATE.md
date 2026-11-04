@@ -1,6 +1,6 @@
 # DEPOT-STATE — cập nhật cuối mỗi phiên
 
-**Cập nhật:** 03/11/2026 (phiên WP4) · **Version hiện tại:** 0.4.0 · **WP:** WP3 + WP4 xong, đã soi cả khách lẻ lẫn B2B; kế tiếp WP6 chuẩn bị public beta
+**Cập nhật:** 04/11/2026 (WP6 đang làm) · **Version hiện tại:** 0.4.0 · **WP:** WP3 + WP4 xong, đã soi cả khách lẻ lẫn B2B; kế tiếp WP6 chuẩn bị public beta
 
 ## Repo
 - GitHub `luma-ecom/depot-theme` (private, `main`) là nguồn chuẩn. Store `depot-theme/main` (id 191852413001) tự sync từ main (~10–20 giây; asset JS có lúc trễ hơn, reload lại là có).
@@ -33,6 +33,12 @@
   - Setting section: heading, text, B2B (mặc định) / mọi người, collection nguồn (mặc định tất cả), ô dán, CSV, mở panel sẵn. Ẩn giá theo `price.liquid`. Nhận app block.
   - Mobile <750px: mỗi dòng 3 hàng (tên · xoá / SKU · tồn / giá · số lượng · tổng); panel dán/CSV đóng sẵn.
   - README + CHANGELOG + version 0.4.0.
+
+## WP6 — đang làm (04/11)
+- Xong: `docs/updating-and-rollback.md` (F36) + README (bước tạo page quick order, mục Updating/rollback); `docs/b2b-setup.md` mục 5 quick order. Soi mobile 390px 4 màn 0.4.0 (header, PDP, collection list, cart) khách lẻ: OK. Lưu ý giả lập mobile phải áp mọi `max-width` ≥390 (có breakpoint 639/719), không chỉ 749/989.
+- Ảnh demo: 34 ảnh minh hoạ bao bì trung tính (không logo/hãng, 1200×1200, vẽ canvas) đã up lên Content → Files, tên `depot-<tên-sp>.png`. Sản phẩm cùng loại (khác hãng) dùng chung 1 ảnh.
+- **Chờ:** gắn ảnh vào 79 SP bằng Shopify connector (`fileUpdate` referencesToAdd) + sửa SKU trùng (2 SP Gracey, 3 biến thể/SP dùng chung SKU). Connector cần Leo đăng nhập lại và chọn depot-demo. KHÔNG dùng CSV import (importer bắt buộc cột Title, có cột giá/catalog B2B, rủi ro ghi đè).
+- Còn lại: Lighthouse (F37), test 1 app embed (F34), soi B2B mobile, CHANGELOG/version 1.0.0-beta, Leo duyệt "chỉnh chu" → public repo.
 
 ## Nghiệm thu WP4 (DoD: 500 SKU không lag; dòng hết hàng không vào cart; tổng tiền theo giá account)
 - Soi 03/11 bằng khách lẻ (tạm bật "mọi người" rồi trả về B2B):
