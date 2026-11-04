@@ -1,4 +1,4 @@
-/* Depot — base styles. Plain, dense where it matters (tables), generous elsewhere. */
+/* Tradepost — base styles. Plain, dense where it matters (tables), generous elsewhere. */
 *,*::before,*::after{box-sizing:border-box}
 html{font-size:var(--font-size-base,15px);-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-weight:var(--font-body-weight);line-height:1.55}

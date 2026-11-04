@@ -1,4 +1,4 @@
-/* Depot — quick order form for the whole catalog (WP4). Original code, no dependencies.
+/* Tradepost — quick order form for the whole catalog (WP4). Original code, no dependencies.
    <depot-order-form>: find by SKU or name, paste "SKU, qty" lines, upload CSV, add every line at once.
    Catalog pages come from sections/order-form-data.liquid (buyer's price, tiers, quantity rules, stock).
    Quantities already in the cart count against stock, rules and tiers; lines with no stock never reach the cart. */
