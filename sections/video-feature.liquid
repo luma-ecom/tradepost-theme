@@ -1,0 +1,80 @@
+{%- comment -%}
+  Video feature: a short video with heading, text and one button. Uses a Shopify-hosted video
+  (Content → Files). Audience setting: everyone / B2B buyers / retail visitors (works on all plans).
+{%- endcomment -%}
+{%- liquid
+  assign show = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.audience == 'd2c' and customer.b2b?
+    assign show = false
+  endif
+-%}
+{%- if show -%}
+  <div class="page-width video-feature">
+    <div class="video-feature__text">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="video-feature__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="video-feature__title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="video-feature__body rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a class="btn btn--primary" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+    <div class="video-feature__media">
+      {%- if section.settings.video != blank -%}
+        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: true, playsinline: true, image_size: '1280x', class: 'video-feature__video' }}
+      {%- else -%}
+        <div class="video-feature__placeholder">{{ 'sections.video_feature.placeholder' | t }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+.video-feature{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:24px 48px;align-items:center;padding-top:48px;padding-bottom:48px;border-top:1px solid var(--color-border)}
+.video-feature__eyebrow{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--color-muted);margin:0 0 8px}
+.video-feature__title{font-size:1.6rem;margin:0 0 10px}
+.video-feature__body{color:var(--color-muted);margin-bottom:20px;max-width:46ch}
+.video-feature__media{border:1px solid var(--color-border);border-radius:var(--radius);overflow:hidden;background:var(--color-surface)}
+.video-feature__video{display:block;width:100%;height:auto}
+.video-feature__placeholder{aspect-ratio:16/9;display:grid;place-items:center;color:var(--color-muted);font-size:.9rem}
+@media (max-width: 749px){
+.video-feature{grid-template-columns:minmax(0,1fr)}
+.video-feature__media{order:-1}
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.video_feature.name",
+  "tag": "section",
+  "class": "video-feature-section",
+  "settings": [
+    { "type": "video", "id": "video", "label": "t:sections.video_feature.video" },
+    { "type": "text", "id": "eyebrow", "label": "t:sections.trade_cta.eyebrow" },
+    { "type": "text", "id": "heading", "label": "t:sections.common.title", "default": "See what a trade buyer sees" },
+    { "type": "richtext", "id": "text", "label": "t:sections.common.text" },
+    { "type": "text", "id": "button_label", "label": "t:sections.common.link_label" },
+    { "type": "url", "id": "button_link", "label": "t:sections.common.link" },
+    {
+      "type": "select",
+      "id": "audience",
+      "label": "t:sections.common.audience",
+      "options": [
+        { "value": "everyone", "label": "t:sections.common.audience_everyone" },
+        { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+        { "value": "d2c", "label": "t:sections.common.audience_d2c" }
+      ],
+      "default": "everyone",
+      "info": "t:sections.common.audience_info"
+    }
+  ],
+  "presets": [{ "name": "t:sections.video_feature.name" }]
+}
+{% endschema %}
