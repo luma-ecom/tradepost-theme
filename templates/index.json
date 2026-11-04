@@ -12,6 +12,26 @@
     "trade": {
       "type": "trade-cta",
       "settings": {
+        "audience": "d2c",
+        "eyebrow": "Trade & wholesale",
+        "title": "Order the way your business buys",
+        "text": "<p>Your prices, your payment terms, quick reordering by SKU. Apply once, order from any location.</p>",
+        "primary_link": "",
+        "primary_label": "Apply for a trade account",
+        "secondary_link": "",
+        "secondary_label": "Already a customer? Log in",
+        "bg": "#f6f6f4"
+      }
+    },
+    "video": {
+      "type": "video-feature",
+      "settings": {
+        "video": "shopify://files/videos/tradepost-b2b-demo.mp4",
+        "eyebrow": "For trade buyers",
+        "heading": "See what a trade buyer sees",
+        "text": "<p>Account prices, volume tiers, quantity rules, quick order by SKU and payment terms at checkout. This short tour is a real B2B login on this demo store.</p>",
+        "button_label": "Request a B2B demo login",
+        "button_link": "/pages/trade-account",
         "audience": "d2c"
       }
     },
@@ -44,18 +64,9 @@
         "h",
         "t"
       ],
-      "settings": {}
-    },
-    "video": {
-      "type": "video-feature",
       "settings": {
-        "eyebrow": "For trade buyers",
-        "heading": "See what a trade buyer sees",
-        "text": "<p>Account prices, volume tiers, quantity rules, quick order by SKU and payment terms at checkout. This short tour is a real B2B login on this demo store.</p>",
-        "button_label": "Request a B2B demo login",
-        "button_link": "/pages/trade-account",
-        "audience": "d2c",
-        "video": "shopify://files/videos/03cdad9634ae4186a65797f70d8db39b.mp4"
+        "audience": "everyone",
+        "width": "narrow"
       }
     }
   },
