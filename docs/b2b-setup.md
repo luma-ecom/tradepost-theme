@@ -40,3 +40,9 @@ Theme settings → Cart:
 ## 4. Customer accounts
 
 B2B needs the new customer accounts. On those stores Shopify hosts the account pages, so Depot's `customers/*` templates are not used; the company name, location switcher, payment terms and PO field live in the header, product page and cart instead. The templates stay in the theme for stores on classic accounts.
+
+## 5. Quick order form and quick order list
+
+- **Quick order form (whole catalog):** create a page (Online Store → Pages → Add page, e.g. "Quick order") and pick the template `page.order-form`. Then in the theme editor open the Header section → **Quick order page**: pick that page. B2B buyers get a "Quick order" link in the top bar. Buyers can search by SKU, paste "SKU, qty" lines from a spreadsheet or upload a CSV (columns `sku`, `quantity`).
+- **Quick order list (per product):** already on the product template under the main product. It shows to B2B buyers on products with more than one variant (both are section settings).
+- Both use the theme setting B2B & wholesale → **Show stock levels in order lists**.
