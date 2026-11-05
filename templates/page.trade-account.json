@@ -1,1 +1,17 @@
-{ "sections": { "main": { "type": "wholesale-register", "settings": {} } }, "order": ["main"] }
+{
+  "sections": {
+    "main": {
+      "type": "wholesale-register",
+      "settings": {
+        "title": "Request a B2B demo login",
+        "text": "<p>See Tradepost the way a trade buyer does: account prices, volume tiers, quantity rules, quick order by SKU and payment terms at checkout.</p>",
+        "requirements": "<p>We set up a buyer login on a demo company and email you within one business day. You sign in with a one-time code sent to your email. No password needed.</p>",
+        "business_types": "Distributor / wholesaler, Brand selling B2B, Agency / developer, Other",
+        "pending_tag": "trade-pending"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

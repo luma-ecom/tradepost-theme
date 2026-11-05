@@ -16,9 +16,9 @@
         "eyebrow": "Trade & wholesale",
         "title": "Order the way your business buys",
         "text": "<p>Your prices, your payment terms, quick reordering by SKU. Apply once, order from any location.</p>",
-        "primary_link": "",
+        "primary_link": "/pages/trade-account",
         "primary_label": "Apply for a trade account",
-        "secondary_link": "",
+        "secondary_link": "/account/login",
         "secondary_label": "Already a customer? Log in",
         "bg": "#f6f6f4"
       }
