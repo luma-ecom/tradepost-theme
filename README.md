@@ -32,7 +32,7 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 
 ## Install
 
-1. Download the latest release zip.
+1. Download `tradepost-theme-1.0.0-beta.zip` from the [latest release](https://github.com/luma-ecom/tradepost-theme/releases/latest).
 2. Shopify admin → Online Store → Themes → Add theme → Upload zip file.
 3. Create a page with template `page.trade-account` and link it in Theme settings → B2B & wholesale → Trade application page.
 4. Set up companies, price lists, quantity rules and payment terms in Shopify admin. On non-Plus plans B2B pricing goes through B2B markets (max 3 active B2B catalogs). Add the two company-location metafields `depot.payment_terms` and `depot.review_orders`. Step by step: [`docs/b2b-setup.md`](docs/b2b-setup.md).
