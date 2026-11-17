@@ -14,13 +14,44 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "menu": { "type": "menu", "settings": { "title": "Shop", "menu": "main-menu" } },
-        "trade": { "type": "trade", "settings": { "link": "shopify://pages/trade-account" } },
-        "text": { "type": "text", "settings": { "title": "Contact", "text": "<p>Mon–Fri, 8:00–17:00. Orders placed before 14:00 ship the same day.</p>" } }
+        "menu": {
+          "type": "menu",
+          "settings": {
+            "title": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "trade": {
+          "type": "trade",
+          "settings": {
+            "link": "shopify://pages/trade-account"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "title": "Contact",
+            "text": "<p>Mon–Fri, 8:00–17:00. Orders placed before 14:00 ship the same day.</p><p><a href=\"/pages/contact\">Send us a message</a></p>"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Newsletter",
+            "text": "<p>Price updates and new stock, once a month.</p>"
+          }
+        }
       },
-      "block_order": ["menu", "trade", "text"],
+      "block_order": [
+        "menu",
+        "trade",
+        "text",
+        "newsletter"
+      ],
       "settings": {}
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }

@@ -1,0 +1,83 @@
+{%- comment -%}
+  FAQ: questions and answers with <details>/<summary> (no JavaScript; Enter / Space open and close).
+  Optional FAQPage structured data (JSON-LD), on by default.
+{%- endcomment -%}
+{%- liquid
+  assign show = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.audience == 'd2c' and customer.b2b?
+    assign show = false
+  endif
+-%}
+{%- if show and section.blocks.size > 0 -%}
+<section class="faq section" data-section="{{ section.id }}">
+  <div class="page-width faq__inner">
+    {%- if section.settings.title != blank -%}
+      <h2 class="faq__title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="faq__intro rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+    <div class="faq__list">
+      {%- for block in section.blocks -%}
+        <details class="faq__item" {{ block.shopify_attributes }}{% if forloop.first and section.settings.open_first %} open{% endif %}>
+          <summary class="faq__q">{{ block.settings.question | escape }}</summary>
+          <div class="faq__a rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- if section.settings.json_ld -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+    {
+      "@type": "Question",
+      "name": {{ block.settings.question | strip_html | json }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_newlines | json }} }
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.faq.name",
+  "tag": "section",
+  "max_blocks": 30,
+  "settings": [
+    { "type": "select", "id": "audience", "label": "t:sections.common.audience", "options": [
+      { "value": "everyone", "label": "t:sections.common.audience_everyone" },
+      { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+      { "value": "d2c", "label": "t:sections.common.audience_d2c" }
+    ], "default": "everyone", "info": "t:sections.common.audience_info" },
+    { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Questions from trade buyers" },
+    { "type": "richtext", "id": "text", "label": "t:sections.common.text" },
+    { "type": "checkbox", "id": "open_first", "label": "t:sections.faq.open_first", "default": false },
+    { "type": "checkbox", "id": "json_ld", "label": "t:sections.faq.json_ld", "info": "t:sections.faq.json_ld_info", "default": true }
+  ],
+  "blocks": [
+    { "type": "question", "name": "t:sections.faq.blocks.question", "settings": [
+      { "type": "text", "id": "question", "label": "t:sections.faq.question", "default": "Who can open a trade account?" },
+      { "type": "richtext", "id": "answer", "label": "t:sections.faq.answer", "default": "<p>Any registered business that buys for resale or for its own work. Apply with your company name and tax ID. We reply within one business day.</p>" }
+    ]}
+  ],
+  "presets": [
+    { "name": "t:sections.faq.name", "blocks": [
+      { "type": "question", "settings": { "question": "Who can open a trade account?", "answer": "<p>Any registered business that buys for resale or for its own work. Apply with your company name and tax ID. We reply within one business day.</p>" } },
+      { "type": "question", "settings": { "question": "Is there a minimum order?", "answer": "<p>Trade orders start at $250 before tax. Some items are sold in case packs; the product page shows the minimum and the step.</p>" } },
+      { "type": "question", "settings": { "question": "How fast do you ship?", "answer": "<p>Orders placed before 2 pm on a business day ship the same day. Most deliveries arrive in 2 to 3 business days.</p>" } },
+      { "type": "question", "settings": { "question": "Can I pay on net terms?", "answer": "<p>Yes. Approved accounts can pay by invoice, 30 days after the order ships. Ask your rep to set it up.</p>" } },
+      { "type": "question", "settings": { "question": "Do you deliver to several locations?", "answer": "<p>Yes. Each location in your account has its own address and can place its own orders.</p>" } }
+    ]}
+  ]
+}
+{% endschema %}

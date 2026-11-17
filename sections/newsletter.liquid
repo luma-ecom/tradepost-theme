@@ -1,0 +1,42 @@
+{%- comment -%}
+  Newsletter section: heading, text and an email sign-up. Sign-ups become customers tagged
+  "newsletter" with email marketing on. The footer has a matching Newsletter block.
+{%- endcomment -%}
+{%- liquid
+  assign show = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.audience == 'd2c' and customer.b2b?
+    assign show = false
+  endif
+  assign fid = 'Newsletter-' | append: section.id
+-%}
+{%- if show -%}
+<section class="newsletter section" data-section="{{ section.id }}">
+  <div class="page-width newsletter__inner">
+    <div class="newsletter__copy">
+      {%- if section.settings.title != blank -%}<h2 class="newsletter__title">{{ section.settings.title | escape }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="newsletter__text rte">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+    {% render 'newsletter-form', id: fid, button_label: section.settings.button_label %}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.newsletter.name",
+  "tag": "section",
+  "settings": [
+    { "type": "select", "id": "audience", "label": "t:sections.common.audience", "options": [
+      { "value": "everyone", "label": "t:sections.common.audience_everyone" },
+      { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+      { "value": "d2c", "label": "t:sections.common.audience_d2c" }
+    ], "default": "everyone", "info": "t:sections.common.audience_info" },
+    { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Price changes and new stock, once a month" },
+    { "type": "richtext", "id": "text", "label": "t:sections.common.text", "default": "<p>One short email with price updates, new lines and back-in-stock items. Unsubscribe any time.</p>" },
+    { "type": "text", "id": "button_label", "label": "t:sections.newsletter.button_label", "default": "Subscribe" }
+  ],
+  "presets": [ { "name": "t:sections.newsletter.name" } ]
+}
+{% endschema %}

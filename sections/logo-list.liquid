@@ -1,0 +1,81 @@
+{%- comment -%}
+  Logo list: brands you distribute or partners. Each block is a logo image, or the brand name
+  as text when you have no logo you are allowed to use. Optional link. Logos can show in grey
+  and turn to color on hover (setting).
+{%- endcomment -%}
+{%- liquid
+  assign show = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.audience == 'd2c' and customer.b2b?
+    assign show = false
+  endif
+-%}
+{%- if show and section.blocks.size > 0 -%}
+<section class="logos section{% if section.settings.grayscale %} logos--gray{% endif %}" data-section="{{ section.id }}">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="logos__title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    <ul class="logos__grid logos__grid--{{ section.settings.per_row }}" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign img = block.settings.image
+          assign label = block.settings.name
+          if label == blank and img != blank
+            assign label = img.alt
+          endif
+          assign alt = block.settings.alt | default: label
+        -%}
+        <li class="logos__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}<a class="logos__link" href="{{ block.settings.link }}">{%- endif -%}
+          {%- if img != blank -%}
+            {{ img | image_url: width: 400 | image_tag: widths: '160, 240, 320, 400', sizes: '160px', class: 'logos__img', loading: 'lazy', alt: alt }}
+          {%- elsif label != blank -%}
+            <span class="logos__name">{{ label | escape }}</span>
+          {%- else -%}
+            {{ 'logo' | placeholder_svg_tag: 'logos__img logos__placeholder' }}
+          {%- endif -%}
+          {%- if block.settings.link != blank -%}</a>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.logo_list.name",
+  "tag": "section",
+  "max_blocks": 24,
+  "settings": [
+    { "type": "select", "id": "audience", "label": "t:sections.common.audience", "options": [
+      { "value": "everyone", "label": "t:sections.common.audience_everyone" },
+      { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+      { "value": "d2c", "label": "t:sections.common.audience_d2c" }
+    ], "default": "everyone", "info": "t:sections.common.audience_info" },
+    { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Brands we distribute" },
+    { "type": "range", "id": "per_row", "label": "t:sections.logo_list.per_row", "min": 3, "max": 6, "step": 1, "default": 6 },
+    { "type": "checkbox", "id": "grayscale", "label": "t:sections.logo_list.grayscale", "info": "t:sections.logo_list.grayscale_info", "default": true }
+  ],
+  "blocks": [
+    { "type": "logo", "name": "t:sections.logo_list.blocks.logo", "settings": [
+      { "type": "image_picker", "id": "image", "label": "t:sections.logo_list.image" },
+      { "type": "text", "id": "name", "label": "t:sections.logo_list.brand_name", "info": "t:sections.logo_list.brand_name_info" },
+      { "type": "text", "id": "alt", "label": "t:sections.logo_list.alt" },
+      { "type": "url", "id": "link", "label": "t:sections.common.link" }
+    ]}
+  ],
+  "presets": [
+    { "name": "t:sections.logo_list.name", "blocks": [
+      { "type": "logo", "settings": { "name": "Brand one" } },
+      { "type": "logo", "settings": { "name": "Brand two" } },
+      { "type": "logo", "settings": { "name": "Brand three" } },
+      { "type": "logo", "settings": { "name": "Brand four" } },
+      { "type": "logo", "settings": { "name": "Brand five" } },
+      { "type": "logo", "settings": { "name": "Brand six" } }
+    ]}
+  ]
+}
+{% endschema %}

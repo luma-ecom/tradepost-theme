@@ -1,0 +1,87 @@
+{%- comment -%}
+  Contact form (Shopify contact form, emails the store's sender address).
+  Fields: name, email, message; optional company, phone and account number (settings).
+  Logged-in customers get name, email and company filled in.
+{%- endcomment -%}
+{%- liquid
+  assign show = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.audience == 'd2c' and customer.b2b?
+    assign show = false
+  endif
+  assign fid = 'ContactForm-' | append: section.id
+  assign company_name = customer.current_company.name | default: customer.default_address.company
+-%}
+{%- if show -%}
+<section class="contact section" data-section="{{ section.id }}">
+  <div class="page-width contact__inner">
+    {%- if section.settings.title != blank or section.settings.text != blank -%}
+      <div class="contact__copy">
+        {%- if section.settings.title != blank -%}<h2 class="contact__title">{{ section.settings.title | escape }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<div class="contact__text rte">{{ section.settings.text }}</div>{%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- form 'contact', id: fid, class: 'form contact__form' -%}
+      {%- if form.posted_successfully? -%}
+        <div class="notice notice--success" role="status">{{ 'contact.form.success' | t }}</div>
+      {%- elsif form.errors -%}
+        <div class="notice notice--error" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <input type="hidden" name="contact[subject]" value="{{ section.settings.subject | escape }}">
+      <div class="form__row">
+        <label class="field"><span class="field__label">{{ 'contact.form.name' | t }}</span>
+          <input class="field__input" type="text" name="contact[name]" autocomplete="name" required value="{% if form.name %}{{ form.name | escape }}{% elsif customer %}{{ customer.name | escape }}{% endif %}">
+        </label>
+        <label class="field"><span class="field__label">{{ 'contact.form.email' | t }}</span>
+          <input class="field__input" type="email" name="contact[email]" autocomplete="email" required value="{% if form.email %}{{ form.email | escape }}{% elsif customer %}{{ customer.email | escape }}{% endif %}">
+        </label>
+      </div>
+      {%- if section.settings.show_company or section.settings.show_phone -%}
+        <div class="form__row">
+          {%- if section.settings.show_company -%}
+            <label class="field"><span class="field__label">{{ 'contact.form.company' | t }}</span>
+              <input class="field__input" type="text" name="contact[company]" autocomplete="organization" value="{{ company_name | escape }}">
+            </label>
+          {%- endif -%}
+          {%- if section.settings.show_phone -%}
+            <label class="field"><span class="field__label">{{ 'contact.form.phone' | t }}</span>
+              <input class="field__input" type="tel" name="contact[phone]" autocomplete="tel" value="{{ customer.phone | escape }}">
+            </label>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.show_account -%}
+        <label class="field"><span class="field__label">{{ 'contact.form.account_number' | t }}</span>
+          <input class="field__input" type="text" name="contact[account_number]">
+        </label>
+      {%- endif -%}
+      <label class="field"><span class="field__label">{{ 'contact.form.message' | t }}</span>
+        <textarea class="field__input" name="contact[body]" rows="5" required>{{ form.body | escape }}</textarea>
+      </label>
+      <button type="submit" class="btn btn--primary">{{ 'contact.form.submit' | t }}</button>
+    {%- endform -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.contact_form.name",
+  "tag": "section",
+  "settings": [
+    { "type": "select", "id": "audience", "label": "t:sections.common.audience", "options": [
+      { "value": "everyone", "label": "t:sections.common.audience_everyone" },
+      { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+      { "value": "d2c", "label": "t:sections.common.audience_d2c" }
+    ], "default": "everyone", "info": "t:sections.common.audience_info" },
+    { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Send us a message" },
+    { "type": "richtext", "id": "text", "label": "t:sections.common.text", "default": "<p>Questions about an order, pricing or your account? We reply within one business day.</p>" },
+    { "type": "text", "id": "subject", "label": "t:sections.contact_form.subject", "info": "t:sections.contact_form.subject_info", "default": "Contact form" },
+    { "type": "checkbox", "id": "show_company", "label": "t:sections.contact_form.show_company", "default": true },
+    { "type": "checkbox", "id": "show_phone", "label": "t:sections.contact_form.show_phone", "default": true },
+    { "type": "checkbox", "id": "show_account", "label": "t:sections.contact_form.show_account", "default": true }
+  ],
+  "presets": [ { "name": "t:sections.contact_form.name" } ]
+}
+{% endschema %}
