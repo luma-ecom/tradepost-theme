@@ -81,7 +81,13 @@
           {%- else -%}
             <div class="product-{{ view }}" data-products>
               {%- for product in collection.products -%}
-                {% render 'product-card', product: product, view: view, section_id: section.id %}
+                {%- liquid
+                  assign eager_card = false
+                  if forloop.index <= 4 and paginate.current_page == 1
+                    assign eager_card = true
+                  endif
+                -%}
+                {% render 'product-card', product: product, view: view, section_id: section.id, eager: eager_card %}
               {%- endfor -%}
             </div>
           {%- endif -%}

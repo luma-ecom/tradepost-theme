@@ -45,11 +45,16 @@
                 assign img = c.products.first.featured_image
               endif
               assign show_count = section.settings.show_count
+              # Near the top of the page the first cards are often the largest paint: load them right away.
+              assign img_loading = 'lazy'
+              if section.index <= 3 and forloop.index <= 2
+                assign img_loading = 'eager'
+              endif
             -%}
             <a class="clist__card" href="{{ c.url }}">
               <span class="clist__media">
                 {%- if img != blank -%}
-                  {{ img | image_url: width: 900 | image_tag: widths: '300, 450, 600, 750, 900', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw', class: 'clist__img', loading: 'lazy', alt: '' }}
+                  {{ img | image_url: width: 900 | image_tag: widths: '300, 450, 600, 750, 900', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw', class: 'clist__img', loading: img_loading, alt: '' }}
                 {%- else -%}
                   {{ 'collection-1' | placeholder_svg_tag: 'clist__img clist__placeholder' }}
                 {%- endif -%}

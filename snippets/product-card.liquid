@@ -1,15 +1,20 @@
 {%- comment -%}
   Product card for collection grids and lists.
-  Params: product (required), view ('grid' | 'list', default 'grid'), section_id
+  Params: product (required), view ('grid' | 'list', default 'grid'), section_id,
+    eager (boolean, load the image right away: first cards above the fold)
 {%- endcomment -%}
 {%- liquid
+  assign card_loading = 'lazy'
+  if eager
+    assign card_loading = 'eager'
+  endif
   assign v = product.selected_or_first_available_variant
   assign view = view | default: 'grid'
 -%}
 <article class="card card--{{ view }}" data-product-card>
   <a class="card__media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
     {%- if product.featured_image -%}
-      {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '200,300,400,600', sizes: '(min-width: 990px) 25vw, 50vw', class: 'card__img' }}
+      {{ product.featured_image | image_url: width: 600 | image_tag: loading: card_loading, widths: '200,300,400,600', sizes: '(min-width: 990px) 25vw, 50vw', class: 'card__img' }}
     {%- else -%}
       <span class="card__placeholder">{% render 'icon', name: 'image' %}<span class="visually-hidden">{{ 'products.no_image' | t }}</span></span>
     {%- endif -%}
