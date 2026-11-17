@@ -4,7 +4,7 @@
 Content sections, batch 2. No breaking changes from 1.0.0-rc.1; settings carry over.
 - New section **Logo list** (`sections/logo-list.liquid`): heading, 3–6 logos per row, up to 24. Each logo: image, brand name (shown as text when there is no image), alt text, link. Logos in grey that turn to color on hover (can be turned off).
 - New section **FAQ** (`sections/faq.liquid`): heading, intro text, up to 30 questions with rich-text answers. Built on `<details>`/`<summary>`: no JavaScript, opens and closes with Enter or Space. Adds `FAQPage` structured data (JSON-LD) by default. Default questions cover trade accounts, minimum order, shipping, net terms and delivery to several locations.
-- New section **Contact form** (`sections/contact-form.liquid`): name, email, message, plus company, phone and account number (each can be turned off). Logged-in customers get name, email and company filled in. Email subject is a setting. Success and error messages at the top of the form.
+- New section **Contact form** (`sections/contact-form.liquid`): name, email, message, plus company, phone and account number (each can be turned off). Logged-in customers get name, email and company filled in. Email subject and layout (text beside the form, or narrow with text above to match page content) are settings. Success and error messages at the top of the form.
 - New section **Newsletter** (`sections/newsletter.liquid`) and a **Newsletter** block in the footer, both using `snippets/newsletter-form.liquid`. Sign-ups become customers tagged `newsletter` with email marketing on.
 - New template `page.contact` (page content + contact form).
 - Footer: columns follow the number of blocks (up to 4).
