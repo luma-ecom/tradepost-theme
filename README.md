@@ -6,7 +6,7 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 
 ## Status
 
-`1.0.0-rc.2` on `main` (release candidate; the latest download is still `1.0.0-beta`). Quick order list and whole-catalog quick order form (search by SKU, paste, CSV), native B2B pricing, volume tiers, quantity rules and stock checks. Tested on a live B2B dev store (3 companies, 3 B2B price lists, volume pricing, quantity rules). Report issues on GitHub.
+`1.0.0-rc.3` (release candidate, the latest download). Content sections, mega menu, country and language selector, pickup availability and subscriptions on top of the beta. Quick order list and whole-catalog quick order form (search by SKU, paste, CSV), native B2B pricing, volume tiers, quantity rules and stock checks. Tested on a live B2B dev store (3 companies, 3 B2B price lists, volume pricing, quantity rules). Report issues on GitHub.
 
 
 ## Live demo
@@ -37,7 +37,7 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 
 ## Install
 
-1. Download `tradepost-theme-1.0.0-beta.zip` from the [latest release](https://github.com/luma-ecom/tradepost-theme/releases/latest).
+1. Download `tradepost-theme-1.0.0-rc.3.zip` from the [latest release](https://github.com/luma-ecom/tradepost-theme/releases/latest).
 2. Shopify admin → Online Store → Themes → Add theme → Upload zip file.
 3. Create a page with template `page.trade-account` and link it in Theme settings → B2B & wholesale → Trade application page.
 4. Set up companies, price lists, quantity rules and payment terms in Shopify admin. On non-Plus plans B2B pricing goes through B2B markets (max 3 active B2B catalogs). Add the two company-location metafields `depot.payment_terms` and `depot.review_orders`. Step by step: [`docs/b2b-setup.md`](docs/b2b-setup.md).
