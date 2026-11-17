@@ -1,0 +1,95 @@
+{%- comment -%}
+  Multicolumn: 2–4 columns on desktop, each with an optional icon or image, title, text and link.
+  Mobile: stacked in one column, or a horizontal swipe row (CSS scroll-snap, no JS).
+{%- endcomment -%}
+{%- liquid
+  assign show = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.audience == 'd2c' and customer.b2b?
+    assign show = false
+  endif
+  assign swipe = false
+  if section.settings.mobile == 'swipe' and section.blocks.size > 1
+    assign swipe = true
+  endif
+-%}
+{%- if show -%}
+<section class="multicolumn section multicolumn--{{ section.settings.image_style }}{% if swipe %} multicolumn--swipe{% endif %}" data-section="{{ section.id }}">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="multicolumn__title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+    <ul
+      class="multicolumn__grid multicolumn__grid--{{ section.settings.columns }}"
+      {% if swipe %}tabindex="0" aria-label="{% if section.settings.title != blank %}{{ section.settings.title | escape }}{% else %}{{ 'sections.multicolumn.scroll_label' | t }}{% endif %}"{% endif %}
+    >
+      {%- for block in section.blocks -%}
+        <li class="multicolumn__col" {{ block.shopify_attributes }}>
+          {%- assign img = block.settings.image -%}
+          {%- if img != blank -%}
+            <div class="multicolumn__media">
+              {%- if section.settings.image_style == 'large' -%}
+                {{ img | image_url: width: 1000 | image_tag: widths: '300, 450, 600, 800, 1000', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 80vw', class: 'multicolumn__img', loading: 'lazy', alt: img.alt }}
+              {%- else -%}
+                {{ img | image_url: width: 96 | image_tag: widths: '48, 96', sizes: '48px', class: 'multicolumn__icon', loading: 'lazy', alt: img.alt }}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          {%- if block.settings.title != blank -%}
+            <h3 class="multicolumn__heading">{{ block.settings.title | escape }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="multicolumn__text rte">{{ block.settings.text }}</div>
+          {%- endif -%}
+          {%- if block.settings.link_label != blank and block.settings.link != blank -%}
+            <a class="multicolumn__link" href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.multicolumn.name",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "select", "id": "audience", "label": "t:sections.common.audience", "options": [
+      { "value": "everyone", "label": "t:sections.common.audience_everyone" },
+      { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+      { "value": "d2c", "label": "t:sections.common.audience_d2c" }
+    ], "default": "everyone", "info": "t:sections.common.audience_info" },
+    { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Why buy from us" },
+    { "type": "range", "id": "columns", "label": "t:sections.multicolumn.columns", "min": 2, "max": 4, "step": 1, "default": 4 },
+    { "type": "select", "id": "mobile", "label": "t:sections.multicolumn.mobile", "options": [
+      { "value": "stack", "label": "t:sections.multicolumn.mobile_stack" },
+      { "value": "swipe", "label": "t:sections.multicolumn.mobile_swipe" }
+    ], "default": "stack" },
+    { "type": "select", "id": "image_style", "label": "t:sections.multicolumn.image_style", "options": [
+      { "value": "icon", "label": "t:sections.multicolumn.image_icon" },
+      { "value": "large", "label": "t:sections.multicolumn.image_large" }
+    ], "default": "icon" }
+  ],
+  "blocks": [
+    { "type": "column", "name": "t:sections.multicolumn.blocks.column", "settings": [
+      { "type": "image_picker", "id": "image", "label": "t:sections.multicolumn.image" },
+      { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Net 30 terms" },
+      { "type": "richtext", "id": "text", "label": "t:sections.common.text", "default": "<p>Approved accounts pay by invoice, 30 days after the order ships.</p>" },
+      { "type": "text", "id": "link_label", "label": "t:sections.common.link_label" },
+      { "type": "url", "id": "link", "label": "t:sections.common.link" }
+    ]}
+  ],
+  "presets": [
+    { "name": "t:sections.multicolumn.name", "blocks": [
+      { "type": "column", "settings": { "title": "Net 30 terms", "text": "<p>Approved accounts pay by invoice, 30 days after the order ships.</p>" } },
+      { "type": "column", "settings": { "title": "Order by SKU", "text": "<p>Paste a list of SKUs or upload a CSV. Your whole order in one step.</p>" } },
+      { "type": "column", "settings": { "title": "Volume pricing", "text": "<p>Your account price drops as you order more. Tiers show on every product.</p>" } },
+      { "type": "column", "settings": { "title": "Dedicated rep", "text": "<p>One person who knows your account and answers within a business day.</p>" } }
+    ]}
+  ]
+}
+{% endschema %}

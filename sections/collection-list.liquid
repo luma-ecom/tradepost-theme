@@ -1,0 +1,110 @@
+{%- comment -%}
+  Collection list: up to 12 hand-picked collections in a 2–5 column grid.
+  An empty block shows a placeholder so the layout reads in the theme editor.
+  Product count: shown unless products in the collection are hidden from this visitor.
+  Free has no hidden products, so the count always shows when the setting is on
+  (Pro adds the wholesale-only check here, same rule as the collection page).
+{%- endcomment -%}
+{%- liquid
+  assign show = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.audience == 'd2c' and customer.b2b?
+    assign show = false
+  endif
+  case section.settings.ratio
+    when 'portrait'
+      assign ratio = 0.75
+    when 'landscape'
+      assign ratio = 1.3333
+    else
+      assign ratio = 1
+  endcase
+-%}
+{%- if show -%}
+<section class="clist section" data-section="{{ section.id }}">
+  <div class="page-width">
+    {%- if section.settings.title != blank or section.settings.show_view_all -%}
+      <header class="featured__head">
+        {%- if section.settings.title != blank -%}
+          <h2 class="featured__title">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.show_view_all -%}
+          <a class="featured__all" href="{{ routes.collections_url }}">{{ 'collections.view_all' | t }}</a>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+    <ul class="clist__grid clist__grid--{{ section.settings.columns }}" style="--ratio: {{ ratio }};">
+      {%- for block in section.blocks -%}
+        {%- assign c = block.settings.collection -%}
+        <li class="clist__item" {{ block.shopify_attributes }}>
+          {%- if c != blank -%}
+            {%- liquid
+              assign img = c.featured_image
+              if img == blank
+                assign img = c.products.first.featured_image
+              endif
+              assign show_count = section.settings.show_count
+            -%}
+            <a class="clist__card" href="{{ c.url }}">
+              <span class="clist__media">
+                {%- if img != blank -%}
+                  {{ img | image_url: width: 900 | image_tag: widths: '300, 450, 600, 750, 900', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw', class: 'clist__img', loading: 'lazy', alt: '' }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'clist__img clist__placeholder' }}
+                {%- endif -%}
+              </span>
+              <span class="clist__title">{{ c.title | escape }}</span>
+              {%- if show_count -%}
+                <span class="clist__count">{{ 'collections.product_count' | t: count: c.products_count }}</span>
+              {%- endif -%}
+            </a>
+          {%- else -%}
+            <div class="clist__card clist__card--placeholder">
+              <span class="clist__media">
+                {%- assign ph = forloop.index | modulo: 6 | plus: 1 -%}
+                {{ 'collection-' | append: ph | placeholder_svg_tag: 'clist__img clist__placeholder' }}
+              </span>
+              <span class="clist__title">{{ 'sections.collection_list.placeholder' | t }}</span>
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.collection_list.name",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "select", "id": "audience", "label": "t:sections.common.audience", "options": [
+      { "value": "everyone", "label": "t:sections.common.audience_everyone" },
+      { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+      { "value": "d2c", "label": "t:sections.common.audience_d2c" }
+    ], "default": "everyone", "info": "t:sections.common.audience_info" },
+    { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Shop by category" },
+    { "type": "range", "id": "columns", "label": "t:sections.collection_list.columns", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "select", "id": "ratio", "label": "t:sections.collection_list.ratio", "options": [
+      { "value": "square", "label": "t:sections.collection_list.ratio_square" },
+      { "value": "portrait", "label": "t:sections.collection_list.ratio_portrait" },
+      { "value": "landscape", "label": "t:sections.collection_list.ratio_landscape" }
+    ], "default": "square" },
+    { "type": "checkbox", "id": "show_count", "label": "t:sections.collection_list.show_count", "default": true },
+    { "type": "checkbox", "id": "show_view_all", "label": "t:sections.collection_list.show_view_all", "default": true }
+  ],
+  "blocks": [
+    { "type": "collection", "name": "t:sections.collection_list.blocks.collection", "settings": [
+      { "type": "collection", "id": "collection", "label": "t:sections.collection_list.collection" }
+    ]}
+  ],
+  "presets": [
+    { "name": "t:sections.collection_list.name", "blocks": [
+      { "type": "collection" }, { "type": "collection" }, { "type": "collection" }, { "type": "collection" }
+    ]}
+  ]
+}
+{% endschema %}

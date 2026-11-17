@@ -1,0 +1,148 @@
+{%- comment -%}
+  Image banner: full-width image with heading, text and up to 2 buttons.
+  Separate mobile image (optional). Height: small / medium / large / adapt to image.
+  First section on the page loads its image eagerly with fetchpriority="high" (LCP).
+  No image: the theme editor shows a placeholder; the live store shows the plain surface color.
+{%- endcomment -%}
+{%- liquid
+  assign show = true
+  if section.settings.audience == 'b2b' and customer.b2b? != true
+    assign show = false
+  elsif section.settings.audience == 'd2c' and customer.b2b?
+    assign show = false
+  endif
+
+  assign img = section.settings.image
+  assign img_m = section.settings.image_mobile | default: img
+  assign first = false
+  if section.index == 1
+    assign first = true
+  endif
+  assign overlay = section.settings.overlay | divided_by: 100.0
+
+  assign ratio = 2.4
+  if img != blank
+    assign ratio = img.aspect_ratio
+  endif
+  assign ratio_m = 1.2
+  if img_m != blank
+    assign ratio_m = img_m.aspect_ratio
+  endif
+-%}
+{%- if show -%}
+<section
+  class="banner banner--{{ section.settings.height }} banner--{{ section.settings.text_position }} banner--{{ section.settings.text_color }}{% if img == blank %} banner--noimg{% endif %}"
+  data-section="{{ section.id }}"
+  style="--overlay: {{ overlay }}; --ratio: {{ ratio }}; --ratio-m: {{ ratio_m }};"
+>
+  <div class="banner__media">
+    {%- if img != blank -%}
+      <picture>
+        {%- if section.settings.image_mobile != blank -%}
+          {%- assign m = section.settings.image_mobile -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ m | image_url: width: 500 }} 500w, {{ m | image_url: width: 750 }} 750w, {{ m | image_url: width: 1100 }} 1100w, {{ m | image_url: width: 1500 }} 1500w"
+            sizes="100vw"
+            width="{{ m.width }}"
+            height="{{ m.height }}"
+          >
+        {%- endif -%}
+        {%- if first -%}
+          {{ img | image_url: width: 3000 | image_tag: widths: '750, 1100, 1500, 1920, 2400, 3000', sizes: '100vw', class: 'banner__img', loading: 'eager', fetchpriority: 'high', alt: img.alt }}
+        {%- else -%}
+          {{ img | image_url: width: 3000 | image_tag: widths: '750, 1100, 1500, 1920, 2400, 3000', sizes: '100vw', class: 'banner__img', loading: 'lazy', alt: img.alt }}
+        {%- endif -%}
+      </picture>
+    {%- elsif request.design_mode -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'banner__img banner__placeholder' }}
+    {%- endif -%}
+  </div>
+  {%- if section.blocks.size > 0 -%}
+    <div class="page-width banner__content">
+      <div class="banner__box">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'heading' -%}
+              {%- if first and forloop.first -%}
+                <h1 class="banner__heading" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</h1>
+              {%- else -%}
+                <h2 class="banner__heading" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</h2>
+              {%- endif -%}
+            {%- when 'text' -%}
+              <div class="banner__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+            {%- when 'buttons' -%}
+              {%- if block.settings.label_1 != blank or block.settings.label_2 != blank -%}
+                <div class="banner__buttons" {{ block.shopify_attributes }}>
+                  {%- if block.settings.label_1 != blank -%}
+                    <a class="btn btn--{{ block.settings.style_1 }}" href="{{ block.settings.link_1 | default: '#' }}">{{ block.settings.label_1 | escape }}</a>
+                  {%- endif -%}
+                  {%- if block.settings.label_2 != blank -%}
+                    <a class="btn btn--{{ block.settings.style_2 }}" href="{{ block.settings.link_2 | default: '#' }}">{{ block.settings.label_2 | escape }}</a>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.image_banner.name",
+  "tag": "section",
+  "class": "banner-section",
+  "settings": [
+    { "type": "select", "id": "audience", "label": "t:sections.common.audience", "options": [
+      { "value": "everyone", "label": "t:sections.common.audience_everyone" },
+      { "value": "b2b", "label": "t:sections.common.audience_b2b" },
+      { "value": "d2c", "label": "t:sections.common.audience_d2c" }
+    ], "default": "everyone", "info": "t:sections.common.audience_info" },
+    { "type": "image_picker", "id": "image", "label": "t:sections.image_banner.image" },
+    { "type": "image_picker", "id": "image_mobile", "label": "t:sections.image_banner.image_mobile", "info": "t:sections.image_banner.image_mobile_info" },
+    { "type": "select", "id": "height", "label": "t:sections.image_banner.height", "options": [
+      { "value": "small", "label": "t:sections.image_banner.height_small" },
+      { "value": "medium", "label": "t:sections.image_banner.height_medium" },
+      { "value": "large", "label": "t:sections.image_banner.height_large" },
+      { "value": "adapt", "label": "t:sections.image_banner.height_adapt" }
+    ], "default": "medium" },
+    { "type": "select", "id": "text_position", "label": "t:sections.image_banner.text_position", "options": [
+      { "value": "left", "label": "t:sections.image_banner.left" },
+      { "value": "center", "label": "t:sections.image_banner.center" }
+    ], "default": "left" },
+    { "type": "range", "id": "overlay", "label": "t:sections.image_banner.overlay", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 35 },
+    { "type": "select", "id": "text_color", "label": "t:sections.image_banner.text_color", "options": [
+      { "value": "light", "label": "t:sections.image_banner.light" },
+      { "value": "dark", "label": "t:sections.image_banner.dark" }
+    ], "default": "light" }
+  ],
+  "blocks": [
+    { "type": "heading", "name": "t:sections.image_banner.blocks.heading", "limit": 1, "settings": [
+      { "type": "text", "id": "text", "label": "t:sections.common.title", "default": "Supplies for the trade, priced for your account" }
+    ]},
+    { "type": "text", "name": "t:sections.image_banner.blocks.text", "limit": 1, "settings": [
+      { "type": "richtext", "id": "text", "label": "t:sections.common.text", "default": "<p>Order by SKU, see your own prices and pay on net terms.</p>" }
+    ]},
+    { "type": "buttons", "name": "t:sections.image_banner.blocks.buttons", "limit": 1, "settings": [
+      { "type": "text", "id": "label_1", "label": "t:sections.image_banner.label_1", "default": "Shop the catalog" },
+      { "type": "url", "id": "link_1", "label": "t:sections.image_banner.link_1" },
+      { "type": "select", "id": "style_1", "label": "t:sections.image_banner.style_1", "options": [
+        { "value": "primary", "label": "t:sections.image_banner.style_primary" },
+        { "value": "secondary", "label": "t:sections.image_banner.style_secondary" }
+      ], "default": "primary" },
+      { "type": "text", "id": "label_2", "label": "t:sections.image_banner.label_2", "default": "Apply for a trade account" },
+      { "type": "url", "id": "link_2", "label": "t:sections.image_banner.link_2" },
+      { "type": "select", "id": "style_2", "label": "t:sections.image_banner.style_2", "options": [
+        { "value": "primary", "label": "t:sections.image_banner.style_primary" },
+        { "value": "secondary", "label": "t:sections.image_banner.style_secondary" }
+      ], "default": "secondary" }
+    ]}
+  ],
+  "presets": [
+    { "name": "t:sections.image_banner.name", "blocks": [ { "type": "heading" }, { "type": "text" }, { "type": "buttons" } ] }
+  ]
+}
+{% endschema %}
