@@ -15,7 +15,7 @@
 -%}
 {%- if show -%}
 <section class="contact section" data-section="{{ section.id }}">
-  <div class="page-width contact__inner">
+  <div class="page-width contact__inner contact__inner--{{ section.settings.width }}">
     {%- if section.settings.title != blank or section.settings.text != blank -%}
       <div class="contact__copy">
         {%- if section.settings.title != blank -%}<h2 class="contact__title">{{ section.settings.title | escape }}</h2>{%- endif -%}
@@ -77,6 +77,10 @@
     ], "default": "everyone", "info": "t:sections.common.audience_info" },
     { "type": "text", "id": "title", "label": "t:sections.common.title", "default": "Send us a message" },
     { "type": "richtext", "id": "text", "label": "t:sections.common.text", "default": "<p>Questions about an order, pricing or your account? We reply within one business day.</p>" },
+    { "type": "select", "id": "width", "label": "t:sections.contact_form.width", "options": [
+      { "value": "full", "label": "t:sections.contact_form.width_full" },
+      { "value": "narrow", "label": "t:sections.contact_form.width_narrow" }
+    ], "default": "full", "info": "t:sections.contact_form.width_info" },
     { "type": "text", "id": "subject", "label": "t:sections.contact_form.subject", "info": "t:sections.contact_form.subject_info", "default": "Contact form" },
     { "type": "checkbox", "id": "show_company", "label": "t:sections.contact_form.show_company", "default": true },
     { "type": "checkbox", "id": "show_phone", "label": "t:sections.contact_form.show_phone", "default": true },
