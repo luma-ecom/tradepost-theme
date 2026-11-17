@@ -1,0 +1,15 @@
+{%- comment -%}
+  Section Rendering endpoint, not added in the editor.
+  Usage: {{ product.url }}?variant=<id>&section_id=pickup-availability
+  The product page already re-renders pickup with the product section on variant change;
+  this endpoint is for quick views and app blocks that only need the pickup line.
+{%- endcomment -%}
+<div id="PickupAvailability">
+  {%- if product -%}
+    {% render 'pickup-availability', variant: product.selected_or_first_available_variant %}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Pickup availability", "settings": [] }
+{% endschema %}

@@ -1,0 +1,54 @@
+{%- comment -%}
+  Country / language selector (native localization form).
+  Params:
+    id            (required) unique id prefix
+    show_country  boolean
+    show_language boolean
+    compact       boolean, smaller inline variant (header)
+  Renders nothing when there is no choice to make.
+  B2B buyers never see the country selector: they buy per company location, and switching
+  market on the storefront could take them out of their B2B catalog prices. Language stays.
+{%- endcomment -%}
+{%- liquid
+  assign has_country = false
+  if show_country and customer.b2b? != true and localization.available_countries.size > 1
+    assign has_country = true
+  endif
+  assign has_language = false
+  if show_language and localization.available_languages.size > 1
+    assign has_language = true
+  endif
+-%}
+{%- if has_country or has_language -%}
+  {%- form 'localization', id: id, class: 'localization', data-localization: '' -%}
+    <div class="localization__fields{% if compact %} localization__fields--compact{% endif %}">
+      {%- if has_country -%}
+        {%- assign country_id = id | append: '-country' -%}
+        <div class="localization__field">
+          <label class="localization__label{% if compact %} visually-hidden{% endif %}" for="{{ country_id }}">{{ 'localization.country_label' | t }}</label>
+          <select class="localization__select" id="{{ country_id }}" name="country_code" data-localization-select>
+            {%- for country in localization.available_countries -%}
+              <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol -}})
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
+      {%- endif -%}
+      {%- if has_language -%}
+        {%- assign language_id = id | append: '-language' -%}
+        <div class="localization__field">
+          <label class="localization__label{% if compact %} visually-hidden{% endif %}" for="{{ language_id }}">{{ 'localization.language_label' | t }}</label>
+          <select class="localization__select" id="{{ language_id }}" name="locale_code" data-localization-select>
+            {%- for language in localization.available_languages -%}
+              <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                {{- language.endonym_name | capitalize -}}
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
+      {%- endif -%}
+      <button type="submit" class="btn btn--secondary btn--small localization__submit" data-localization-submit>{{ 'localization.update' | t }}</button>
+    </div>
+  {%- endform -%}
+{%- endif -%}

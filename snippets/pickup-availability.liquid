@@ -1,0 +1,45 @@
+{%- comment -%}
+  Local pickup for one variant (native store_availabilities).
+  Params: variant (required)
+  Renders nothing unless at least one location has local pickup turned on for this variant.
+  Re-rendered on variant change: through the product section (data-pickup-wrapper) or the
+  standalone endpoint sections/pickup-availability.liquid.
+{%- endcomment -%}
+{%- liquid
+  assign pickup_locations = variant.store_availabilities | where: 'pick_up_enabled'
+  assign first = pickup_locations.first
+-%}
+{%- if first -%}
+  <div class="pickup" data-pickup>
+    {%- if first.available -%}
+      <p class="pickup__status pickup__status--in">
+        {% render 'icon', name: 'check' %}
+        <span>{{ 'products.pickup.available_at_html' | t: location: first.location.name }}{% if first.pick_up_time != blank %} <span class="pickup__time">{{ 'products.pickup.ready_in' | t: time: first.pick_up_time }}</span>{% endif %}</span>
+      </p>
+    {%- else -%}
+      <p class="pickup__status pickup__status--out">{{ 'products.pickup.unavailable_at_html' | t: location: first.location.name }}</p>
+    {%- endif -%}
+    <details class="pickup__more">
+      <summary class="pickup__toggle">
+        {%- if pickup_locations.size > 1 -%}{{ 'products.pickup.check_other' | t }}{%- else -%}{{ 'products.pickup.view_store' | t }}{%- endif -%}
+      </summary>
+      <ul class="pickup__list" role="list">
+        {%- for a in pickup_locations -%}
+          <li class="pickup__location">
+            <p class="pickup__name">{{ a.location.name }}</p>
+            <p class="pickup__line">
+              {%- if a.available -%}
+                {{ 'products.pickup.available' | t }}{% if a.pick_up_time != blank %} · {{ 'products.pickup.ready_in' | t: time: a.pick_up_time }}{% endif %}
+              {%- else -%}
+                {{ 'products.pickup.unavailable' | t }}
+              {%- endif -%}
+            </p>
+            {%- if a.location.address != blank -%}
+              <address class="pickup__address">{{ a.location.address | format_address }}</address>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </details>
+  </div>
+{%- endif -%}
