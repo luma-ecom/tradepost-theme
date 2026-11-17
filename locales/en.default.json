@@ -37,7 +37,10 @@
         "other": "{{ count }} results for “{{ terms }}”"
       }
     },
-    "quick_order": "Quick order"
+    "quick_order": "Quick order",
+    "mega_menu": {
+      "view_all": "All {{ title }}"
+    }
   },
   "accessibility": {
     "skip_to_content": "Skip to content"
@@ -109,6 +112,21 @@
       "review": "Check the highlighted lines, then add again.",
       "tier": "Tier [qty]+",
       "error": "Could not add to cart. Try again."
+    },
+    "pickup": {
+      "available_at_html": "Pickup available at <strong>{{ location }}</strong>",
+      "unavailable_at_html": "Pickup currently unavailable at <strong>{{ location }}</strong>",
+      "ready_in": "Usually ready in {{ time }}",
+      "available": "Pickup available",
+      "unavailable": "Pickup currently unavailable",
+      "check_other": "Check pickup at other locations",
+      "view_store": "View store information"
+    },
+    "selling_plans": {
+      "legend": "Purchase options",
+      "one_time": "One-time purchase",
+      "frequency": "Delivery frequency",
+      "per_delivery": "{{ price }} per delivery"
     }
   },
   "order_form": {
@@ -304,5 +322,10 @@
     "email": "Email address",
     "submit": "Subscribe",
     "success": "Thanks for subscribing."
+  },
+  "localization": {
+    "country_label": "Country/region",
+    "language_label": "Language",
+    "update": "Update"
   }
 }

@@ -104,7 +104,12 @@
       "audience_everyone": "Everyone",
       "audience_b2b": "B2B buyers only",
       "audience_d2c": "Retail visitors only",
-      "audience_info": "Works on all plans. B2B buyers are customers logged in to a company account."
+      "audience_info": "Works on all plans. B2B buyers are customers logged in to a company account.",
+      "localization": "Country and language",
+      "show_country_selector": "Show country/region selector",
+      "show_country_selector_info": "Appears when the store sells to more than one country in Settings → Markets. B2B buyers never see it: their prices follow their company location.",
+      "show_language_selector": "Show language selector",
+      "show_language_selector_info": "Appears when the store has more than one published language."
     },
     "header": {
       "name": "Header",
@@ -115,7 +120,13 @@
       "announcement": "Announcement text",
       "sticky": "Sticky header",
       "quick_order_link": "Quick order page",
-      "quick_order_link_info": "Shown to B2B buyers in the top bar. Create a page with the template page.order-form and pick it here."
+      "quick_order_link_info": "Shown to B2B buyers in the top bar. Create a page with the template page.order-form and pick it here.",
+      "menu_type": "Menu style",
+      "menu_type_dropdown": "Dropdown",
+      "menu_type_mega": "Mega menu",
+      "menu_type_info": "Mega menu: second-level links become columns, third-level links are listed under each column. Opens on hover, click or keyboard.",
+      "mega_menu_images": "Show collection images in the mega menu",
+      "mega_menu_images_info": "For second-level links that point to a collection. Uses the collection image, or its first product image."
     },
     "footer": {
       "name": "Footer",
@@ -138,7 +149,9 @@
         "specs": "Specifications (metafield)",
         "documents": "Documents (file list metafield)",
         "text": "Text"
-      }
+      },
+      "show_pickup": "Show pickup availability",
+      "show_pickup_info": "Appears when at least one location offers local pickup for the selected variant."
     },
     "main_collection": {
       "name": "Collection",
@@ -207,7 +220,9 @@
       "name": "Trade account application",
       "requirements": "Requirements",
       "business_types": "Business types (comma separated)",
-      "pending_tag": "Customer tag meaning \"pending approval\""
+      "pending_tag": "Customer tag meaning \"pending approval\"",
+      "submit_label": "Submit button label",
+      "submit_label_info": "Leave empty for \"Submit application\"."
     },
     "rich_text": {
       "name": "Rich text",
