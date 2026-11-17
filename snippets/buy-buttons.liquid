@@ -20,6 +20,50 @@
   <depot-product-form class="buy-buttons" data-section-id="{{ section_id }}">
     {%- form 'product', product, id: form_id, class: 'buy-buttons__form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
       <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id>
+      {%- comment -%} Subscriptions: native B2B does not support selling plans, so buyers never see them. {%- endcomment -%}
+      {%- if product.selling_plan_groups.size > 0 and customer.b2b? != true -%}
+        {%- liquid
+          assign selected_plan = product.selected_selling_plan
+          assign default_group = nil
+          if selected_plan == blank and product.requires_selling_plan
+            assign default_group = product.selling_plan_groups.first
+            assign selected_plan = default_group.selling_plans.first
+          endif
+        -%}
+        <depot-selling-plans class="plans" data-url="{{ product.url }}" data-section-id="{{ section_id }}">
+          <input type="hidden" name="selling_plan" value="{{ selected_plan.id }}" data-plan-input>
+          <fieldset class="plans__fieldset">
+            <legend class="plans__legend">{{ 'products.selling_plans.legend' | t }}</legend>
+            {%- unless product.requires_selling_plan -%}
+              <label class="plans__option">
+                <input type="radio" name="PurchaseOption-{{ section_id }}" value="" data-plan-radio{% if selected_plan == blank %} checked{% endif %}>
+                <span>{{ 'products.selling_plans.one_time' | t }}</span>
+              </label>
+            {%- endunless -%}
+            {%- for group in product.selling_plan_groups -%}
+              {%- liquid
+                assign group_on = false
+                if group.selling_plan_selected or group == default_group
+                  assign group_on = true
+                endif
+                assign plan_select_id = 'SellingPlan-' | append: section_id | append: '-' | append: forloop.index
+              -%}
+              <label class="plans__option">
+                <input type="radio" name="PurchaseOption-{{ section_id }}" value="{{ group.id }}" data-plan-radio{% if group_on %} checked{% endif %}>
+                <span>{{ group.name }}</span>
+              </label>
+              <div class="plans__group" data-plan-group="{{ group.id }}"{% unless group_on %} hidden{% endunless %}>
+                <label class="visually-hidden" for="{{ plan_select_id }}">{{ 'products.selling_plans.frequency' | t }}</label>
+                <select class="variants__select plans__select" id="{{ plan_select_id }}" data-plan-select>
+                  {%- for plan in group.selling_plans -%}
+                    <option value="{{ plan.id }}"{% if plan.id == selected_plan.id %} selected{% endif %}>{{ plan.name }}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endfor -%}
+          </fieldset>
+        </depot-selling-plans>
+      {%- endif -%}
       <div class="buy-buttons__row">
         {% render 'quantity-input', variant: variant, id: qty_id %}
         <button type="submit" class="btn btn--primary buy-buttons__submit" data-add-to-cart

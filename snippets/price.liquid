@@ -36,6 +36,12 @@
   {%- liquid
     assign price = variant.price
     assign compare = variant.compare_at_price
+    assign plan_alloc = nil
+    if ctx == 'product' and customer.b2b? != true and variant.selected_selling_plan_allocation
+      assign plan_alloc = variant.selected_selling_plan_allocation
+      assign price = plan_alloc.price
+      assign compare = plan_alloc.compare_at_price
+    endif
     assign has_compare = false
     if compare != blank and compare > price
       assign has_compare = true
@@ -68,6 +74,15 @@
         <span class="visually-hidden">{{ 'products.price.regular_price' | t }}</span>
         {{ compare | money }}
       </s>
+    {%- endif -%}
+    {%- if plan_alloc -%}
+      <span class="price__plan">
+        {%- if plan_alloc.per_delivery_price != plan_alloc.price -%}
+          {%- assign per_delivery = plan_alloc.per_delivery_price | money -%}
+          {{ 'products.selling_plans.per_delivery' | t: price: per_delivery }} ·
+        {% endif -%}
+        {{ plan_alloc.selling_plan.name }}
+      </span>
     {%- endif -%}
     {%- if has_tiers and show_tiers and ctx == 'card' and settings.show_volume_tiers_on_cards -%}
       {%- assign lowest_money = lowest | money -%}

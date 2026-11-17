@@ -28,6 +28,12 @@
   </div>
   <div class="page-width footer__bottom">
     <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+    {%- if section.settings.show_country_selector or section.settings.show_language_selector -%}
+      {%- assign loc_id = 'FooterLocalization-' | append: section.id -%}
+      <div class="footer__localization">
+        {% render 'localization-form', id: loc_id, show_country: section.settings.show_country_selector, show_language: section.settings.show_language_selector %}
+      </div>
+    {%- endif -%}
     {%- if section.settings.show_payment_icons -%}
       <ul class="footer__payments" role="list">
         {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag: class: 'payment-icon' }}</li>{%- endfor -%}
@@ -41,7 +47,10 @@
   "name": "t:sections.footer.name",
   "tag": "footer",
   "settings": [
-    { "type": "checkbox", "id": "show_payment_icons", "label": "t:sections.footer.payment_icons", "default": true }
+    { "type": "checkbox", "id": "show_payment_icons", "label": "t:sections.footer.payment_icons", "default": true },
+    { "type": "header", "content": "t:sections.common.localization" },
+    { "type": "checkbox", "id": "show_country_selector", "label": "t:sections.common.show_country_selector", "default": true, "info": "t:sections.common.show_country_selector_info" },
+    { "type": "checkbox", "id": "show_language_selector", "label": "t:sections.common.show_language_selector", "default": true, "info": "t:sections.common.show_language_selector_info" }
   ],
   "blocks": [
     { "type": "menu", "name": "t:sections.footer.blocks.menu", "settings": [

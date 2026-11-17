@@ -88,6 +88,12 @@
         {% render 'buy-buttons', product: product, variant: v, section_id: section.id %}
       </div>
 
+      {%- if section.settings.show_pickup -%}
+        <div data-pickup-wrapper>
+          {% render 'pickup-availability', variant: v %}
+        </div>
+      {%- endif -%}
+
       {%- if customer.b2b? and customer.current_location.metafields.depot.payment_terms.value != blank -%}
         <p class="product__terms">{{ 'products.b2b.terms_note' | t: terms: customer.current_location.metafields.depot.payment_terms.value }}</p>
       {%- endif -%}
@@ -136,7 +142,8 @@
   "name": "t:sections.main_product.name",
   "tag": "section",
   "settings": [
-    { "type": "checkbox", "id": "show_vendor", "label": "t:sections.main_product.show_vendor", "default": false }
+    { "type": "checkbox", "id": "show_vendor", "label": "t:sections.main_product.show_vendor", "default": false },
+    { "type": "checkbox", "id": "show_pickup", "label": "t:sections.main_product.show_pickup", "default": true, "info": "t:sections.main_product.show_pickup_info" }
   ],
   "blocks": [
     { "type": "@app" },

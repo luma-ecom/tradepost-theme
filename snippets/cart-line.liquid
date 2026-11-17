@@ -8,6 +8,7 @@
     {%- if item.product.has_only_default_variant == false -%}
       <span class="cart-line__variant">{{ item.variant.title }}</span>
     {%- endif -%}
+    {%- if item.selling_plan_allocation -%}<span class="cart-line__plan">{{ item.selling_plan_allocation.selling_plan.name }}</span>{%- endif -%}
     {%- if settings.show_sku and item.sku != blank -%}<span class="cart-line__sku">{{ item.sku }}</span>{%- endif -%}
     {%- for p in item.properties -%}
       {%- unless p.last == blank or p.first contains '_' -%}

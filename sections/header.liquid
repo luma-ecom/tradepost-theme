@@ -22,8 +22,41 @@
     </a>
 
     <nav class="header__nav" aria-label="{{ 'general.menu' | t }}">
-      <ul class="nav" role="list">
+      <ul class="nav{% if section.settings.menu_type == 'mega' %} nav--mega{% endif %}" role="list">
         {%- for link in section.settings.menu.links -%}
+          {%- if section.settings.menu_type == 'mega' and link.links.size > 0 -%}
+            {%- assign panel_id = 'MegaMenu-' | append: section.id | append: '-' | append: forloop.index -%}
+            <li class="nav__item has-children" data-mega-item>
+              <button type="button" class="nav__link nav__trigger{% if link.active or link.child_active %} is-active{% endif %}" aria-expanded="false" aria-controls="{{ panel_id }}" data-mega-trigger>
+                {{- link.title -}}{% render 'icon', name: 'chevron' %}
+              </button>
+              <div class="mega" id="{{ panel_id }}" data-mega-panel hidden>
+                <div class="page-width mega__inner">
+                  <a class="mega__all" href="{{ link.url }}">{{ 'general.mega_menu.view_all' | t: title: link.title }}</a>
+                  <ul class="mega__grid" role="list">
+                    {%- for child in link.links -%}
+                      <li class="mega__col">
+                        {%- if section.settings.mega_menu_images and child.type == 'collection_link' -%}
+                          {%- assign col_img = child.object.featured_image | default: child.object.products.first.featured_image -%}
+                          {%- if col_img -%}
+                            <a class="mega__media" href="{{ child.url }}" tabindex="-1" aria-hidden="true">
+                              {{ col_img | image_url: width: 480 | image_tag: loading: 'lazy', widths: '240,360,480', sizes: '240px', class: 'mega__img', alt: '' }}
+                            </a>
+                          {%- endif -%}
+                        {%- endif -%}
+                        <a class="mega__title{% if child.active %} is-active{% endif %}" href="{{ child.url }}">{{ child.title }}</a>
+                        {%- if child.links.size > 0 -%}
+                          <ul class="mega__links" role="list">
+                            {%- for g in child.links -%}<li><a href="{{ g.url }}"{% if g.active %} aria-current="page"{% endif %}>{{ g.title }}</a></li>{%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </div>
+            </li>
+          {%- else -%}
           <li class="nav__item{% if link.links.size > 0 %} has-children{% endif %}">
             <a class="nav__link{% if link.active %} is-active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
             {%- if link.links.size > 0 -%}
@@ -40,6 +73,7 @@
               </ul>
             {%- endif -%}
           </li>
+          {%- endif -%}
         {%- endfor -%}
       </ul>
     </nav>
@@ -53,6 +87,12 @@
     </form>
 
     <div class="header__actions">
+      {%- if section.settings.show_country_selector or section.settings.show_language_selector -%}
+        {%- assign loc_id = 'HeaderLocalization-' | append: section.id -%}
+        <div class="header__localization">
+          {% render 'localization-form', id: loc_id, show_country: section.settings.show_country_selector, show_language: section.settings.show_language_selector, compact: true %}
+        </div>
+      {%- endif -%}
       <a class="header__action" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="{{ 'customer.account.title' | t }}">
         {% render 'icon', name: 'account' %}
         <span class="header__action-label">{% if customer.b2b? %}{{ customer.current_company.name | truncate: 18 }}{% elsif customer %}{{ 'customer.account.title' | t }}{% else %}{{ 'customer.login.title' | t }}{% endif %}</span>
@@ -74,7 +114,23 @@
         <li>
           {%- if link.links.size > 0 -%}
             <details><summary>{{ link.title }}</summary>
-              <ul role="list">{%- for child in link.links -%}<li><a href="{{ child.url }}">{{ child.title }}</a></li>{%- endfor -%}</ul>
+              <ul role="list">
+                <li><a href="{{ link.url }}">{{ 'general.mega_menu.view_all' | t: title: link.title }}</a></li>
+                {%- for child in link.links -%}
+                  <li>
+                    {%- if child.links.size > 0 -%}
+                      <details><summary>{{ child.title }}</summary>
+                        <ul role="list">
+                          <li><a href="{{ child.url }}">{{ 'general.mega_menu.view_all' | t: title: child.title }}</a></li>
+                          {%- for g in child.links -%}<li><a href="{{ g.url }}">{{ g.title }}</a></li>{%- endfor -%}
+                        </ul>
+                      </details>
+                    {%- else -%}
+                      <a href="{{ child.url }}">{{ child.title }}</a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
             </details>
           {%- else -%}
             <a href="{{ link.url }}">{{ link.title }}</a>
@@ -82,6 +138,12 @@
         </li>
       {%- endfor -%}
     </ul>
+    {%- if section.settings.show_country_selector or section.settings.show_language_selector -%}
+      {%- assign loc_id_m = 'MobileLocalization-' | append: section.id -%}
+      <div class="mobile-menu__localization">
+        {% render 'localization-form', id: loc_id_m, show_country: section.settings.show_country_selector, show_language: section.settings.show_language_selector %}
+      </div>
+    {%- endif -%}
   </div>
 </header>
 
@@ -103,9 +165,17 @@
     { "type": "image_picker", "id": "logo", "label": "t:sections.header.logo" },
     { "type": "range", "id": "logo_width", "label": "t:sections.header.logo_width", "min": 80, "max": 300, "step": 10, "unit": "px", "default": 140 },
     { "type": "link_list", "id": "menu", "label": "t:sections.header.menu", "default": "main-menu" },
+    { "type": "select", "id": "menu_type", "label": "t:sections.header.menu_type", "options": [
+      { "value": "dropdown", "label": "t:sections.header.menu_type_dropdown" },
+      { "value": "mega", "label": "t:sections.header.menu_type_mega" }
+    ], "default": "mega", "info": "t:sections.header.menu_type_info" },
+    { "type": "checkbox", "id": "mega_menu_images", "label": "t:sections.header.mega_menu_images", "default": false, "info": "t:sections.header.mega_menu_images_info" },
     { "type": "text", "id": "announcement", "label": "t:sections.header.announcement" },
     { "type": "checkbox", "id": "sticky", "label": "t:sections.header.sticky", "default": true },
-    { "type": "url", "id": "quick_order_link", "label": "t:sections.header.quick_order_link", "info": "t:sections.header.quick_order_link_info" }
+    { "type": "url", "id": "quick_order_link", "label": "t:sections.header.quick_order_link", "info": "t:sections.header.quick_order_link_info" },
+    { "type": "header", "content": "t:sections.common.localization" },
+    { "type": "checkbox", "id": "show_country_selector", "label": "t:sections.common.show_country_selector", "default": true, "info": "t:sections.common.show_country_selector_info" },
+    { "type": "checkbox", "id": "show_language_selector", "label": "t:sections.common.show_language_selector", "default": true, "info": "t:sections.common.show_language_selector_info" }
   ]
 }
 {% endschema %}
