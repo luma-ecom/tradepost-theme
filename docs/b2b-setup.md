@@ -9,6 +9,8 @@ Tradepost reads Shopify's native B2B data. Nothing here needs an app.
 
 The theme does not care which route you use. Volume pricing (quantity price breaks) and quantity rules set on the price list show up on product pages, cards and in the cart.
 
+**Markets and the country selector.** A B2B buyer's prices come from their company location (the B2B market or catalog it belongs to), not from the country picked on the storefront. Switching country on the storefront could move a buyer into a retail market and drop their account prices, so Tradepost never shows the country selector to logged-in B2B buyers. They still get the language selector. Retail visitors see the country selector when the store sells to more than one country (Header and Footer → Show country/region selector). To serve buyers in another country, add that country to the company location's address and market, not to the storefront selector.
+
 Need more than 3 price lists on a non-Plus plan, or price lists pushed from your ERP? That is service work, not theme work: https://luma-e.com
 
 ## 2. Payment terms and order review: two metafields

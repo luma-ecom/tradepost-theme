@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0-rc.3 — 2026-11-17
+Standard Shopify features the theme was missing. No breaking changes from 1.0.0-rc.2; settings carry over.
+- **Country and language selector** (`snippets/localization-form.liquid`, native localization form): in the header (desktop and mobile menu) and the footer, each with its own on/off settings. Country shows with its currency. Renders nothing when the store sells to one country in one language. Changes apply on select; a plain Update button stays for visitors without JavaScript. B2B buyers never see the country selector (their prices follow their company location; switching market could drop their catalog prices). They still get the language selector.
+- **Mega menu** (Header → Menu style, default Mega menu; Dropdown keeps the old behaviour). Top links with children open a full-width panel: second-level links are columns, third-level links are listed under each. Opens on hover with a mouse, on click, and on Enter or Space; Esc closes and returns focus to the trigger; Tab moves through the panel and closes it on the way out; `aria-expanded` on each trigger. Each panel starts with an "All <menu item>" link, since the top item is now a button. Optional collection images per column (off by default).
+- Mobile menu: second and third levels open as nested accordions, each with an "All <item>" link.
+- **Pickup availability** on the product page (`snippets/pickup-availability.liquid`, Product section → Show pickup availability): "Pickup available at <location>, usually ready in …" under the buy buttons, and a list of every pickup location with its address. Re-rendered on variant change. Nothing shows unless a location offers local pickup. Also a Section Rendering endpoint, `sections/pickup-availability.liquid`, for quick views. Not yet tried with real pickup data: the demo store has no location with local pickup turned on.
+- **Selling plans (subscriptions)**: when a product has selling plan groups, the product page shows One-time purchase / each plan group with a frequency select and sends `selling_plan` with the add to cart. The price follows the chosen plan (with per-delivery price for prepaid plans). Cart lines show the plan name. Hidden for B2B buyers (native B2B does not support subscriptions). Not yet tried with real data: the demo store has no subscription app; checked by code review and theme check only.
+- Trade account application: new setting "Submit button label" (empty = "Submit application"). Demo store: "Request demo login".
+- Docs: `docs/b2b-setup.md` explains why B2B buyers do not get a country selector.
+
 ## 1.0.0-rc.2 — 2026-11-17
 Content sections, batch 2. No breaking changes from 1.0.0-rc.1; settings carry over.
 - New section **Logo list** (`sections/logo-list.liquid`): heading, 3–6 logos per row, up to 24. Each logo: image, brand name (shown as text when there is no image), alt text, link. Logos in grey that turn to color on hover (can be turned off).

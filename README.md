@@ -27,6 +27,9 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 - Sections that target B2B buyers or retail visitors (works on all plans via `customer.b2b?`)
 - Home page sections: image banner (separate mobile image), image with text, multicolumn (stack or swipe on mobile), collection list, featured collection, logo list, FAQ (with FAQPage structured data), newsletter, rich text, trade CTA, video. Each has a "Show to" setting (everyone / B2B buyers / retail visitors)
 - Contact page template (`page.contact`) with company, phone and account number fields; newsletter block in the footer
+- Mega menu (three levels, mouse and keyboard, optional collection images) and nested accordions in the mobile menu
+- Country and language selector in the header and footer (B2B buyers get the language selector only)
+- Pickup availability on the product page; subscriptions (selling plans) for retail visitors
 - Trade account application page (Shopify Forms app block or built-in form) with a pending state
 - Account page with payment terms, PO numbers and one-click reorder
 - Cart with PO number and notes, net-terms and submit-for-review messaging
