@@ -358,7 +358,11 @@
       "subject_info": "The subject line of the email the store receives.",
       "show_company": "Show company field",
       "show_phone": "Show phone field",
-      "show_account": "Show account number field"
+      "show_account": "Show account number field",
+      "width": "Layout",
+      "width_full": "Text beside the form",
+      "width_narrow": "Narrow, text above the form",
+      "width_info": "Narrow matches the width of page content."
     },
     "newsletter": {
       "name": "Newsletter",
