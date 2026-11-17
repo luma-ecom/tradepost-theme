@@ -1,6 +1,9 @@
 {
   "sections": {
-    "main": { "type": "main-page", "settings": {} },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
     "form": {
       "type": "contact-form",
       "settings": {
@@ -10,9 +13,13 @@
         "subject": "Contact form",
         "show_company": true,
         "show_phone": true,
-        "show_account": true
+        "show_account": true,
+        "width": "narrow"
       }
     }
   },
-  "order": ["main", "form"]
+  "order": [
+    "main",
+    "form"
+  ]
 }
