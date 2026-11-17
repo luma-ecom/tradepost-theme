@@ -124,7 +124,8 @@
       "blocks": {
         "menu": "Menu",
         "text": "Text",
-        "trade": "Trade account prompt"
+        "trade": "Trade account prompt",
+        "newsletter": "Newsletter"
       }
     },
     "main_product": {
@@ -326,6 +327,42 @@
       "blocks": {
         "collection": "Collection"
       }
+    },
+    "logo_list": {
+      "name": "Logo list",
+      "per_row": "Logos per row on desktop",
+      "grayscale": "Show logos in grey",
+      "grayscale_info": "Logos turn to full color on hover.",
+      "image": "Logo",
+      "brand_name": "Brand name",
+      "brand_name_info": "Shown as text when there is no logo image. Only use logos you have permission to use.",
+      "alt": "Alt text",
+      "blocks": {
+        "logo": "Logo"
+      }
+    },
+    "faq": {
+      "name": "FAQ",
+      "open_first": "Open the first question",
+      "json_ld": "Add FAQ structured data",
+      "json_ld_info": "Adds FAQPage data for search engines. Use it on one FAQ section per page.",
+      "question": "Question",
+      "answer": "Answer",
+      "blocks": {
+        "question": "Question"
+      }
+    },
+    "contact_form": {
+      "name": "Contact form",
+      "subject": "Email subject",
+      "subject_info": "The subject line of the email the store receives.",
+      "show_company": "Show company field",
+      "show_phone": "Show phone field",
+      "show_account": "Show account number field"
+    },
+    "newsletter": {
+      "name": "Newsletter",
+      "button_label": "Button label"
     }
   },
   "collections": {

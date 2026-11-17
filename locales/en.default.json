@@ -287,5 +287,22 @@
     "collection_list": {
       "placeholder": "Collection name"
     }
+  },
+  "contact": {
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "phone": "Phone",
+      "account_number": "Account number (optional)",
+      "message": "Message",
+      "submit": "Send message",
+      "success": "Thanks. We got your message and will reply within one business day."
+    }
+  },
+  "newsletter": {
+    "email": "Email address",
+    "submit": "Subscribe",
+    "success": "Thanks for subscribing."
   }
 }
