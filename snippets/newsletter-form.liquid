@@ -1,0 +1,19 @@
+{%- comment -%}
+  Newsletter sign-up: Shopify customer form, tags the customer "newsletter" and turns on email marketing.
+  Params: id (unique form id), button_label (optional).
+  Usage: {% render 'newsletter-form', id: 'Newsletter-footer' %}
+{%- endcomment -%}
+{%- form 'customer', id: id, class: 'newsletter-form' -%}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+  <input type="hidden" name="contact[accepts_marketing]" value="true">
+  {%- if form.posted_successfully? -%}
+    <p class="newsletter-form__msg newsletter-form__msg--ok" role="status">{{ 'newsletter.success' | t }}</p>
+  {%- elsif form.errors -%}
+    <div class="newsletter-form__msg newsletter-form__msg--error" role="alert">{{ form.errors | default_errors }}</div>
+  {%- endif -%}
+  <div class="newsletter-form__row">
+    <label class="visually-hidden" for="{{ id }}-email">{{ 'newsletter.email' | t }}</label>
+    <input class="field__input newsletter-form__input" id="{{ id }}-email" type="email" name="contact[email]" autocomplete="email" required placeholder="{{ 'newsletter.email' | t }}" value="{{ form.email | escape }}">
+    <button type="submit" class="btn btn--primary newsletter-form__btn">{% if button_label != blank %}{{ button_label | escape }}{% else %}{{ 'newsletter.submit' | t }}{% endif %}</button>
+  </div>
+{%- endform -%}
