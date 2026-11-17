@@ -68,9 +68,163 @@
         "audience": "everyone",
         "width": "narrow"
       }
+    },
+    "banner": {
+      "type": "image-banner",
+      "blocks": {
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Clinical supplies for dental practices and labs"
+          }
+        },
+        "t": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Gloves, masks, sterilization, instruments and equipment. Account prices, net terms and quick reorder by SKU.</p>"
+          }
+        },
+        "b": {
+          "type": "buttons",
+          "settings": {
+            "label_1": "Shop the catalog",
+            "link_1": "/collections/all",
+            "style_1": "primary",
+            "label_2": "Quick order by SKU",
+            "link_2": "/pages/quick-order",
+            "style_2": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "h",
+        "t",
+        "b"
+      ],
+      "settings": {
+        "audience": "everyone",
+        "height": "small",
+        "text_position": "center",
+        "overlay": 0,
+        "text_color": "dark"
+      }
+    },
+    "why": {
+      "type": "multicolumn",
+      "blocks": {
+        "c1": {
+          "type": "column",
+          "settings": {
+            "title": "Net 30 terms",
+            "text": "<p>Approved accounts pay by invoice, 30 days after the order ships.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c2": {
+          "type": "column",
+          "settings": {
+            "title": "Order by SKU",
+            "text": "<p>Paste a list of SKUs or upload a CSV. Your whole order in one step.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c3": {
+          "type": "column",
+          "settings": {
+            "title": "Volume pricing",
+            "text": "<p>Your account price drops as you order more. Tiers show on every product.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c4": {
+          "type": "column",
+          "settings": {
+            "title": "Dedicated rep",
+            "text": "<p>One person who knows your account and answers within a business day.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "audience": "everyone",
+        "title": "Why practices order here",
+        "columns": 4,
+        "mobile": "swipe",
+        "image_style": "icon"
+      }
+    },
+    "cats": {
+      "type": "collection-list",
+      "blocks": {
+        "k1": {
+          "type": "collection",
+          "settings": {
+            "collection": "consumables"
+          }
+        },
+        "k2": {
+          "type": "collection",
+          "settings": {
+            "collection": "infection-control"
+          }
+        },
+        "k3": {
+          "type": "collection",
+          "settings": {
+            "collection": "restorative"
+          }
+        },
+        "k4": {
+          "type": "collection",
+          "settings": {
+            "collection": "endodontics"
+          }
+        },
+        "k5": {
+          "type": "collection",
+          "settings": {
+            "collection": "instruments"
+          }
+        },
+        "k6": {
+          "type": "collection",
+          "settings": {
+            "collection": "equipment"
+          }
+        }
+      },
+      "block_order": [
+        "k1",
+        "k2",
+        "k3",
+        "k4",
+        "k5",
+        "k6"
+      ],
+      "settings": {
+        "audience": "everyone",
+        "title": "Shop by category",
+        "columns": 3,
+        "ratio": "landscape",
+        "show_count": true,
+        "show_view_all": true
+      }
     }
   },
   "order": [
+    "banner",
+    "why",
+    "cats",
     "trade",
     "video",
     "featured",
