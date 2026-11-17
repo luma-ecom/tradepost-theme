@@ -6,7 +6,7 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 
 ## Status
 
-`1.0.0-beta` — public beta. Quick order list and whole-catalog quick order form (search by SKU, paste, CSV), native B2B pricing, volume tiers, quantity rules and stock checks. Tested on a live B2B dev store (3 companies, 3 B2B price lists, volume pricing, quantity rules). Report issues on GitHub.
+`1.0.0-rc.1` on `main` (release candidate; the latest download is still `1.0.0-beta`). Quick order list and whole-catalog quick order form (search by SKU, paste, CSV), native B2B pricing, volume tiers, quantity rules and stock checks. Tested on a live B2B dev store (3 companies, 3 B2B price lists, volume pricing, quantity rules). Report issues on GitHub.
 
 
 ## Live demo
@@ -25,6 +25,7 @@ It fixes the things merchants complain about in Shopify's free Trade theme: stoc
 - Lowest volume tier on product cards ("From $X at 12+")
 - Company and location switcher in the header
 - Sections that target B2B buyers or retail visitors (works on all plans via `customer.b2b?`)
+- Home page sections: image banner (separate mobile image), image with text, multicolumn (stack or swipe on mobile), collection list, featured collection, rich text, trade CTA, video. Each has a "Show to" setting (everyone / B2B buyers / retail visitors)
 - Trade account application page (Shopify Forms app block or built-in form) with a pending state
 - Account page with payment terms, PO numbers and one-click reorder
 - Cart with PO number and notes, net-terms and submit-for-review messaging

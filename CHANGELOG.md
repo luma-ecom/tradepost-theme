@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.0-rc.1 — 2026-11-18
+Content sections, batch 1. No breaking changes from 1.0.0-beta; settings carry over.
+- New section **Image banner** (`sections/image-banner.liquid`): main image plus an optional mobile image (below 750px), height small / medium / large / adapt to image, text left or centered, dark overlay 0–80%, light or dark text. Blocks: heading, text, buttons (up to 2, each with label, link and style). As the first section on the page the image loads with `fetchpriority="high"` and the heading is the page `h1`. With no image, the theme editor shows a placeholder and the live store shows the plain surface color with dark text.
+- New section **Image with text** (`sections/image-with-text.liquid`): image left or right, ratio square / 4:3 / 16:9 / adapt, text aligned top / middle / bottom. Blocks: heading, text, button. Stacks on mobile with the image first.
+- New section **Multicolumn** (`sections/multicolumn.liquid`): heading, 2–4 columns on desktop, up to 8 columns. Each column: image, title, text, link. Small icon or large image. On mobile: one column, or a sideways swipe row (CSS scroll-snap, no JavaScript). Default content is written for distributors (Net 30 terms, Order by SKU, Volume pricing, Dedicated rep).
+- New section **Collection list** (`sections/collection-list.liquid`): heading, 2–5 columns, image ratio square / portrait / landscape, "View all" link, up to 12 collections. A collection with no image uses its first product's image. Product count can be turned off. Empty blocks show placeholders.
+- All four have the "Show to" setting (everyone / B2B buyers / retail visitors), responsive images with `srcset` and fixed ratios (no layout shift), and styles at the end of `assets/base.css`, one block per section.
+- Demo store home: image banner (text only, the demo has no wide photo yet), multicolumn with four B2B strengths, collection list of six categories. Retail visitors still see the trade CTA and the buyer tour video; B2B buyers skip both.
+
 ## 1.0.0-beta — 2026-11-04
 WP6: public beta candidate. No breaking changes from 0.4.0; settings carry over.
 - Product page: the main product image loads with `fetchpriority="high"` (faster LCP on first visit).
