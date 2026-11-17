@@ -1,7 +1,14 @@
 # Changelog
 
-## 1.0.0-rc.4 — unreleased
+## 1.0.0 — 2026-11-17
+First stable release. No breaking changes from 1.0.0-beta; settings carry over. It gathers 1.0.0-rc.1 to rc.3 (below) plus the quality checks here.
+- **Fresh install fixed.** The rc.3 zip carried the demo store's home page, which points at a video file only that store has; Shopify rejected the whole home template on any other store. Release zips are now built with `scripts/build-release.py`, which drops store-only file references. Checked on an empty development store: home, collection, product, cart, search, 404, blog, pages and the quick order page render with no Liquid errors and no sideways scroll, desktop and mobile. Minimum steps are in `docs/b2b-setup.md` → Fresh install.
 - Header → Menu style now defaults to **Dropdown**. In rc.3 the default was Mega menu, which turns each top link with children into a button (no longer a link to its page): a store updating from the beta would get that change without choosing it. The theme's own header (`sections/header-group.json`), and so fresh installs and the demo store, keep Mega menu.
+- **Speed:** the first two collection-list images near the top of the home page and the first four product cards on a collection page load right away instead of lazily. Collection page on mobile: LCP 5.3 s → 3.2 s.
+- **Lighthouse** (home, collection, product; median of 3 runs; measured through `shopify theme dev` on the demo store, so performance is indicative, not a CDN number): performance mobile 90 / 82 / 91, desktop 99 / 94 / 100, average 92. Accessibility 95 / 98 / 99 on both, average 97. Layout shift 0.002 or less.
+- **Large catalog:** quick order form with 1,259 products / 5,000 variants on the empty store: the full catalog loads in 3.7 s (13 requests of 100 products), page LCP 0.95 s, SKU search answers in about 1 ms, pasting 500 "SKU, qty" lines renders in 0.2 s (420 valid lines, 80 out of stock and left out). Adding the 420 lines to the cart took 30 s: that is Shopify's cart, called in groups of 100. `docs/make-large-catalog.py` generates the test catalog.
+- **Markets:** with a second market (4 EU countries) the country selector shows in the header, mobile menu and footer. Not checked end to end: the test store's payment provider does not allow a second currency, and the local preview cannot post the country form. A second language was enabled but not attached to a market, so the language selector did not show.
+- Country and language options no longer carry stray whitespace.
 
 ## 1.0.0-rc.3 — 2026-11-17
 Standard Shopify features the theme was missing. No breaking changes from 1.0.0-rc.2; settings carry over.

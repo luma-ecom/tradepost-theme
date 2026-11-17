@@ -28,9 +28,7 @@
           <label class="localization__label{% if compact %} visually-hidden{% endif %}" for="{{ country_id }}">{{ 'localization.country_label' | t }}</label>
           <select class="localization__select" id="{{ country_id }}" name="country_code" data-localization-select>
             {%- for country in localization.available_countries -%}
-              <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>
-                {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol -}})
-              </option>
+              <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})</option>
             {%- endfor -%}
           </select>
         </div>
@@ -41,9 +39,7 @@
           <label class="localization__label{% if compact %} visually-hidden{% endif %}" for="{{ language_id }}">{{ 'localization.language_label' | t }}</label>
           <select class="localization__select" id="{{ language_id }}" name="locale_code" data-localization-select>
             {%- for language in localization.available_languages -%}
-              <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} selected{% endif %}>
-                {{- language.endonym_name | capitalize -}}
-              </option>
+              <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} selected{% endif %}>{{ language.endonym_name | capitalize }}</option>
             {%- endfor -%}
           </select>
         </div>

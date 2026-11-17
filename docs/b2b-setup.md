@@ -48,3 +48,16 @@ B2B needs the new customer accounts. On those stores Shopify hosts the account p
 - **Quick order form (whole catalog):** create a page (Online Store → Pages → Add page, e.g. "Quick order") and pick the template `page.order-form`. Then in the theme editor open the Header section → **Quick order page**: pick that page. B2B buyers get a "Quick order" link in the top bar. Buyers can search by SKU, paste "SKU, qty" lines from a spreadsheet or upload a CSV (columns `sku`, `quantity`).
 - **Quick order list (per product):** already on the product template under the main product. It shows to B2B buyers on products with more than one variant (both are section settings).
 - Both use the theme setting B2B & wholesale → **Show stock levels in order lists**.
+
+## Fresh install: the minimum steps
+
+Checked on an empty development store (no demo data, no B2B set up) with the release zip.
+
+1. Upload the zip and publish. Home, collection, product, cart, search, 404, blog and pages render with no setup. The home page shows the theme's default sections; the buyer tour video block is empty until you pick your own video.
+2. Create the page **Quick order** with the template `page.order-form` and keep the handle `quick-order` (the header already links to `/pages/quick-order`). The form is set to "B2B buyers" by default: retail visitors see a login prompt. Change "Show to" in the section if you want it open to everyone.
+3. Create the page **Trade account** with the template `page.trade-account` (handle `trade-account`), so the footer and trade prompts have somewhere to go. Then check Theme settings → B2B & wholesale → Trade application page.
+4. Optional: a page with the template `page.contact` for the contact form.
+5. Assign your main menu in the Header section. Menu style is Mega menu in a fresh install; switch to Dropdown there if you prefer.
+6. Set up B2B in Shopify admin (sections 1 and 2 above). Without it the theme works as a normal retail theme.
+
+Country selector: it appears once the store sells to more than one country (Settings → Markets). A second currency needs a payment provider that supports it, such as Shopify Payments.
