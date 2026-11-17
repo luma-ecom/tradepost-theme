@@ -381,7 +381,7 @@ body.drawer-open{overflow:hidden}
 .banner--noimg,.banner--noimg.banner--light{color:var(--color-text)}
 .banner--noimg .banner__media::after{display:none}
 .banner--noimg.banner--light .btn--secondary{border-color:var(--color-text);color:var(--color-text)}
-.banner__heading{font-size:2.4rem;line-height:1.1;margin-bottom:.4em}
+.banner__heading{font-size:2.4rem;line-height:1.1;margin-bottom:.4em;text-wrap:balance}
 .banner__text{font-size:1.05rem;max-width:48ch}
 .banner--center .banner__text{margin-left:auto;margin-right:auto}
 .banner__buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
