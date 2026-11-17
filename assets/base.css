@@ -526,3 +526,76 @@ body.drawer-open{overflow:hidden}
 @media (max-width: 749px){
   .newsletter__inner{grid-template-columns:minmax(0,1fr)}
 }
+
+/* Mega menu */
+.header:not(.header--sticky){position:relative}
+.nav--mega .nav__item.has-children{position:static}
+.nav__trigger{display:inline-flex;align-items:center;gap:4px;background:none;border:0;color:inherit;font:inherit;font-weight:500;cursor:pointer}
+.nav__trigger .icon-chevron{transition:transform .15s}
+.nav__trigger[aria-expanded="true"] .icon-chevron{transform:rotate(180deg)}
+.nav__trigger:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+.mega{position:absolute;left:0;right:0;top:100%;z-index:60;background:var(--color-bg);border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);box-shadow:0 14px 30px rgba(0,0,0,.06)}
+.mega[hidden]{display:none}
+.mega__inner{padding-top:24px;padding-bottom:32px;max-height:calc(100vh - 140px);overflow:auto}
+.mega__all{display:inline-block;margin-bottom:18px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.mega__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:24px 32px}
+.mega__col{min-width:0}
+.mega__media{display:block;margin-bottom:10px;aspect-ratio:4/3;overflow:hidden;border-radius:var(--radius);background:var(--color-surface)}
+.mega__img{display:block;width:100%;height:100%;object-fit:cover}
+.mega__title{display:block;font-weight:600;text-decoration:none;padding:2px 0 6px}
+.mega__title:hover,.mega__title.is-active{text-decoration:underline;text-underline-offset:3px}
+.mega__links{list-style:none;margin:0;padding:0}
+.mega__links a{display:block;padding:4px 0;color:var(--color-muted);text-decoration:none;font-size:.95rem}
+.mega__links a:hover,.mega__links a[aria-current]{color:var(--color-text);text-decoration:underline;text-underline-offset:3px}
+@media (prefers-reduced-motion: reduce){.nav__trigger .icon-chevron{transition:none}}
+
+/* Mobile menu: second and third level accordions */
+.mobile-menu__list summary{list-style:none;display:flex;justify-content:space-between;align-items:center}
+.mobile-menu__list summary::-webkit-details-marker{display:none}
+.mobile-menu__list summary::after{content:"+";font-weight:400;font-size:1.2rem;line-height:1;color:var(--color-muted)}
+.mobile-menu__list details[open]>summary::after{content:"\2212"}
+.mobile-menu__list ul summary{padding:8px 0;font-weight:400}
+.mobile-menu__list ul ul{padding-left:14px}
+.mobile-menu__localization{margin-top:20px}
+
+/* Localization (country / language) */
+.localization__fields{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.localization__field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.localization__label{font-size:.8rem;color:var(--color-muted)}
+.localization__select{padding:8px 10px;border:1px solid var(--color-border);border-radius:var(--radius);background:var(--color-bg);color:inherit;font:inherit;font-size:.9rem;max-width:100%}
+.localization__fields--compact{flex-wrap:nowrap;gap:6px}
+.localization__fields--compact .localization__select{padding:6px 8px;font-size:.85rem;max-width:150px}
+.footer__localization{margin-left:auto;margin-right:16px}
+@media (max-width: 989px){
+  .header__localization{display:none}
+}
+@media (max-width: 749px){
+  .footer__bottom{flex-wrap:wrap;gap:12px}
+  .footer__localization{margin:0;order:-1;width:100%}
+}
+
+/* Pickup availability */
+.pickup{margin:18px 0 6px;padding-top:14px;border-top:1px solid var(--color-border);font-size:.95rem}
+.pickup__status{display:flex;gap:8px;align-items:flex-start;margin:0 0 6px}
+.pickup__status--in .icon{flex:none;margin-top:3px;color:var(--color-success)}
+.pickup__status--out{color:var(--color-muted)}
+.pickup__time{display:block;color:var(--color-muted)}
+.pickup__toggle{cursor:pointer;text-decoration:underline;text-underline-offset:3px;font-size:.9rem;display:inline-block}
+.pickup__toggle:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+.pickup__list{list-style:none;margin:10px 0 0;padding:0;border-top:1px solid var(--color-border)}
+.pickup__location{padding:10px 0;border-bottom:1px solid var(--color-border)}
+.pickup__name{margin:0;font-weight:600}
+.pickup__line{margin:2px 0;color:var(--color-muted);font-size:.9rem}
+.pickup__address{font-style:normal;color:var(--color-muted);font-size:.85rem}
+.pickup__address p{margin:0}
+
+/* Selling plans (subscriptions) */
+.plans{display:block;margin:0 0 14px}
+.plans__fieldset{border:1px solid var(--color-border);border-radius:var(--radius);margin:0;padding:6px 14px 10px}
+.plans__legend{padding:0 6px;font-size:.85rem;color:var(--color-muted)}
+.plans__option{display:flex;gap:10px;align-items:center;padding:8px 0;cursor:pointer}
+.plans__option input{accent-color:var(--color-accent);margin:0}
+.plans__group{padding:0 0 8px 26px}
+.plans__group[hidden]{display:none}
+.price__plan{display:block;width:100%;font-size:.85rem;color:var(--color-muted)}
+.cart-line__plan{display:block;font-size:.85rem;color:var(--color-muted)}

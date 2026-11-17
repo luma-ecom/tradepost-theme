@@ -1,6 +1,6 @@
 /* Depot theme — original code. No build step, no dependencies.
-   Components: depot-quantity, depot-variant-picker, depot-product-form, depot-cart-drawer, depot-gallery, depot-quick-order,
-   plus header menu / predictive search / reorder helpers. */
+   Components: depot-quantity, depot-variant-picker, depot-selling-plans, depot-product-form, depot-cart-drawer, depot-gallery,
+   depot-quick-order, plus header menu (mega menu) / localization / predictive search / reorder helpers. */
 
 const Depot = window.depot || {};
 
@@ -130,13 +130,15 @@ class DepotVariantPicker extends HTMLElement {
   async onChange() {
     const v = this.current();
     if (!v) { this.unavailable(); return; }
-    const url = `${this.dataset.url}?variant=${v.id}&section_id=${this.dataset.sectionId}`;
-    history.replaceState({}, '', `${this.dataset.url}?variant=${v.id}`);
+    const plan = this.section.querySelector('[data-plan-input]')?.value;
+    const query = `variant=${v.id}${plan ? `&selling_plan=${plan}` : ''}`;
+    const url = `${this.dataset.url}?${query}&section_id=${this.dataset.sectionId}`;
+    history.replaceState({}, '', `${this.dataset.url}?${query}`);
     this.section.classList.add('is-loading');
     try {
       const html = await (await fetch(url)).text();
       const doc = new DOMParser().parseFromString(html, 'text/html');
-      ['[data-price-wrapper]', '[data-volume-wrapper]', '[data-buy-wrapper]', '[data-sku]', '[data-stock]'].forEach(sel => {
+      ['[data-price-wrapper]', '[data-volume-wrapper]', '[data-buy-wrapper]', '[data-pickup-wrapper]', '[data-sku]', '[data-stock]'].forEach(sel => {
         const next = doc.querySelector(sel); const cur = this.section.querySelector(sel);
         if (next && cur) cur.replaceWith(next);
       });
@@ -152,6 +154,37 @@ class DepotVariantPicker extends HTMLElement {
   }
 }
 customElements.define('depot-variant-picker', DepotVariantPicker);
+
+/* ---------- Selling plans (subscriptions): keeps the hidden selling_plan input and the price in step ---------- */
+class DepotSellingPlans extends HTMLElement {
+  connectedCallback() {
+    this.input = this.querySelector('[data-plan-input]');
+    this.addEventListener('change', (e) => {
+      if (e.target.matches('[data-plan-radio], [data-plan-select]')) this.update();
+    });
+  }
+  selected() {
+    const radio = this.querySelector('[data-plan-radio]:checked');
+    const group = radio && radio.value ? this.querySelector(`[data-plan-group="${radio.value}"]`) : null;
+    this.querySelectorAll('[data-plan-group]').forEach(g => { g.hidden = g !== group; });
+    return group ? group.querySelector('[data-plan-select]').value : '';
+  }
+  async update() {
+    const plan = this.selected();
+    this.input.value = plan;
+    const section = this.closest('[data-section]');
+    const variantId = this.closest('form').querySelector('[data-variant-id]').value;
+    const query = `variant=${variantId}${plan ? `&selling_plan=${plan}` : ''}`;
+    history.replaceState({}, '', `${this.dataset.url}?${query}`);
+    try {
+      const html = await (await fetch(`${this.dataset.url}?${query}&section_id=${this.dataset.sectionId}`)).text();
+      const next = new DOMParser().parseFromString(html, 'text/html').querySelector('[data-price-wrapper]');
+      const cur = section && section.querySelector('[data-price-wrapper]');
+      if (next && cur) cur.replaceWith(next);
+    } catch (ex) { /* price stays as it was; the cart still gets the right plan */ }
+  }
+}
+customElements.define('depot-selling-plans', DepotSellingPlans);
 
 /* ---------- Product form: AJAX add, opens drawer ---------- */
 class DepotProductForm extends HTMLElement {
@@ -270,6 +303,50 @@ document.addEventListener('DOMContentLoaded', () => {
   const menu = document.querySelector('[data-mobile-menu]');
   document.querySelector('[data-menu-open]')?.addEventListener('click', (e) => { menu.hidden = false; e.currentTarget.setAttribute('aria-expanded', 'true'); });
   document.querySelector('[data-menu-close]')?.addEventListener('click', () => { menu.hidden = true; document.querySelector('[data-menu-open]').setAttribute('aria-expanded', 'false'); });
+
+  // Mega menu: hover (pointer devices), click, Enter/Space on the trigger, Esc closes, Tab moves through the panel.
+  const megaItems = [...document.querySelectorAll('[data-mega-item]')];
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const closeAll = (except) => megaItems.forEach(i => { if (i !== except && i.megaClose) i.megaClose(); });
+  megaItems.forEach((item) => {
+    const btn = item.querySelector('[data-mega-trigger]');
+    const panel = item.querySelector('[data-mega-panel]');
+    let timer;
+    const open = () => {
+      clearTimeout(timer);
+      if (!panel.hidden) return;
+      closeAll(item);
+      panel.hidden = false; btn.setAttribute('aria-expanded', 'true'); item.classList.add('is-open');
+    };
+    const close = (focusTrigger) => {
+      clearTimeout(timer);
+      if (panel.hidden) return;
+      panel.hidden = true; btn.setAttribute('aria-expanded', 'false'); item.classList.remove('is-open');
+      if (focusTrigger) btn.focus();
+    };
+    item.megaClose = close;
+    btn.addEventListener('click', (e) => {
+      // Keyboard (Enter/Space, detail 0) and touch toggle. With a mouse, hover already opened the
+      // panel, so a click only keeps it open; it closes on mouse leave, Esc or a click outside.
+      const fromMouse = e.detail > 0 && canHover.matches;
+      if (panel.hidden) open(); else if (!fromMouse) close();
+    });
+    item.addEventListener('mouseenter', () => { if (canHover.matches) { clearTimeout(timer); timer = setTimeout(open, 80); } });
+    item.addEventListener('mouseleave', () => { if (canHover.matches) { clearTimeout(timer); timer = setTimeout(() => close(), 180); } });
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) { e.stopPropagation(); close(true); }
+    });
+    item.addEventListener('focusout', (e) => { if (!item.contains(e.relatedTarget)) close(); });
+  });
+  if (megaItems.length) {
+    document.addEventListener('click', (e) => { if (!e.target.closest('[data-mega-item]')) closeAll(); });
+  }
+
+  // Localization: submit on change; the button stays for visitors without JavaScript.
+  document.querySelectorAll('[data-localization]').forEach((form) => {
+    form.querySelectorAll('[data-localization-submit]').forEach(b => { b.hidden = true; });
+    form.addEventListener('change', (e) => { if (e.target.matches('[data-localization-select]')) form.submit(); });
+  });
 
   const input = document.querySelector('[data-predictive-input]');
   const results = document.querySelector('[data-predictive-results]');
