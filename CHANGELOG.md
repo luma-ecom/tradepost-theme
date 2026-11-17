@@ -1,6 +1,17 @@
 # Changelog
 
-## 1.0.0-rc.1 — 2026-11-18
+## 1.0.0-rc.2 — 2026-11-17
+Content sections, batch 2. No breaking changes from 1.0.0-rc.1; settings carry over.
+- New section **Logo list** (`sections/logo-list.liquid`): heading, 3–6 logos per row, up to 24. Each logo: image, brand name (shown as text when there is no image), alt text, link. Logos in grey that turn to color on hover (can be turned off).
+- New section **FAQ** (`sections/faq.liquid`): heading, intro text, up to 30 questions with rich-text answers. Built on `<details>`/`<summary>`: no JavaScript, opens and closes with Enter or Space. Adds `FAQPage` structured data (JSON-LD) by default. Default questions cover trade accounts, minimum order, shipping, net terms and delivery to several locations.
+- New section **Contact form** (`sections/contact-form.liquid`): name, email, message, plus company, phone and account number (each can be turned off). Logged-in customers get name, email and company filled in. Email subject is a setting. Success and error messages at the top of the form.
+- New section **Newsletter** (`sections/newsletter.liquid`) and a **Newsletter** block in the footer, both using `snippets/newsletter-form.liquid`. Sign-ups become customers tagged `newsletter` with email marketing on.
+- New template `page.contact` (page content + contact form).
+- Footer: columns follow the number of blocks (up to 4).
+- All four sections have the "Show to" setting (everyone / B2B buyers / retail visitors). Styles at the end of `assets/base.css`, one block per section.
+- Demo store: home gains a brand list (names as text, no brand logos) and an FAQ at the end; Contact page uses the new template; footer has the newsletter block and a link to the Contact page.
+
+## 1.0.0-rc.1 — 2026-11-17
 Content sections, batch 1. No breaking changes from 1.0.0-beta; settings carry over.
 - New section **Image banner** (`sections/image-banner.liquid`): main image plus an optional mobile image (below 750px), height small / medium / large / adapt to image, text left or centered, dark overlay 0–80%, light or dark text. Blocks: heading, text, buttons (up to 2, each with label, link and style). As the first section on the page the image loads with `fetchpriority="high"` and the heading is the page `h1`. With no image, the theme editor shows a placeholder and the live store shows the plain surface color with dark text.
 - New section **Image with text** (`sections/image-with-text.liquid`): image left or right, ratio square / 4:3 / 16:9 / adapt, text aligned top / middle / bottom. Blocks: heading, text, button. Stacks on mobile with the image first.
