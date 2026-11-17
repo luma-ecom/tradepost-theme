@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.0-rc.4 — unreleased
+- Header → Menu style now defaults to **Dropdown**. In rc.3 the default was Mega menu, which turns each top link with children into a button (no longer a link to its page): a store updating from the beta would get that change without choosing it. The theme's own header (`sections/header-group.json`), and so fresh installs and the demo store, keep Mega menu.
+
 ## 1.0.0-rc.3 — 2026-11-17
 Standard Shopify features the theme was missing. No breaking changes from 1.0.0-rc.2; settings carry over.
 - **Country and language selector** (`snippets/localization-form.liquid`, native localization form): in the header (desktop and mobile menu) and the footer, each with its own on/off settings. Country shows with its currency. Renders nothing when the store sells to one country in one language. Changes apply on select; a plain Update button stays for visitors without JavaScript. B2B buyers never see the country selector (their prices follow their company location; switching market could drop their catalog prices). They still get the language selector.
