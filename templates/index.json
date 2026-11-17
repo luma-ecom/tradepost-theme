@@ -219,6 +219,127 @@
         "show_count": true,
         "show_view_all": true
       }
+    },
+    "brands": {
+      "type": "logo-list",
+      "blocks": {
+        "b1": {
+          "type": "logo",
+          "settings": {
+            "name": "Melag",
+            "alt": "",
+            "link": "/collections/vendors?q=Melag"
+          }
+        },
+        "b2": {
+          "type": "logo",
+          "settings": {
+            "name": "Sempermed",
+            "alt": "",
+            "link": "/collections/vendors?q=Sempermed"
+          }
+        },
+        "b3": {
+          "type": "logo",
+          "settings": {
+            "name": "Woson",
+            "alt": "",
+            "link": "/collections/vendors?q=Woson"
+          }
+        },
+        "b4": {
+          "type": "logo",
+          "settings": {
+            "name": "EMS",
+            "alt": "",
+            "link": "/collections/vendors?q=EMS"
+          }
+        },
+        "b5": {
+          "type": "logo",
+          "settings": {
+            "name": "Hu-Friedy",
+            "alt": "",
+            "link": "/collections/vendors?q=Hu-Friedy"
+          }
+        },
+        "b6": {
+          "type": "logo",
+          "settings": {
+            "name": "Medicom",
+            "alt": "",
+            "link": "/collections/vendors?q=Medicom"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ],
+      "settings": {
+        "audience": "everyone",
+        "title": "Brands we distribute",
+        "per_row": 6,
+        "grayscale": true
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Who can open a trade account?",
+            "answer": "<p>Any registered business that buys for resale or for its own work: clinics, labs, dealers. Apply with your company name and tax ID. We reply within one business day.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Is there a minimum order?",
+            "answer": "<p>Trade orders start at $250 before tax. Some items are sold in case packs; the product page shows the minimum and the step.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How fast do you ship?",
+            "answer": "<p>Orders placed before 2 pm on a business day ship the same day. Most deliveries arrive in 2 to 3 business days.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Can I pay on net terms?",
+            "answer": "<p>Yes. Approved accounts can pay by invoice, 30 days after the order ships.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Do you deliver to several locations?",
+            "answer": "<p>Yes. Each location in your account has its own address and can place its own orders.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "audience": "everyone",
+        "title": "Questions from trade buyers",
+        "text": "",
+        "open_first": false,
+        "json_ld": true
+      }
     }
   },
   "order": [
@@ -228,6 +349,8 @@
     "trade",
     "video",
     "featured",
-    "rich"
+    "brands",
+    "rich",
+    "faq"
   ]
 }
