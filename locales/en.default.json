@@ -280,6 +280,12 @@
   "sections": {
     "video_feature": {
       "placeholder": "Pick a video in the theme editor."
+    },
+    "multicolumn": {
+      "scroll_label": "Scroll sideways for more"
+    },
+    "collection_list": {
+      "placeholder": "Collection name"
     }
   }
 }

@@ -245,6 +245,87 @@
     "video_feature": {
       "name": "Video",
       "video": "Video"
+    },
+    "image_banner": {
+      "name": "Image banner",
+      "image": "Image",
+      "image_mobile": "Mobile image",
+      "image_mobile_info": "Optional. Shown below 750px wide. Leave empty to use the main image.",
+      "height": "Height",
+      "height_small": "Small",
+      "height_medium": "Medium",
+      "height_large": "Large",
+      "height_adapt": "Adapt to image",
+      "text_position": "Text position",
+      "left": "Left",
+      "center": "Center",
+      "overlay": "Dark overlay",
+      "text_color": "Text color",
+      "light": "Light",
+      "dark": "Dark",
+      "label_1": "First button label",
+      "link_1": "First button link",
+      "style_1": "First button style",
+      "label_2": "Second button label",
+      "link_2": "Second button link",
+      "style_2": "Second button style",
+      "style_primary": "Primary",
+      "style_secondary": "Secondary",
+      "blocks": {
+        "heading": "Heading",
+        "text": "Text",
+        "buttons": "Buttons"
+      }
+    },
+    "image_with_text": {
+      "name": "Image with text",
+      "image": "Image",
+      "image_position": "Image position",
+      "left": "Left",
+      "right": "Right",
+      "ratio": "Image ratio",
+      "ratio_square": "Square",
+      "ratio_4_3": "4:3",
+      "ratio_16_9": "16:9",
+      "ratio_adapt": "Adapt to image",
+      "v_align": "Text alignment",
+      "top": "Top",
+      "middle": "Middle",
+      "bottom": "Bottom",
+      "button_style": "Button style",
+      "blocks": {
+        "heading": "Heading",
+        "text": "Text",
+        "button": "Button"
+      }
+    },
+    "multicolumn": {
+      "name": "Multicolumn",
+      "columns": "Columns on desktop",
+      "mobile": "Mobile layout",
+      "mobile_stack": "One column",
+      "mobile_swipe": "Swipe sideways",
+      "image_style": "Image style",
+      "image_icon": "Small icon",
+      "image_large": "Large image",
+      "image": "Image",
+      "blocks": {
+        "column": "Column"
+      }
+    },
+    "collection_list": {
+      "name": "Collection list",
+      "columns": "Columns on desktop",
+      "ratio": "Image ratio",
+      "ratio_square": "Square",
+      "ratio_portrait": "Portrait",
+      "ratio_landscape": "Landscape",
+      "show_count": "Show product count",
+      "show_view_all": "Show \"View all\" link",
+      "collection": "Collection",
+      "blocks": {
+        "collection": "Collection"
+      }
     }
   },
   "collections": {
