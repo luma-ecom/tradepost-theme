@@ -28,7 +28,7 @@
     </div>
     {%- if section.settings.video != blank -%}
       <div class="video-feature__media">
-        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: true, playsinline: true, image_size: '1280x', class: 'video-feature__video' }}
+        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: true, playsinline: true, image_size: '1280x', class: 'video-feature__video' | replace: '<img src=', '<img alt="" src=' }}
       </div>
     {%- elsif request.design_mode -%}
       <div class="video-feature__media">

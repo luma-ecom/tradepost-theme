@@ -244,7 +244,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .rich__inner--narrow{max-width:720px}
 .rich__heading{font-size:1.6rem}
 .featured__head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
-.featured__all{font-size:.9rem}
+.featured__all{font-size:.9rem;white-space:nowrap;flex-shrink:0}
 
 /* Cart */
 .cart-page__title{margin-bottom:24px}

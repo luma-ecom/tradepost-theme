@@ -66,7 +66,8 @@
 
   /* Text (pasted or CSV) → [{ sku, qty|null }]. Header row optional; columns found by name when present. */
   const parseList = (text) => {
-    const rows = String(text || '').replace(/^﻿/, '').split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(splitCells);
+    // Trim spaces only: a leading tab is an empty first column (Excel), not padding.
+    const rows = String(text || '').replace(/^﻿/, '').split(/\r?\n/).filter(l => l.trim()).map(l => l.replace(/^[ \u00a0]+|[ \u00a0\r]+$/g, '')).map(splitCells);
     if (!rows.length) return [];
     let skuCol = 0; let qtyCol = 1;
     const head = rows[0].map(c => c.toLowerCase().replace(/[^a-z]/g, ''));

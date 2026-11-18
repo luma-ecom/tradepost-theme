@@ -1,6 +1,6 @@
 {%- comment -%}
   Product card for collection grids and lists.
-  Params: product (required), view ('grid' | 'list', default 'grid'), section_id,
+  Params: product (required), heading_tag ('h3' default; 'h2' on the collection and search grids), view ('grid' | 'list', default 'grid'), section_id,
     eager (boolean, load the image right away: first cards above the fold)
 {%- endcomment -%}
 {%- liquid
@@ -26,7 +26,8 @@
     {%- if settings.show_sku and v.sku != blank -%}
       <span class="card__sku">{{ v.sku }}</span>
     {%- endif -%}
-    <h3 class="card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+    {%- assign card_tag = heading_tag | default: 'h3' -%}
+    <{{ card_tag }} class="card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></{{ card_tag }}>
     {%- if view == 'list' and product.metafields.custom.short_spec != blank -%}
       <p class="card__spec">{{ product.metafields.custom.short_spec }}</p>
     {%- endif -%}

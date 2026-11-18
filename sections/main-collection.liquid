@@ -87,7 +87,7 @@
                     assign eager_card = true
                   endif
                 -%}
-                {% render 'product-card', product: product, view: view, section_id: section.id, eager: eager_card %}
+                {% render 'product-card', product: product, view: view, section_id: section.id, eager: eager_card, heading_tag: 'h2' %}
               {%- endfor -%}
             </div>
           {%- endif -%}

@@ -13,7 +13,7 @@
           {%- for item in search.results -%}
             {%- case item.object_type -%}
             {%- when 'product' -%}
-              {% render 'product-card', product: item, view: 'list', section_id: section.id %}
+              {% render 'product-card', product: item, view: 'list', section_id: section.id, heading_tag: 'h2' %}
             {%- when 'article', 'page' -%}
               <article class="card card--list card--content">
                 <div class="card__body"><h3 class="card__title"><a href="{{ item.url }}">{{ item.title }}</a></h3>

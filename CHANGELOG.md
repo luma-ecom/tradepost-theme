@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2 — 2026-11-18
+Fixes found while closing Tradepost Pro 1.6.0. No setting changes.
+- Quick order form: a line copied from Excel whose first cell is empty (a leading tab) no longer shifts its columns, so the SKU and quantity land in the right place.
+- Accessibility: product card titles are `h2` on the collection and search grids, so headings go in order. The video section's fallback image has an empty `alt`. Lighthouse accessibility on home, collection and product: 100 / 100 / 99.
+- The "View all" link next to a section heading stays on one line on phones.
+- Release zip: `scripts/build-release.py` also leaves out the demo store's app embeds (the 1.0.0 and 1.0.1 zips carried the demo's B2B app embed; Shopify ignores an embed for an app you don't have, but it shouldn't be there).
+
 ## 1.0.1 — 2026-11-18
 Wording fix. No setting changes.
 - Quick order form and quick order list: adding one line now says "Added 1 line to your cart." instead of "Added 1 lines". New strings `products.quick_order.added_one` / `added_other`; the old `added` key stays for custom code that still reads it.
