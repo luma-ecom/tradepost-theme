@@ -74,7 +74,7 @@ def main():
                     match = next((n for n, pv in presets.items() if all(cur.get(k) == v for k, v in pv.items())), next(iter(presets)))
                     doc["current"] = match
                     removed_all.append(f"{f}: current = style \"{match}\" (demo settings left out)")
-                    data = ((head + "\n") if head else "").encode() + (json.dumps(doc, indent=2, ensure_ascii=False) + "\n").encode()
+                data = ((head + "\n") if head else "").encode() + (json.dumps(doc, indent=2, ensure_ascii=False) + "\n").encode()
             z.writestr(f, data)
     print(f"{zpath} ({len(files)} files)")
     for r in removed_all:
