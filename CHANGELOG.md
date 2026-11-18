@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 — 2026-11-18
+Wording fix. No setting changes.
+- Quick order form and quick order list: adding one line now says "Added 1 line to your cart." instead of "Added 1 lines". New strings `products.quick_order.added_one` / `added_other`; the old `added` key stays for custom code that still reads it.
+- Quick order form: a catalog with a single SKU says "1 SKU ready to order." (`order_form.loaded_one`).
+
 ## 1.0.0 — 2026-11-17
 First stable release. No breaking changes from 1.0.0-beta; settings carry over. It gathers 1.0.0-rc.1 to rc.3 (below) plus the quality checks here.
 - **Fresh install fixed.** The rc.3 zip carried the demo store's home page, which points at a video file only that store has; Shopify rejected the whole home template on any other store. Release zips are now built with `scripts/build-release.py`, which drops store-only file references. Checked on an empty development store: home, collection, product, cart, search, 404, blog, pages and the quick order page render with no Liquid errors and no sideways scroll, desktop and mobile. Minimum steps are in `docs/b2b-setup.md` → Fresh install.

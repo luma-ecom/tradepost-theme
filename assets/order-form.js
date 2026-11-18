@@ -152,7 +152,7 @@
           });
         }
         this.loaded = true;
-        this.meta(qs(this.s, 'loaded', { count: this.bySku.size }));
+        this.meta(this.bySku.size === 1 && this.s.loadedOne ? this.s.loadedOne : qs(this.s, 'loaded', { count: this.bySku.size }));
         const { search, pasteAdd, file } = this.el;
         if (search) { search.disabled = false; search.placeholder = search.dataset.placeholder || ''; }
         if (pasteAdd) pasteAdd.disabled = false;
@@ -546,7 +546,7 @@
         this.lines.forEach(l => { if (!l.error) { const f = this.fit(l.rec, l.qty || 0); l.blocked = !!f.blocked; } });
         this.render(); this.save();
         if (added) document.dispatchEvent(new CustomEvent('depot:cart-updated', { detail: { open: !failed } }));
-        const addedMsg = added ? fill(this.s.added, { count: added }) : '';
+        const addedMsg = !added ? '' : (added === 1 && this.s.addedOne ? this.s.addedOne : fill(this.s.added, { count: added }));
         if (failed) this.status(`${addedMsg} ${this.s.review}`.trim(), true);
         else this.status(addedMsg);
       } catch (e) {

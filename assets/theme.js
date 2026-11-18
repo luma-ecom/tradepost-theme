@@ -424,6 +424,11 @@ class DepotQuickOrder extends HTMLElement {
     if (el) { el.textContent = message; el.hidden = !message; }
     row.classList.toggle('has-error', !!message);
   }
+  addedMsg(count) {
+    const d = this.dataset;
+    return count === 1 && d.msgAddedOne ? d.msgAddedOne : (d.msgAdded || '').replace('[count]', count);
+  }
+
   status(message, isError) {
     const el = this.querySelector('[data-qo-status]');
     if (!el) return;
@@ -532,13 +537,13 @@ class DepotQuickOrder extends HTMLElement {
         const nextBody = after && after.querySelector('[data-qo-body]');
         if (body && nextBody) body.innerHTML = nextBody.innerHTML;
         this.recalc();
-        this.status(this.dataset.msgAdded.replace('[count]', added));
+        this.status(this.addedMsg(added));
       } else {
         items.forEach(it => { if (it.ok) { const q = it.row.querySelector('depot-quantity'); q.input.value = 0; q.validate(false); } });
         const after = await this.fetchFresh();
         if (after) this.applyFresh(after);
         this.recalc();
-        this.status(added ? this.dataset.msgAdded.replace('[count]', added) + ' ' + this.dataset.msgReview : this.dataset.msgReview, true);
+        this.status(added ? this.addedMsg(added) + ' ' + this.dataset.msgReview : this.dataset.msgReview, true);
       }
     } catch (ex) {
       this.status(this.dataset.msgError, true);
