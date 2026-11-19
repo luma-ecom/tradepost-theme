@@ -118,7 +118,6 @@
     "pickup": {
       "available_at_html": "Pickup available at <strong>{{ location }}</strong>",
       "unavailable_at_html": "Pickup currently unavailable at <strong>{{ location }}</strong>",
-      "ready_in": "Usually ready in {{ time }}",
       "available": "Pickup available",
       "unavailable": "Pickup currently unavailable",
       "check_other": "Check pickup at other locations",

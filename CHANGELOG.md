@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3 — 2026-11-19
+Security fix and one wording fix. No setting changes. If you installed 1.0.0-beta to 1.0.2, update, or delete `templates/search.bss.b2b.liquid` from your theme (Online Store → Themes → Edit code).
+- **Removed `templates/search.bss.b2b.liquid`.** It isn't Tradepost code: the BSS B2B app wrote it into our demo store's theme on 2026-11-04 and it slipped into this repo (commit `e736c28`, by shopify[bot]) and every zip since 1.0.0-beta. On any store with that file, `/search?view=bss.b2b&q=<word>` returned product data as JSON, prices included, to visitors who aren't logged in. That covers wholesale-only products too. In 1.0.3 the same URL just shows the normal search page.
+- Release zip: `scripts/build-release.py` skips files an app wrote into the theme (`*.bss.*`). After building it reads the zip back and stops with an error if "bss" is in any file name or file.
+- Local pickup on the product page said "Usually ready in Usually ready in 1 hour". Shopify's pickup time is already a full sentence, so the theme now prints it as is. The `products.pickup.ready_in` string is gone.
+- `docs/b2b-setup.md`: pickup only shows for a location that has its address filled in.
+
 ## 1.0.2 — 2026-11-18
 Fixes found while closing Tradepost Pro 1.6.0. No setting changes.
 - Quick order form: a line copied from Excel whose first cell is empty (a leading tab) no longer shifts its columns, so the SKU and quantity land in the right place.

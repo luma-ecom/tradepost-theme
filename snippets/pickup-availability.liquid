@@ -1,6 +1,7 @@
 {%- comment -%}
   Local pickup for one variant (native store_availabilities).
   Params: variant (required)
+  pick_up_time is already a full sentence from Shopify ("Usually ready in 1 hour"), so it is printed as is.
   Renders nothing unless at least one location has local pickup turned on for this variant.
   Re-rendered on variant change: through the product section (data-pickup-wrapper) or the
   standalone endpoint sections/pickup-availability.liquid.
@@ -14,7 +15,7 @@
     {%- if first.available -%}
       <p class="pickup__status pickup__status--in">
         {% render 'icon', name: 'check' %}
-        <span>{{ 'products.pickup.available_at_html' | t: location: first.location.name }}{% if first.pick_up_time != blank %} <span class="pickup__time">{{ 'products.pickup.ready_in' | t: time: first.pick_up_time }}</span>{% endif %}</span>
+        <span>{{ 'products.pickup.available_at_html' | t: location: first.location.name }}{% if first.pick_up_time != blank %} <span class="pickup__time">{{ first.pick_up_time }}</span>{% endif %}</span>
       </p>
     {%- else -%}
       <p class="pickup__status pickup__status--out">{{ 'products.pickup.unavailable_at_html' | t: location: first.location.name }}</p>
@@ -29,7 +30,7 @@
             <p class="pickup__name">{{ a.location.name }}</p>
             <p class="pickup__line">
               {%- if a.available -%}
-                {{ 'products.pickup.available' | t }}{% if a.pick_up_time != blank %} · {{ 'products.pickup.ready_in' | t: time: a.pick_up_time }}{% endif %}
+                {{ 'products.pickup.available' | t }}{% if a.pick_up_time != blank %} · {{ a.pick_up_time }}{% endif %}
               {%- else -%}
                 {{ 'products.pickup.unavailable' | t }}
               {%- endif -%}

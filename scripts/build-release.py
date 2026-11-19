@@ -7,7 +7,8 @@ references a file the target store does not have, so a fresh install would lose
 that whole template (rc.3: the home page). This script copies the theme folders
 from HEAD and blanks every setting whose value is a store file reference.
 It also drops app embeds saved in config/settings_data.json (the demo store's
-apps, e.g. a B2B app), so a buyer's store does not inherit them.
+apps, e.g. a B2B app), so a buyer's store does not inherit them, skips files an app
+wrote into the theme (*.bss.*), and stops if "bss" is still anywhere in the zip.
 The zip is named after theme_info.theme_name: tradepost-theme-<v>.zip or tradepost-pro-<v>.zip.
 
 Usage: python3 scripts/build-release.py 1.0.0 [out_dir]
@@ -16,6 +17,10 @@ import io, json, re, subprocess, sys, zipfile, pathlib
 
 THEME_DIRS = ["assets", "config", "layout", "locales", "sections", "snippets", "templates"]
 STORE_FILE = re.compile(r"^shopify://(files|shop_images)/")
+# Files an app writes into the demo theme (e.g. BSS B2B's templates/search.bss.b2b.liquid, which
+# returns product JSON with prices to anyone). They are never part of Tradepost: skip them, and stop
+# the build if one still ends up in the zip.
+APP_FILE = re.compile(r"(^|/)[^/]*\.bss\.[^/]*$|(^|/)[^/]*bss[-_]", re.I)
 
 def strip_header(text):
     # Shopify-generated JSON may start with a /* ... */ comment.
@@ -41,6 +46,8 @@ def main():
     version = sys.argv[1]
     out = pathlib.Path(sys.argv[2] if len(sys.argv) > 2 else ".")
     files = subprocess.check_output(["git", "ls-files", *THEME_DIRS], text=True).split()
+    skipped = [f for f in files if APP_FILE.search(f)]
+    files = [f for f in files if f not in skipped]
     schema = json.loads(subprocess.check_output(["git", "show", "HEAD:config/settings_schema.json"], text=True))
     name = next((x.get("theme_name", "") for x in schema if x.get("name") == "theme_info"), "")
     slug = "tradepost-pro" if "Pro" in name else "tradepost-theme"
@@ -76,7 +83,16 @@ def main():
                     removed_all.append(f"{f}: current = style \"{match}\" (demo settings left out)")
                 data = ((head + "\n") if head else "").encode() + (json.dumps(doc, indent=2, ensure_ascii=False) + "\n").encode()
             z.writestr(f, data)
+    with zipfile.ZipFile(zpath) as z:
+        names = z.namelist()
+        leaked = [n for n in names if APP_FILE.search(n)]
+        leaked += [n for n in names if b"bss" in z.read(n).lower()]
+    if leaked:
+        zpath.unlink()
+        sys.exit(f"build stopped, app files or app references in the zip: {sorted(set(leaked))}")
     print(f"{zpath} ({len(files)} files)")
+    for f in skipped:
+        print("  skipped app file", f)
     for r in removed_all:
         print("  removed", r)
 

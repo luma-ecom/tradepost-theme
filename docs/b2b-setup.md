@@ -39,6 +39,8 @@ Theme settings → Cart:
 
 - **PO number** and **Order notes** fields, and **Show PO number and notes to B2B buyers only** (on by default).
 
+Product section → **Show pickup availability**: shows only for locations with local pickup turned on (Settings → Shipping and delivery → Local pickup). The location also needs its address filled in. Without one, Shopify doesn't offer pickup there and the theme shows nothing.
+
 ## 4. Customer accounts
 
 B2B needs the new customer accounts. On those stores Shopify hosts the account pages, so Tradepost's `customers/*` templates are not used; the company name, location switcher, payment terms and PO field live in the header, product page and cart instead. The templates stay in the theme for stores on classic accounts.
