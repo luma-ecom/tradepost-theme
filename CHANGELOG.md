@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.4 — 2026-11-20
+Home page defaults. No setting changes, no code changes to sections.
+- **A fresh install's home page was our demo store's** ("Clinical supplies for dental practices and labs", "Why practices order here", Net 30 terms, a $250 minimum, same-day shipping before 2 pm, real brand names and our demo's collections), and the Video section said "…a real B2B login on this demo store". Those are promises and names that belong to someone else's store. The zip now ships its own neutral home page: a "Wholesale ordering for your trade customers" banner, four columns about what the theme does (account prices, order by SKU, volume pricing, reorder), category and featured product blocks with no collection picked, an empty Brands section (it shows once you add a logo), and three FAQ questions whose answers say "Replace this with your own terms". The Video section is no longer on the default home page; add it from the theme editor when you have a video.
+- **Footer:** the text block said "Mon–Fri, 8:00–17:00. Orders placed before 14:00 ship the same day." It now asks you to add your own hours and cut-off time.
+- **Already installed 1.0.3 or earlier?** Your home page does not change by itself when you upload this zip. Open the theme editor and replace the banner, the "Why" columns, the FAQ answers, the brand names and the footer hours with your own, or remove those sections.
+- `scripts/build-release.py` puts `release/index.default.json` and `release/footer-group.default.json` in the zip in place of the demo store's home page and footer, and stops the build if demo copy shows up in any template or section group.
+
 ## 1.0.3 — 2026-11-19
 Security fix and one wording fix. No setting changes. If you installed 1.0.0-beta to 1.0.2, update, or delete `templates/search.bss.b2b.liquid` from your theme (Online Store → Themes → Edit code).
 - **Removed `templates/search.bss.b2b.liquid`.** It isn't Tradepost code: the BSS B2B app wrote it into our demo store's theme on 2026-11-04 and it slipped into this repo (commit `e736c28`, by shopify[bot]) and every zip since 1.0.0-beta. On any store with that file, `/search?view=bss.b2b&q=<word>` returned product data as JSON, prices included, to visitors who aren't logged in. That covers wholesale-only products too. In 1.0.3 the same URL just shows the normal search page.

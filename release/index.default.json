@@ -1,0 +1,258 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "trade": {
+      "type": "trade-cta",
+      "settings": {
+        "audience": "d2c",
+        "eyebrow": "Trade & wholesale",
+        "title": "Order the way your business buys",
+        "text": "<p>Your prices, your payment terms, quick reordering by SKU. Apply once, order from any location.</p>",
+        "primary_link": "/pages/trade-account",
+        "primary_label": "Apply for a trade account",
+        "secondary_link": "/account/login",
+        "secondary_label": "Already a customer? Log in",
+        "bg": "#f6f6f4"
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Popular with trade customers",
+        "limit": 4,
+        "columns": 4
+      }
+    },
+    "rich": {
+      "type": "rich-text",
+      "blocks": {
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Built for distributors, not just shops"
+          }
+        },
+        "t": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Customer-specific pricing, quantity rules, net terms and quick reordering, using Shopify’s native B2B on every plan.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "h",
+        "t"
+      ],
+      "settings": {
+        "audience": "everyone",
+        "width": "narrow"
+      }
+    },
+    "banner": {
+      "type": "image-banner",
+      "blocks": {
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Wholesale ordering for your trade customers"
+          }
+        },
+        "t": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Account prices, volume tiers and quick reorder by SKU, built on Shopify’s native B2B.</p>"
+          }
+        },
+        "b": {
+          "type": "buttons",
+          "settings": {
+            "label_1": "Shop the catalog",
+            "link_1": "/collections/all",
+            "style_1": "primary",
+            "label_2": "Quick order by SKU",
+            "link_2": "/pages/quick-order",
+            "style_2": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "h",
+        "t",
+        "b"
+      ],
+      "settings": {
+        "audience": "everyone",
+        "height": "small",
+        "text_position": "center",
+        "overlay": 0,
+        "text_color": "dark"
+      }
+    },
+    "why": {
+      "type": "multicolumn",
+      "blocks": {
+        "c1": {
+          "type": "column",
+          "settings": {
+            "title": "Account prices",
+            "text": "<p>Logged-in trade buyers see the prices set for their company.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c2": {
+          "type": "column",
+          "settings": {
+            "title": "Order by SKU",
+            "text": "<p>Paste a list of SKUs or upload a CSV. The whole order in one step.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c3": {
+          "type": "column",
+          "settings": {
+            "title": "Volume pricing",
+            "text": "<p>Price tiers show on every product and update as the quantity changes.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "c4": {
+          "type": "column",
+          "settings": {
+            "title": "Reorder",
+            "text": "<p>Buyers repeat a past order or a saved list instead of building it again.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "audience": "everyone",
+        "title": "Why order here",
+        "columns": 4,
+        "mobile": "swipe",
+        "image_style": "icon"
+      }
+    },
+    "cats": {
+      "type": "collection-list",
+      "blocks": {
+        "k1": {
+          "type": "collection",
+          "settings": {}
+        },
+        "k2": {
+          "type": "collection",
+          "settings": {}
+        },
+        "k3": {
+          "type": "collection",
+          "settings": {}
+        },
+        "k4": {
+          "type": "collection",
+          "settings": {}
+        },
+        "k5": {
+          "type": "collection",
+          "settings": {}
+        },
+        "k6": {
+          "type": "collection",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "k1",
+        "k2",
+        "k3",
+        "k4",
+        "k5",
+        "k6"
+      ],
+      "settings": {
+        "audience": "everyone",
+        "title": "Shop by category",
+        "columns": 3,
+        "ratio": "landscape",
+        "show_count": true,
+        "show_view_all": true
+      }
+    },
+    "brands": {
+      "type": "logo-list",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "audience": "everyone",
+        "title": "Brands we carry",
+        "per_row": 6,
+        "grayscale": true
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Who can open a trade account?",
+            "answer": "<p>Replace this with your own terms in the theme editor.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Is there a minimum order?",
+            "answer": "<p>Replace this with your own terms in the theme editor.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How fast do you ship?",
+            "answer": "<p>Replace this with your own terms in the theme editor.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "audience": "everyone",
+        "title": "Questions from trade buyers",
+        "text": "",
+        "open_first": false,
+        "json_ld": true
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "why",
+    "cats",
+    "trade",
+    "featured",
+    "brands",
+    "rich",
+    "faq"
+  ]
+}

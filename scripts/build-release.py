@@ -9,6 +9,8 @@ from HEAD and blanks every setting whose value is a store file reference.
 It also drops app embeds saved in config/settings_data.json (the demo store's
 apps, e.g. a B2B app), so a buyer's store does not inherit them, skips files an app
 wrote into the theme (*.bss.*), and stops if "bss" is still anywhere in the zip.
+The home page and footer in the zip are release/*.default.json (neutral copy, no store or industry), not
+the demo store's, and the build stops if demo copy (DEMO_TEXT) is in any templates/*.json or sections/*.json.
 The zip is named after theme_info.theme_name: tradepost-theme-<v>.zip or tradepost-pro-<v>.zip.
 
 Usage: python3 scripts/build-release.py 1.0.0 [out_dir]
@@ -17,6 +19,13 @@ import io, json, re, subprocess, sys, zipfile, pathlib
 
 THEME_DIRS = ["assets", "config", "layout", "locales", "sections", "snippets", "templates"]
 STORE_FILE = re.compile(r"^shopify://(files|shop_images)/")
+# The demo store's home page and footer sell dental supplies with its own promises (minimum order,
+# ship times, real brand names). None of it may reach a buyer's store: the zip gets neutral copies.
+NEUTRAL = {
+    "templates/index.json": "release/index.default.json",
+    "sections/footer-group.json": "release/footer-group.default.json",
+}
+DEMO_TEXT = re.compile(rb"dental|clinical|clinics|\$250|2 pm|14:00|same day|Melag|Sempermed|Hu-Friedy", re.I)
 # Files an app writes into the demo theme (e.g. BSS B2B's templates/search.bss.b2b.liquid, which
 # returns product JSON with prices to anyone). They are never part of Tradepost: skip them, and stop
 # the build if one still ends up in the zip.
@@ -55,7 +64,9 @@ def main():
     removed_all = []
     with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as z:
         for f in files:
-            data = subprocess.check_output(["git", "show", f"HEAD:{f}"])
+            data = subprocess.check_output(["git", "show", f"HEAD:{NEUTRAL.get(f, f)}"])
+            if f in NEUTRAL:
+                removed_all.append(f"{f}: replaced by {NEUTRAL[f]}")
             if f.endswith(".json") and (f.startswith("templates/") or f.startswith("sections/")):
                 head, body = strip_header(data.decode("utf-8"))
                 doc = json.loads(body)
@@ -87,9 +98,13 @@ def main():
         names = z.namelist()
         leaked = [n for n in names if APP_FILE.search(n)]
         leaked += [n for n in names if b"bss" in z.read(n).lower()]
+        demo = [n for n in names if n.startswith(("templates/", "sections/")) and n.endswith(".json") and DEMO_TEXT.search(z.read(n))]
     if leaked:
         zpath.unlink()
         sys.exit(f"build stopped, app files or app references in the zip: {sorted(set(leaked))}")
+    if demo:
+        zpath.unlink()
+        sys.exit(f"build stopped, demo store copy in the zip: {sorted(demo)}")
     print(f"{zpath} ({len(files)} files)")
     for f in skipped:
         print("  skipped app file", f)
