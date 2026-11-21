@@ -9,7 +9,7 @@
       "settings": {
         "audience": "everyone",
         "title": "Send us a message",
-        "text": "<p>Questions about an order, pricing or your account? We reply within one business day.</p>",
+        "text": "<p>Questions about an order, pricing or your account? Send us a message.</p>",
         "subject": "Contact form",
         "show_company": true,
         "show_phone": true,

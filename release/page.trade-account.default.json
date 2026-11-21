@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "wholesale-register",
+      "settings": {
+        "title": "Apply for a trade account",
+        "text": "<p>Tell us about your business. Approved accounts see wholesale pricing, payment terms and quick ordering.</p>",
+        "requirements": "<p>You will need a registered business and a tax ID.</p>",
+        "business_types": "Retailer, Distributor, Clinic / practice, Restaurant / hospitality, Contractor, Other",
+        "pending_tag": "trade-pending"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

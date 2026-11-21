@@ -239,7 +239,7 @@
       "message": "Tell us what you buy and roughly how often",
       "submit": "Submit application",
       "submit_account": "Create account",
-      "submitted": "Thanks. We review applications within one business day and will email you.",
+      "submitted": "Thanks. We'll review your application and email you.",
       "pending": "Your trade application is being reviewed. We will email you when it is approved.",
       "already_b2b": "Your trade account is active.",
       "trade_prompt": "Buying for a business?"
@@ -317,7 +317,7 @@
       "account_number": "Account number (optional)",
       "message": "Message",
       "submit": "Send message",
-      "success": "Thanks. We got your message and will reply within one business day."
+      "success": "Thanks. We got your message and will reply by email."
     }
   },
   "newsletter": {

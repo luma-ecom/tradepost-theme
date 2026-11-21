@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.5 — 2026-11-21
+Default text, round three. No setting changes.
+- **The trade account page in the zip was our demo store's** ("Request a B2B demo login", "We set up a buyer login on a demo company…", button "Request demo login"). If you used it for your trade page, your wholesale buyers saw a demo login request. The zip now ships a neutral trade application: "Apply for a trade account", "You will need a registered business and a tax ID.", general business types, and the section's own "Submit application" button. Installed 1.0.4 or earlier? Open the page in the theme editor and change the title, the text, the business types and the button label (or clear it), or upload this zip and use its trade account template.
+- **Defaults when you add a section** (theme editor → Add section) no longer make promises for you: FAQ answers about minimum order, shipping times and payment terms now say "Replace this with…", the "Why buy from us" columns describe what the theme does (no "Net 30", no "answers within a business day"), the trade banner's facts read "Your minimum", "Your terms", "Your lead time", and the contact and trade application texts drop "within one business day".
+- **Messages after a form is sent** no longer promise a reply time: "Thanks. We'll review your application and email you.", "Thanks. We got your message and will reply by email."
+- **Contact page** default text: "Questions about an order, pricing or your account? Send us a message."
+- **Already installed an earlier version?** Your live theme doesn't change by itself. If you copy your page templates into the new version, check the Trade account and Contact pages for any reply time you don't want to promise. The form messages above come with the new version.
+- `scripts/build-release.py` also replaces the trade account page in the zip, and the check for demo copy now covers section defaults and the storefront messages, and catches "demo login" and "business day".
+
 ## 1.0.4 — 2026-11-20
 Home page defaults. No setting changes, no code changes to sections.
 - **A fresh install's home page was our demo store's** ("Clinical supplies for dental practices and labs", "Why practices order here", Net 30 terms, a $250 minimum, same-day shipping before 2 pm, real brand names and our demo's collections), and the Video section said "…a real B2B login on this demo store". Those are promises and names that belong to someone else's store. The zip now ships its own neutral home page: a "Wholesale ordering for your trade customers" banner, four columns about what the theme does (account prices, order by SKU, volume pricing, reorder), category and featured product blocks with no collection picked, an empty Brands section (it shows once you add a logo), and three FAQ questions whose answers say "Replace this with your own terms". The Video section is no longer on the default home page; add it from the theme editor when you have a video.

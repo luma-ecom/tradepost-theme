@@ -10,7 +10,9 @@ It also drops app embeds saved in config/settings_data.json (the demo store's
 apps, e.g. a B2B app), so a buyer's store does not inherit them, skips files an app
 wrote into the theme (*.bss.*), and stops if "bss" is still anywhere in the zip.
 The home page and footer in the zip are release/*.default.json (neutral copy, no store or industry), not
-the demo store's, and the build stops if demo copy (DEMO_TEXT) is in any templates/*.json or sections/*.json.
+the demo store's (also the trade account page), and the build stops if demo copy or a promise the
+buyer's store would make for them (DEMO_TEXT) is in a template, a section or the storefront locale.
+A fresh install starts on DEFAULT_STYLE when the theme has it (Pro: Distributor; the demo uses Dental & Medical).
 The zip is named after theme_info.theme_name: tradepost-theme-<v>.zip or tradepost-pro-<v>.zip.
 
 Usage: python3 scripts/build-release.py 1.0.0 [out_dir]
@@ -24,8 +26,16 @@ STORE_FILE = re.compile(r"^shopify://(files|shop_images)/")
 NEUTRAL = {
     "templates/index.json": "release/index.default.json",
     "sections/footer-group.json": "release/footer-group.default.json",
+    "templates/page.trade-account.json": "release/page.trade-account.default.json",
 }
-DEMO_TEXT = re.compile(rb"dental|clinical|clinics|\$250|2 pm|14:00|same day|Melag|Sempermed|Hu-Friedy", re.I)
+DEMO_TEXT = re.compile(rb"dental|clinical|clinics|\$250|2 pm|14:00|same day|business day|demo (login|company|store)|Melag|Sempermed|Hu-Friedy", re.I)
+# Where DEMO_TEXT is searched: everything a buyer's store shows by default or when a section is added
+# (templates, section groups and section schema defaults, storefront locale). Not the editor-only
+# schema locale, whose help text may quote "$250" as an example.
+def scanned(name):
+    return (name.startswith(("templates/", "sections/")) and name.endswith((".json", ".liquid"))) or name == "locales/en.default.json"
+# Theme style a fresh install starts from (Theme settings). None = the style that matches the demo store.
+DEFAULT_STYLE = "Distributor"
 # Files an app writes into the demo theme (e.g. BSS B2B's templates/search.bss.b2b.liquid, which
 # returns product JSON with prices to anyone). They are never part of Tradepost: skip them, and stop
 # the build if one still ends up in the zip.
@@ -90,6 +100,8 @@ def main():
                 presets = doc.get("presets") or {}
                 if isinstance(cur, dict) and presets:
                     match = next((n for n, pv in presets.items() if all(cur.get(k) == v for k, v in pv.items())), next(iter(presets)))
+                    if DEFAULT_STYLE in presets:
+                        match = DEFAULT_STYLE
                     doc["current"] = match
                     removed_all.append(f"{f}: current = style \"{match}\" (demo settings left out)")
                 data = ((head + "\n") if head else "").encode() + (json.dumps(doc, indent=2, ensure_ascii=False) + "\n").encode()
@@ -98,7 +110,7 @@ def main():
         names = z.namelist()
         leaked = [n for n in names if APP_FILE.search(n)]
         leaked += [n for n in names if b"bss" in z.read(n).lower()]
-        demo = [n for n in names if n.startswith(("templates/", "sections/")) and n.endswith(".json") and DEMO_TEXT.search(z.read(n))]
+        demo = [n for n in names if scanned(n) and DEMO_TEXT.search(z.read(n))]
     if leaked:
         zpath.unlink()
         sys.exit(f"build stopped, app files or app references in the zip: {sorted(set(leaked))}")
